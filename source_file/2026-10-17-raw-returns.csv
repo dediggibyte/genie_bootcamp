@@ -1,0 +1,5 @@
+return_id,sales_line_id,return_date,return_qty,refund_amount_eur,return_reason,return_channel,is_restockable,return_handling_cost_eur
+R001,SL001,2025-07-12,1,16.77,Wrong Size,Online,Y,4.50
+R002,SL004,2025-09-15,1,1150.00,Wrong Size,In Store,Y,12.00
+R003,SL009,2026-03-20,1,450.00,Changed Mind,In Store,Y,8.00
+R004,SL010,2025-12-03,1,55.93,Defective,Courier,N,6.50

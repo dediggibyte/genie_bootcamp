@@ -1,0 +1,11 @@
+product_id,product_name,brand,brand_tier,category,collection,material,list_price_eur,unit_cost_eur,max_discount_pct,last_updated
+P001,Sac de Jour Large Tote,YSL,Luxury,Handbags,FW25,Calfskin Leather,3500.00,700.00,10,2025-06-01 09:00:00
+P002,Linen Blend Shirt, Zara ,Fast Fashion,clothing,SS25,Linen Blend,27.95,19.07,30,2025-03-01 09:00:00
+P003,Keepall Bandouliere 50,Louis Vuitton,Luxury,Leather Goods,Permanent,Monogram Canvas,2480.00,452.00,0,2025-01-15 09:00:00
+P004,No. 5 Eau de Parfum 100ml,Chanel,Luxury,perfumes,Permanent,Fragrance,165.00,30.00,0,2025-01-15 09:00:00
+P005,Horsebit Leather Loafer,Gucci,Luxury,Shoes,FW25,Calfskin Leather,1150.00,260.00,10,2025-07-01 09:00:00
+P006,Tribales Gold-Finish Earrings,Dior,Luxury,Jewelry,FW25,Gold-Finish Metal,890.00,180.00,10,2025-07-01 09:00:00
+P007,Galleria Saffiano Bag,Prada,Luxury,Handbags,FW25,Saffiano Leather,3990.00,860.00,10,2025-07-01 09:00:00
+P008,Wool Two-Piece Suit,Armani,Premium,Clothing,FW25,Virgin Wool,2890.00,700.00,25,2025-07-01 09:00:00
+P009,Monogram Silk Scarf,YSL,Luxury,Accessories,SS26,Silk,450.00,95.00,10,2025-11-01 09:00:00
+P010,Leather Ankle Boots,Zara,Fast Fashion,Shoes,FW25,Leather,79.90,34.00,30,2025-07-01 09:00:00

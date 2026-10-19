@@ -1,0 +1,11 @@
+production_batch_id,product_id,production_month,factory_country,factory_city,units_planned,units_produced,units_defective,unit_production_cost_eur,lead_time_days,on_time_flag
+PB001,P001,2025-05,Italy,Scandicci,400,390,6,700.00,95,Y
+PB002,P002,2025-02,Portugal,Porto,20000,19800,594,19.07,35,Y
+PB003,P003,2025-01,France,Asnieres,600,600,3,452.00,80,Y
+PB004,P004,2025-01,France,Neuilly,50000,49500,99,30.00,40,Y
+PB005,P005,2025-06,Italy,Florence,1200,1100,44,260.00,110,N
+PB006,P006,2025-06,Italy,Valenza,800,760,38,180.00,90,N
+PB007,P007,2025-06,Italy,Montevarchi,500,500,5,860.00,85,Y
+PB008,P008,2025-05,Italy,Settimo Torinese,900,880,18,700.00,100,N
+PB009,P009,2025-10,Italy,Como,1500,1500,15,95.00,60,Y
+PB010,P010,2025-06,Spain,Arteixo,15000,14250,855,34.00,45,N

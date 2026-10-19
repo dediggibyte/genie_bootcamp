@@ -1,0 +1,11 @@
+store_id,store_name,channel,country,city,store_size_sqm,opening_date
+S01,Paris Avenue Montaigne Boutique,Boutique,France,Paris,420,2012-03-15
+S02,Milan Via Montenapoleone Boutique,Boutique,Italy,Milan,380,2010-09-01
+S03,Paris Haussmann Department Store Corner,Department Store,France,Paris,150,2015-04-20
+S04,Madrid Calle Serrano Boutique,Boutique,Spain,Madrid,300,2014-06-10
+S05,Maison Europa Online,Online,Netherlands,Amsterdam,0,2018-01-01
+S06,Berlin Kurfuerstendamm Department Store Corner,Department Store,Germany,Berlin,180,2016-11-05
+S07,Stockholm Biblioteksgatan Boutique,Boutique,Sweden,Stockholm,210,2018-02-14
+S08,Warsaw Outlet,Outlet,Poland,Warsaw,650,2021-05-01
+S09,Serravalle Designer Outlet,Outlet,Italy,Serravalle Scrivia,700,2017-03-30
+S10,Vienna Kohlmarkt Boutique,Boutique,Austria,Vienna,260,2019-10-12

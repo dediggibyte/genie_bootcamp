@@ -1,0 +1,12 @@
+customer_id,first_name,last_name,email,phone,gender,date_of_birth,street_address,city,postal_code,country,customer_segment,loyalty_tier,first_purchase_date,last_updated
+C001,Camille,Laurent,camille.laurent@example.com,+33 600 000 101,F,1985-04-12,12 Rue Exemple,Paris,75008,France,VIC,Platinum,14/03/2016,2025-11-20 10:00:00
+C002,Giulia,Bianchi,giulia.bianchi@example.com,+39 300 000 202,F,1992-08-23,8 Via Esempio,Milan,20121,Italy,Regular,Gold,02/09/2019,2025-10-05 10:00:00
+C003,Sophie,Becker,sophie.becker@example.com,+31 600 000 303,F,2001-01-30,21 Voorbeeldstraat,Amsterdam,1012,Netherlands,New,Silver,28/06/2025,2025-07-05 10:00:00
+C004,Amelie,Dubois,amelie.dubois@example.com,+33 600 000 404,F,1978-11-02,5 Rue Fictive,Lyon,69002,France,VIC,Platinum,19/05/2012,2026-01-10 10:00:00
+C005,CARLOS,Navarro,CARLOS.NAVARRO@EXAMPLE.COM,+34 600 000 505,M,1988-06-17,40 Calle Ejemplo, Madrid ,28001,spain,Regular,Silver,07/10/2018,2025-03-01 10:00:00
+C005,Carlos,Navarro,carlos.navarro@example.com,+34 600 000 505,M,1988-06-17,40 Calle Ejemplo,Madrid,28001,Spain,VIC,Gold,07/10/2018,2025-11-15 10:00:00
+C006,Marco,Rossi,marco.rossi@example.com,+39 300 000 606,M,1995-02-09,17 Via Prova,Rome,00187,Italy,Regular,Silver,11/01/2021,2025-09-01 10:00:00
+C007,Anna,Gruber,anna.gruber@example.com,+43 600 000 707,F,1970-09-14,3 Beispielgasse,Vienna,1010,Austria,VIC,Platinum,25/04/2010,2026-01-20 10:00:00
+C008,Erik,Lindqvist,erik.lindqvist@example.com,+46 700 000 808,M,1983-12-05,9 Exempelvagen,Stockholm,11146,Sweden,Regular,Gold,30/08/2017,2025-12-01 10:00:00
+C009,Lena,Schmidt,lena.schmidt@example.com,+49 150 000 909,F,2004-05-21,14 Musterstrasse,Munich,80331,Germany,New,Bronze,14/03/2026,2026-03-14 10:00:00
+C010,Piotr,Kowalski,piotr.kowalski@example.com,+48 500 000 010,M,1960-03-28,6 Ulica Przykladowa,Warsaw,00-001,Poland,Regular,Silver,22/11/2020,2025-11-28 10:00:00

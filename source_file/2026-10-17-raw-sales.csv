@@ -1,0 +1,13 @@
+sales_line_id,order_id,order_date,customer_id,product_id,store_id,quantity,unit_list_price_eur,discount_pct,promotion_type,payment_method,order_status
+SL001,O1001,2025-07-05,C003,P002,S05,2,27.95,40,Summer Sale,PayPal,Partially Returned
+SL002,O1002,2025-12-12,C001,P001,S01,1,3500.00,0,None,Credit Card,Completed
+SL003,O1003,2026-02-10,C004,P004,S03,2,165.00,0,None,Debit Card,Completed
+SL003,O1003,2026-02-10,C004,P004,S03,2,165.00,0,None,Debit Card,Completed
+SL004,O1004,2025-09-08,C006,P005,S02,1,1150.00,0,None,Credit Card,Returned
+SL005,O1005,2026-01-15,C002,P006,S02,1,890.00,20,Manager Override,Credit Card,Completed
+SL006,O1006,2026-01-20,C007,P007,S10,1,3990.00,5,Winter Sale,Credit Card,Completed
+SL007,O1007,2025-11-27,C005,P008,S04,2,2890.00,10,VIC Private Sale,Bank Transfer,Completed
+SL008,O1008,2025-12-20,C008,P003,S07,1,2480.00,0,None,Apple Pay,Completed
+SL009,O1009,2026-03-14,C009,P009,S06,2,450.00,0,None,Debit Card,Partially Returned
+SL010,O1010,2025-11-28,C010,P010,S08,2,79.90,30,Black Friday,Debit Card,Partially Returned
+SL011,O1011,2026-02-14,C999,P002,S05,0,27.95,0,None,PayPal,Completed
