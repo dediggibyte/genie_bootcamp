@@ -1,0 +1,4 @@
+supplier_id,supplier_name,country,lead_time_days,payment_terms_days
+SUP01,Electrolux Nordic AB,Sweden,21,60
+SUP02,LEGO Nordic A/S,Denmark,14,45
+SUP03,Helly Hansen AS,Norway,28,30

@@ -1,0 +1,23 @@
+cost_centre,cost_centre_name,store_id,department
+CC-ST01-OPS,ST01 Store Operations,ST01,Operations
+CC-ST01-MKT,ST01 Local Marketing,ST01,Marketing
+CC-ST02-OPS,ST02 Store Operations,ST02,Operations
+CC-ST02-MKT,ST02 Local Marketing,ST02,Marketing
+CC-ST03-OPS,ST03 Store Operations,ST03,Operations
+CC-ST03-MKT,ST03 Local Marketing,ST03,Marketing
+CC-ST04-OPS,ST04 Store Operations,ST04,Operations
+CC-ST04-MKT,ST04 Local Marketing,ST04,Marketing
+CC-ST05-OPS,ST05 Store Operations,ST05,Operations
+CC-ST05-MKT,ST05 Local Marketing,ST05,Marketing
+CC-ST06-OPS,ST06 Store Operations,ST06,Operations
+CC-ST06-MKT,ST06 Local Marketing,ST06,Marketing
+CC-ST07-OPS,ST07 Store Operations,ST07,Operations
+CC-ST07-MKT,ST07 Local Marketing,ST07,Marketing
+CC-ST08-OPS,ST08 Store Operations,ST08,Operations
+CC-ST08-MKT,ST08 Local Marketing,ST08,Marketing
+CC-ST09-OPS,ST09 Store Operations,ST09,Operations
+CC-ST09-MKT,ST09 Local Marketing,ST09,Marketing
+CC-ST10-OPS,ST10 Store Operations,ST10,Operations
+CC-ST10-MKT,ST10 Local Marketing,ST10,Marketing
+CC-ON01-OPS,ON01 Store Operations,ON01,Operations
+CC-ON01-MKT,ON01 Local Marketing,ON01,Marketing

@@ -1,0 +1,9 @@
+campaign_id,campaign_name,media_mix,start_date,end_date,budget_eur
+CMP01,Black Friday 2024,Paid social + email,2024-11-18,2024-12-02,45000
+CMP02,Christmas 2024,TV + display,2024-12-03,2024-12-23,60000
+CMP03,Summer Sale 2024,Email + search,2024-06-17,2024-07-31,30000
+CMP04,Summer Sale 2025,Email + search,2025-06-16,2025-07-31,32000
+CMP05,Black Friday 2025,Paid social + email,2025-11-17,2025-12-01,50000
+CMP06,Christmas 2025,TV + display,2025-12-02,2025-12-23,65000
+CMP07,Winter Outdoor 2025,Outdoor media,2025-10-01,2025-10-31,20000
+CMP08,Summer Sale 2026,Email + search,2026-06-15,2026-07-31,34000

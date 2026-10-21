@@ -1,0 +1,207 @@
+customer_id,first_name,last_name,email,phone,gender,date_of_birth,country,city,signup_date,is_active
+C0028,Sven,Jensen,sven.jensen28@example.com,+46 000 8392 759,Male,1975-04-29,Sweden,Uppsala,2023-08-08,Y
+C0056,Lukas,Eriksson,lukas.eriksson56@example.com,+45 000 2705 681,Male,1969-11-07,Denmark,Aarhus,2023-11-04,y
+C0075,  Lars,Holm,lars.holm75@example.com,+46 000 3155 546,M,1955-09-18,Sweden,  Gothenburg,2023-10-09,y
+C0057,Nora,Lund,nora.lund57@example.com,+47 000 9217 700,F,1967-11-09,Norway,Oslo,2025-10-11,Y 
+C0015,Magnus,Pedersen,Magnus.Pedersen15@EXAMPLE.com ,+47 000 2287 104,Male,1954-12-21,NORWAY ,Trondheim,2026-04-20,Y
+C0177,Mathias,Haugen,mathias.haugen177@example.com,+47 000 6285 157,Male,1978-09-26,Norway,Bergen,2022-02-12,y
+C0169,Nils,Bakke,nils.bakke169@example.com,+46 000 3770 222, male,1972-03-19,Sweden,Uppsala,2021-01-14,Y 
+C0020,Ida,Berg,ida.berg20@example.com,+47 000 4083 593,Female,1976-03-26,Norway,Bergen,2022-06-04,y
+C0171,Liv,Dahl,liv.dahl171@example.com,+46 000 5577 727,F,1992-05-14,Sweden,Stockholm,29.06.2022,y
+C0191,Tove,Berg,tove.berg191@example.com,+45 000 2779 236,Female,1987-05-31,Denmark,Odense,2023-10-03,Y
+C0126,Nora,Holm,nora.holm126@example.com,+47 000 3712 555,female ,1971-06-07,Norge,Stavanger,2023-09-26,Y 
+C0026,kasper,Johansen,kasper.johansen26@example.com,+46 000 6660 667,Male,1973-09-06,Sweden,Malmo,2023-09-23,Y
+C0102,Jonas,Strand,jonas.strand102@example.com,+47 000 6925 644,M,1966-07-25,NORWAY ,Stavanger,20.07.2024,y
+C0091,Oskar,Berg,oskar.berg91@example.com,+46 000 4323 121, male,1964-12-29,Sweden,Stockholm,2021-01-16,Y 
+C0146,Liv,Lindqvist,Liv.Lindqvist146@EXAMPLE.com ,+46 000 2203 202,female ,1970-01-24,Sweden,Uppsala,2023-06-02,Y
+C0120,Kasper,Lindqvist,kasper.lindqvist120@example.com,+47 000 9884 473,Male,1984-01-02,Norway,Trondheim,30.04.2024,y
+C0129,Klara,Karlsson,klara.karlsson129@example.com,+46 000 2736 643,F,1963-03-16,Sweden,Uppsala,2023-06-22,Y
+C0066,kasper,Bakke,kasper.bakke66@example.com,+47 000 1395 839,M,1989-04-06,Norway,Stavanger,24.05.2022,Y 
+C0018,Sofie,Vik,sofie.vik18@example.com,+298 000 5837 729,female ,1982-07-15,Faroe Islands,Torshavn,22.03.2025,Y
+C0074,Ida,Johansson,ida.johansson74@example.com,+46 000 9734 933,female ,1979-04-01,Sweden,Gothenburg,2021-04-14,Y 
+C0011,Oskar,Eriksson,oskar.eriksson11@example.com,+46 000 7874 806, male,1981-01-19,sweden,Stockholm,2022-06-06,Y
+C0040,Nils,JOHANSSON ,Nils.Johansson40@EXAMPLE.com ,+47 000 7622 411,X,1990-05-08,  Norway,Bergen,2023-06-10,y
+C0139,Lars,Sorensen,lars.sorensen139@example.com,+45 000 8581 774,Male,1997-10-13,Denmark,Aalborg,20.06.2026,y
+C0004,Kasper,Jensen,kasper.jensen4@example.com,+47 000 8806 962, male,1972-09-04,NORWAY ,Bergen,2023-10-12,Y
+C0116,Liv,Hansen,liv.hansen116@example.com,+45 000 1165 299,Female,1962-05-03,denmark,Odense,2021-04-25,Y 
+C0083,Liv,Eriksson,liv.eriksson83@example.com,+45 000 1365 312,female ,1995-11-26,DENMARK ,Aalborg,2022-11-02,Y 
+C0016,JAKOB ,Larsson,jakob.larsson16@example.com,+46 000 7948 726,M,1996-09-07,Sweden,Gothenburg,2023-01-03,n
+C0008,Liv,Johansen,liv.johansen8@example.com,+45 000 4751 264,F,1985-02-25,Denmark,Odense,2021-03-08,Y 
+C0042,Sara,Nielsen,sara.nielsen42@example.com,+45 000 2707 116,F,1955-01-03,Danmark,Aalborg,2023-08-23,Y 
+C0080,jakob,PEDERSEN ,jakob.pedersen80@example.com,+45 000 9431 240,M,1961-03-08,Denmark,Copenhagen,2023-02-12,Y 
+C0155,Lars,Pedersen,lars.pedersen155@example.com,+46 000 1188 303,Male,1953-02-01,Sweden,Uppsala,02.06.2025,y
+C0156,Oskar,Lund,oskar.lund156@example.com,+47 000 5625 720, male,1992-05-28,  Norway,Bergen,2025-09-01,Y 
+C0009,Axel,Haugen,axel.haugen9@example.com,+46 000 8238 637,M,1968-01-18,Sweden,Uppsala,2023-11-18,Y 
+C0052,magnus,Karlsson,magnus.karlsson52@example.com,+46 000 9237 646,M,1995-11-09,Sweden,Gothenburg,10.11.2023,y
+C0150,Jonas,Hansen,jonas.hansen150@example.com,+46 000 4933 403,Male,1988-04-28,Sweden,UPPSALA ,2024-02-27,y
+C0111,Mikkel,Olsen,mikkel.olsen111@example.com,+47 000 7804 713,M,1991-10-02,Norway,Bergen,2021-10-01,Y
+C0162,Axel,Bakke,axel.bakke162@example.com,+45 000 4158 305,M,1967-02-14,Denmark,Aarhus,2023-04-27,Y
+C0092,Viktor,Strand,viktor.strand92@example.com,+47 000 5294 989,Male,1993-07-02,Norway,Trondheim,2023-04-13,Y
+C0131,julie,Dahl,julie.dahl131@example.com,+46 000 8192 865,X,1955-02-16,Sweden,Stockholm,2024-05-09,Y
+C0011,Oskar,Eriksson,oskar.eriksson11@example.com,+46 000 7874 806, male,1981-01-19,sweden,Stockholm,2022-06-06,Y
+C0081,sara,Dahl,sara.dahl81@example.com,+47 000 5866 846,female ,2004-05-14,Norway,Bergen,2024-03-02,y
+C0033,Maja,Karlsson,maja.karlsson33@example.com,+46 000 9823 355,female ,1969-04-14,Sweden,Stockholm,2021-08-10,y
+C0031,Mette,Sorensen,mette.sorensen31@example.com,+45 000 2030 347,Female,1988-06-18,Denmark,Aarhus,2026-05-21,Y 
+C0176,Anders,Jensen,anders.jensen176@example.com,+46 000 5919 516,Male,1998-04-15,Sweden,Stockholm,2026-07-19,y
+C0100,Mathias,Berg,mathias.berg100@example.com,+45 000 6243 360,Male,1956-06-23,Denmark,Aarhus,2021-12-05,Y 
+C0185,Ida,Bakke,ida.bakke185@example.com,+45 000 8539 354,Female,1967-11-14,Denmark,Copenhagen,2024-08-29,Y
+C0161,  Klara,Johansen,klara.johansen161@example.com,+46 000 8233 309,female ,2001-06-26,Sweden,Gothenburg,2026-07-06,Y
+C0069,Mette,Johansen,mette.johansen69@example.com,+46 000 4060 293,female ,1950-07-09,Sweden,Stockholm,2024-07-25,Y
+C0084,Emma,Nilsson,emma.nilsson84@example.com,+46 000 2009 181,female ,1970-01-10,Sweden,Malmo,2023-09-27,y
+C0170,Anna,eriksson,anna.eriksson170@example.com,+45 000 5801 257,female ,1951-11-12,Denmark,Odense,2022-01-01,y
+C0182,Hanna,Haugen,Hanna.Haugen182@EXAMPLE.com ,+45 000 8861 244,female ,1958-05-18,Denmark,ODENSE ,08.01.2023,Y
+C0172,Olav,Jensen,olav.jensen172@example.com,+47 000 2969 897,Male,1982-04-16,NORWAY ,Oslo,2021-12-12,n
+C0134,Anders,Johansson,anders.johansson134@example.com,+46 000 3326 334,M,1982-11-10,Sweden,Gothenburg,12.01.2024,Y
+C0130,Hanna,Moller,hanna.moller130@example.com,+47 000 7882 787,X,1977-09-18,Norway,oslo,2023-10-19,Y
+C0188,Viktor,Larsen,viktor.larsen188@example.com,+46 000 5396 785,Male,1965-06-07,Sweden,Stockholm,28.03.2023,Y 
+C0079,Ingrid,Eriksson,ingrid.eriksson79@example.com,+47 000 2203 487,Female,1978-02-22,  Norge,Oslo,2023-11-04,y
+C0035,nora,Moller,nora.moller35@example.com,+47 000 8015 560,F,1982-05-17,Norway,  Stavanger,2025-10-18,Y 
+C0190,Liv,Johansen,liv.johansen190@example.com,+46 000 7056 787,female ,1971-01-14,Sverige,Gothenburg,2024-08-11,Y
+C0085,Klara,Hansen,klara.hansen85@example.com,+46 000 7435 942,F,1956-10-18,Sweden,uppsala,2022-08-15,y
+C0059,Anna,Christensen,anna.christensen59@example.com,+46 000 8281 319,female ,2002-11-25,Sweden,Uppsala,2022-10-31,N
+C0158,  Lukas,Karlsson,lukas.karlsson158@example.com,+47 000 2038 771,M,1991-09-06,Norway,Trondheim,2023-11-07,Y
+C0060,Viktor,Andersson,viktor.andersson60@example.com,+46 000 4262 468,Male,2004-10-13,Sweden,Malmo,2026-01-14,Y
+C0135,elsa,Nilsson,elsa.nilsson135@example.com,+47 000 5340 409,Female,1955-09-22,Norway,Trondheim,13.01.2026,Y
+C0048,Jonas,Lindqvist,jonas.lindqvist48@example.com,+46 000 4193 956,M,1987-01-07,SWEDEN ,Malmo,2022-06-27,Y 
+C0047,Oskar,Johansson,oskar.johansson47@example.com,+46 000 1513 521, male,1951-04-21,Sweden,GOTHENBURG ,2023-11-12,Y
+C0152,Sofie,Nielsen,sofie.nielsen152@example.com,+298 000 1322 750,Female,1960-01-06,Faroe Islands,Torshavn,2024-08-03,Y
+C0068,Hanna,Bakke,hanna.bakke68@example.com,+46 000 2190 569,F,2001-03-02,Sweden,Stockholm,2022-10-21,y
+C0179,maja,Pedersen,maja.pedersen179@example.com,+45 000 2297 460,female ,1966-06-24,Danmark,  Odense,2023-10-17,Y
+C0064,signe,Johansen,signe.johansen64@example.com,+45 000 3524 160,F,1962-12-06,DENMARK ,  Aarhus,2025-12-29,Y
+C0193,Klara,Andersson,klara.andersson193@example.com,+46 000 5180 507,F,1954-10-22,Sweden,Malmo,2022-10-29,y
+C0103,Kasper,Andersson,kasper.andersson103@example.com,+46 000 3318 468,Male,1971-10-16,Sweden,Uppsala,2026-04-23,Y 
+C0157,Emil,Nilsson,emil.nilsson157@example.com,+46 000 4998 255,Male,1968-02-17,Sweden,Gothenburg,2021-01-14,y
+C0200,Klara,Lund,Klara.Lund200@EXAMPLE.com ,+46 000 3205 597,female ,1995-05-27,Sweden,Gothenburg,10.07.2021,Y 
+C0106,Henrik,Strand,henrik.strand106@example.com,+45 000 4114 778, male,1985-02-03,Denmark,Aarhus,2023-10-25,Y
+C0025,EMIL ,Andersson,emil.andersson25@example.com,+45 000 8929 404,Male,1964-10-11,Denmark,Copenhagen,2024-08-25,y
+C0128,Frederik,Moller,frederik.moller128@example.com,+46 000 4073 412,Male,1983-05-04,Sweden,Stockholm,2025-02-08,N
+C0088,Henrik,Johansen,henrik.johansen88@example.com,+47 000 7591 345, male,1952-07-05,norway,Trondheim,2023-03-18,Y 
+C0043,Julie,Jensen,julie.jensen43@example.com,+47 000 9482 111,Female,1960-03-07,Norway,Trondheim,2022-08-30,y
+C0082,Klara,Moller,klara.moller82@example.com,+46 000 2753 451,F,1966-07-02,sweden,UPPSALA ,2022-08-21,y
+C0127,  Ida,Christensen,ida.christensen127@example.com,+46 000 2924 956,female ,1975-08-23,Sweden,Gothenburg,2021-04-21,Y
+C0167,Hanna,Sorensen,hanna.sorensen167@example.com,+45 000 5887 128,Female,1959-05-22,Denmark,Odense,2021-10-07,n
+C0199,Mette,JOHANSSON ,mette.johansson199@example.com,+46 000 7642 427,Female,1979-09-21,  Sweden,Stockholm,2024-03-15,n
+C0046,Johan,Moller,johan.moller46@example.com,+45 000 4041 439,Male,1984-07-22,Denmark,Aalborg,2022-03-09,Y
+C0166,Karin,Berg,karin.berg166@example.com,+46 000 3457 237,F,1977-05-13,Sweden,Gothenburg,2022-06-01,Y 
+C0105,Oskar,STRAND ,oskar.strand105@example.com,+45 000 1809 574,M,2000-09-02,Denmark,Odense,26.06.2023,Y 
+C0174,Signe,Larsen,signe.larsen174@example.com,+45 000 6478 155,Female,1962-04-23,Denmark,odense,2026-08-19,Y
+C0030,SOFIE ,Johansen,sofie.johansen30@example.com,+47 000 3102 871,F,2001-03-15,  Norway,Oslo,2025-10-19,Y
+C0062,Axel,Jensen,axel.jensen62@example.com,+47 000 5557 596,X,2001-07-31,Norway,Oslo,14.05.2024,Y 
+C0113,Karin,Bakke,karin.bakke113@example.com,+46 000 7741 985,Female,1980-10-27,Sweden,Stockholm,2022-09-23,y
+C0086,Jonas,Andersson,jonas.andersson86@example.com,+46 000 6499 145,Male,2001-06-27,Sweden,Malmo,28.02.2025,y
+C0022,Freja,Haugen,freja.haugen22@example.com,+46 000 5574 428,Female,1990-03-02,Sweden,Stockholm,2024-11-01,y
+C0024,Tove,Haugen,Tove.Haugen24@EXAMPLE.com ,+45 000 6688 309,F,1996-05-01,Denmark,Aarhus,2022-03-06,Y 
+C0132,Julie,Olsen,julie.olsen132@example.com,+45 000 3949 789,female ,1998-05-03,Denmark,Copenhagen,2023-08-01,y
+C0044,Nora,Dahl,nora.dahl44@example.com,+46 000 4083 522,Female,1986-02-18,Sweden,Uppsala,2025-01-19,y
+C0067,Magnus,Eriksson,magnus.eriksson67@example.com,+47 000 1058 609, male,2000-06-13,Norway,Bergen,2025-01-17,N
+C0165,Klara,Olsen,klara.olsen165@example.com,+47 000 6465 163,female ,1979-07-15,Norway,Trondheim,2021-04-27,Y
+C0094,Kasper,Olsen,kasper.olsen94@example.com,+46 000 8307 477,M,1995-11-05,Sweden,Stockholm,2025-10-14,Y
+C0107,Mathias,Holm,mathias.holm107@example.com,+47 000 7199 355,Male,1954-04-10,Norway,Stavanger,2024-07-19,y
+C0160,Erik,Hansen,erik.hansen160@example.com,+45 000 8021 686,Male,1989-09-09,Denmark,Copenhagen,2021-08-02,Y 
+C0096,Kasper,Karlsson,kasper.karlsson96@example.com,+47 000 2759 220,M,1971-09-22,Norway,Oslo,2024-06-01,Y 
+C0168,Olav,Andersson,olav.andersson168@example.com,+45 000 3706 324, male,1990-02-25,Denmark,Aarhus,2026-03-01,Y 
+C0002,Viktor,Nilsson,Viktor.Nilsson2@EXAMPLE.com ,+47 000 5396 636,M,1956-10-20,Norway,bergen,2024-03-19,y
+C0097,Lars,Lindqvist,lars.lindqvist97@example.com,+46 000 2804 584,M,1990-02-11,Sweden,Uppsala,2026-08-01,Y 
+C0010,Mathias,Karlsson,mathias.karlsson10@example.com,+47 000 9628 181, male,1989-11-20,Norway,trondheim,2022-07-27,Y
+C0003,hanna,Olsen,hanna.olsen3@example.com,+45 000 5205 516,female ,2003-02-09,Denmark,Copenhagen,18.07.2021,Y
+C0107,Mathias,Holm,mathias.holm107@example.com,+47 000 7199 355,Male,1954-04-10,Norway,Stavanger,2024-07-19,y
+C0055,Hanna,BERG ,hanna.berg55@example.com,+47 000 3606 902,Female,1986-03-07,Norway,Trondheim,2022-10-19,N
+C0045,Johan,karlsson,johan.karlsson45@example.com,+45 000 4878 768,M,1985-11-17,  Denmark,Odense,2025-12-12,Y 
+C0110,Sara,Eriksson,sara.eriksson110@example.com,+45 000 7922 969,F,1961-12-03,Denmark,Aarhus,05.10.2022,Y
+C0197,Kasper,Nielsen,kasper.nielsen197@example.com,+47 000 1606 739,M,1953-12-01,Norway,Oslo,01.05.2023,y
+C0164,Sven,Vik,sven.vik164@example.com,+46 000 3106 831, male,1965-10-06,Sweden,Malmo,2023-08-03,Y 
+C0098,Freja,Nilsson,freja.nilsson98@example.com,+46 000 4592 453,F,2001-11-15,Sverige,Stockholm,2023-10-16,Y 
+C0119,Lukas,Larsen,lukas.larsen119@example.com,+47 000 4320 188,M,1978-01-08,Norway,Trondheim,2023-10-14,Y
+C0194,Axel,Eriksson,axel.eriksson194@example.com,+45 000 1487 962,M,1971-06-14,Denmark,Aalborg,2023-11-23,Y
+C0145,Axel,Vik,axel.vik145@example.com,+47 000 8976 414,M,1958-04-02,Norway,Bergen,2026-07-08,y
+C0122,astrid,  Larsen,astrid.larsen122@example.com,+47 000 6528 401,F,1972-10-10,Norway,Trondheim,2021-10-22,y
+C0005,  Ingrid,LUND ,ingrid.lund5@example.com,+46 000 3562 847,female ,1967-01-21,Sweden,Gothenburg,30.09.2023,Y
+C0108,Ida,Christensen,ida.christensen108@example.com,+46 000 4680 860,F,1987-02-01,Sverige,Malmo,2025-08-15,Y 
+C0125,Anna,Nilsson,anna.nilsson125@example.com,+46 000 1816 891,F,1952-11-04,Sweden,Stockholm,2026-08-16,y
+C0073,Axel,Nielsen,axel.nielsen73@example.com,+45 000 4452 515, male,1986-08-24,Denmark,Aarhus,2022-03-24,y
+C0076,Liv,Strand,liv.strand76@example.com,+46 000 8126 869,female ,2004-04-28,Sweden,Uppsala,2022-02-13,Y 
+C0089,Ingrid,Johansen,ingrid.johansen89@example.com,+298 000 7372 449,female ,1966-01-05,Faroe Islands,Torshavn,2021-07-27,Y
+C0090,Viktor,Christensen,viktor.christensen90@example.com,+47 000 8334 307,M,1953-11-04,Norway,Oslo,2021-09-21,y
+C0189,Sven,Lindqvist,sven.lindqvist189@example.com,+45 000 8647 872, male,1982-01-02,Denmark,Copenhagen,2021-12-24,y
+C0078,Mikkel,JOHANSSON ,mikkel.johansson78@example.com,+47 000 9648 569,M,2001-08-31,Norway,Oslo,2022-07-24,y
+C0198,Erik,Berg,erik.berg198@example.com,+45 000 9492 228,M,1994-05-15,Danmark,Aarhus,2021-05-16,Y
+C0115,Elsa,Lund,elsa.lund115@example.com,+46 000 5944 962,F,1999-02-01,Sweden,Malmo,2022-08-24,Y 
+C0014,Hanna,Lund,hanna.lund14@example.com,+45 000 9265 799,Female,1966-03-27,denmark,Aarhus,12.12.2021,Y 
+C0001,Mikkel,Vik,mikkel.vik1@example.com,+45 000 2186 474,M,1977-07-10,Denmark,Aarhus,21.10.2023,Y
+C0039,Magnus,Larsen,magnus.larsen39@example.com,+46 000 3619 328,M,1954-11-19,Sweden,Stockholm,2022-09-16,Y 
+C0133,Jakob,Lindqvist,jakob.lindqvist133@example.com,+47 000 2278 249,M,2003-04-21,norway,Trondheim,2025-04-28,Y 
+C0095,  Anna,Olsen,anna.olsen95@example.com,+46 000 4404 893,female ,1973-10-09,Sweden,Uppsala,2023-04-30,Y
+C0070,Mette,STRAND ,mette.strand70@example.com,+47 000 4079 338,F,1972-10-18,Norway,Oslo,2021-08-15,Y 
+C0184,Tove,Nilsson,tove.nilsson184@example.com,+46 000 2690 233,F,2004-06-03,Sweden,Uppsala,2021-07-04,Y
+C0017,Henrik,NILSSON ,henrik.nilsson17@example.com,+47 000 9820 512,Male,1990-05-18,Norway,stavanger,18.01.2021,Y 
+C0054,Nils,Bakke,nils.bakke54@example.com,+47 000 5470 453,M,1965-10-14,Norge,Bergen,2022-12-01,N
+C0053,LINNEA ,Lund,linnea.lund53@example.com,+45 000 6917 659,female ,1957-11-01,Denmark,Aalborg,2026-03-07,Y 
+C0180,Ingrid,Berg,ingrid.berg180@example.com,+45 000 6126 655,Female,1966-12-24,Denmark,Odense,27.12.2021,Y 
+C0032,Emma,Larsen,emma.larsen32@example.com,+45 000 1542 452,female ,1973-05-09,Denmark,Odense,2026-02-24,y
+C0118,Sven,Vik,sven.vik118@example.com,+45 000 8647 695,M,1999-10-16,DENMARK ,Copenhagen,2024-07-05,Y 
+C0049,Mikkel,Olsen,mikkel.olsen49@example.com,+47 000 7657 366,M,1994-11-17,Norway,Oslo,2026-04-02,Y
+C0109,Linnea,Haugen,linnea.haugen109@example.com,+46 000 6417 401,Female,1984-01-23,Sweden,Stockholm,23.06.2026,y
+C0154,Tove,  Eriksson,tove.eriksson154@example.com,+47 000 7952 954,female ,2003-02-12,Norway,Oslo,2026-06-17,Y 
+C0140,Hanna,Christensen,hanna.christensen140@example.com,+46 000 2797 645,female ,1961-03-26,  Sweden,Gothenburg,2022-06-26,Y
+C0012,Klara,Dahl,klara.dahl12@example.com,+45 000 3434 598,female ,1986-11-22,Denmark,Copenhagen,2023-03-20,y
+C0071,Axel,Christensen,axel.christensen71@example.com,+46 000 4983 139,M,1991-05-25,Sweden,Stockholm,2021-04-28,y
+C0023,Liv,Dahl,liv.dahl23@example.com,+45 000 9282 989,Female,1957-12-01,Denmark,Odense,2023-02-12,Y 
+C0144,Frederik,Berg,frederik.berg144@example.com,+47 000 1800 790,M,1989-10-12,Norge,Oslo,21.12.2023,y
+C0093,Kasper,Vik,kasper.vik93@example.com,+47 000 3412 293, male,1997-12-23,Norway,TRONDHEIM ,2024-06-04,Y
+C0065,Henrik,Karlsson,henrik.karlsson65@example.com,+47 000 4810 454,M,1968-08-01,Norway,Oslo,2025-09-26,Y
+C0013,Frederik,Moller,frederik.moller13@example.com,+47 000 7459 529,M,1992-11-20,Norway,  Bergen,03.06.2021,n
+C0178,Sofie,Berg,sofie.berg178@example.com,+45 000 2931 385,Female,1972-08-17,denmark,Aalborg,2024-11-08,n
+C0138,Freja,Nielsen,freja.nielsen138@example.com,+47 000 1528 498,female ,2003-02-08,Norway,Bergen,2021-05-15,y
+C0021,Johan,Lund,johan.lund21@example.com,+45 000 1503 164,Male,1980-09-08,Denmark,ODENSE ,2026-05-12,Y
+C0195,Mette,Christensen,mette.christensen195@example.com,+46 000 7861 705,female ,1974-02-16,Sweden,Malmo,2024-06-30,y
+C0181,Lars,Olsen,lars.olsen181@example.com,+45 000 6335 151, male,1997-09-25,Denmark,Copenhagen,2022-11-14,y
+C0194,Axel,Eriksson,axel.eriksson194@example.com,+45 000 1487 962,M,1971-06-14,Denmark,Aalborg,2023-11-23,Y
+C0124,  Anders,Moller,anders.moller124@example.com,+46 000 2320 560,Male,2003-12-02,Sweden,Uppsala,2022-02-06,Y
+C0165,Klara,Olsen,klara.olsen165@example.com,+47 000 6465 163,female ,1979-07-15,Norway,Trondheim,2021-04-27,Y
+C0137,Klara,Johansen,klara.johansen137@example.com,+45 000 3290 319,F,1979-07-11,Denmark,Aalborg,2023-07-05,y
+C0061,Julie,Johansen,julie.johansen61@example.com,+47 000 9512 238,F,1952-02-26,Norway,Oslo,23.11.2024,Y 
+C0159,Sofie,Sorensen,sofie.sorensen159@example.com,+45 000 8208 872,Female,1975-03-17,Denmark,Copenhagen,2025-09-29,y
+C0186,Jonas,Lindqvist,jonas.lindqvist186@example.com,+47 000 7693 189,Male,1964-05-11,Norway,OSLO ,2023-10-17,Y 
+C0063,Mikkel,ANDERSSON ,mikkel.andersson63@example.com,+47 000 7867 417,X,1951-09-30,Norway,Stavanger,2022-07-20,Y 
+C0154,Tove,  Eriksson,tove.eriksson154@example.com,+47 000 7952 954,female ,2003-02-12,Norway,Oslo,2026-06-17,Y 
+C0038,JONAS ,Hansen,jonas.hansen38@example.com,+47 000 1808 108,Male,1990-11-21,Norway,  Oslo,2024-11-17,Y
+C0099,Linnea,Johansson,linnea.johansson99@example.com,+46 000 2154 268,Female,1997-09-04,Sweden,Uppsala,2021-04-19,y
+C0141,Julie,Andersson,julie.andersson141@example.com,+47 000 5373 669,female ,1990-02-04,Norway,STAVANGER ,2024-10-31,Y 
+C0148,Jonas,Strand,jonas.strand148@example.com,+47 000 3967 925, male,1994-04-15,norway,Bergen,2022-07-31,y
+C0117,Olav,Lindqvist,Olav.Lindqvist117@EXAMPLE.com ,+45 000 2589 372,M,1952-05-04,Denmark,  Copenhagen,2022-09-22,Y 
+C0142,ANNA ,Eriksson,anna.eriksson142@example.com,+47 000 5466 363,F,1969-05-09,Norway,Stavanger,28.10.2021,Y
+C0037,Sofie,Nilsson,sofie.nilsson37@example.com,+46 000 5767 334,F,1965-12-09,Sweden,Stockholm,2024-04-19,Y 
+C0051,Julie,Bakke,julie.bakke51@example.com,+46 000 4539 582,F,1989-07-27,Sweden,Malmo,2021-09-30,y
+C0121,Anna,Holm,anna.holm121@example.com,+47 000 6856 268,Female,1978-08-02,NORWAY ,Trondheim,2024-02-04,n
+C0173,Johan,Bakke,johan.bakke173@example.com,+46 000 7420 584,M,1955-07-31,Sweden,Malmo,2021-10-12,y
+C0123,Signe,  Bakke,signe.bakke123@example.com,+46 000 4791 322,Female,1982-08-15,Sweden,Stockholm,2022-11-24,Y 
+C0187,Astrid,Vik,astrid.vik187@example.com,+46 000 2194 288,female ,2001-03-15,Sweden,malmo,2024-06-05,y
+C0087,Julie,Christensen,julie.christensen87@example.com,+45 000 8001 703,female ,1994-01-11,Denmark,Copenhagen,2026-03-11,y
+C0034,Mikkel,Berg,mikkel.berg34@example.com,+46 000 1545 604,M,2004-01-31,Sweden,Malmo,2023-03-24,y
+C0050,Kasper,Johansson,kasper.johansson50@example.com,+46 000 2666 320,M,1983-03-01,Sweden,Stockholm,2023-10-28,y
+C0151,Julie,nielsen,julie.nielsen151@example.com,+45 000 8111 858,female ,1982-03-01,Denmark,Aalborg,2025-08-27,y
+C0192,Sara,  Nilsson,sara.nilsson192@example.com,+46 000 1622 833,female ,1959-01-17,Sweden,Stockholm,2023-08-25,Y
+C0058,Maja,Berg,maja.berg58@example.com,+47 000 7461 977,Female,2000-04-04,Norway,Trondheim,2023-09-24,y
+C0104,Ida,Moller,ida.moller104@example.com,+45 000 5284 152,female ,1989-01-09,Denmark,Aarhus,2024-12-27,y
+C0143,Maja,Nielsen,maja.nielsen143@example.com,+45 000 2247 687,Female,1977-05-16,Denmark,AARHUS ,2021-06-19,Y
+C0136,Ida,eriksson,ida.eriksson136@example.com,+46 000 1348 898,female ,1999-05-18,Sweden,Malmo,2022-06-08,Y 
+C0114,  Oskar,Andersson,oskar.andersson114@example.com,+47 000 1584 566, male,1967-05-22,Norge,Stavanger,2021-10-07,y
+C0183,Emil,Olsen,emil.olsen183@example.com,+47 000 7405 177,M,1976-02-08,Norway,  Trondheim,2024-12-21,Y
+C0029,maja,Haugen,maja.haugen29@example.com,+46 000 3394 931,F,2002-12-11,Sweden,  Uppsala,2025-04-21,Y
+C0149,MAGNUS ,Johansson,magnus.johansson149@example.com,+47 000 1872 335, male,2001-03-13,Norway,Stavanger,2021-04-18,Y 
+C0006,Signe,Berg,Signe.Berg6@EXAMPLE.com ,+45 000 2633 106,female ,1977-09-24,Denmark,aalborg,2026-02-10,y
+C0147,Ida,Sorensen,ida.sorensen147@example.com,+46 000 1098 451,female ,1953-12-13,Sweden,Stockholm,2022-01-11,y
+C0077,Julie,Karlsson,julie.karlsson77@example.com,+46 000 8929 814,Female,1971-06-03,Sweden,Stockholm,2023-06-08,Y 
+C0153,Emma,Johansen,emma.johansen153@example.com,+46 000 8211 821,female ,1958-10-30,sweden,Stockholm,2024-12-29,Y 
+C0076,Liv,Strand,liv.strand76@example.com,+46 000 8126 869,female ,2004-04-28,Sweden,Uppsala,2022-02-13,Y 
+C0041,Sven,Berg,sven.berg41@example.com,+47 000 3384 103,M,1995-05-25,  Norway,Trondheim,2024-11-04,y
+C0112,Astrid,Bakke,astrid.bakke112@example.com,+46 000 5756 926,X,1985-02-14,Sweden,Gothenburg,2025-01-26,Y 
+C0027,Ingrid,Jensen,ingrid.jensen27@example.com,+47 000 8910 529,Female,1987-12-20,Norway,Stavanger,2022-05-06,y
+C0175,  Astrid,Nielsen,astrid.nielsen175@example.com,+46 000 7898 636,F,1993-10-27,Sweden,Malmo,21.07.2021,Y 
+C0196,Ingrid,Lund,ingrid.lund196@example.com,+46 000 5857 188,F,1993-06-20,SWEDEN ,Gothenburg,2022-05-13,y
+C0007,Magnus,Johansson,magnus.johansson7@example.com,+45 000 9815 842,M,2000-10-31,Denmark,Aarhus,2023-07-06,y
+C0036,tove,Berg,tove.berg36@example.com,+46 000 9079 727,F,1952-10-25,Sweden,Stockholm,27.09.2021,y
+C0163,Henrik,Hansen,henrik.hansen163@example.com,+46 000 6535 288,Male,1953-04-14,Sweden,Gothenburg,2021-11-12,Y 
+C0019,Magnus,Christensen,magnus.christensen19@example.com,+45 000 2380 467,M,2000-03-21,Denmark,Aarhus,2022-06-04,y
+C0072,Frederik,Strand,frederik.strand72@example.com,+46 000 6890 388,Male,2000-11-02,Sweden,uppsala,2024-06-14,Y 
+C0101,jonas,Vik,jonas.vik101@example.com,+45 000 6743 187,Male,1989-09-03,Denmark,Copenhagen,2024-06-01,Y

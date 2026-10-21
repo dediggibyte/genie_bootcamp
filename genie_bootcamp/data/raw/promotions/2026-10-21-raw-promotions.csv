@@ -1,0 +1,10 @@
+promotion_id,promotion_name,promotion_type,discount_pct,start_date,end_date,campaign_id
+PR01,Black Friday 2024,Seasonal discount,20,2024-11-25,2024-12-02,CMP01
+PR02,Christmas Gift Deal 2024,Seasonal discount,10,2024-12-03,2024-12-23,CMP02
+PR03,Summer Sale 2024,Clearance,15,2024-06-17,2024-07-31,CMP03
+PR04,Summer Sale 2025,Clearance,15,2025-06-16,2025-07-31,CMP04
+PR05,Black Friday 2025,Seasonal discount,25,2025-11-24,2025-12-01,CMP05
+PR06,Christmas Gift Deal 2025,Seasonal discount,10,2025-12-02,2025-12-23,CMP06
+PR07,Winter Outdoor Week,Category discount,20,2025-10-01,2025-10-31,CMP07
+PR08,Summer Sale 2026,Clearance,15,2026-06-15,2026-07-31,CMP08
+PR09,Loyalty Spring Bonus,Loyalty,5,2025-03-01,2025-04-30,

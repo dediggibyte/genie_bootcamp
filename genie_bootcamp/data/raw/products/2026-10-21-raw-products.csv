@@ -1,0 +1,18 @@
+product_id,sku,product_name,brand,category_id,supplier_id,list_price,unit_cost,launch_date,is_active
+P009,LEG-CRT-PS,LEGO Creator 3-in-1 Pirate Ship,LEGO,CAT06,SUP02,99.0,50.0,2023-08-01,Y
+P008,LEG-FRD-HC,LEGO Friends Heartlake Cafe,LEGO,CAT06,SUP02,49.0,23.0,2024-01-01,Y
+P007,LEG-CTY-FS,LEGO City Fire Station,LEGO,CAT06,SUP02,89.0,44.0,2023-01-01,Y
+P014,HH-MSS-RJ,Helly Hansen Moss Rain Jacket,Helly Hansen,CAT11,SUP03,69.0,27.0,2023-03-01,Y
+P004,ELX-IH800,Electrolux 800 Series Induction Hob,Electrolux,CAT04,SUP01,899.0,575.0,2024-02-01,Y
+P001,ELX-DW600,Electrolux 600 Series Dishwasher,Electrolux,CAT01,SUP01,649.0,410.0,2023-03-01,Y
+P012,HH-CRW-ML,Helly Hansen Crew Midlayer Jacket,Helly Hansen,CAT09,SUP03,179.0,78.0,2023-08-15,Y
+P015,HH-ULR-SK,Helly Hansen Ullr Ski Jacket,Helly Hansen,CAT12,SUP03,299.0,130.0,2024-09-01,Y
+P005,ELX-AP500,Electrolux UltimateHome 500 Air Purifier,Electrolux,CAT05,SUP01,299.0,170.0,2024-04-01,Y
+P008,LEG-FRD-HC,LEGO Friends Heartlake Cafe,LEGO,CAT06,SUP02,49.0,23.0,2024-01-01,Y
+P011,HH-ODN-SH,Helly Hansen Odin Shell Jacket,Helly Hansen,CAT08,SUP03,449.0,195.0,2023-08-15,Y
+P006,LEG-TEC-SC,LEGO Technic Supercar,LEGO,CAT06,SUP02,449.0,250.0,2023-06-01,Y
+P001,ELX-DW600,Electrolux 600 Series Dishwasher,Electrolux,CAT01,SUP01,649.0,410.0,2023-03-01,Y
+P010,LEG-ICN-FB,LEGO Icons Flower Bouquet,LEGO,CAT07,SUP02,59.0,28.0,2023-02-01,Y
+P002,ELX-WM700,Electrolux 700 Series Washing Machine,Electrolux,CAT02,SUP01,799.0,505.0,2023-01-15,Y
+P013,HH-LFA-MB,Helly Hansen Lifa Merino Base Layer,Helly Hansen,CAT10,SUP03,79.0,33.0,2023-09-01,Y
+P003,ELX-VCQ9,Electrolux Pure Q9 Cordless Vacuum,Electrolux,CAT03,SUP01,349.0,205.0,2023-09-01,Y

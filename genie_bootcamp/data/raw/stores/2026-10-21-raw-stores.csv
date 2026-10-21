@@ -1,0 +1,12 @@
+store_id,store_name,channel_id,country,city,opening_date
+ST01,Mall of Scandinavia,STORE,Sweden,Stockholm,2015-11-12
+ST02,Gallerian Stockholm,STORE,Sweden,Stockholm,2012-03-01
+ST03,Nordstan Gothenburg,STORE,Sweden,Gothenburg,2014-05-20
+ST04,Emporia Malmo,STORE,Sweden,Malmo,2016-09-15
+ST05,Storo Oslo,STORE,Norway,Oslo,2013-04-10
+ST06,Byporten Oslo,STORE,Norway,Oslo,2018-02-01
+ST07,Lagunen Bergen,STORE,Norway,Bergen,2017-10-05
+ST08,Fields Copenhagen,STORE,Denmark,Copenhagen,2014-03-01
+ST09,Stroget Copenhagen,STORE,Denmark,Copenhagen,2011-06-18
+ST10,Bruuns Galleri Aarhus,STORE,Denmark,Aarhus,2019-08-22
+ON01,Online Store,ONLINE,Sweden,Stockholm,2015-01-01
