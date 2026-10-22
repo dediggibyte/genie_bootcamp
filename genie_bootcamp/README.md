@@ -26,6 +26,9 @@ notebooks/2026-10-21-00-setup.py                catalog, schemas, volume, copy C
 notebooks/2026-10-21-01-bronze.py               raw ingestion (PySpark)
 notebooks/2026-10-21-02-silver.py               cleaning + conforming (SQL + PySpark)
 notebooks/2026-10-21-03-gold.py                 star schema + metric validation (SQL)
+notebooks/2026-10-22-04-metric-view.py          metric view gold.kpi_metrics with the 5 KPIs (SQL)
+notebooks/2026-10-22-05-governance.py           region + category row filters, PII masks, common category
+genie_one/                                      Genie One knowledge documents + brand images
 genie/2026-10-21-genie-instructions.md          Genie space instructions + sample questions
 scripts/2026-10-21-generate-synthetic-data.py   reproducible data generator (seed 42)
 ```
@@ -45,7 +48,9 @@ scripts/2026-10-21-generate-synthetic-data.py   reproducible data generator (see
 | 01 | `2026-10-21-01-bronze` | 27 `bronze.<system>_<entity>_raw` tables, all STRING, with lineage columns; the raw quality issues |
 | 02 | `2026-10-21-02-silver` | 15 clean tables + `order_items_quarantine`; data-quality summary |
 | 03 | `2026-10-21-03-gold` | 6 dims + 6 facts with comments and PK/FK; the 5 metric values checked against this README |
-| 04 | Create the Genie space | See "Create the Genie space" below |
+| 04 | `2026-10-22-04-metric-view` | Metric view `gold.kpi_metrics`; the 5 KPIs checked against this README |
+| 05 | `2026-10-22-05-governance` | Entitlements, row filters and PII masks; the Services & Gifts category; what each user sees |
+| 06 | Create the Genie space | See "Create the Genie space" below |
 
 Every notebook can be re-run safely.
 

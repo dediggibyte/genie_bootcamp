@@ -70,6 +70,10 @@ Line-level formulas: `gross_sales = quantity × unit_price`, `net_sales = gross_
 9. `order_status = 'Processing'` lines are recent online orders. Include them unless the user asks for completed only.
 10. The data ends on **2026-09-30**. Interpret "today", "this month" and "last N days" relative to that date,
     not `current_date()`.
+11. **Governance.** Row filters limit each user to their granted regions and product categories, plus the
+    common category **Services & Gifts** (brand Nordhem). Finance, web sessions and shipments are admin-only, and
+    customer name, email and phone show `***` for non-admins. When results are partial or empty, say that the
+    answer covers only the data the user may see. Never estimate hidden data.
 
 ---
 

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="320" viewBox="0 0 820 320" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" role="img" aria-label="Helly Hansen brand card">
+  <title>Helly Hansen — Outdoor Apparel (Norway)</title>
+  <rect x="1" y="1" width="818" height="318" rx="16" fill="#ffffff" stroke="#dfe3e8" stroke-width="2"/>
+  <path d="M17 1 H220 V319 H17 A16 16 0 0 1 1 303 V17 A16 16 0 0 1 17 1 Z" fill="#C8261C"/>
+  <text x="110" y="62" text-anchor="middle" font-size="27" font-weight="800" fill="#ffffff">Helly Hansen</text>
+  <text x="110" y="92" text-anchor="middle" font-size="14" fill="#ffffffcc">Outdoor Apparel</text>
+  <polygon points="68,204 104,142 128,180 140,164 164,204" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><polygon points="96,156 104,142 112,156 104,152" fill="#fff"/>
+  <text x="110" y="270" text-anchor="middle" font-size="13" fill="#ffffffcc">Peak: Winter (Oct–Feb)</text>
+  <rect x="250" y="28" width="42" height="28" rx="2" fill="#BA0C2F"/>
+  <rect x="263.02" y="28" width="6.16" height="28" fill="#FFFFFF"/>
+  <rect x="250" y="38.92" width="42" height="6.16" fill="#FFFFFF"/>
+  <rect x="264.56" y="28" width="3.08" height="28" fill="#00205B"/>
+  <rect x="250" y="40.46" width="42" height="3.08" fill="#00205B"/>
+  <rect x="250" y="28" width="42" height="28" rx="2" fill="none" stroke="#00000022"/>
+  <text x="304" y="48" font-size="22" font-weight="700" fill="#1d2430">The margin leader — 57 % gross margin</text>
+  <text x="304" y="72" font-size="14" fill="#5b6470">Norway · SUP03 Helly Hansen AS · 28-day lead time</text>
+  <line x1="250" y1="94" x2="794" y2="94" stroke="#eef0f3" stroke-width="2"/>
+  <rect x="250" y="112" width="122" height="62" rx="8" fill="#FBEDEC"/><text x="262" y="134" font-size="12" fill="#5b6470">Net sales</text><text x="262" y="162" font-size="20" font-weight="700" fill="#1d2430">≈ 128k €</text><rect x="382" y="112" width="122" height="62" rx="8" fill="#FBEDEC"/><text x="394" y="134" font-size="12" fill="#5b6470">Sales share</text><text x="394" y="162" font-size="20" font-weight="700" fill="#1d2430">20 %</text><rect x="514" y="112" width="122" height="62" rx="8" fill="#FBEDEC"/><text x="526" y="134" font-size="12" fill="#5b6470">Gross margin</text><text x="526" y="162" font-size="20" font-weight="700" fill="#1d2430">57.3 %</text><rect x="646" y="112" width="122" height="62" rx="8" fill="#FBEDEC"/><text x="658" y="134" font-size="12" fill="#5b6470">Top return</text><text x="658" y="162" font-size="20" font-weight="700" fill="#1d2430">Wrong size</text>
+  <text x="250" y="208" font-size="12" font-weight="700" fill="#5b6470" letter-spacing="1">PRODUCT RANGE (LIST PRICE)</text>
+  <circle cx="254" cy="231" r="4" fill="#C8261C"/><text x="266" y="236" font-size="14" fill="#1d2430">Odin Shell Jacket<tspan fill="#5b6470"> · 449 EUR</tspan></text><circle cx="534" cy="231" r="4" fill="#C8261C"/><text x="546" y="236" font-size="14" fill="#1d2430">Ullr Ski Jacket<tspan fill="#5b6470"> · 299 EUR</tspan></text><circle cx="254" cy="257" r="4" fill="#C8261C"/><text x="266" y="262" font-size="14" fill="#1d2430">Crew Midlayer Jacket<tspan fill="#5b6470"> · 179 EUR</tspan></text><circle cx="534" cy="257" r="4" fill="#C8261C"/><text x="546" y="262" font-size="14" fill="#1d2430">Lifa Merino Base Layer<tspan fill="#5b6470"> · 79 EUR</tspan></text><circle cx="254" cy="283" r="4" fill="#C8261C"/><text x="266" y="288" font-size="14" fill="#1d2430">Moss Rain Jacket<tspan fill="#5b6470"> · 69 EUR</tspan></text>
+  <text x="794" y="306" text-anchor="end" font-size="10" fill="#9aa3ad">Illustrative card · synthetic bootcamp data · not an official brand asset</text>
+</svg>

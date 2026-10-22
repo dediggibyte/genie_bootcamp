@@ -16,6 +16,9 @@
 # MAGIC           ├─ fact_returns, fact_web_session, fact_inventory_daily, fact_shipment
 # MAGIC           └─ fact_finance_monthly  (GL — never add to fact_order_line revenue)
 # MAGIC ```
+# MAGIC
+# MAGIC > 🔐 Re-running this notebook drops the gold tables, which removes the governance (row filters, masks and the
+# MAGIC > Services & Gifts category). Run `2026-10-22-05-governance` again afterwards.
 
 # COMMAND ----------
 

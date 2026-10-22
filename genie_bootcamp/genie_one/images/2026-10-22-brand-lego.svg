@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="320" viewBox="0 0 820 320" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" role="img" aria-label="LEGO brand card">
+  <title>LEGO — Toys (Denmark)</title>
+  <rect x="1" y="1" width="818" height="318" rx="16" fill="#ffffff" stroke="#dfe3e8" stroke-width="2"/>
+  <path d="M17 1 H220 V319 H17 A16 16 0 0 1 1 303 V17 A16 16 0 0 1 17 1 Z" fill="#D01012"/>
+  <text x="110" y="62" text-anchor="middle" font-size="40" font-weight="800" fill="#ffffff">LEGO</text>
+  <text x="110" y="92" text-anchor="middle" font-size="14" fill="#ffffffcc">Toys</text>
+  <rect x="96" y="148" width="14" height="10" rx="2" fill="#fff"/><rect x="122" y="148" width="14" height="10" rx="2" fill="#fff"/><rect x="82" y="156" width="68" height="44" rx="4" fill="#fff"/>
+  <text x="110" y="270" text-anchor="middle" font-size="13" fill="#ffffffcc">Peak: Christmas (Dec)</text>
+  <rect x="250" y="28" width="42" height="28" rx="2" fill="#C8102E"/>
+  <rect x="263.02" y="28" width="6.16" height="28" fill="#FFFFFF"/>
+  <rect x="250" y="38.92" width="42" height="6.16" fill="#FFFFFF"/>
+  <rect x="250" y="28" width="42" height="28" rx="2" fill="none" stroke="#00000022"/>
+  <text x="304" y="48" font-size="22" font-weight="700" fill="#1d2430">The gift brand — peaks at Christmas</text>
+  <text x="304" y="72" font-size="14" fill="#5b6470">Denmark · SUP02 LEGO Nordic A/S · 14-day lead time</text>
+  <line x1="250" y1="94" x2="794" y2="94" stroke="#eef0f3" stroke-width="2"/>
+  <rect x="250" y="112" width="122" height="62" rx="8" fill="#FFF6D6"/><text x="262" y="134" font-size="12" fill="#5b6470">Net sales</text><text x="262" y="162" font-size="20" font-weight="700" fill="#1d2430">≈ 119k €</text><rect x="382" y="112" width="122" height="62" rx="8" fill="#FFF6D6"/><text x="394" y="134" font-size="12" fill="#5b6470">Sales share</text><text x="394" y="162" font-size="20" font-weight="700" fill="#1d2430">18 %</text><rect x="514" y="112" width="122" height="62" rx="8" fill="#FFF6D6"/><text x="526" y="134" font-size="12" fill="#5b6470">Gross margin</text><text x="526" y="162" font-size="20" font-weight="700" fill="#1d2430">47.8 %</text><rect x="646" y="112" width="122" height="62" rx="8" fill="#FFF6D6"/><text x="658" y="134" font-size="12" fill="#5b6470">Units / line</text><text x="658" y="162" font-size="20" font-weight="700" fill="#1d2430">2–3</text>
+  <text x="250" y="208" font-size="12" font-weight="700" fill="#5b6470" letter-spacing="1">PRODUCT RANGE (LIST PRICE)</text>
+  <circle cx="254" cy="231" r="4" fill="#D01012"/><text x="266" y="236" font-size="14" fill="#1d2430">Technic Supercar<tspan fill="#5b6470"> · 449 EUR</tspan></text><circle cx="534" cy="231" r="4" fill="#D01012"/><text x="546" y="236" font-size="14" fill="#1d2430">City Fire Station<tspan fill="#5b6470"> · 89 EUR</tspan></text><circle cx="254" cy="257" r="4" fill="#D01012"/><text x="266" y="262" font-size="14" fill="#1d2430">Creator 3-in-1 Pirate Ship<tspan fill="#5b6470"> · 99 EUR</tspan></text><circle cx="534" cy="257" r="4" fill="#D01012"/><text x="546" y="262" font-size="14" fill="#1d2430">Friends Heartlake Cafe<tspan fill="#5b6470"> · 49 EUR</tspan></text><circle cx="254" cy="283" r="4" fill="#D01012"/><text x="266" y="288" font-size="14" fill="#1d2430">Icons Flower Bouquet<tspan fill="#5b6470"> · 59 EUR</tspan></text>
+  <text x="794" y="306" text-anchor="end" font-size="10" fill="#9aa3ad">Illustrative card · synthetic bootcamp data · not an official brand asset</text>
+</svg>
