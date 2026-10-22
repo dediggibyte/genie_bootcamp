@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 00 · Setup — Genie Bootcamp (Scandinavian Retail)
 # MAGIC
@@ -69,6 +73,8 @@ assert os.path.isdir(src), f"Source folder not found: {src}. Set the repo_root w
 
 copied = 0
 for entity in sorted(os.listdir(src)):
+    if not os.path.isdir(os.path.join(src, entity)):
+        continue
     os.makedirs(f"{VOLUME_PATH}/{entity}", exist_ok=True)
     for f in os.listdir(os.path.join(src, entity)):
         if f.endswith(".csv"):
