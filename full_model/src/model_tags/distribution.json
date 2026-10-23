@@ -1,0 +1,1573 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "distribution",
+ "schema_comment": "Owns warehouse operations, inventory management, and order fulfillment across distribution centers. Manages inbound/outbound logistics within DCs, put-away/picking/packing processes, cycle counting, FEFO/FIFO inventory rotation, WMS integration (Blue Yonder), OTIF performance, OSA metrics, and DSD execution for direct store delivery channels.",
+ "tag_count": 588,
+ "foreign_key_count": 95,
+ "schema_tags": {
+  "dbx_domain": "distribution",
+  "dbx_division": "operations"
+ },
+ "tables": {
+  "distribution_facility": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "facility_management"
+   },
+   "column_tags": {
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Facility Identifier"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "address_line_1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line_2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "closed_date": {
+     "dbx_business_glossary_term": "Closed Date"
+    },
+    "contact_email": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Contact Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "contact_phone": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Contact Phone Number"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "cross_dock_enabled_flag": {
+     "dbx_business_glossary_term": "Cross-Dock Enabled Flag"
+    },
+    "cycle_count_frequency_days": {
+     "dbx_business_glossary_term": "Cycle Count Frequency (Days)"
+    },
+    "dc_code": {
+     "dbx_business_glossary_term": "Distribution Center (DC) Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,12}$"
+    },
+    "dc_name": {
+     "dbx_business_glossary_term": "Distribution Center (DC) Name"
+    },
+    "dock_doors_inbound": {
+     "dbx_business_glossary_term": "Dock Doors (Inbound)"
+    },
+    "dock_doors_outbound": {
+     "dbx_business_glossary_term": "Dock Doors (Outbound)"
+    },
+    "dsd_hub_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Hub Flag"
+    },
+    "facility_type": {
+     "dbx_business_glossary_term": "Facility Type",
+     "dbx_value_regex": "ambient|chilled|frozen|multi_temperature|dsd_hub|cross_dock"
+    },
+    "fsc_certified_flag": {
+     "dbx_business_glossary_term": "Forest Stewardship Council (FSC) Certified Flag"
+    },
+    "gmp_certified_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certified Flag"
+    },
+    "hazmat_certified_flag": {
+     "dbx_business_glossary_term": "Hazardous Materials (HAZMAT) Certified Flag"
+    },
+    "inventory_rotation_method": {
+     "dbx_business_glossary_term": "Inventory Rotation Method",
+     "dbx_value_regex": "fifo|fefo|lifo"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "lease_expiration_date": {
+     "dbx_business_glossary_term": "Lease Expiration Date"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "opened_date": {
+     "dbx_business_glossary_term": "Opened Date"
+    },
+    "operating_hours_weekday": {
+     "dbx_business_glossary_term": "Operating Hours (Weekday)"
+    },
+    "operating_hours_weekend": {
+     "dbx_business_glossary_term": "Operating Hours (Weekend)"
+    },
+    "operational_status": {
+     "dbx_business_glossary_term": "Operational Status",
+     "dbx_value_regex": "active|inactive|under_construction|decommissioned|seasonal|maintenance"
+    },
+    "osa_target_percentage": {
+     "dbx_business_glossary_term": "On Shelf Availability (OSA) Target Percentage"
+    },
+    "otif_target_percentage": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Target Percentage"
+    },
+    "ownership_type": {
+     "dbx_business_glossary_term": "Ownership Type",
+     "dbx_value_regex": "owned|leased|third_party_logistics"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "sap_plant_code": {
+     "dbx_business_glossary_term": "SAP Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "sap_storage_location": {
+     "dbx_business_glossary_term": "SAP Storage Location",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "shifts_per_day": {
+     "dbx_business_glossary_term": "Shifts Per Day"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "storage_capacity_pallet_positions": {
+     "dbx_business_glossary_term": "Storage Capacity (Pallet Positions)"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "time_zone": {
+     "dbx_business_glossary_term": "Time Zone"
+    },
+    "total_capacity_sqft": {
+     "dbx_business_glossary_term": "Total Capacity (Square Feet)"
+    },
+    "wms_site_code": {
+     "dbx_business_glossary_term": "Warehouse Management System (WMS) Site Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{4,20}$"
+    }
+   }
+  },
+  "storage_location": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "facility_management"
+   },
+   "column_tags": {
+    "storage_location_id": {
+     "dbx_business_glossary_term": "Storage Location Identifier"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center (DC) ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Category Id (Foreign Key)"
+    },
+    "abc_classification": {
+     "dbx_business_glossary_term": "ABC Velocity Classification",
+     "dbx_value_regex": "A|B|C"
+    },
+    "aisle": {
+     "dbx_business_glossary_term": "Aisle Identifier",
+     "dbx_value_regex": "^[A-Z0-9]{1,5}$"
+    },
+    "bay": {
+     "dbx_business_glossary_term": "Bay Identifier",
+     "dbx_value_regex": "^[A-Z0-9]{1,5}$"
+    },
+    "bin_position": {
+     "dbx_business_glossary_term": "Bin Position Identifier",
+     "dbx_value_regex": "^[A-Z0-9]{1,5}$"
+    },
+    "blocked_date": {
+     "dbx_business_glossary_term": "Location Blocked Date"
+    },
+    "blocked_reason": {
+     "dbx_business_glossary_term": "Location Blocked Reason"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "cycle_count_frequency": {
+     "dbx_business_glossary_term": "Cycle Count Frequency",
+     "dbx_value_regex": "daily|weekly|monthly|quarterly|annual"
+    },
+    "distribution_storage_location_level": {
+     "dbx_business_glossary_term": "Rack Level Identifier",
+     "dbx_value_regex": "^[A-Z0-9]{1,3}$"
+    },
+    "dsd_eligible_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Eligible Flag"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Location Effective Date"
+    },
+    "equipment_type_required": {
+     "dbx_business_glossary_term": "Material Handling Equipment Type Required",
+     "dbx_value_regex": "forklift|reach_truck|order_picker|pallet_jack|manual|automated"
+    },
+    "expiration_date": {
+     "dbx_business_glossary_term": "Location Expiration Date"
+    },
+    "fefo_eligible_flag": {
+     "dbx_business_glossary_term": "First Expired First Out (FEFO) Eligible Flag"
+    },
+    "fifo_eligible_flag": {
+     "dbx_business_glossary_term": "First In First Out (FIFO) Eligible Flag"
+    },
+    "hazmat_certified_flag": {
+     "dbx_business_glossary_term": "Hazardous Material (HAZMAT) Certified Flag"
+    },
+    "height_cm": {
+     "dbx_business_glossary_term": "Location Height (Centimeters)"
+    },
+    "last_cycle_count_date": {
+     "dbx_business_glossary_term": "Last Cycle Count Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "length_cm": {
+     "dbx_business_glossary_term": "Location Length (Centimeters)"
+    },
+    "location_code": {
+     "dbx_business_glossary_term": "Storage Location Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,20}$"
+    },
+    "location_name": {
+     "dbx_business_glossary_term": "Storage Location Name"
+    },
+    "location_status": {
+     "dbx_business_glossary_term": "Storage Location Status",
+     "dbx_value_regex": "active|inactive|blocked|maintenance|quarantine|damaged"
+    },
+    "location_type": {
+     "dbx_business_glossary_term": "Storage Location Type",
+     "dbx_value_regex": "bulk|pick|reserve|staging|dock|cross_dock"
+    },
+    "mixed_lot_allowed_flag": {
+     "dbx_business_glossary_term": "Mixed Lot/Batch Allowed Flag"
+    },
+    "mixed_sku_allowed_flag": {
+     "dbx_business_glossary_term": "Mixed Stock Keeping Unit (SKU) Allowed Flag"
+    },
+    "pick_face_flag": {
+     "dbx_business_glossary_term": "Pick Face Flag"
+    },
+    "picking_strategy": {
+     "dbx_business_glossary_term": "Picking Strategy",
+     "dbx_value_regex": "batch|wave|zone|discrete|cluster"
+    },
+    "putaway_strategy": {
+     "dbx_business_glossary_term": "Put-Away Strategy",
+     "dbx_value_regex": "directed|random|fixed|dynamic"
+    },
+    "replenishment_priority": {
+     "dbx_business_glossary_term": "Replenishment Priority Rank"
+    },
+    "temperature_zone": {
+     "dbx_business_glossary_term": "Temperature Zone Classification",
+     "dbx_value_regex": "ambient|refrigerated|frozen|controlled"
+    },
+    "volume_capacity_m3": {
+     "dbx_business_glossary_term": "Volume Capacity (Cubic Meters)"
+    },
+    "weight_capacity_kg": {
+     "dbx_business_glossary_term": "Weight Capacity (Kilograms)"
+    },
+    "width_cm": {
+     "dbx_business_glossary_term": "Location Width (Centimeters)"
+    },
+    "zone_code": {
+     "dbx_business_glossary_term": "Warehouse Zone Code",
+     "dbx_value_regex": "^[A-Z0-9]{1,10}$"
+    }
+   }
+  },
+  "inbound_receipt": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inbound_operations"
+   },
+   "column_tags": {
+    "inbound_receipt_id": {
+     "dbx_business_glossary_term": "Inbound Receipt ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "primary_inbound_distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center (DC) ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "accepted_quantity": {
+     "dbx_business_glossary_term": "Accepted Quantity"
+    },
+    "actual_receipt_timestamp": {
+     "dbx_business_glossary_term": "Actual Receipt Timestamp"
+    },
+    "asn_number": {
+     "dbx_business_glossary_term": "Advanced Shipping Notice (ASN) Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,30}$"
+    },
+    "case_count": {
+     "dbx_business_glossary_term": "Case Count"
+    },
+    "container_number": {
+     "dbx_business_glossary_term": "Container Number",
+     "dbx_value_regex": "^[A-Z]{4}[0-9]{7}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "discrepancy_flag": {
+     "dbx_business_glossary_term": "Discrepancy Flag"
+    },
+    "discrepancy_notes": {
+     "dbx_business_glossary_term": "Discrepancy Notes"
+    },
+    "discrepancy_reason": {
+     "dbx_business_glossary_term": "Discrepancy Reason",
+     "dbx_value_regex": "overage|shortage|damage|wrong_product|quality_issue|documentation_error"
+    },
+    "dock_door_number": {
+     "dbx_business_glossary_term": "Dock Door Number",
+     "dbx_value_regex": "^[A-Z0-9]{1,10}$"
+    },
+    "expected_quantity": {
+     "dbx_business_glossary_term": "Expected Quantity"
+    },
+    "goods_receipt_document_number": {
+     "dbx_business_glossary_term": "Goods Receipt Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "otif_compliant_flag": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Compliant Flag"
+    },
+    "pallet_count": {
+     "dbx_business_glossary_term": "Pallet Count"
+    },
+    "putaway_completion_timestamp": {
+     "dbx_business_glossary_term": "Put-Away Completion Timestamp"
+    },
+    "quality_inspection_required_flag": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "quality_inspection_status": {
+     "dbx_business_glossary_term": "Quality Inspection Status",
+     "dbx_value_regex": "not_required|pending|in_progress|passed|failed"
+    },
+    "receipt_completion_timestamp": {
+     "dbx_business_glossary_term": "Receipt Completion Timestamp"
+    },
+    "receipt_number": {
+     "dbx_business_glossary_term": "Receipt Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "receipt_status": {
+     "dbx_business_glossary_term": "Receipt Status",
+     "dbx_value_regex": "scheduled|in_progress|completed|discrepancy|cancelled"
+    },
+    "receipt_type": {
+     "dbx_business_glossary_term": "Receipt Type",
+     "dbx_value_regex": "supplier_delivery|plant_transfer|inter_dc_transfer|return_from_customer|production_output"
+    },
+    "received_quantity": {
+     "dbx_business_glossary_term": "Received Quantity"
+    },
+    "rejected_quantity": {
+     "dbx_business_glossary_term": "Rejected Quantity"
+    },
+    "scheduled_receipt_date": {
+     "dbx_business_glossary_term": "Scheduled Receipt Date"
+    },
+    "seal_intact_flag": {
+     "dbx_business_glossary_term": "Seal Intact Flag"
+    },
+    "seal_number": {
+     "dbx_business_glossary_term": "Seal Number",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "temperature_check_required_flag": {
+     "dbx_business_glossary_term": "Temperature Check Required Flag"
+    },
+    "temperature_compliant_flag": {
+     "dbx_business_glossary_term": "Temperature Compliant Flag"
+    },
+    "temperature_reading_celsius": {
+     "dbx_business_glossary_term": "Temperature Reading (Celsius)"
+    },
+    "trailer_number": {
+     "dbx_business_glossary_term": "Trailer Number",
+     "dbx_value_regex": "^[A-Z0-9]{4,20}$"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    }
+   }
+  },
+  "inbound_receipt_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inbound_operations"
+   },
+   "column_tags": {
+    "inbound_receipt_line_id": {
+     "dbx_business_glossary_term": "Inbound Receipt Line ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "gtin_registry_id": {
+     "dbx_business_glossary_term": "Gtin Registry Id (Foreign Key)"
+    },
+    "inbound_receipt_id": {
+     "dbx_business_glossary_term": "Inbound Receipt ID"
+    },
+    "label_spec_id": {
+     "dbx_business_glossary_term": "Label Spec Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Registration Id (Foreign Key)"
+    },
+    "packaging_spec_id": {
+     "dbx_business_glossary_term": "Product Packaging Spec Id (Foreign Key)"
+    },
+    "po_line_id": {
+     "dbx_business_glossary_term": "Po Line Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Stock Position Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "storage_location_id": {
+     "dbx_business_glossary_term": "Distribution Storage Location Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "asn_line_number": {
+     "dbx_business_glossary_term": "Advanced Shipping Notice (ASN) Line Number"
+    },
+    "asn_number": {
+     "dbx_business_glossary_term": "Advanced Shipping Notice (ASN) Number",
+     "dbx_value_regex": "^[A-Z0-9-]{6,30}$"
+    },
+    "condition_code": {
+     "dbx_business_glossary_term": "Condition Code",
+     "dbx_value_regex": "good|damaged|expired|quarantine|rejected|hold"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "damage_description": {
+     "dbx_business_glossary_term": "Damage Description"
+    },
+    "expected_quantity_cases": {
+     "dbx_business_glossary_term": "Expected Quantity Cases"
+    },
+    "expected_quantity_eaches": {
+     "dbx_business_glossary_term": "Expected Quantity Eaches"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "extended_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Extended Cost"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Line Number"
+    },
+    "lot_number": {
+     "dbx_business_glossary_term": "Lot Number",
+     "dbx_value_regex": "^[A-Z0-9-]{4,30}$"
+    },
+    "manufacture_date": {
+     "dbx_business_glossary_term": "Manufacture Date"
+    },
+    "pallet_code": {
+     "dbx_business_glossary_term": "Pallet ID",
+     "dbx_value_regex": "^[A-Z0-9-]{6,30}$"
+    },
+    "put_away_timestamp": {
+     "dbx_business_glossary_term": "Put Away Timestamp"
+    },
+    "quality_inspection_required_flag": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "quality_inspection_status": {
+     "dbx_business_glossary_term": "Quality Inspection Status",
+     "dbx_value_regex": "not_required|pending|in_progress|passed|failed|conditional"
+    },
+    "receipt_status": {
+     "dbx_business_glossary_term": "Receipt Status",
+     "dbx_value_regex": "pending|received|inspected|put_away|discrepancy|rejected"
+    },
+    "received_quantity_cases": {
+     "dbx_business_glossary_term": "Received Quantity Cases"
+    },
+    "received_quantity_eaches": {
+     "dbx_business_glossary_term": "Received Quantity Eaches"
+    },
+    "received_timestamp": {
+     "dbx_business_glossary_term": "Received Timestamp"
+    },
+    "sscc": {
+     "dbx_business_glossary_term": "Serial Shipping Container Code (SSCC)",
+     "dbx_value_regex": "^[0-9]{18}$"
+    },
+    "temperature_at_receipt_celsius": {
+     "dbx_business_glossary_term": "Temperature at Receipt Celsius"
+    },
+    "unit_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Unit Cost"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "case|each|pallet|layer|inner_pack|display_unit"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC)",
+     "dbx_value_regex": "^[0-9]{12}$"
+    },
+    "variance_quantity_cases": {
+     "dbx_business_glossary_term": "Variance Quantity Cases"
+    },
+    "variance_quantity_eaches": {
+     "dbx_business_glossary_term": "Variance Quantity Eaches"
+    }
+   }
+  },
+  "outbound_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "outbound_fulfillment"
+   },
+   "column_tags": {
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "network_node_id": {
+     "dbx_business_glossary_term": "Freight Order Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Sales Order Reference"
+    },
+    "primary_outbound_distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center (DC) ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id"
+    },
+    "source_manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Source Manufacturing Facility Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Customer ID"
+    },
+    "actual_delivery_date": {
+     "dbx_business_glossary_term": "Actual Delivery Date"
+    },
+    "actual_ship_date": {
+     "dbx_business_glossary_term": "Actual Ship Date"
+    },
+    "backorder_flag": {
+     "dbx_business_glossary_term": "Backorder Flag"
+    },
+    "bill_of_lading_number": {
+     "dbx_business_glossary_term": "Bill of Lading (BOL) Number"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Cancellation Reason"
+    },
+    "cancelled_timestamp": {
+     "dbx_business_glossary_term": "Cancelled Timestamp"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "fill_rate_percentage": {
+     "dbx_business_glossary_term": "Fill Rate Percentage"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Material (HAZMAT) Flag"
+    },
+    "incoterm": {
+     "dbx_business_glossary_term": "Incoterm"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "order_date": {
+     "dbx_business_glossary_term": "Order Date"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "Order Status"
+    },
+    "order_type": {
+     "dbx_business_glossary_term": "Order Type",
+     "dbx_value_regex": "retail_replenishment|dsd|ecommerce|inter_dc_transfer|wholesale|export"
+    },
+    "otif_commitment_flag": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Commitment Flag"
+    },
+    "packing_slip_number": {
+     "dbx_business_glossary_term": "Packing Slip Number"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "pick_ticket_number": {
+     "dbx_business_glossary_term": "Pick Ticket Number"
+    },
+    "priority_code": {
+     "dbx_business_glossary_term": "Priority Code",
+     "dbx_value_regex": "standard|expedited|rush|critical"
+    },
+    "proof_of_delivery_timestamp": {
+     "dbx_business_glossary_term": "Proof of Delivery (POD) Timestamp"
+    },
+    "requested_ship_date": {
+     "dbx_business_glossary_term": "Requested Ship Date"
+    },
+    "required_delivery_date": {
+     "dbx_business_glossary_term": "Required Delivery Date"
+    },
+    "service_level": {
+     "dbx_business_glossary_term": "Service Level",
+     "dbx_value_regex": "standard|next_day|two_day|same_day|scheduled"
+    },
+    "shipping_method": {
+     "dbx_business_glossary_term": "Shipping Method"
+    },
+    "special_handling_instructions": {
+     "dbx_business_glossary_term": "Special Handling Instructions"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "total_order_quantity": {
+     "dbx_business_glossary_term": "Total Order Quantity"
+    },
+    "total_order_value": {
+     "dbx_business_glossary_term": "Total Order Value"
+    },
+    "total_order_volume_m3": {
+     "dbx_business_glossary_term": "Total Order Volume (Cubic Meters)"
+    },
+    "total_order_weight_kg": {
+     "dbx_business_glossary_term": "Total Order Weight (Kilograms)"
+    },
+    "tracking_number": {
+     "dbx_business_glossary_term": "Tracking Number"
+    },
+    "wave_code": {
+     "dbx_business_glossary_term": "Wave ID"
+    }
+   }
+  },
+  "outbound_order_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "outbound_fulfillment"
+   },
+   "column_tags": {
+    "outbound_order_line_id": {
+     "dbx_business_glossary_term": "Outbound Order Line ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "gtin_registry_id": {
+     "dbx_business_glossary_term": "Gtin Registry Id (Foreign Key)"
+    },
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Stock Position Id (Foreign Key)"
+    },
+    "promoted_price_id": {
+     "dbx_business_glossary_term": "Promoted Price Id (Foreign Key)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Distribution Shipment Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Label Version Id (Foreign Key)"
+    },
+    "storage_location_id": {
+     "dbx_business_glossary_term": "Storage Location Id (Foreign Key)"
+    },
+    "actual_ship_date": {
+     "dbx_business_glossary_term": "Actual Ship Date"
+    },
+    "allocated_quantity": {
+     "dbx_business_glossary_term": "Allocated Quantity"
+    },
+    "base_unit_quantity": {
+     "dbx_business_glossary_term": "Base Unit Quantity"
+    },
+    "confirmed_quantity": {
+     "dbx_business_glossary_term": "Confirmed Quantity"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "customer_po_line_number": {
+     "dbx_business_glossary_term": "Customer Purchase Order (PO) Line Number"
+    },
+    "dsd_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Flag"
+    },
+    "edi_line_reference": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Line Reference"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "handling_unit_code": {
+     "dbx_business_glossary_term": "Handling Unit ID"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Material (HAZMAT) Flag"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Line Number"
+    },
+    "line_status": {
+     "dbx_business_glossary_term": "Line Status"
+    },
+    "line_volume_m3": {
+     "dbx_business_glossary_term": "Line Volume (Cubic Meters)"
+    },
+    "line_weight_kg": {
+     "dbx_business_glossary_term": "Line Weight (Kilograms)"
+    },
+    "lot_number": {
+     "dbx_business_glossary_term": "Lot Number"
+    },
+    "ordered_quantity": {
+     "dbx_business_glossary_term": "Ordered Quantity"
+    },
+    "otif_status": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Status",
+     "dbx_value_regex": "on_time_in_full|late_in_full|on_time_partial|late_partial"
+    },
+    "pack_timestamp": {
+     "dbx_business_glossary_term": "Pack Timestamp"
+    },
+    "packed_quantity": {
+     "dbx_business_glossary_term": "Packed Quantity"
+    },
+    "pallet_code": {
+     "dbx_business_glossary_term": "Pallet ID"
+    },
+    "pick_timestamp": {
+     "dbx_business_glossary_term": "Pick Timestamp"
+    },
+    "pick_zone": {
+     "dbx_business_glossary_term": "Pick Zone"
+    },
+    "picked_quantity": {
+     "dbx_business_glossary_term": "Picked Quantity"
+    },
+    "requested_ship_date": {
+     "dbx_business_glossary_term": "Requested Ship Date"
+    },
+    "serial_numbers": {
+     "dbx_business_glossary_term": "Serial Numbers"
+    },
+    "ship_timestamp": {
+     "dbx_business_glossary_term": "Ship Timestamp"
+    },
+    "shipped_quantity": {
+     "dbx_business_glossary_term": "Shipped Quantity"
+    },
+    "short_ship_flag": {
+     "dbx_business_glossary_term": "Short Ship Flag"
+    },
+    "short_ship_reason_code": {
+     "dbx_business_glossary_term": "Short Ship Reason Code",
+     "dbx_value_regex": "OOS|DAMAGE|RECALL|EXPIRED|ALLOCATION"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "unit_volume_m3": {
+     "dbx_business_glossary_term": "Unit Volume (Cubic Meters)"
+    },
+    "unit_weight_kg": {
+     "dbx_business_glossary_term": "Unit Weight (Kilograms)"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC)",
+     "dbx_value_regex": "^[0-9]{12}$"
+    },
+    "warehouse_location_code": {
+     "dbx_business_glossary_term": "Warehouse Location Code"
+    }
+   }
+  },
+  "pick_task": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "outbound_fulfillment"
+   },
+   "column_tags": {
+    "pick_task_id": {
+     "dbx_business_glossary_term": "Pick Task Identifier (ID)"
+    },
+    "atp_record_id": {
+     "dbx_business_glossary_term": "Atp Record Id (Foreign Key)"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "destination_location_distribution_storage_location_id": {
+     "dbx_business_glossary_term": "Destination Location Identifier (ID)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order Identifier (ID)"
+    },
+    "outbound_order_line_id": {
+     "dbx_business_glossary_term": "Outbound Order Line Id (Foreign Key)"
+    },
+    "primary_pick_distribution_storage_location_id": {
+     "dbx_business_glossary_term": "Source Location Identifier (ID)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Distribution Shipment Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Identifier (ID)"
+    },
+    "carton_code": {
+     "dbx_business_glossary_term": "Carton Identifier (ID)",
+     "dbx_value_regex": "^CTN[0-9A-Z]{8,15}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "dsd_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Flag"
+    },
+    "exception_code": {
+     "dbx_business_glossary_term": "Exception Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,6}$"
+    },
+    "exception_notes": {
+     "dbx_business_glossary_term": "Exception Notes"
+    },
+    "gross_weight_kg": {
+     "dbx_business_glossary_term": "Gross Weight in Kilograms (KG)"
+    },
+    "gs1_128_label": {
+     "dbx_business_glossary_term": "GS1-128 Label Data"
+    },
+    "height_cm": {
+     "dbx_business_glossary_term": "Height in Centimeters (CM)"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "length_cm": {
+     "dbx_business_glossary_term": "Length in Centimeters (CM)"
+    },
+    "net_weight_kg": {
+     "dbx_business_glossary_term": "Net Weight in Kilograms (KG)"
+    },
+    "otif_eligible_flag": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Eligible Flag"
+    },
+    "pack_station_code": {
+     "dbx_business_glossary_term": "Pack Station Identifier (ID)"
+    },
+    "packaging_material_code": {
+     "dbx_business_glossary_term": "Packaging Material Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "pallet_code": {
+     "dbx_business_glossary_term": "Pallet Identifier (ID)",
+     "dbx_value_regex": "^PLT[0-9A-Z]{8,15}$"
+    },
+    "pick_accuracy_flag": {
+     "dbx_business_glossary_term": "Pick Accuracy Flag"
+    },
+    "pick_list_number": {
+     "dbx_business_glossary_term": "Pick List Number",
+     "dbx_value_regex": "^PL[0-9]{8,12}$"
+    },
+    "pick_quantity": {
+     "dbx_business_glossary_term": "Pick Quantity"
+    },
+    "picked_quantity": {
+     "dbx_business_glossary_term": "Picked Quantity"
+    },
+    "picking_strategy": {
+     "dbx_business_glossary_term": "Picking Strategy",
+     "dbx_value_regex": "discrete|batch|zone|wave|cluster"
+    },
+    "priority_level": {
+     "dbx_business_glossary_term": "Priority Level",
+     "dbx_value_regex": "urgent|high|normal|low"
+    },
+    "sscc": {
+     "dbx_business_glossary_term": "Serial Shipping Container Code (SSCC)",
+     "dbx_value_regex": "^[0-9]{18}$"
+    },
+    "task_assigned_timestamp": {
+     "dbx_business_glossary_term": "Task Assigned Timestamp"
+    },
+    "task_completed_timestamp": {
+     "dbx_business_glossary_term": "Task Completed Timestamp"
+    },
+    "task_duration_seconds": {
+     "dbx_business_glossary_term": "Task Duration in Seconds"
+    },
+    "task_started_timestamp": {
+     "dbx_business_glossary_term": "Task Started Timestamp"
+    },
+    "task_status": {
+     "dbx_business_glossary_term": "Task Status",
+     "dbx_value_regex": "pending|assigned|in_progress|completed|cancelled|on_hold"
+    },
+    "task_type": {
+     "dbx_business_glossary_term": "Task Type",
+     "dbx_value_regex": "pick|pack|pick_and_pack|replenishment_pick"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "wave_code": {
+     "dbx_business_glossary_term": "Wave Identifier (ID)"
+    },
+    "width_cm": {
+     "dbx_business_glossary_term": "Width in Centimeters (CM)"
+    }
+   }
+  },
+  "shipment": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "outbound_fulfillment"
+   },
+   "column_tags": {
+    "shipment_id": {
+     "dbx_business_glossary_term": "Distribution Shipment ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "load_plan_id": {
+     "dbx_business_glossary_term": "Load Plan Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "network_node_id": {
+     "dbx_business_glossary_term": "Lane Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Intransit Shipment Id (Foreign Key)"
+    },
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Campaign Id (Foreign Key)"
+    },
+    "source_distribution_facility_id": {
+     "dbx_business_glossary_term": "Source Distribution Facility Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "actual_delivery_timestamp": {
+     "dbx_business_glossary_term": "Actual Delivery Timestamp"
+    },
+    "actual_departure_timestamp": {
+     "dbx_business_glossary_term": "Actual Departure Timestamp"
+    },
+    "bill_of_lading_number": {
+     "dbx_business_glossary_term": "Bill of Lading (BOL) Number"
+    },
+    "carrier_code": {
+     "dbx_business_glossary_term": "Carrier Code"
+    },
+    "carrier_name": {
+     "dbx_business_glossary_term": "Carrier Name"
+    },
+    "carrier_service_level": {
+     "dbx_business_glossary_term": "Carrier Service Level",
+     "dbx_value_regex": "ground|express|overnight|two_day|economy|premium"
+    },
+    "carton_count": {
+     "dbx_business_glossary_term": "Carton Count"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "destination_address_line1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Destination Address Line 1"
+    },
+    "destination_city": {
+     "dbx_business_glossary_term": "Destination City"
+    },
+    "destination_code": {
+     "dbx_business_glossary_term": "Destination Code"
+    },
+    "destination_country_code": {
+     "dbx_business_glossary_term": "Destination Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "destination_name": {
+     "dbx_business_glossary_term": "Destination Name"
+    },
+    "destination_postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Destination Postal Code"
+    },
+    "destination_state_province": {
+     "dbx_business_glossary_term": "Destination State or Province"
+    },
+    "destination_type": {
+     "dbx_business_glossary_term": "Destination Type",
+     "dbx_value_regex": "retail_store|distribution_center|customer|warehouse|third_party"
+    },
+    "dock_door_number": {
+     "dbx_business_glossary_term": "Dock Door Number"
+    },
+    "estimated_delivery_timestamp": {
+     "dbx_business_glossary_term": "Estimated Delivery Timestamp"
+    },
+    "freight_charge_amount": {
+     "dbx_business_glossary_term": "Freight Charge Amount"
+    },
+    "freight_currency_code": {
+     "dbx_business_glossary_term": "Freight Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "freight_terms": {
+     "dbx_business_glossary_term": "Freight Terms",
+     "dbx_value_regex": "prepaid|collect|third_party|fob_origin|fob_destination"
+    },
+    "goods_issue_document_number": {
+     "dbx_business_glossary_term": "Goods Issue Document Number"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Materials (HAZMAT) Flag"
+    },
+    "in_full_flag": {
+     "dbx_business_glossary_term": "In Full Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "line_item_count": {
+     "dbx_business_glossary_term": "Line Item Count"
+    },
+    "on_time_flag": {
+     "dbx_business_glossary_term": "On Time Flag"
+    },
+    "otif_status": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Status",
+     "dbx_value_regex": "on_time_in_full|late|incomplete|damaged|not_applicable"
+    },
+    "pallet_count": {
+     "dbx_business_glossary_term": "Pallet Count"
+    },
+    "pro_number": {
+     "dbx_business_glossary_term": "Progressive (PRO) Number"
+    },
+    "scheduled_delivery_date": {
+     "dbx_business_glossary_term": "Scheduled Delivery Date"
+    },
+    "scheduled_delivery_timestamp": {
+     "dbx_business_glossary_term": "Scheduled Delivery Timestamp"
+    },
+    "scheduled_departure_timestamp": {
+     "dbx_business_glossary_term": "Scheduled Departure Timestamp"
+    },
+    "scheduled_ship_date": {
+     "dbx_business_glossary_term": "Scheduled Ship Date"
+    },
+    "seal_number": {
+     "dbx_business_glossary_term": "Seal Number"
+    },
+    "shipment_number": {
+     "dbx_business_glossary_term": "Shipment Number",
+     "dbx_value_regex": "^SHP[0-9]{10}$"
+    },
+    "shipment_status": {
+     "dbx_business_glossary_term": "Shipment Status"
+    },
+    "shipment_type": {
+     "dbx_business_glossary_term": "Shipment Type",
+     "dbx_value_regex": "standard|expedited|dsd|cross_dock|transfer|return"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "total_units": {
+     "dbx_business_glossary_term": "Total Units"
+    },
+    "total_volume_cubic_meters": {
+     "dbx_business_glossary_term": "Total Volume in Cubic Meters"
+    },
+    "total_weight_kg": {
+     "dbx_business_glossary_term": "Total Weight in Kilograms (KG)"
+    },
+    "tracking_number": {
+     "dbx_business_glossary_term": "Tracking Number"
+    },
+    "trailer_number": {
+     "dbx_business_glossary_term": "Trailer Number"
+    },
+    "wave_number": {
+     "dbx_business_glossary_term": "Wave Number"
+    }
+   }
+  },
+  "inventory_position": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "facility_management"
+   },
+   "column_tags": {
+    "inventory_position_id": {
+     "dbx_business_glossary_term": "Inventory Position Identifier"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Lot Batch ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "safety_stock_id": {
+     "dbx_business_glossary_term": "Safety Stock Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "standard_cost_id": {
+     "dbx_business_glossary_term": "Standard Cost Id (Foreign Key)"
+    },
+    "storage_location_id": {
+     "dbx_business_glossary_term": "Storage Location Dc Location Id (Foreign Key)"
+    },
+    "actual_weight": {
+     "dbx_business_glossary_term": "Actual Weight"
+    },
+    "catch_weight_flag": {
+     "dbx_business_glossary_term": "Catch Weight Flag"
+    },
+    "cost_per_unit": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost Per Unit"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "days_on_hand": {
+     "dbx_business_glossary_term": "Days On Hand (DOH)"
+    },
+    "days_to_expiry": {
+     "dbx_business_glossary_term": "Days to Expiry"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "inventory_condition": {
+     "dbx_business_glossary_term": "Inventory Condition",
+     "dbx_value_regex": "new|refurbished|returned|damaged|expired|recalled"
+    },
+    "inventory_status": {
+     "dbx_business_glossary_term": "Inventory Status",
+     "dbx_value_regex": "available|allocated|quarantine|hold|damaged|expired"
+    },
+    "last_cycle_count_date": {
+     "dbx_business_glossary_term": "Last Cycle Count Date"
+    },
+    "last_movement_date": {
+     "dbx_business_glossary_term": "Last Movement Date"
+    },
+    "last_movement_type": {
+     "dbx_business_glossary_term": "Last Movement Type"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Last Updated Timestamp"
+    },
+    "license_plate_number": {
+     "dbx_business_glossary_term": "License Plate Number (LPN)"
+    },
+    "lot_number": {
+     "dbx_business_glossary_term": "Lot Number"
+    },
+    "manufacture_date": {
+     "dbx_business_glossary_term": "Manufacture Date"
+    },
+    "owner_type": {
+     "dbx_business_glossary_term": "Owner Type",
+     "dbx_value_regex": "owned|consignment|customer_owned|vendor_managed"
+    },
+    "pallet_code": {
+     "dbx_business_glossary_term": "Pallet ID"
+    },
+    "pick_face_flag": {
+     "dbx_business_glossary_term": "Pick Face Flag"
+    },
+    "putaway_date": {
+     "dbx_business_glossary_term": "Putaway Date"
+    },
+    "quantity_allocated": {
+     "dbx_business_glossary_term": "Quantity Allocated"
+    },
+    "quantity_available": {
+     "dbx_business_glossary_term": "Quantity Available (ATP - Available to Promise)"
+    },
+    "quantity_damaged": {
+     "dbx_business_glossary_term": "Quantity Damaged"
+    },
+    "quantity_hold": {
+     "dbx_business_glossary_term": "Quantity Hold"
+    },
+    "quantity_on_hand": {
+     "dbx_business_glossary_term": "Quantity On Hand (QOH)"
+    },
+    "quantity_quarantine": {
+     "dbx_business_glossary_term": "Quantity Quarantine"
+    },
+    "quantity_reserved": {
+     "dbx_business_glossary_term": "Quantity Reserved"
+    },
+    "receipt_date": {
+     "dbx_business_glossary_term": "Receipt Date"
+    },
+    "replenishment_flag": {
+     "dbx_business_glossary_term": "Replenishment Flag"
+    },
+    "snapshot_timestamp": {
+     "dbx_business_glossary_term": "Snapshot Timestamp"
+    },
+    "storage_zone": {
+     "dbx_business_glossary_term": "Storage Zone"
+    },
+    "temperature_zone": {
+     "dbx_business_glossary_term": "Temperature Zone",
+     "dbx_value_regex": "ambient|refrigerated|frozen|controlled"
+    },
+    "total_inventory_value": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Total Inventory Value"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "weight_unit_of_measure": {
+     "dbx_business_glossary_term": "Weight Unit of Measure",
+     "dbx_value_regex": "LB|KG|OZ|G"
+    }
+   }
+  },
+  "load_plan": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "outbound_fulfillment"
+   },
+   "column_tags": {
+    "load_plan_id": {
+     "dbx_business_glossary_term": "Load Plan ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center (DC) ID"
+    },
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order Id"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store Id (Foreign Key)"
+    },
+    "actual_departure_datetime": {
+     "dbx_business_glossary_term": "Actual Departure Date Time"
+    },
+    "carrier_service_level": {
+     "dbx_business_glossary_term": "Carrier Service Level",
+     "dbx_value_regex": "standard|expedited|next_day|two_day|economy|white_glove"
+    },
+    "case_count": {
+     "dbx_business_glossary_term": "Case Count"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "dock_door_number": {
+     "dbx_business_glossary_term": "Dock Door Number"
+    },
+    "dsd_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Flag"
+    },
+    "estimated_freight_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Estimated Freight Cost"
+    },
+    "exception_code": {
+     "dbx_business_glossary_term": "Exception Code"
+    },
+    "exception_notes": {
+     "dbx_business_glossary_term": "Exception Notes"
+    },
+    "freight_cost_currency_code": {
+     "dbx_business_glossary_term": "Freight Cost Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "hazmat_class": {
+     "dbx_business_glossary_term": "Hazardous Materials (HAZMAT) Class"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Materials (HAZMAT) Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "load_plan_number": {
+     "dbx_business_glossary_term": "Load Plan Number"
+    },
+    "load_plan_status": {
+     "dbx_business_glossary_term": "Load Plan Status"
+    },
+    "load_sequence_strategy": {
+     "dbx_business_glossary_term": "Load Sequence Strategy",
+     "dbx_value_regex": "fifo|lifo|stop_sequence|priority"
+    },
+    "load_type": {
+     "dbx_business_glossary_term": "Load Type",
+     "dbx_value_regex": "full_truckload|less_than_truckload|parcel|intermodal|dsd|pool_distribution"
+    },
+    "loading_completion_datetime": {
+     "dbx_business_glossary_term": "Loading Completion Date Time"
+    },
+    "loading_start_datetime": {
+     "dbx_business_glossary_term": "Loading Start Date Time"
+    },
+    "order_count": {
+     "dbx_business_glossary_term": "Order Count"
+    },
+    "otif_target_delivery_datetime": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Target Delivery Date Time"
+    },
+    "pallet_configuration": {
+     "dbx_business_glossary_term": "Pallet Configuration"
+    },
+    "pallet_count": {
+     "dbx_business_glossary_term": "Pallet Count"
+    },
+    "planned_departure_datetime": {
+     "dbx_business_glossary_term": "Planned Departure Date Time"
+    },
+    "seal_number": {
+     "dbx_business_glossary_term": "Seal Number"
+    },
+    "stop_count": {
+     "dbx_business_glossary_term": "Stop Count"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "temperature_range_max_celsius": {
+     "dbx_business_glossary_term": "Temperature Range Maximum (Celsius)"
+    },
+    "temperature_range_min_celsius": {
+     "dbx_business_glossary_term": "Temperature Range Minimum (Celsius)"
+    },
+    "total_volume_cubic_meters": {
+     "dbx_business_glossary_term": "Total Volume (Cubic Meters)"
+    },
+    "total_weight_kg": {
+     "dbx_business_glossary_term": "Total Weight (Kilograms)"
+    },
+    "trailer_code": {
+     "dbx_business_glossary_term": "Trailer ID"
+    },
+    "trailer_type": {
+     "dbx_business_glossary_term": "Trailer Type",
+     "dbx_value_regex": "dry_van|refrigerated|flatbed|tanker|intermodal|box_truck"
+    },
+    "trailer_utilization_percentage": {
+     "dbx_business_glossary_term": "Trailer Utilization Percentage"
+    }
+   }
+  }
+ }
+}

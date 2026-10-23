@@ -1,0 +1,44 @@
+# Orchestration job:  pipeline  ->  metric_views || model_tags  ->  validate
+# All tasks run on serverless compute; the notebooks receive the job parameter catalog.
+resources:
+  jobs:
+    cpg_lakehouse_job:
+      name: cpg_lakehouse_job (${var.catalog})
+      description: >-
+        Genie bootcamp lakehouse: refresh the bronze/silver/gold pipeline, create the metric views,
+        apply the industry-model tags and validate the result (catalog ${var.catalog}).
+      max_concurrent_runs: 1
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      tasks:
+        - task_key: pipeline
+          description: Bronze -> silver -> gold (Lakeflow Spark Declarative Pipeline, incremental)
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.cpg_lakehouse_pipeline.id}
+          # Safety net for the very first run: brand-new gold tables get their foreign keys in a
+          # second pipeline update (see pipeline/README.md); the pipeline normally retries itself.
+          max_retries: 1
+          min_retry_interval_millis: 10000
+
+        - task_key: metric_views
+          description: Industry (and curated bootcamp) metric views in the domain schemas
+          depends_on:
+            - task_key: pipeline
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/02a_create_metric_views.py
+
+        - task_key: model_tags
+          description: dbx_* tags of the industry model on schemas, tables and columns
+          depends_on:
+            - task_key: pipeline
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/02b_apply_model_tags.py
+
+        - task_key: validate
+          description: Gold tables filled, primary keys unique, metric views queryable
+          depends_on:
+            - task_key: metric_views
+            - task_key: model_tags
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/02c_validate_lakehouse.py

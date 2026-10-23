@@ -1,0 +1,47 @@
+# =================================================================================================
+# Genie bootcamp - Declarative Automation Bundle (formerly Databricks Asset Bundle)
+#
+# Deploys the Fjallmark lakehouse of the bootcamp: 3 domains of the Lakehouse Industry Data Model
+# (consumer, finance, manufacturing - 36 gold tables, 22 industry metric views):
+#   * pipeline cpg_lakehouse_pipeline  - Lakeflow Spark Declarative Pipeline, bronze -> silver -> gold
+#   * job      cpg_lakehouse_job       - runs the pipeline, then creates the metric views and applies
+#                                        the model tags (in parallel), then validates the result
+#
+# Participants (workspace UI, from the Git folder):
+#   open bootcamp/databricks.yml -> Deployments (rocket icon) -> target "dev" -> Deploy -> run
+#   "cpg_lakehouse_job".
+# CLI (from this folder):
+#   databricks bundle deploy -t dev            # optionally: --var catalog=<your_catalog>
+#   databricks bundle run cpg_lakehouse_job -t dev
+#
+# Before deploying, run notebooks/01_setup_catalog.py (creates the catalog, schemas, volume and
+# copies the CSV files). The catalog default below matches the setup notebook's default.
+# Re-running the job is safe: the pipeline only picks up new files, the metric views / tags tasks
+# only apply what is missing or changed.
+# =================================================================================================
+bundle:
+  name: genie_bootcamp
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: >-
+      Unity Catalog catalog for all bootcamp objects. Default cpg_<your short user name>, e.g.
+      cpg_jane_doe for jane.doe@example.com (same rule as notebooks/01_setup_catalog.py).
+    default: cpg_${workspace.current_user.short_name}
+
+workspace:
+  # One deployment per catalog, so deployments into different catalogs never share state.
+  root_path: ~/.bundle/${bundle.name}/${bundle.target}/${var.catalog}
+
+sync:
+  exclude:
+    - data/**/*.csv   # copied into the volume from the Git folder by notebooks/01_setup_catalog.py
+                      # (data/manifest.json IS deployed: the validate task compares row counts with it)
+
+targets:
+  dev:
+    default: true
+    mode: development

@@ -1,0 +1,1676 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "product",
+ "schema_comment": "Single source of truth for all product master data across the CPG/FMCG portfolio. Owns SKU definitions, GTIN/UPC/EAN identifiers, product hierarchies, BOM structures, PLM lifecycle stages, formulation records, packaging specifications, INCI ingredient declarations, and regulatory labeling attributes. Serves as the authoritative product catalog referenced by all other domains.",
+ "tag_count": 617,
+ "foreign_key_count": 47,
+ "schema_tags": {
+  "dbx_domain": "product",
+  "dbx_division": "business"
+ },
+ "tables": {
+  "sku": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "default_supply_network_node_id": {
+     "dbx_business_glossary_term": "Default Supply Network Node Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "hierarchy_id": {
+     "dbx_business_glossary_term": "Product Hierarchy Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "primary_supplier_id": {
+     "dbx_business_glossary_term": "Primary Supplier Id (Foreign Key)"
+    },
+    "primary_supplier_site_id": {
+     "dbx_business_glossary_term": "Primary Supplier Site Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{3,30}$"
+    },
+    "color": {
+     "dbx_business_glossary_term": "Product Color"
+    },
+    "country_of_origin": {
+     "dbx_business_glossary_term": "Country of Origin (ISO 3166-1 Alpha-3)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code (ISO 4217)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "discontinuation_date": {
+     "dbx_business_glossary_term": "SKU Discontinuation Date"
+    },
+    "ean": {
+     "dbx_business_glossary_term": "European Article Number (EAN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "fefo_threshold_pct": {
+     "dbx_business_glossary_term": "First Expired First Out (FEFO) Threshold Percentage"
+    },
+    "gross_weight_kg": {
+     "dbx_business_glossary_term": "Gross Weight (Kilograms)"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{8,14}$"
+    },
+    "inci_declaration": {
+     "dbx_business_glossary_term": "International Nomenclature of Cosmetic Ingredients (INCI) Declaration"
+    },
+    "is_hazardous": {
+     "dbx_business_glossary_term": "Hazardous Material Indicator"
+    },
+    "is_recyclable_packaging": {
+     "dbx_business_glossary_term": "Recyclable Packaging Indicator"
+    },
+    "is_regulated_product": {
+     "dbx_business_glossary_term": "Regulated Product Indicator"
+    },
+    "is_sustainable": {
+     "dbx_business_glossary_term": "Sustainable Product Indicator"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "launch_date": {
+     "dbx_business_glossary_term": "SKU Launch Date"
+    },
+    "lifecycle_stage": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) Stage"
+    },
+    "msrp": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Manufacturer Suggested Retail Price (MSRP)"
+    },
+    "net_content": {
+     "dbx_business_glossary_term": "Net Content (Quantity)"
+    },
+    "net_content_uom": {
+     "dbx_business_glossary_term": "Net Content Unit of Measure (UOM)"
+    },
+    "net_weight_kg": {
+     "dbx_business_glossary_term": "Net Weight (Kilograms)"
+    },
+    "pack_size": {
+     "dbx_business_glossary_term": "Pack Size (Consumer Units per Pack)"
+    },
+    "packaging_material_type": {
+     "dbx_business_glossary_term": "Primary Packaging Material Type"
+    },
+    "portfolio_classification": {
+     "dbx_business_glossary_term": "Portfolio Classification",
+     "dbx_value_regex": "core|strategic|tail|innovation|seasonal|limited_edition"
+    },
+    "product_form": {
+     "dbx_business_glossary_term": "Product Form"
+    },
+    "product_name": {
+     "dbx_business_glossary_term": "Product Name"
+    },
+    "regulatory_category": {
+     "dbx_business_glossary_term": "Regulatory Product Category"
+    },
+    "scent": {
+     "dbx_business_glossary_term": "Scent / Fragrance Descriptor"
+    },
+    "short_description": {
+     "dbx_business_glossary_term": "Short Description"
+    },
+    "sku_status": {
+     "dbx_business_glossary_term": "SKU Status",
+     "dbx_value_regex": "active|inactive|blocked|discontinued|pending_launch"
+    },
+    "standard_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Standard Cost (COGS)"
+    },
+    "storage_conditions": {
+     "dbx_business_glossary_term": "Storage Conditions",
+     "dbx_value_regex": "ambient|refrigerated|frozen|controlled_temperature|dry|flammable"
+    },
+    "sub_brand": {
+     "dbx_business_glossary_term": "Sub-Brand Name"
+    },
+    "subcategory": {
+     "dbx_business_glossary_term": "Product Subcategory"
+    },
+    "target_demographic": {
+     "dbx_business_glossary_term": "Target Demographic"
+    },
+    "total_shelf_life_days": {
+     "dbx_business_glossary_term": "Total Shelf Life (Days)"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC)",
+     "dbx_value_regex": "^[0-9]{12}$"
+    },
+    "variant": {
+     "dbx_business_glossary_term": "Product Variant"
+    },
+    "volume_ml": {
+     "dbx_business_glossary_term": "Product Volume (Millilitres)"
+    }
+   }
+  },
+  "gtin_registry": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "gtin_registry_id": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN) Registry ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "activation_date": {
+     "dbx_business_glossary_term": "GTIN Activation Date"
+    },
+    "assignment_date": {
+     "dbx_business_glossary_term": "GTIN Assignment Date"
+    },
+    "barcode_symbology": {
+     "dbx_business_glossary_term": "Barcode Symbology"
+    },
+    "brand_owner_gln": {
+     "dbx_business_glossary_term": "Brand Owner Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "cases_per_pallet": {
+     "dbx_business_glossary_term": "Cases Per Pallet"
+    },
+    "check_digit": {
+     "dbx_business_glossary_term": "GTIN Check Digit",
+     "dbx_value_regex": "^[0-9]{1}$"
+    },
+    "country_of_origin": {
+     "dbx_business_glossary_term": "Country of Origin",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "data_pool_publication_date": {
+     "dbx_business_glossary_term": "Data Pool Publication Date"
+    },
+    "data_pool_published": {
+     "dbx_business_glossary_term": "Data Pool Published Flag"
+    },
+    "ean_value": {
+     "dbx_business_glossary_term": "European Article Number (EAN) Value"
+    },
+    "edi_eligible": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Eligible Flag"
+    },
+    "gpc_brick_code": {
+     "dbx_business_glossary_term": "GS1 Global Product Classification (GPC) Brick Code",
+     "dbx_value_regex": "^[0-9]{8}$"
+    },
+    "gs1_company_prefix": {
+     "dbx_business_glossary_term": "GS1 Company Prefix",
+     "dbx_value_regex": "^[0-9]{6,12}$"
+    },
+    "gs1_member_org": {
+     "dbx_business_glossary_term": "GS1 Member Organization"
+    },
+    "gs1_registration_reference": {
+     "dbx_business_glossary_term": "GS1 Registration Reference Number"
+    },
+    "gs1_registry_published": {
+     "dbx_business_glossary_term": "GS1 Registry Published Flag"
+    },
+    "gtin_format": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN) Format",
+     "dbx_value_regex": "GTIN-8|GTIN-12|GTIN-13|GTIN-14"
+    },
+    "gtin_value": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN) Value"
+    },
+    "indicator_digit": {
+     "dbx_business_glossary_term": "GTIN-14 Indicator Digit",
+     "dbx_value_regex": "^[0-9]{1}$"
+    },
+    "inner_packs_per_case": {
+     "dbx_business_glossary_term": "Inner Packs Per Case"
+    },
+    "is_consumer_unit": {
+     "dbx_business_glossary_term": "Consumer Unit Flag"
+    },
+    "is_orderable": {
+     "dbx_business_glossary_term": "Orderable Flag"
+    },
+    "is_scannable": {
+     "dbx_business_glossary_term": "Scannable Barcode Flag"
+    },
+    "is_variable_measure": {
+     "dbx_business_glossary_term": "Variable Measure Item Flag"
+    },
+    "item_reference_number": {
+     "dbx_business_glossary_term": "GS1 Item Reference Number"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "net_content_uom": {
+     "dbx_business_glossary_term": "Net Content Unit of Measure (UOM)"
+    },
+    "net_content_value": {
+     "dbx_business_glossary_term": "Net Content Value"
+    },
+    "packaging_level": {
+     "dbx_business_glossary_term": "Packaging Hierarchy Level",
+     "dbx_value_regex": "each|inner_pack|case|pallet"
+    },
+    "plm_lifecycle_stage": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) Lifecycle Stage",
+     "dbx_value_regex": "concept|development|commercialization|active|end_of_life|discontinued"
+    },
+    "product_category": {
+     "dbx_business_glossary_term": "Product Category"
+    },
+    "product_description": {
+     "dbx_business_glossary_term": "Product Description"
+    },
+    "registration_status": {
+     "dbx_business_glossary_term": "GTIN Registration Status",
+     "dbx_value_regex": "active|inactive|pending|retired|cancelled"
+    },
+    "retirement_date": {
+     "dbx_business_glossary_term": "GTIN Retirement Date"
+    },
+    "source_system_key": {
+     "dbx_business_glossary_term": "Source System Natural Key"
+    },
+    "target_market_country": {
+     "dbx_business_glossary_term": "Target Market Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "units_per_case": {
+     "dbx_business_glossary_term": "Units Per Case"
+    },
+    "upc_value": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC) Value"
+    }
+   }
+  },
+  "hierarchy": {
+   "table_tags": {
+    "dbx_data_type": "reference_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "hierarchy_id": {
+     "dbx_business_glossary_term": "Product Hierarchy ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "parent_hierarchy_id": {
+     "dbx_business_glossary_term": "Parent Hierarchy Node ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "approved_date": {
+     "dbx_business_glossary_term": "Approved Date"
+    },
+    "channel_applicability": {
+     "dbx_business_glossary_term": "Channel Applicability"
+    },
+    "consumer_segment": {
+     "dbx_business_glossary_term": "Target Consumer Segment"
+    },
+    "cpsc_regulated": {
+     "dbx_business_glossary_term": "CPSC Regulated Flag (Consumer Product Safety Commission)"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "division_code": {
+     "dbx_business_glossary_term": "Division Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From Date"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "Effective Until Date"
+    },
+    "external_reference_code": {
+     "dbx_business_glossary_term": "External Reference Code"
+    },
+    "gmp_standard": {
+     "dbx_business_glossary_term": "GMP Standard (Good Manufacturing Practice)",
+     "dbx_value_regex": "ISO 22716|GMP 21 CFR 111|GMP 21 CFR 210|GMP 21 CFR 211|OSHA|None"
+    },
+    "gpc_brick_code": {
+     "dbx_business_glossary_term": "GPC Brick Code (Global Product Classification)",
+     "dbx_value_regex": "^[0-9]{8}$"
+    },
+    "gpc_brick_name": {
+     "dbx_business_glossary_term": "GPC Brick Name (Global Product Classification)"
+    },
+    "ibp_planning_level": {
+     "dbx_business_glossary_term": "IBP Planning Level Flag (Integrated Business Planning)"
+    },
+    "inci_applicable": {
+     "dbx_business_glossary_term": "INCI Applicable Flag (International Nomenclature of Cosmetic Ingredients)"
+    },
+    "iri_category_code": {
+     "dbx_business_glossary_term": "IRI Category Code"
+    },
+    "is_leaf_node": {
+     "dbx_business_glossary_term": "Is Leaf Node Flag"
+    },
+    "language_code": {
+     "dbx_business_glossary_term": "Language Code",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "level": {
+     "dbx_business_glossary_term": "Hierarchy Level"
+    },
+    "level_name": {
+     "dbx_business_glossary_term": "Hierarchy Level Name"
+    },
+    "market_share_reportable": {
+     "dbx_business_glossary_term": "Market Share Reportable Flag"
+    },
+    "nielsen_category_code": {
+     "dbx_business_glossary_term": "Nielsen IQ Category Code"
+    },
+    "node_code": {
+     "dbx_business_glossary_term": "Hierarchy Node Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{2,30}$"
+    },
+    "node_description": {
+     "dbx_business_glossary_term": "Hierarchy Node Description"
+    },
+    "node_name": {
+     "dbx_business_glossary_term": "Hierarchy Node Name"
+    },
+    "node_status": {
+     "dbx_business_glossary_term": "Hierarchy Node Status",
+     "dbx_value_regex": "active|inactive|pending|discontinued|archived"
+    },
+    "path": {
+     "dbx_business_glossary_term": "Hierarchy Full Path"
+    },
+    "plm_lifecycle_stage": {
+     "dbx_business_glossary_term": "PLM Lifecycle Stage (Product Lifecycle Management)"
+    },
+    "reach_regulated": {
+     "dbx_business_glossary_term": "EU REACH Regulated Flag"
+    },
+    "regulatory_framework": {
+     "dbx_business_glossary_term": "Applicable Regulatory Framework"
+    },
+    "sort_order": {
+     "dbx_business_glossary_term": "Sort Order"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code"
+    },
+    "source_system_node_code": {
+     "dbx_business_glossary_term": "Source System Node ID"
+    },
+    "sustainability_flag": {
+     "dbx_business_glossary_term": "Sustainability Certified Flag"
+    },
+    "tax_category_code": {
+     "dbx_business_glossary_term": "Tax Category Code"
+    },
+    "trade_promotion_eligible": {
+     "dbx_business_glossary_term": "Trade Promotion Eligible Flag"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Version Number"
+    }
+   }
+  },
+  "product_bom": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "product_bom_id": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) ID"
+    },
+    "formulation_id": {
+     "dbx_business_glossary_term": "Product Formulation Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant / Production Site ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "alternative_bom": {
+     "dbx_business_glossary_term": "Alternative Bill of Materials (BOM) Number"
+    },
+    "approved_date": {
+     "dbx_business_glossary_term": "BOM Approval Date"
+    },
+    "base_quantity": {
+     "dbx_business_glossary_term": "BOM Base Quantity"
+    },
+    "base_uom": {
+     "dbx_business_glossary_term": "Base Unit of Measure (UOM)"
+    },
+    "bom_category": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Category",
+     "dbx_value_regex": "material|equipment|functional_location|document"
+    },
+    "bom_description": {
+     "dbx_business_glossary_term": "BOM Description"
+    },
+    "bom_level": {
+     "dbx_business_glossary_term": "BOM Level"
+    },
+    "bom_number": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Number"
+    },
+    "bom_type": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Type",
+     "dbx_value_regex": "production|costing|engineering|sales|configurable"
+    },
+    "change_number": {
+     "dbx_business_glossary_term": "Engineering Change Number (ECN)"
+    },
+    "component_count": {
+     "dbx_business_glossary_term": "BOM Component Count"
+    },
+    "costing_relevance": {
+     "dbx_business_glossary_term": "Costing Relevance Indicator",
+     "dbx_value_regex": "relevant|not_relevant|conditional"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "BOM Record Created Timestamp"
+    },
+    "deletion_flag": {
+     "dbx_business_glossary_term": "BOM Deletion Flag"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "BOM Effective From Date"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "BOM Effective Until Date"
+    },
+    "gmp_compliant": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliant Indicator"
+    },
+    "is_configurable": {
+     "dbx_business_glossary_term": "Configurable BOM Indicator"
+    },
+    "is_phantom": {
+     "dbx_business_glossary_term": "Phantom Assembly Indicator"
+    },
+    "last_changed_by": {
+     "dbx_business_glossary_term": "BOM Last Changed By"
+    },
+    "last_changed_timestamp": {
+     "dbx_business_glossary_term": "BOM Last Changed Timestamp"
+    },
+    "lot_size_from": {
+     "dbx_business_glossary_term": "BOM Lot Size From"
+    },
+    "lot_size_to": {
+     "dbx_business_glossary_term": "BOM Lot Size To"
+    },
+    "lot_size_uom": {
+     "dbx_business_glossary_term": "Lot Size Unit of Measure (UOM)"
+    },
+    "material_number": {
+     "dbx_business_glossary_term": "Material Number"
+    },
+    "mrp_relevance": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Relevance Indicator"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "BOM Notes"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code"
+    },
+    "plm_status": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) Status",
+     "dbx_value_regex": "draft|in_review|approved|active|obsolete|superseded"
+    },
+    "production_version": {
+     "dbx_business_glossary_term": "Production Version"
+    },
+    "reach_compliant": {
+     "dbx_business_glossary_term": "EU REACH Regulation Compliant Indicator"
+    },
+    "regulatory_approval_status": {
+     "dbx_business_glossary_term": "Regulatory Approval Status",
+     "dbx_value_regex": "pending|approved|conditionally_approved|rejected|not_required"
+    },
+    "rspo_certified": {
+     "dbx_business_glossary_term": "Roundtable on Sustainable Palm Oil (RSPO) Certified Indicator"
+    },
+    "source_system_bom_code": {
+     "dbx_business_glossary_term": "Source System BOM Identifier"
+    },
+    "version": {
+     "dbx_business_glossary_term": "BOM Version"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "BOM Created By"
+    }
+   }
+  },
+  "bom_line": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "bom_line_id": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Line ID"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant ID"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "product_bom_id": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Component Item ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Preferred Supplier ID"
+    },
+    "alternative_item_group": {
+     "dbx_business_glossary_term": "Alternative Item Group"
+    },
+    "alternative_priority": {
+     "dbx_business_glossary_term": "Alternative Item Priority"
+    },
+    "bom_item_category": {
+     "dbx_business_glossary_term": "BOM Item Category",
+     "dbx_value_regex": "stock|non_stock|variable_size|document|text|class"
+    },
+    "bulk_material_flag": {
+     "dbx_business_glossary_term": "Bulk Material Flag"
+    },
+    "change_number": {
+     "dbx_business_glossary_term": "Engineering Change Number (ECN)"
+    },
+    "co_product_flag": {
+     "dbx_business_glossary_term": "Co-Product Flag"
+    },
+    "component_cost_usd": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Component Cost (USD)"
+    },
+    "component_item_number": {
+     "dbx_business_glossary_term": "Component Item Number"
+    },
+    "component_type": {
+     "dbx_business_glossary_term": "Component Type",
+     "dbx_value_regex": "raw_material|packaging|semi_finished|finished_good|co_product|by_product"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "fixed_quantity_flag": {
+     "dbx_business_glossary_term": "Fixed Quantity Flag"
+    },
+    "hazardous_material_flag": {
+     "dbx_business_glossary_term": "Hazardous Material Flag"
+    },
+    "inci_name": {
+     "dbx_business_glossary_term": "International Nomenclature of Cosmetic Ingredients (INCI) Name"
+    },
+    "is_alternative_item": {
+     "dbx_business_glossary_term": "Is Alternative Item Flag"
+    },
+    "is_critical_component": {
+     "dbx_business_glossary_term": "Is Critical Component Flag"
+    },
+    "issue_method": {
+     "dbx_business_glossary_term": "Component Issue Method",
+     "dbx_value_regex": "backflush|manual|pick_list|kanban"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "lead_time_offset_days": {
+     "dbx_business_glossary_term": "Lead Time Offset (Days)"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "BOM Line Number"
+    },
+    "line_status": {
+     "dbx_business_glossary_term": "BOM Line Status",
+     "dbx_value_regex": "active|inactive|pending_approval|obsolete|under_review"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "operation_number": {
+     "dbx_business_glossary_term": "Production Operation ID"
+    },
+    "phantom_item_flag": {
+     "dbx_business_glossary_term": "Phantom Item Flag"
+    },
+    "reach_registration_number": {
+     "dbx_business_glossary_term": "EU REACH Registration Number"
+    },
+    "recursive_bom_flag": {
+     "dbx_business_glossary_term": "Recursive BOM Flag"
+    },
+    "required_quantity": {
+     "dbx_business_glossary_term": "Required Quantity"
+    },
+    "scrap_percentage": {
+     "dbx_business_glossary_term": "Scrap Percentage"
+    },
+    "sds_document_number": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Document Number"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code"
+    },
+    "storage_location": {
+     "dbx_business_glossary_term": "Storage Location"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "usage_probability_pct": {
+     "dbx_business_glossary_term": "Usage Probability Percentage"
+    },
+    "valid_from_date": {
+     "dbx_business_glossary_term": "Valid From Date"
+    },
+    "valid_to_date": {
+     "dbx_business_glossary_term": "Valid To Date"
+    }
+   }
+  },
+  "formulation": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "formulation_id": {
+     "dbx_business_glossary_term": "Formulation ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Document ID"
+    },
+    "active_ingredient_name": {
+     "dbx_business_glossary_term": "Active Ingredient Name"
+    },
+    "active_ingredient_pct": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Active Ingredient Percentage"
+    },
+    "allergen_declaration": {
+     "dbx_business_glossary_term": "Allergen Declaration"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Formulation Approval Date"
+    },
+    "bom_reference_code": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Reference Code",
+     "dbx_value_regex": "^[A-Z0-9\\-]{4,30}$"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Formulation Code",
+     "dbx_value_regex": "^[A-Z0-9\\-]{4,30}$"
+    },
+    "color_description": {
+     "dbx_business_glossary_term": "Formulation Color Description"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Formulation Effective Date"
+    },
+    "formulation_type": {
+     "dbx_business_glossary_term": "Formulation Type"
+    },
+    "fragrance_code": {
+     "dbx_business_glossary_term": "Fragrance Code",
+     "dbx_value_regex": "^[A-Z0-9\\-]{2,20}$"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "inci_declaration": {
+     "dbx_business_glossary_term": "International Nomenclature of Cosmetic Ingredients (INCI) Declaration"
+    },
+    "intended_use": {
+     "dbx_business_glossary_term": "Intended Use"
+    },
+    "is_cruelty_free": {
+     "dbx_business_glossary_term": "Cruelty Free Indicator"
+    },
+    "is_fragrance_free": {
+     "dbx_business_glossary_term": "Fragrance Free Indicator"
+    },
+    "is_vegan": {
+     "dbx_business_glossary_term": "Vegan Formulation Indicator"
+    },
+    "lab_notebook_reference": {
+     "dbx_business_glossary_term": "Laboratory Notebook Reference"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "lifecycle_stage": {
+     "dbx_business_glossary_term": "Formulation Lifecycle Stage",
+     "dbx_value_regex": "lab_development|pilot|stability_testing|regulatory_review|approved|obsolete"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Formulation Name"
+    },
+    "obsolescence_date": {
+     "dbx_business_glossary_term": "Formulation Obsolescence Date"
+    },
+    "ph_max": {
+     "dbx_business_glossary_term": "Formulation pH Maximum"
+    },
+    "ph_min": {
+     "dbx_business_glossary_term": "Formulation pH Minimum"
+    },
+    "preservative_system": {
+     "dbx_business_glossary_term": "Preservative System"
+    },
+    "rd_project_code": {
+     "dbx_business_glossary_term": "Research and Development (R&D) Project Code",
+     "dbx_value_regex": "^[A-Z0-9\\-]{3,20}$"
+    },
+    "reach_registration_number": {
+     "dbx_business_glossary_term": "EU REACH Registration Number",
+     "dbx_value_regex": "^\\d{2}-\\d{10}-\\d{2}-\\d{4}$"
+    },
+    "regulatory_approval_status": {
+     "dbx_business_glossary_term": "Regulatory Approval Status",
+     "dbx_value_regex": "pending|approved|conditionally_approved|rejected|withdrawn"
+    },
+    "regulatory_classification": {
+     "dbx_business_glossary_term": "Regulatory Classification",
+     "dbx_value_regex": "cosmetic|otc_drug|household_chemical|biocide|medical_device|food_contact"
+    },
+    "rspo_certified": {
+     "dbx_business_glossary_term": "Roundtable on Sustainable Palm Oil (RSPO) Certified Indicator"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Identifier",
+     "dbx_value_regex": "^[A-Z0-9\\-\\_]{2,50}$"
+    },
+    "stability_period_months": {
+     "dbx_business_glossary_term": "Stability Period (Months)"
+    },
+    "storage_condition": {
+     "dbx_business_glossary_term": "Storage Condition"
+    },
+    "total_solid_content_pct": {
+     "dbx_business_glossary_term": "Total Solid Content Percentage"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Formulation Version Number",
+     "dbx_value_regex": "^\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "viscosity_max_cps": {
+     "dbx_business_glossary_term": "Formulation Viscosity Maximum (cPs)"
+    },
+    "viscosity_min_cps": {
+     "dbx_business_glossary_term": "Formulation Viscosity Minimum (cPs)"
+    }
+   }
+  },
+  "formulation_ingredient": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "formulation_ingredient_id": {
+     "dbx_business_glossary_term": "Formulation Ingredient ID"
+    },
+    "formulation_id": {
+     "dbx_business_glossary_term": "Formulation ID"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id (Foreign Key)"
+    },
+    "allergen_declaration": {
+     "dbx_business_glossary_term": "Allergen Declaration"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "cas_number": {
+     "dbx_business_glossary_term": "Chemical Abstracts Service (CAS) Registry Number",
+     "dbx_value_regex": "^[0-9]{2,7}-[0-9]{2}-[0-9]$"
+    },
+    "concentration_max_pct": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Maximum Concentration Percentage"
+    },
+    "concentration_min_pct": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Minimum Concentration Percentage"
+    },
+    "concentration_nominal_pct": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Nominal Concentration Percentage"
+    },
+    "concentration_uom": {
+     "dbx_business_glossary_term": "Concentration Unit of Measure",
+     "dbx_value_regex": "% w/w|% v/v|% w/v|ppm|ppb|mg/kg"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "ec_number": {
+     "dbx_business_glossary_term": "European Community (EC) Number",
+     "dbx_value_regex": "^[0-9]{3}-[0-9]{3}-[0-9]$"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Ingredient Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Ingredient Authorization Expiry Date"
+    },
+    "fda_status": {
+     "dbx_business_glossary_term": "FDA Regulatory Status",
+     "dbx_value_regex": "approved|gras|permitted|restricted|prohibited|under_review"
+    },
+    "ghs_hazard_classification": {
+     "dbx_business_glossary_term": "Globally Harmonized System (GHS) Hazard Classification"
+    },
+    "grade_specification": {
+     "dbx_business_glossary_term": "Ingredient Grade Specification"
+    },
+    "halal_status": {
+     "dbx_business_glossary_term": "Halal Certification Status",
+     "dbx_value_regex": "certified|not_certified|not_applicable|under_review"
+    },
+    "ifra_compliance_status": {
+     "dbx_business_glossary_term": "International Fragrance Association (IFRA) Compliance Status",
+     "dbx_value_regex": "compliant|non_compliant|not_applicable|under_review"
+    },
+    "inci_name": {
+     "dbx_business_glossary_term": "International Nomenclature of Cosmetic Ingredients (INCI) Name"
+    },
+    "ingredient_function": {
+     "dbx_business_glossary_term": "Ingredient Functional Role"
+    },
+    "ingredient_name": {
+     "dbx_business_glossary_term": "Ingredient Common Name"
+    },
+    "ingredient_status": {
+     "dbx_business_glossary_term": "Ingredient Lifecycle Status",
+     "dbx_value_regex": "active|inactive|under_review|approved|rejected|phased_out"
+    },
+    "is_active_ingredient": {
+     "dbx_business_glossary_term": "Active Ingredient Indicator"
+    },
+    "is_fragrance_allergen": {
+     "dbx_business_glossary_term": "Fragrance Allergen Indicator"
+    },
+    "is_natural_origin": {
+     "dbx_business_glossary_term": "Natural Origin Indicator"
+    },
+    "is_palm_derived": {
+     "dbx_business_glossary_term": "Palm-Derived Ingredient Indicator"
+    },
+    "is_prohibited_substance": {
+     "dbx_business_glossary_term": "Prohibited Substance Indicator"
+    },
+    "is_restricted_substance": {
+     "dbx_business_glossary_term": "Restricted Substance Indicator"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Ingredient Line Number"
+    },
+    "natural_origin_index": {
+     "dbx_business_glossary_term": "Natural Origin Index (NOI)"
+    },
+    "origin_country_code": {
+     "dbx_business_glossary_term": "Ingredient Country of Origin Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "physical_form": {
+     "dbx_business_glossary_term": "Ingredient Physical Form"
+    },
+    "reach_registration_number": {
+     "dbx_business_glossary_term": "EU REACH Registration Number",
+     "dbx_value_regex": "^[0-9]{2}-[0-9]{10}-[0-9]{2}-[0-9]{4}$"
+    },
+    "reach_registration_status": {
+     "dbx_business_glossary_term": "EU REACH Registration Status",
+     "dbx_value_regex": "registered|pre-registered|exempt|not_required|pending|failed"
+    },
+    "regulatory_limit_reference": {
+     "dbx_business_glossary_term": "Regulatory Concentration Limit Reference"
+    },
+    "regulatory_max_concentration_pct": {
+     "dbx_business_glossary_term": "Regulatory Maximum Concentration Percentage"
+    },
+    "sds_reference_number": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Reference Number"
+    },
+    "sds_version": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Version"
+    },
+    "supplier_material_code": {
+     "dbx_business_glossary_term": "Supplier Material Code"
+    },
+    "svhc_flag": {
+     "dbx_business_glossary_term": "Substance of Very High Concern (SVHC) Flag"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "vegan_status": {
+     "dbx_business_glossary_term": "Vegan Status",
+     "dbx_value_regex": "vegan|non_vegan|unknown|under_review"
+    }
+   }
+  },
+  "packaging_spec": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "packaging_spec_id": {
+     "dbx_business_glossary_term": "Packaging Specification ID"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Packaging Supplier ID"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Specification Approval Status",
+     "dbx_value_regex": "pending|approved|rejected|under_review"
+    },
+    "artwork_ref": {
+     "dbx_business_glossary_term": "Artwork Reference Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{1,50}$"
+    },
+    "color": {
+     "dbx_business_glossary_term": "Packaging Color"
+    },
+    "component_type": {
+     "dbx_business_glossary_term": "Packaging Component Type"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "ean": {
+     "dbx_business_glossary_term": "European Article Number (EAN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Specification Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Specification Expiry Date"
+    },
+    "finish": {
+     "dbx_business_glossary_term": "Packaging Surface Finish"
+    },
+    "gross_weight_g": {
+     "dbx_business_glossary_term": "Gross Weight (grams)"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{8,14}$"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Material (Hazmat) Flag"
+    },
+    "height_mm": {
+     "dbx_business_glossary_term": "Packaging Height (mm)"
+    },
+    "hi": {
+     "dbx_business_glossary_term": "Pallet Height (Hi)"
+    },
+    "is_fsc_certified": {
+     "dbx_business_glossary_term": "Forest Stewardship Council (FSC) Certification Flag"
+    },
+    "is_rspo_certified": {
+     "dbx_business_glossary_term": "Roundtable on Sustainable Palm Oil (RSPO) Certification Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Packaging Component Lead Time (Days)"
+    },
+    "length_mm": {
+     "dbx_business_glossary_term": "Packaging Length (mm)"
+    },
+    "lifecycle_status": {
+     "dbx_business_glossary_term": "Packaging Specification Lifecycle Status",
+     "dbx_value_regex": "draft|active|under_review|obsolete|discontinued"
+    },
+    "moq": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "packaging_level": {
+     "dbx_business_glossary_term": "Packaging Level",
+     "dbx_value_regex": "primary|secondary|tertiary|display_unit|pallet"
+    },
+    "pcr_content_pct": {
+     "dbx_business_glossary_term": "Post-Consumer Recycled (PCR) Content Percentage"
+    },
+    "print_method": {
+     "dbx_business_glossary_term": "Packaging Print Method"
+    },
+    "qty_per_parent": {
+     "dbx_business_glossary_term": "Quantity Per Parent Packaging Level"
+    },
+    "recyclability_code": {
+     "dbx_business_glossary_term": "How2Recycle Recyclability Code",
+     "dbx_value_regex": "^[A-Z0-9-]{1,20}$"
+    },
+    "regulatory_compliance_flag": {
+     "dbx_business_glossary_term": "Regulatory Compliance Flag"
+    },
+    "spec_code": {
+     "dbx_business_glossary_term": "Packaging Specification Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{3,30}$"
+    },
+    "spec_name": {
+     "dbx_business_glossary_term": "Packaging Specification Name"
+    },
+    "supplier_tooling_ref": {
+     "dbx_business_glossary_term": "Supplier Tooling Reference",
+     "dbx_value_regex": "^[A-Z0-9_-]{1,50}$"
+    },
+    "tare_weight_g": {
+     "dbx_business_glossary_term": "Tare Weight (grams)"
+    },
+    "ti": {
+     "dbx_business_glossary_term": "Pallet Tier (Ti)"
+    },
+    "unit_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Packaging Component Unit Cost"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC)",
+     "dbx_value_regex": "^[0-9]{12}$"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Specification Version Number",
+     "dbx_value_regex": "^[0-9]+\\.[0-9]+$"
+    },
+    "width_mm": {
+     "dbx_business_glossary_term": "Packaging Width (mm)"
+    }
+   }
+  },
+  "label_spec": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_specification"
+   },
+   "column_tags": {
+    "label_spec_id": {
+     "dbx_business_glossary_term": "Label Specification ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "packaging_spec_id": {
+     "dbx_business_glossary_term": "Packaging Spec Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "allergen_declaration": {
+     "dbx_business_glossary_term": "Allergen Declaration"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Label Approval Status",
+     "dbx_value_regex": "draft|under_review|approved|rejected|superseded"
+    },
+    "artwork_file_reference": {
+     "dbx_business_glossary_term": "Artwork File Reference"
+    },
+    "barcode_placement": {
+     "dbx_business_glossary_term": "Barcode Placement"
+    },
+    "barcode_type": {
+     "dbx_business_glossary_term": "Barcode Type"
+    },
+    "certification_marks": {
+     "dbx_business_glossary_term": "Certification Marks"
+    },
+    "claim_text": {
+     "dbx_business_glossary_term": "Label Claim Text"
+    },
+    "color_profile": {
+     "dbx_business_glossary_term": "Color Profile"
+    },
+    "country_of_origin": {
+     "dbx_business_glossary_term": "Country of Origin",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "digital_watermark_enabled": {
+     "dbx_business_glossary_term": "Digital Watermark Enabled Flag"
+    },
+    "distributor_name": {
+     "dbx_business_glossary_term": "Distributor Name"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Label Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Label Expiry Date"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{14}$"
+    },
+    "ingredient_declaration_text": {
+     "dbx_business_glossary_term": "Ingredient Declaration Text"
+    },
+    "is_primary_label": {
+     "dbx_business_glossary_term": "Primary Label Flag"
+    },
+    "label_approval_date": {
+     "dbx_business_glossary_term": "Label Approval Date"
+    },
+    "label_dimensions": {
+     "dbx_business_glossary_term": "Label Dimensions"
+    },
+    "label_type": {
+     "dbx_business_glossary_term": "Label Type",
+     "dbx_value_regex": "front_of_pack|back_of_pack|inner_label|neck_label|hang_tag|insert"
+    },
+    "label_version": {
+     "dbx_business_glossary_term": "Label Version",
+     "dbx_value_regex": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "language_code": {
+     "dbx_business_glossary_term": "Language Code",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "lot_code_format": {
+     "dbx_business_glossary_term": "Lot Code Format"
+    },
+    "mandatory_regulatory_statements": {
+     "dbx_business_glossary_term": "Mandatory Regulatory Statements"
+    },
+    "market_country_code": {
+     "dbx_business_glossary_term": "Market Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "net_content_declaration": {
+     "dbx_business_glossary_term": "Net Content Declaration"
+    },
+    "nutrition_facts_required": {
+     "dbx_business_glossary_term": "Nutrition Facts Required Flag"
+    },
+    "plm_change_order_number": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) Change Order Number"
+    },
+    "print_process": {
+     "dbx_business_glossary_term": "Print Process",
+     "dbx_value_regex": "flexographic|digital|offset|gravure|screen"
+    },
+    "recycling_symbol_code": {
+     "dbx_business_glossary_term": "Recycling Symbol Code"
+    },
+    "regulatory_framework": {
+     "dbx_business_glossary_term": "Regulatory Framework"
+    },
+    "regulatory_registration_number": {
+     "dbx_business_glossary_term": "Regulatory Registration Number"
+    },
+    "shelf_life_statement": {
+     "dbx_business_glossary_term": "Shelf Life Statement"
+    },
+    "substrate_material": {
+     "dbx_business_glossary_term": "Label Substrate Material"
+    },
+    "usage_instructions": {
+     "dbx_business_glossary_term": "Usage Instructions"
+    },
+    "veeva_document_reference": {
+     "dbx_business_glossary_term": "Veeva Vault Document ID"
+    },
+    "warning_statements": {
+     "dbx_business_glossary_term": "Warning Statements"
+    }
+   }
+  },
+  "brand": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Marketing Brand Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "architecture_type": {
+     "dbx_business_glossary_term": "Brand Architecture Type",
+     "dbx_value_regex": "master_brand|sub_brand|endorsed_brand|standalone|house_of_brands"
+    },
+    "brand_status": {
+     "dbx_business_glossary_term": "Brand Status",
+     "dbx_value_regex": "active|dormant|divested|discontinued|pipeline"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Primary Distribution Channel",
+     "dbx_value_regex": "retail|ecommerce|wholesale|dtc|dsd|omnichannel"
+    },
+    "divestiture_date": {
+     "dbx_business_glossary_term": "Brand Divestiture Date"
+    },
+    "ean_prefix": {
+     "dbx_business_glossary_term": "European Article Number (EAN) / GS1 Company Prefix",
+     "dbx_value_regex": "^[0-9]{4,7}$"
+    },
+    "equity_methodology": {
+     "dbx_business_glossary_term": "Brand Equity Tracking Methodology",
+     "dbx_value_regex": "nielsen_brand_health|kantar_brandz|ipsos_brand_value|internal_scorecard|bav|none"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Brand Geographic Scope",
+     "dbx_value_regex": "global|regional|national|local|export_only"
+    },
+    "gmp_certification_ref": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certification Reference"
+    },
+    "is_licensed_brand": {
+     "dbx_business_glossary_term": "Licensed Brand Indicator"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "launch_date": {
+     "dbx_business_glossary_term": "Brand Launch Date"
+    },
+    "launch_year": {
+     "dbx_business_glossary_term": "Brand Launch Year"
+    },
+    "license_expiry_date": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Brand License Expiry Date"
+    },
+    "msrp_currency_code": {
+     "dbx_business_glossary_term": "Manufacturer Suggested Retail Price (MSRP) Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Brand Name"
+    },
+    "nps_tracking_enabled": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS) Tracking Enabled"
+    },
+    "owner_division": {
+     "dbx_business_glossary_term": "Brand Owner Business Division"
+    },
+    "plm_stage": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) Stage"
+    },
+    "positioning_statement": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Brand Positioning Statement"
+    },
+    "primary_category": {
+     "dbx_business_glossary_term": "Primary Product Category"
+    },
+    "primary_country_code": {
+     "dbx_business_glossary_term": "Primary Country of Origin Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "regulatory_classification": {
+     "dbx_business_glossary_term": "Regulatory Product Classification"
+    },
+    "short_name": {
+     "dbx_business_glossary_term": "Brand Short Name",
+     "dbx_value_regex": "^.{1,30}$"
+    },
+    "social_media_handle": {
+     "dbx_business_glossary_term": "Brand Social Media Handle"
+    },
+    "source_system_brand_code": {
+     "dbx_business_glossary_term": "Source System Brand Identifier"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code",
+     "dbx_value_regex": "SAP_S4|SFDC_CGC|ORACLE_ERP|VEEVA|MANUAL"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification",
+     "dbx_value_regex": "fsc|rspo|iso_14001|rainforest_alliance|none|multiple"
+    },
+    "target_consumer_segment": {
+     "dbx_business_glossary_term": "Target Consumer Segment"
+    },
+    "tier": {
+     "dbx_business_glossary_term": "Brand Tier",
+     "dbx_value_regex": "premium|mass|value|super_premium|private_label"
+    },
+    "trade_promotion_eligible": {
+     "dbx_business_glossary_term": "Trade Promotion Management (TPM) Eligible"
+    },
+    "trademark_jurisdiction": {
+     "dbx_business_glossary_term": "Trademark Jurisdiction Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "trademark_registration_ref": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Brand Trademark Registration Reference"
+    },
+    "website_url": {
+     "dbx_business_glossary_term": "Brand Website URL",
+     "dbx_value_regex": "^https?://[^\\s/$.?#].[^\\s]*$"
+    }
+   }
+  },
+  "product_category": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Identifier"
+    },
+    "parent_category_product_category_id": {
+     "dbx_business_glossary_term": "Parent Category Id"
+    },
+    "parent_product_category_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Parent Product Category Id"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "business_unit": {
+     "dbx_business_glossary_term": "Business Unit"
+    },
+    "category_code": {
+     "dbx_business_glossary_term": "Category Code"
+    },
+    "category_description": {
+     "dbx_business_glossary_term": "Description"
+    },
+    "category_name": {
+     "dbx_business_glossary_term": "Category Name"
+    },
+    "category_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "classification": {
+     "dbx_business_glossary_term": "Classification"
+    },
+    "classification_type": {
+     "dbx_business_glossary_term": "Classification Type"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "display_order": {
+     "dbx_business_glossary_term": "Display Order"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "Effective Until"
+    },
+    "hierarchy_level": {
+     "dbx_business_glossary_term": "Hierarchy Level"
+    },
+    "hierarchy_path": {
+     "dbx_business_glossary_term": "Hierarchy Path"
+    },
+    "image_url": {
+     "dbx_business_glossary_term": "Image Url"
+    },
+    "is_leaf": {
+     "dbx_business_glossary_term": "Is Leaf"
+    },
+    "marketing_tag": {
+     "dbx_business_glossary_term": "Marketing Tag"
+    },
+    "product_category_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Updated Timestamp"
+    }
+   }
+  },
+  "material": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "material_id": {
+     "dbx_business_glossary_term": "Material Identifier"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "parent_material_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Parent Material Id"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id"
+    },
+    "allergen_info": {
+     "dbx_business_glossary_term": "Allergen Info"
+    },
+    "base_uom": {
+     "dbx_business_glossary_term": "Base Uom"
+    },
+    "brand_name": {
+     "dbx_business_glossary_term": "Brand Name"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Material Code"
+    },
+    "country_of_origin": {
+     "dbx_business_glossary_term": "Country Of Origin"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Description"
+    },
+    "ean": {
+     "dbx_business_glossary_term": "Ean"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "Effective Until"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Gtin"
+    },
+    "hazardous_flag": {
+     "dbx_business_glossary_term": "Hazardous Flag"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Last Updated Timestamp"
+    },
+    "lifecycle_stage": {
+     "dbx_business_glossary_term": "Lifecycle Stage"
+    },
+    "material_group": {
+     "dbx_business_glossary_term": "Material Group"
+    },
+    "material_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "material_type": {
+     "dbx_business_glossary_term": "Material Type"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Material Name"
+    },
+    "packaging_type": {
+     "dbx_business_glossary_term": "Packaging Type"
+    },
+    "regulatory_status": {
+     "dbx_business_glossary_term": "Regulatory Status"
+    },
+    "shelf_life_days": {
+     "dbx_business_glossary_term": "Shelf Life Days"
+    },
+    "standard_cost": {
+     "dbx_business_glossary_term": "Standard Cost"
+    },
+    "storage_temperature_c": {
+     "dbx_business_glossary_term": "Storage Temperature C"
+    },
+    "unit_conversion_factor": {
+     "dbx_business_glossary_term": "Unit Conversion Factor"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Upc"
+    },
+    "volume_l": {
+     "dbx_business_glossary_term": "Volume L"
+    },
+    "weight_kg": {
+     "dbx_business_glossary_term": "Weight Kg"
+    }
+   }
+  },
+  "category": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "item_master"
+   },
+   "column_tags": {
+    "category_id": {
+     "dbx_business_glossary_term": "category Identifier"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Reference to sku"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,1404 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "quality",
+ "schema_comment": "Owns quality assurance, quality control, and GMP compliance data across the product lifecycle. Manages QC inspection results, non-conformance records, CAPA processes, batch release decisions, stability studies, certificate of analysis, GMP audit findings, supplier quality assessments, product complaints, and regulatory hold events. Integrates with SAP QM and Veeva Vault.",
+ "tag_count": 519,
+ "foreign_key_count": 90,
+ "schema_tags": {
+  "dbx_domain": "quality",
+  "dbx_division": "operations"
+ },
+ "tables": {
+  "inspection_plan": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "inspection_management"
+   },
+   "column_tags": {
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approval_required_flag": {
+     "dbx_business_glossary_term": "Approval Required Flag"
+    },
+    "aql_level": {
+     "dbx_business_glossary_term": "Acceptable Quality Level (AQL)"
+    },
+    "certificate_of_analysis_required_flag": {
+     "dbx_business_glossary_term": "Certificate of Analysis (CoA) Required Flag"
+    },
+    "change_control_number": {
+     "dbx_business_glossary_term": "Change Control Number",
+     "dbx_value_regex": "^CC-[0-9]{6,10}$"
+    },
+    "characteristic_count": {
+     "dbx_business_glossary_term": "Inspection Characteristic Count"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "gmp_critical_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Critical Flag"
+    },
+    "inspection_lead_time_days": {
+     "dbx_business_glossary_term": "Inspection Lead Time (Days)"
+    },
+    "inspection_method": {
+     "dbx_business_glossary_term": "Inspection Method",
+     "dbx_value_regex": "manual|automated|laboratory|visual|destructive|non_destructive"
+    },
+    "inspection_severity": {
+     "dbx_business_glossary_term": "Inspection Severity Level",
+     "dbx_value_regex": "normal|tightened|reduced"
+    },
+    "inspection_stage": {
+     "dbx_business_glossary_term": "Inspection Stage",
+     "dbx_value_regex": "goods_receipt|production_start|production_end|pre_release|post_release"
+    },
+    "inspection_type": {
+     "dbx_business_glossary_term": "Inspection Type",
+     "dbx_value_regex": "incoming|in_process|final|stability|release|periodic"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "material_type": {
+     "dbx_business_glossary_term": "Material Type",
+     "dbx_value_regex": "raw_material|packaging_material|intermediate|finished_good|bulk_product"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "plan_code": {
+     "dbx_business_glossary_term": "Inspection Plan Code",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "plan_description": {
+     "dbx_business_glossary_term": "Inspection Plan Description"
+    },
+    "plan_name": {
+     "dbx_business_glossary_term": "Inspection Plan Name"
+    },
+    "plan_status": {
+     "dbx_business_glossary_term": "Inspection Plan Status",
+     "dbx_value_regex": "draft|active|inactive|obsolete|under_review"
+    },
+    "regulatory_requirement": {
+     "dbx_business_glossary_term": "Regulatory Requirement Reference"
+    },
+    "responsible_inspector_role": {
+     "dbx_business_glossary_term": "Responsible Inspector Role"
+    },
+    "revision_number": {
+     "dbx_business_glossary_term": "Revision Number"
+    },
+    "sample_size": {
+     "dbx_business_glossary_term": "Sample Size"
+    },
+    "sample_unit": {
+     "dbx_business_glossary_term": "Sample Unit of Measure"
+    },
+    "sampling_procedure_code": {
+     "dbx_business_glossary_term": "Sampling Procedure Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,12}$"
+    },
+    "skip_lot_allowed_flag": {
+     "dbx_business_glossary_term": "Skip Lot Inspection Allowed Flag"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Identifier"
+    },
+    "specification_version": {
+     "dbx_business_glossary_term": "Specification Version",
+     "dbx_value_regex": "^V[0-9]{1,3}(\\.[0-9]{1,2})?$"
+    },
+    "test_equipment_required": {
+     "dbx_business_glossary_term": "Test Equipment Required"
+    }
+   }
+  },
+  "inspection_lot": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inspection_management"
+   },
+   "column_tags": {
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt Id (Foreign Key)"
+    },
+    "inbound_receipt_line_id": {
+     "dbx_business_glossary_term": "Inbound Receipt Line Id (Foreign Key)"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan ID"
+    },
+    "inventory_position_id": {
+     "dbx_business_glossary_term": "Inventory Position Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Carbon Emission Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Vendor ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "certificate_of_analysis_number": {
+     "dbx_business_glossary_term": "Certificate of Analysis (COA) Number"
+    },
+    "coa_issue_date": {
+     "dbx_business_glossary_term": "Certificate of Analysis (COA) Issue Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "decision_date": {
+     "dbx_business_glossary_term": "Decision Date"
+    },
+    "decision_timestamp": {
+     "dbx_business_glossary_term": "Decision Timestamp"
+    },
+    "defect_count": {
+     "dbx_business_glossary_term": "Defect Count"
+    },
+    "disposition_outcome": {
+     "dbx_business_glossary_term": "Disposition Outcome",
+     "dbx_value_regex": "released|blocked|scrapped|returned|reworked"
+    },
+    "expiration_date": {
+     "dbx_business_glossary_term": "Expiration Date"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "inspection_end_date": {
+     "dbx_business_glossary_term": "Inspection End Date"
+    },
+    "inspection_location": {
+     "dbx_business_glossary_term": "Inspection Location"
+    },
+    "inspection_lot_number": {
+     "dbx_business_glossary_term": "Inspection Lot Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,12}$"
+    },
+    "inspection_notes": {
+     "dbx_business_glossary_term": "Inspection Notes"
+    },
+    "inspection_priority": {
+     "dbx_business_glossary_term": "Inspection Priority",
+     "dbx_value_regex": "urgent|high|normal|low"
+    },
+    "inspection_start_date": {
+     "dbx_business_glossary_term": "Inspection Start Date"
+    },
+    "inspection_status": {
+     "dbx_business_glossary_term": "Inspection Status",
+     "dbx_value_regex": "created|released|in_progress|completed|cancelled"
+    },
+    "inspection_type": {
+     "dbx_business_glossary_term": "Inspection Type",
+     "dbx_value_regex": "goods_receipt|production_batch|periodic|in_process|final_release|stability"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lot_origin_number": {
+     "dbx_business_glossary_term": "Lot Origin Number"
+    },
+    "lot_origin_type": {
+     "dbx_business_glossary_term": "Lot Origin Type",
+     "dbx_value_regex": "production_order|purchase_order|process_order|delivery|stock_transfer"
+    },
+    "lot_quantity": {
+     "dbx_business_glossary_term": "Lot Quantity"
+    },
+    "lot_quantity_uom": {
+     "dbx_business_glossary_term": "Lot Quantity Unit of Measure (UOM)"
+    },
+    "material_number": {
+     "dbx_business_glossary_term": "Material Number"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "regulatory_hold_flag": {
+     "dbx_business_glossary_term": "Regulatory Hold Flag"
+    },
+    "regulatory_hold_reason": {
+     "dbx_business_glossary_term": "Regulatory Hold Reason"
+    },
+    "retest_date": {
+     "dbx_business_glossary_term": "Retest Date"
+    },
+    "sample_quantity": {
+     "dbx_business_glossary_term": "Sample Quantity"
+    },
+    "sample_quantity_uom": {
+     "dbx_business_glossary_term": "Sample Quantity Unit of Measure (UOM)"
+    },
+    "stock_posting_instruction": {
+     "dbx_business_glossary_term": "Stock Posting Instruction",
+     "dbx_value_regex": "release_to_unrestricted|move_to_blocked|move_to_quality|scrap|return"
+    },
+    "storage_location_code": {
+     "dbx_business_glossary_term": "Storage Location Code"
+    },
+    "usage_decision": {
+     "dbx_business_glossary_term": "Usage Decision",
+     "dbx_value_regex": "accepted|rejected|restricted_use|rework|scrap|return_to_vendor"
+    },
+    "usage_decision_code": {
+     "dbx_business_glossary_term": "Usage Decision Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    }
+   }
+  },
+  "inspection_result": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inspection_management"
+   },
+   "column_tags": {
+    "inspection_result_id": {
+     "dbx_business_glossary_term": "Inspection Result ID"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sample ID"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Inspection Result Specification Id (Foreign Key)"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "pending|approved|rejected"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "coa_inclusion_flag": {
+     "dbx_business_glossary_term": "Certificate of Analysis (COA) Inclusion Flag"
+    },
+    "control_chart_rule_violated": {
+     "dbx_business_glossary_term": "Control Chart Rule Violated"
+    },
+    "control_chart_violation_flag": {
+     "dbx_business_glossary_term": "Control Chart Violation Flag"
+    },
+    "data_source_system": {
+     "dbx_business_glossary_term": "Data Source System"
+    },
+    "defect_code": {
+     "dbx_business_glossary_term": "Defect Code"
+    },
+    "defect_severity": {
+     "dbx_business_glossary_term": "Defect Severity",
+     "dbx_value_regex": "critical|major|minor"
+    },
+    "deviation_code": {
+     "dbx_business_glossary_term": "Deviation Code"
+    },
+    "environmental_condition_humidity": {
+     "dbx_business_glossary_term": "Environmental Condition Humidity"
+    },
+    "environmental_condition_temperature": {
+     "dbx_business_glossary_term": "Environmental Condition Temperature"
+    },
+    "inspection_characteristic_code": {
+     "dbx_business_glossary_term": "Inspection Characteristic Code"
+    },
+    "inspection_characteristic_name": {
+     "dbx_business_glossary_term": "Inspection Characteristic Name"
+    },
+    "inspection_method_code": {
+     "dbx_business_glossary_term": "Inspection Method Code"
+    },
+    "inspection_timestamp": {
+     "dbx_business_glossary_term": "Inspection Timestamp"
+    },
+    "instrument_code": {
+     "dbx_business_glossary_term": "Instrument ID"
+    },
+    "laboratory_code": {
+     "dbx_business_glossary_term": "Laboratory ID"
+    },
+    "lower_specification_limit": {
+     "dbx_business_glossary_term": "Lower Specification Limit (LSL)"
+    },
+    "measured_value": {
+     "dbx_business_glossary_term": "Measured Value"
+    },
+    "measurement_uncertainty": {
+     "dbx_business_glossary_term": "Measurement Uncertainty"
+    },
+    "record_created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "record_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "regulatory_reportable_flag": {
+     "dbx_business_glossary_term": "Regulatory Reportable Flag"
+    },
+    "remarks": {
+     "dbx_business_glossary_term": "Remarks"
+    },
+    "result_status": {
+     "dbx_business_glossary_term": "Result Status",
+     "dbx_value_regex": "pass|fail|conditional|pending|waived"
+    },
+    "retest_indicator": {
+     "dbx_business_glossary_term": "Retest Indicator"
+    },
+    "retest_reason_code": {
+     "dbx_business_glossary_term": "Retest Reason Code",
+     "dbx_value_regex": "initial_failure|inconclusive|instrument_error|sample_contamination|procedural_deviation|other"
+    },
+    "sample_sequence_number": {
+     "dbx_business_glossary_term": "Sample Sequence Number"
+    },
+    "target_value": {
+     "dbx_business_glossary_term": "Target Value"
+    },
+    "test_batch_number": {
+     "dbx_business_glossary_term": "Test Batch Number"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "upper_specification_limit": {
+     "dbx_business_glossary_term": "Upper Specification Limit (USL)"
+    }
+   }
+  },
+  "usage_decision": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inspection_management"
+   },
+   "column_tags": {
+    "usage_decision_id": {
+     "dbx_business_glossary_term": "Usage Decision ID"
+    },
+    "capa_id": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt Id (Foreign Key)"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot ID"
+    },
+    "inventory_position_id": {
+     "dbx_business_glossary_term": "Inventory Position Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "storage_location_id": {
+     "dbx_business_glossary_term": "Distribution Storage Location Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Vendor ID"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approval_required_flag": {
+     "dbx_business_glossary_term": "Approval Required Flag"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number"
+    },
+    "capa_required_flag": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) Required Flag"
+    },
+    "certificate_of_analysis_number": {
+     "dbx_business_glossary_term": "Certificate of Analysis (COA) Number"
+    },
+    "comments": {
+     "dbx_business_glossary_term": "Usage Decision Comments"
+    },
+    "decision_code": {
+     "dbx_business_glossary_term": "Usage Decision Code",
+     "dbx_value_regex": "A|R|Q|S|X"
+    },
+    "decision_date": {
+     "dbx_business_glossary_term": "Usage Decision Date"
+    },
+    "decision_maker_name": {
+     "dbx_business_glossary_term": "Decision Maker Name"
+    },
+    "decision_text": {
+     "dbx_business_glossary_term": "Usage Decision Description"
+    },
+    "decision_timestamp": {
+     "dbx_business_glossary_term": "Usage Decision Timestamp"
+    },
+    "defect_code": {
+     "dbx_business_glossary_term": "Defect Code"
+    },
+    "defect_description": {
+     "dbx_business_glossary_term": "Defect Description"
+    },
+    "disposition_date": {
+     "dbx_business_glossary_term": "Disposition Date"
+    },
+    "disposition_status": {
+     "dbx_business_glossary_term": "Disposition Status",
+     "dbx_value_regex": "pending|completed|cancelled"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "inspection_type": {
+     "dbx_business_glossary_term": "Inspection Type",
+     "dbx_value_regex": "goods_receipt|in_process|final|stability|complaint"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code"
+    },
+    "quantity_accepted": {
+     "dbx_business_glossary_term": "Quantity Accepted"
+    },
+    "quantity_rejected": {
+     "dbx_business_glossary_term": "Quantity Rejected"
+    },
+    "quantity_rework": {
+     "dbx_business_glossary_term": "Quantity for Rework"
+    },
+    "record_created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "record_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "regulatory_hold_flag": {
+     "dbx_business_glossary_term": "Regulatory Hold Flag"
+    },
+    "regulatory_hold_reason": {
+     "dbx_business_glossary_term": "Regulatory Hold Reason"
+    },
+    "sampling_procedure": {
+     "dbx_business_glossary_term": "Sampling Procedure"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System ID"
+    },
+    "stock_posting_instruction": {
+     "dbx_business_glossary_term": "Stock Posting Instruction",
+     "dbx_value_regex": "unrestricted|blocked|quality_inspection|scrap|sample|rework"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    }
+   }
+  },
+  "nonconformance": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "issue_resolution"
+   },
+   "column_tags": {
+    "nonconformance_id": {
+     "dbx_business_glossary_term": "Nonconformance ID"
+    },
+    "capa_id": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "inbound_receipt_id": {
+     "dbx_business_glossary_term": "Inbound Receipt Id (Foreign Key)"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot Id (Foreign Key)"
+    },
+    "inventory_position_id": {
+     "dbx_business_glossary_term": "Inventory Position Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Regulatory Action Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Order Id (Foreign Key)"
+    },
+    "product_complaint_id": {
+     "dbx_business_glossary_term": "Customer Complaint ID"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "affected_quantity": {
+     "dbx_business_glossary_term": "Affected Quantity"
+    },
+    "affected_quantity_uom": {
+     "dbx_business_glossary_term": "Affected Quantity Unit of Measure (UOM)",
+     "dbx_value_regex": "EA|KG|L|M|BOX|PALLET"
+    },
+    "closed_timestamp": {
+     "dbx_business_glossary_term": "Closed Timestamp"
+    },
+    "containment_action": {
+     "dbx_business_glossary_term": "Containment Action"
+    },
+    "containment_timestamp": {
+     "dbx_business_glossary_term": "Containment Timestamp"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "defect_classification": {
+     "dbx_business_glossary_term": "Defect Classification"
+    },
+    "defect_description": {
+     "dbx_business_glossary_term": "Defect Description"
+    },
+    "detected_timestamp": {
+     "dbx_business_glossary_term": "Detection Timestamp"
+    },
+    "detection_source": {
+     "dbx_business_glossary_term": "Detection Source"
+    },
+    "disposition_approved_by": {
+     "dbx_business_glossary_term": "Disposition Approved By User ID",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "disposition_approved_timestamp": {
+     "dbx_business_glossary_term": "Disposition Approved Timestamp"
+    },
+    "disposition_decision": {
+     "dbx_business_glossary_term": "Disposition Decision",
+     "dbx_value_regex": "use_as_is|rework|scrap|return_to_supplier|downgrade|quarantine"
+    },
+    "event_type": {
+     "dbx_business_glossary_term": "Nonconformance Event Type",
+     "dbx_value_regex": "complaint|defect|deviation|improvement_request|supplier_issue|audit_finding"
+    },
+    "financial_impact_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Financial Impact Amount"
+    },
+    "financial_impact_currency": {
+     "dbx_business_glossary_term": "Financial Impact Currency",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "nonconformance_status": {
+     "dbx_business_glossary_term": "Nonconformance Status",
+     "dbx_value_regex": "open|in_investigation|containment_active|capa_assigned|closed|cancelled"
+    },
+    "notification_number": {
+     "dbx_business_glossary_term": "Quality Notification Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "Nonconformance Priority",
+     "dbx_value_regex": "urgent|high|medium|low"
+    },
+    "regulatory_report_date": {
+     "dbx_business_glossary_term": "Regulatory Report Date"
+    },
+    "regulatory_reportable_flag": {
+     "dbx_business_glossary_term": "Regulatory Reportable Flag"
+    },
+    "reported_timestamp": {
+     "dbx_business_glossary_term": "Reported Timestamp"
+    },
+    "responsible_department": {
+     "dbx_business_glossary_term": "Responsible Department"
+    },
+    "responsible_plant_code": {
+     "dbx_business_glossary_term": "Responsible Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "root_cause_analysis": {
+     "dbx_business_glossary_term": "Root Cause Analysis"
+    },
+    "severity": {
+     "dbx_business_glossary_term": "Nonconformance Severity",
+     "dbx_value_regex": "critical|major|minor"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System ID"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "verification_method": {
+     "dbx_business_glossary_term": "Verification Method"
+    }
+   }
+  },
+  "capa": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "issue_resolution"
+   },
+   "column_tags": {
+    "capa_id": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Facility ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Product ID"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "actual_completion_date": {
+     "dbx_business_glossary_term": "Actual Completion Date"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number"
+    },
+    "capa_number": {
+     "dbx_business_glossary_term": "CAPA Number",
+     "dbx_value_regex": "^CAPA-[0-9]{6,10}$"
+    },
+    "capa_status": {
+     "dbx_business_glossary_term": "CAPA Status"
+    },
+    "capa_type": {
+     "dbx_business_glossary_term": "CAPA Type",
+     "dbx_value_regex": "corrective|preventive|combined"
+    },
+    "closure_comments": {
+     "dbx_business_glossary_term": "Closure Comments"
+    },
+    "closure_date": {
+     "dbx_business_glossary_term": "CAPA Closure Date"
+    },
+    "corrective_action_description": {
+     "dbx_business_glossary_term": "Corrective Action Description"
+    },
+    "cost_impact_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost Impact Amount"
+    },
+    "cost_impact_currency_code": {
+     "dbx_business_glossary_term": "Cost Impact Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "customer_impact_flag": {
+     "dbx_business_glossary_term": "Customer Impact Flag"
+    },
+    "description": {
+     "dbx_business_glossary_term": "CAPA Description"
+    },
+    "effectiveness_verification_method": {
+     "dbx_business_glossary_term": "Effectiveness Verification Method"
+    },
+    "effectiveness_verification_result": {
+     "dbx_business_glossary_term": "Effectiveness Verification Result",
+     "dbx_value_regex": "effective|ineffective|pending"
+    },
+    "gmp_deviation_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Deviation Flag"
+    },
+    "initiated_date": {
+     "dbx_business_glossary_term": "CAPA Initiated Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "preventive_action_description": {
+     "dbx_business_glossary_term": "Preventive Action Description"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "CAPA Priority",
+     "dbx_value_regex": "high|medium|low"
+    },
+    "process_area": {
+     "dbx_business_glossary_term": "Process Area"
+    },
+    "regulatory_report_date": {
+     "dbx_business_glossary_term": "Regulatory Report Date"
+    },
+    "regulatory_reportable_flag": {
+     "dbx_business_glossary_term": "Regulatory Reportable Flag"
+    },
+    "responsible_department": {
+     "dbx_business_glossary_term": "Responsible Department"
+    },
+    "root_cause_analysis_method": {
+     "dbx_business_glossary_term": "Root Cause Analysis (RCA) Method",
+     "dbx_value_regex": "5_whys|fishbone|fault_tree|pareto|failure_mode_effects_analysis|other"
+    },
+    "root_cause_description": {
+     "dbx_business_glossary_term": "Root Cause Description"
+    },
+    "severity": {
+     "dbx_business_glossary_term": "CAPA Severity",
+     "dbx_value_regex": "critical|major|minor"
+    },
+    "source_reference_number": {
+     "dbx_business_glossary_term": "Source Reference Number"
+    },
+    "source_type": {
+     "dbx_business_glossary_term": "CAPA Source Type",
+     "dbx_value_regex": "nonconformance|audit_finding|customer_complaint|supplier_issue|stability_failure|regulatory_inspection"
+    },
+    "target_completion_date": {
+     "dbx_business_glossary_term": "Target Completion Date"
+    },
+    "title": {
+     "dbx_business_glossary_term": "CAPA Title"
+    },
+    "verification_date": {
+     "dbx_business_glossary_term": "Verification Date"
+    }
+   }
+  },
+  "batch_release": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_certification"
+   },
+   "column_tags": {
+    "batch_release_id": {
+     "dbx_business_glossary_term": "Batch Release ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "certificate_of_analysis_id": {
+     "dbx_business_glossary_term": "Batch Release Certificate Of Analysis Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "formulation_id": {
+     "dbx_business_glossary_term": "Prototype Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot Id (Foreign Key)"
+    },
+    "inventory_position_id": {
+     "dbx_business_glossary_term": "Inventory Position Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Lot Batch Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "standard_cost_id": {
+     "dbx_business_glossary_term": "Standard Cost Id (Foreign Key)"
+    },
+    "usage_decision_id": {
+     "dbx_business_glossary_term": "Usage Decision Id (Foreign Key)"
+    },
+    "audit_trail_reference": {
+     "dbx_business_glossary_term": "Audit Trail Reference",
+     "dbx_value_regex": "^AUDIT-[A-Z0-9]{8,20}$"
+    },
+    "batch_size_quantity": {
+     "dbx_business_glossary_term": "Batch Size Quantity"
+    },
+    "batch_size_uom": {
+     "dbx_business_glossary_term": "Batch Size Unit of Measure (UOM)"
+    },
+    "capa_required_flag": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) Required Flag"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "deviation_count": {
+     "dbx_business_glossary_term": "Deviation Count"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "hold_initiated_date": {
+     "dbx_business_glossary_term": "Hold Initiated Date"
+    },
+    "hold_reason": {
+     "dbx_business_glossary_term": "Hold Reason"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "manufacturing_site_code": {
+     "dbx_business_glossary_term": "Manufacturing Site Code",
+     "dbx_value_regex": "^[A-Z0-9]{3,10}$"
+    },
+    "product_registration_number": {
+     "dbx_business_glossary_term": "Product Registration Number",
+     "dbx_value_regex": "^[A-Z0-9-]{6,20}$"
+    },
+    "production_date": {
+     "dbx_business_glossary_term": "Production Date"
+    },
+    "qc_inspection_status": {
+     "dbx_business_glossary_term": "Quality Control (QC) Inspection Status",
+     "dbx_value_regex": "passed|failed|conditional_pass|pending|waived"
+    },
+    "qp_signature_timestamp": {
+     "dbx_business_glossary_term": "Qualified Person (QP) Signature Timestamp"
+    },
+    "qualified_person_name": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Qualified Person (QP) Name"
+    },
+    "regulatory_hold_status": {
+     "dbx_business_glossary_term": "Regulatory Hold Status",
+     "dbx_value_regex": "no_hold|fda_hold|epa_hold|internal_hold|customer_hold|recall_hold"
+    },
+    "regulatory_market": {
+     "dbx_business_glossary_term": "Regulatory Market"
+    },
+    "rejected_quantity": {
+     "dbx_business_glossary_term": "Rejected Quantity"
+    },
+    "release_date": {
+     "dbx_business_glossary_term": "Release Date"
+    },
+    "release_decision": {
+     "dbx_business_glossary_term": "Release Decision",
+     "dbx_value_regex": "released|rejected|quarantine|conditional_release|pending_review|on_hold"
+    },
+    "release_notes": {
+     "dbx_business_glossary_term": "Release Notes"
+    },
+    "release_timestamp": {
+     "dbx_business_glossary_term": "Release Timestamp"
+    },
+    "released_quantity": {
+     "dbx_business_glossary_term": "Released Quantity"
+    },
+    "retest_date": {
+     "dbx_business_glossary_term": "Retest Date"
+    },
+    "stability_study_reference": {
+     "dbx_business_glossary_term": "Stability Study Reference",
+     "dbx_value_regex": "^STAB-[A-Z0-9]{8,20}$"
+    },
+    "veeva_vault_document_reference": {
+     "dbx_business_glossary_term": "Veeva Vault Document ID",
+     "dbx_value_regex": "^VV-[A-Z0-9]{10,20}$"
+    }
+   }
+  },
+  "certificate_of_analysis": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_certification"
+   },
+   "column_tags": {
+    "certificate_of_analysis_id": {
+     "dbx_business_glossary_term": "Certificate of Analysis (CoA) ID"
+    },
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt Id (Foreign Key)"
+    },
+    "inspection_lot_id": {
+     "dbx_business_glossary_term": "Inspection Lot Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Lot Batch ID"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Specification Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id (Foreign Key)"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "authorized_signatory_name": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Authorized Signatory Name"
+    },
+    "authorized_signatory_title": {
+     "dbx_business_glossary_term": "Authorized Signatory Title"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "batch_size": {
+     "dbx_business_glossary_term": "Batch Size"
+    },
+    "batch_size_uom": {
+     "dbx_business_glossary_term": "Batch Size Unit of Measure (UOM)",
+     "dbx_value_regex": "kg|g|L|mL|units|cases"
+    },
+    "certificate_number": {
+     "dbx_business_glossary_term": "Certificate Number",
+     "dbx_value_regex": "^COA-[A-Z0-9]{8,20}$"
+    },
+    "certificate_type": {
+     "dbx_business_glossary_term": "Certificate Type",
+     "dbx_value_regex": "finished_goods|raw_material|intermediate|packaging_material"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "customer_facing_flag": {
+     "dbx_business_glossary_term": "Customer Facing Flag"
+    },
+    "document_url": {
+     "dbx_business_glossary_term": "Document URL",
+     "dbx_value_regex": "^https?://.*"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "gmp_compliant_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliant Flag"
+    },
+    "issue_date": {
+     "dbx_business_glossary_term": "Issue Date"
+    },
+    "manufacturing_date": {
+     "dbx_business_glossary_term": "Manufacturing Date"
+    },
+    "material_code": {
+     "dbx_business_glossary_term": "Material Code",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "material_description": {
+     "dbx_business_glossary_term": "Material Description"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "overall_result_status": {
+     "dbx_business_glossary_term": "Overall Result Status",
+     "dbx_value_regex": "pass|fail|conditional_pass|pending_review"
+    },
+    "quantity_tested": {
+     "dbx_business_glossary_term": "Quantity Tested"
+    },
+    "quantity_tested_uom": {
+     "dbx_business_glossary_term": "Quantity Tested Unit of Measure (UOM)",
+     "dbx_value_regex": "kg|g|L|mL|units|cases"
+    },
+    "regulatory_submission_flag": {
+     "dbx_business_glossary_term": "Regulatory Submission Flag"
+    },
+    "remarks": {
+     "dbx_business_glossary_term": "Remarks"
+    },
+    "retest_date": {
+     "dbx_business_glossary_term": "Retest Date"
+    },
+    "storage_condition": {
+     "dbx_business_glossary_term": "Storage Condition"
+    },
+    "supplier_lot_number": {
+     "dbx_business_glossary_term": "Supplier Lot Number"
+    },
+    "test_date": {
+     "dbx_business_glossary_term": "Test Date"
+    },
+    "test_method_reference": {
+     "dbx_business_glossary_term": "Test Method Reference"
+    },
+    "veeva_vault_document_reference": {
+     "dbx_business_glossary_term": "Veeva Vault Document ID",
+     "dbx_value_regex": "^[A-Z0-9]{10,30}$"
+    }
+   }
+  },
+  "product_complaint": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "issue_resolution"
+   },
+   "column_tags": {
+    "product_complaint_id": {
+     "dbx_business_glossary_term": "Product Complaint ID"
+    },
+    "capa_id": {
+     "dbx_business_glossary_term": "Corrective and Preventive Action (CAPA) ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "invoice_id": {
+     "dbx_business_glossary_term": "Invoice Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Regulatory Action Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Order Id (Foreign Key)"
+    },
+    "outbound_order_line_id": {
+     "dbx_business_glossary_term": "Outbound Order Line Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store Id (Foreign Key)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Logistics Shipment Id (Foreign Key)"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Shopper Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Retail Account ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "complainant_address": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Complainant Address"
+    },
+    "complainant_country_code": {
+     "dbx_business_glossary_term": "Complainant Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "complainant_email": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Complainant Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "complainant_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Complainant Name"
+    },
+    "complainant_phone": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Complainant Phone Number"
+    },
+    "complaint_category": {
+     "dbx_business_glossary_term": "Complaint Category",
+     "dbx_value_regex": "foreign_body|contamination|labeling_error|efficacy_failure|packaging_defect|adverse_reaction"
+    },
+    "complaint_description": {
+     "dbx_business_glossary_term": "Complaint Description"
+    },
+    "complaint_number": {
+     "dbx_business_glossary_term": "Complaint Number",
+     "dbx_value_regex": "^CPL-[0-9]{8}$"
+    },
+    "complaint_received_timestamp": {
+     "dbx_business_glossary_term": "Complaint Received Timestamp"
+    },
+    "complaint_source": {
+     "dbx_business_glossary_term": "Complaint Source",
+     "dbx_value_regex": "consumer_direct|retailer|distributor|regulatory_agency|social_media|call_center"
+    },
+    "complaint_status": {
+     "dbx_business_glossary_term": "Complaint Status",
+     "dbx_value_regex": "open|under_investigation|pending_lab_analysis|resolved|closed|escalated"
+    },
+    "complaint_subcategory": {
+     "dbx_business_glossary_term": "Complaint Subcategory"
+    },
+    "corrective_action": {
+     "dbx_business_glossary_term": "Corrective Action"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{8}$|^[0-9]{12}$|^[0-9]{13}$|^[0-9]{14}$"
+    },
+    "incident_date": {
+     "dbx_business_glossary_term": "Incident Date"
+    },
+    "investigation_completion_date": {
+     "dbx_business_glossary_term": "Investigation Completion Date"
+    },
+    "investigation_start_date": {
+     "dbx_business_glossary_term": "Investigation Start Date"
+    },
+    "investigation_status": {
+     "dbx_business_glossary_term": "Investigation Status",
+     "dbx_value_regex": "not_started|in_progress|lab_testing|pending_capa|completed"
+    },
+    "lab_analysis_result": {
+     "dbx_business_glossary_term": "Laboratory Analysis Result"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "manufacturing_date": {
+     "dbx_business_glossary_term": "Manufacturing Date"
+    },
+    "preventive_action": {
+     "dbx_business_glossary_term": "Preventive Action"
+    },
+    "purchase_date": {
+     "dbx_business_glossary_term": "Purchase Date"
+    },
+    "regulatory_agency": {
+     "dbx_business_glossary_term": "Regulatory Agency"
+    },
+    "regulatory_case_number": {
+     "dbx_business_glossary_term": "Regulatory Case Number"
+    },
+    "regulatory_report_date": {
+     "dbx_business_glossary_term": "Regulatory Report Date"
+    },
+    "regulatory_reportable_flag": {
+     "dbx_business_glossary_term": "Regulatory Reportable Flag"
+    },
+    "resolution_date": {
+     "dbx_business_glossary_term": "Resolution Date"
+    },
+    "resolution_outcome": {
+     "dbx_business_glossary_term": "Resolution Outcome",
+     "dbx_value_regex": "refund_issued|replacement_sent|no_action_required|product_recall|investigation_ongoing"
+    },
+    "root_cause": {
+     "dbx_business_glossary_term": "Root Cause"
+    },
+    "sample_received_date": {
+     "dbx_business_glossary_term": "Sample Received Date"
+    },
+    "sample_returned_flag": {
+     "dbx_business_glossary_term": "Sample Returned Flag"
+    },
+    "severity_level": {
+     "dbx_business_glossary_term": "Severity Level",
+     "dbx_value_regex": "critical|high|medium|low"
+    }
+   }
+  },
+  "specification": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "inspection_management"
+   },
+   "column_tags": {
+    "specification_id": {
+     "dbx_business_glossary_term": "Quality Specification ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "specification_material_sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "specification_sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "superseded_by_specification_id": {
+     "dbx_business_glossary_term": "Superseded By Specification ID"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "category": {
+     "dbx_business_glossary_term": "Specification Category",
+     "dbx_value_regex": "physical|chemical|microbiological|sensory|functional|safety"
+    },
+    "coa_inclusion_flag": {
+     "dbx_business_glossary_term": "Certificate of Analysis (CoA) Inclusion Flag"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "critical_quality_attribute_flag": {
+     "dbx_business_glossary_term": "Critical Quality Attribute (CQA) Flag"
+    },
+    "customer_requirement_flag": {
+     "dbx_business_glossary_term": "Customer Requirement Flag"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lower_specification_limit": {
+     "dbx_business_glossary_term": "Lower Specification Limit (LSL)"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Specification Notes"
+    },
+    "review_frequency_months": {
+     "dbx_business_glossary_term": "Review Frequency (Months)"
+    },
+    "sampling_plan": {
+     "dbx_business_glossary_term": "Sampling Plan"
+    },
+    "specification_number": {
+     "dbx_business_glossary_term": "Specification Number",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "specification_status": {
+     "dbx_business_glossary_term": "Specification Status",
+     "dbx_value_regex": "draft|under_review|approved|active|superseded|obsolete"
+    },
+    "specification_type": {
+     "dbx_business_glossary_term": "Specification Type",
+     "dbx_value_regex": "raw_material|packaging_material|in_process|finished_good|intermediate|bulk"
+    },
+    "stability_indicating_flag": {
+     "dbx_business_glossary_term": "Stability Indicating Flag"
+    },
+    "target_value": {
+     "dbx_business_glossary_term": "Target Value"
+    },
+    "test_characteristic": {
+     "dbx_business_glossary_term": "Test Characteristic"
+    },
+    "test_equipment_required": {
+     "dbx_business_glossary_term": "Test Equipment Required"
+    },
+    "test_frequency": {
+     "dbx_business_glossary_term": "Test Frequency"
+    },
+    "test_method_reference": {
+     "dbx_business_glossary_term": "Test Method Reference"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "upper_specification_limit": {
+     "dbx_business_glossary_term": "Upper Specification Limit (USL)"
+    },
+    "veeva_vault_document_reference": {
+     "dbx_business_glossary_term": "Veeva Vault Document ID"
+    },
+    "version": {
+     "dbx_business_glossary_term": "Specification Version",
+     "dbx_value_regex": "^[0-9]{1,3}\\.[0-9]{1,3}$"
+    }
+   }
+  }
+ }
+}

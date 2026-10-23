@@ -1,0 +1,1604 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "manufacturing",
+ "schema_comment": "Owns production planning, scheduling, and execution across manufacturing facilities. Manages production orders, batch records, work orders, MES integration (Siemens Opcenter), line performance (OEE), yield tracking, MRP runs, GMP compliance events, changeover management, and shop floor data collection aligned with ISO 22716 standards.",
+ "tag_count": 609,
+ "foreign_key_count": 67,
+ "schema_tags": {
+  "dbx_domain": "manufacturing",
+  "dbx_division": "operations"
+ },
+ "tables": {
+  "manufacturing_facility": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "asset_configuration"
+   },
+   "column_tags": {
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "address_line_1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line_2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "city": {
+     "dbx_business_glossary_term": "City"
+    },
+    "commissioning_date": {
+     "dbx_business_glossary_term": "Commissioning Date"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "email_address": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "energy_consumption_kwh_per_year": {
+     "dbx_business_glossary_term": "Energy Consumption (Kilowatt-Hours Per Year)"
+    },
+    "epa_site_number": {
+     "dbx_business_glossary_term": "Environmental Protection Agency (EPA) Site ID"
+    },
+    "erp_plant_code": {
+     "dbx_business_glossary_term": "Enterprise Resource Planning (ERP) Plant ID"
+    },
+    "facility_name": {
+     "dbx_business_glossary_term": "Facility Name"
+    },
+    "facility_type": {
+     "dbx_business_glossary_term": "Facility Type",
+     "dbx_value_regex": "mixing|filling|packaging|co-manufacturing|integrated|contract"
+    },
+    "fda_establishment_number": {
+     "dbx_business_glossary_term": "Food and Drug Administration (FDA) Establishment ID",
+     "dbx_value_regex": "^[0-9]{7,10}$"
+    },
+    "gmp_certification_date": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certification Date"
+    },
+    "gmp_certified": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certified"
+    },
+    "gmp_expiration_date": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Expiration Date"
+    },
+    "iso_14001_certified": {
+     "dbx_business_glossary_term": "ISO 14001 Certified"
+    },
+    "iso_22716_compliance_tier": {
+     "dbx_business_glossary_term": "ISO 22716 Compliance Tier",
+     "dbx_value_regex": "tier_1|tier_2|tier_3|non_compliant"
+    },
+    "iso_9001_certified": {
+     "dbx_business_glossary_term": "ISO 9001 Certified"
+    },
+    "last_audit_date": {
+     "dbx_business_glossary_term": "Last Audit Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "mes_system_integrated": {
+     "dbx_business_glossary_term": "Manufacturing Execution System (MES) Integrated"
+    },
+    "next_audit_date": {
+     "dbx_business_glossary_term": "Next Audit Date"
+    },
+    "number_of_production_lines": {
+     "dbx_business_glossary_term": "Number of Production Lines"
+    },
+    "operational_status": {
+     "dbx_business_glossary_term": "Operational Status",
+     "dbx_value_regex": "active|inactive|maintenance|startup|decommissioned|seasonal"
+    },
+    "osha_establishment_number": {
+     "dbx_business_glossary_term": "Occupational Safety and Health Administration (OSHA) Establishment Number"
+    },
+    "ownership_type": {
+     "dbx_business_glossary_term": "Ownership Type",
+     "dbx_value_regex": "owned|leased|contract|joint_venture"
+    },
+    "phone_number": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Phone Number"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "primary_product_category": {
+     "dbx_business_glossary_term": "Primary Product Category"
+    },
+    "production_capacity_units_per_day": {
+     "dbx_business_glossary_term": "Production Capacity (Units Per Day)"
+    },
+    "shift_pattern": {
+     "dbx_business_glossary_term": "Shift Pattern",
+     "dbx_value_regex": "single|two_shift|three_shift|continuous|flexible"
+    },
+    "square_footage": {
+     "dbx_business_glossary_term": "Square Footage"
+    },
+    "state_province": {
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "sustainability_rating": {
+     "dbx_business_glossary_term": "Sustainability Rating",
+     "dbx_value_regex": "platinum|gold|silver|bronze|not_rated"
+    },
+    "time_zone": {
+     "dbx_business_glossary_term": "Time Zone"
+    },
+    "water_consumption_cubic_meters_per_year": {
+     "dbx_business_glossary_term": "Water Consumption (Cubic Meters Per Year)"
+    },
+    "workforce_headcount": {
+     "dbx_business_glossary_term": "Workforce Headcount"
+    }
+   }
+  },
+  "production_line": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "asset_configuration"
+   },
+   "column_tags": {
+    "production_line_id": {
+     "dbx_business_glossary_term": "Production Line Identifier (ID)"
+    },
+    "cost_center_id": {
+     "dbx_internal": "true",
+     "dbx_business_glossary_term": "Cost Center Id"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "allergen_handling_flag": {
+     "dbx_business_glossary_term": "Allergen Handling Flag"
+    },
+    "allergen_types": {
+     "dbx_business_glossary_term": "Allergen Types"
+    },
+    "asset_tag_number": {
+     "dbx_business_glossary_term": "Asset Tag Number",
+     "dbx_value_regex": "^[A-Z0-9-]{6,20}$"
+    },
+    "automation_level": {
+     "dbx_business_glossary_term": "Automation Level",
+     "dbx_value_regex": "manual|semi_automated|fully_automated|lights_out"
+    },
+    "changeover_time_standard_minutes": {
+     "dbx_business_glossary_term": "Changeover Time Standard (Minutes)"
+    },
+    "cleaning_validation_protocol": {
+     "dbx_business_glossary_term": "Cleaning Validation Protocol"
+    },
+    "commissioning_date": {
+     "dbx_business_glossary_term": "Commissioning Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "crew_size_standard": {
+     "dbx_business_glossary_term": "Standard Crew Size"
+    },
+    "depreciation_method": {
+     "dbx_business_glossary_term": "Depreciation Method",
+     "dbx_value_regex": "straight_line|declining_balance|units_of_production|sum_of_years"
+    },
+    "design_speed_units_per_hour": {
+     "dbx_business_glossary_term": "Design Speed (Units Per Hour)"
+    },
+    "energy_consumption_kwh_per_unit": {
+     "dbx_business_glossary_term": "Energy Consumption (Kilowatt-Hours Per Unit)"
+    },
+    "environmental_control_required": {
+     "dbx_business_glossary_term": "Environmental Control Required"
+    },
+    "gmp_classification": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Classification",
+     "dbx_value_regex": "gmp_a|gmp_b|gmp_c|gmp_d|non_gmp"
+    },
+    "humidity_range_percent": {
+     "dbx_business_glossary_term": "Operating Humidity Range (Percent)"
+    },
+    "installed_power_kw": {
+     "dbx_business_glossary_term": "Installed Power (Kilowatts)"
+    },
+    "last_major_overhaul_date": {
+     "dbx_business_glossary_term": "Last Major Overhaul Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "line_code": {
+     "dbx_business_glossary_term": "Production Line Code",
+     "dbx_value_regex": "^[A-Z0-9]{3,12}$"
+    },
+    "line_length_meters": {
+     "dbx_business_glossary_term": "Production Line Length (Meters)"
+    },
+    "line_name": {
+     "dbx_business_glossary_term": "Production Line Name"
+    },
+    "line_type": {
+     "dbx_business_glossary_term": "Production Line Type",
+     "dbx_value_regex": "filling|blending|packaging|assembly|labeling|palletizing"
+    },
+    "mean_time_between_failures_hours": {
+     "dbx_business_glossary_term": "Mean Time Between Failures (MTBF) Hours"
+    },
+    "mean_time_to_repair_hours": {
+     "dbx_business_glossary_term": "Mean Time To Repair (MTTR) Hours"
+    },
+    "mes_asset_tag": {
+     "dbx_business_glossary_term": "Manufacturing Execution System (MES) Asset Tag",
+     "dbx_value_regex": "^[A-Z0-9_-]{4,20}$"
+    },
+    "modified_by_user": {
+     "dbx_business_glossary_term": "Modified By User"
+    },
+    "next_scheduled_maintenance_date": {
+     "dbx_business_glossary_term": "Next Scheduled Maintenance Date"
+    },
+    "nominal_oee_target_percent": {
+     "dbx_business_glossary_term": "Nominal Overall Equipment Effectiveness (OEE) Target Percent"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Production Line Notes"
+    },
+    "operational_status": {
+     "dbx_business_glossary_term": "Operational Status",
+     "dbx_value_regex": "active|inactive|maintenance|decommissioned|startup|idle"
+    },
+    "plc_system_type": {
+     "dbx_business_glossary_term": "Programmable Logic Controller (PLC) System Type"
+    },
+    "quality_inspection_frequency": {
+     "dbx_business_glossary_term": "Quality Inspection Frequency",
+     "dbx_value_regex": "continuous|hourly|per_batch|per_shift|daily"
+    },
+    "record_source_system": {
+     "dbx_business_glossary_term": "Record Source System"
+    },
+    "scada_integration_enabled": {
+     "dbx_business_glossary_term": "Supervisory Control And Data Acquisition (SCADA) Integration Enabled"
+    },
+    "scrap_rate_target_percent": {
+     "dbx_business_glossary_term": "Scrap Rate Target Percent"
+    },
+    "shift_pattern": {
+     "dbx_business_glossary_term": "Shift Pattern",
+     "dbx_value_regex": "single_shift|two_shift|three_shift|continuous|custom"
+    },
+    "temperature_range_celsius": {
+     "dbx_business_glossary_term": "Operating Temperature Range (Celsius)"
+    },
+    "useful_life_years": {
+     "dbx_business_glossary_term": "Useful Life (Years)"
+    }
+   }
+  },
+  "work_center": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "asset_configuration"
+   },
+   "column_tags": {
+    "work_center_id": {
+     "dbx_business_glossary_term": "Work Center ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant ID"
+    },
+    "production_line_id": {
+     "dbx_business_glossary_term": "Production Line ID"
+    },
+    "available_capacity_hours_per_day": {
+     "dbx_business_glossary_term": "Available Capacity Hours Per Day"
+    },
+    "calibration_due_date": {
+     "dbx_business_glossary_term": "Calibration Due Date"
+    },
+    "capacity_unit": {
+     "dbx_business_glossary_term": "Capacity Unit of Measure",
+     "dbx_value_regex": "units_per_hour|units_per_shift|kg_per_hour|liters_per_hour|cases_per_hour"
+    },
+    "category": {
+     "dbx_business_glossary_term": "Work Center Category",
+     "dbx_value_regex": "machine|production_line|assembly_station|quality_control|warehouse|maintenance"
+    },
+    "clean_room_class": {
+     "dbx_business_glossary_term": "Clean Room Classification"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Work Center Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,20}$"
+    },
+    "commissioning_date": {
+     "dbx_business_glossary_term": "Commissioning Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "crew_size": {
+     "dbx_business_glossary_term": "Crew Size"
+    },
+    "decommissioning_date": {
+     "dbx_business_glossary_term": "Decommissioning Date"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Work Center Description"
+    },
+    "energy_consumption_kwh_per_hour": {
+     "dbx_business_glossary_term": "Energy Consumption (kWh per Hour)"
+    },
+    "gmp_qualification_status": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Qualification Status",
+     "dbx_value_regex": "not_qualified|iq_complete|oq_complete|pq_complete|fully_qualified|requalification_required"
+    },
+    "hazardous_area_classification": {
+     "dbx_business_glossary_term": "Hazardous Area Classification"
+    },
+    "humidity_controlled_flag": {
+     "dbx_business_glossary_term": "Humidity Controlled Flag"
+    },
+    "last_calibration_date": {
+     "dbx_business_glossary_term": "Last Calibration Date"
+    },
+    "maintenance_class": {
+     "dbx_business_glossary_term": "Maintenance Class",
+     "dbx_value_regex": "critical|high|medium|low"
+    },
+    "maintenance_strategy": {
+     "dbx_business_glossary_term": "Maintenance Strategy",
+     "dbx_value_regex": "preventive|predictive|reactive|condition_based"
+    },
+    "manufacturer_name": {
+     "dbx_business_glossary_term": "Manufacturer Name"
+    },
+    "mes_equipment_code": {
+     "dbx_business_glossary_term": "Manufacturing Execution System (MES) Equipment ID",
+     "dbx_value_regex": "^[A-Z0-9_-]{4,30}$"
+    },
+    "model_number": {
+     "dbx_business_glossary_term": "Model Number"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Work Center Name"
+    },
+    "operator_skill_level_required": {
+     "dbx_business_glossary_term": "Operator Skill Level Required",
+     "dbx_value_regex": "entry|intermediate|advanced|expert|certified"
+    },
+    "qualification_date": {
+     "dbx_business_glossary_term": "Qualification Date"
+    },
+    "rated_capacity": {
+     "dbx_business_glossary_term": "Rated Capacity"
+    },
+    "requalification_due_date": {
+     "dbx_business_glossary_term": "Requalification Due Date"
+    },
+    "safety_certification": {
+     "dbx_business_glossary_term": "Safety Certification"
+    },
+    "serial_number": {
+     "dbx_business_glossary_term": "Serial Number"
+    },
+    "setup_time_minutes": {
+     "dbx_business_glossary_term": "Setup Time (Minutes)"
+    },
+    "shift_pattern": {
+     "dbx_business_glossary_term": "Shift Pattern",
+     "dbx_value_regex": "single_shift|two_shift|three_shift|continuous|custom"
+    },
+    "standard_cycle_time_minutes": {
+     "dbx_business_glossary_term": "Standard Cycle Time (Minutes)"
+    },
+    "teardown_time_minutes": {
+     "dbx_business_glossary_term": "Teardown Time (Minutes)"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "utilization_rate_percent": {
+     "dbx_business_glossary_term": "Utilization Rate Percentage"
+    },
+    "work_center_status": {
+     "dbx_business_glossary_term": "Work Center Status",
+     "dbx_value_regex": "active|inactive|maintenance|decommissioned|under_qualification|blocked"
+    },
+    "work_center_type": {
+     "dbx_business_glossary_term": "Work Center Type",
+     "dbx_value_regex": "mixing_vessel|filling_machine|labeler|capper|palletizer|packaging_line"
+    }
+   }
+  },
+  "manufacturing_bom": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_planning"
+   },
+   "column_tags": {
+    "manufacturing_bom_id": {
+     "dbx_business_glossary_term": "Manufacturing Bill of Materials (BOM) ID"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "primary_manufacturing_sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "product_bom_id": {
+     "dbx_business_glossary_term": "Product Bom Id"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "allergen_flag": {
+     "dbx_business_glossary_term": "Allergen Flag"
+    },
+    "alternative_item_group": {
+     "dbx_business_glossary_term": "Alternative Item Group"
+    },
+    "alternative_item_priority": {
+     "dbx_business_glossary_term": "Alternative Item Priority"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "backflush_indicator": {
+     "dbx_business_glossary_term": "Backflush Indicator"
+    },
+    "base_quantity": {
+     "dbx_business_glossary_term": "Base Quantity"
+    },
+    "base_unit_of_measure": {
+     "dbx_business_glossary_term": "Base Unit of Measure (UOM)"
+    },
+    "bom_number": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Number"
+    },
+    "bom_status": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Status",
+     "dbx_value_regex": "active|inactive|pending|obsolete|under_review"
+    },
+    "bom_type": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Type",
+     "dbx_value_regex": "production|co-product|phantom|engineering|planning"
+    },
+    "component_effective_end_date": {
+     "dbx_business_glossary_term": "Component Effective End Date"
+    },
+    "component_effective_start_date": {
+     "dbx_business_glossary_term": "Component Effective Start Date"
+    },
+    "component_item_category": {
+     "dbx_business_glossary_term": "Component Item Category",
+     "dbx_value_regex": "stock|non-stock|phantom|text|variable_size"
+    },
+    "component_item_number": {
+     "dbx_business_glossary_term": "Component Item Number"
+    },
+    "component_quantity": {
+     "dbx_business_glossary_term": "Component Quantity"
+    },
+    "component_unit_of_measure": {
+     "dbx_business_glossary_term": "Component Unit of Measure (UOM)"
+    },
+    "cost_allocation_percentage": {
+     "dbx_business_glossary_term": "Cost Allocation Percentage"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "critical_component_flag": {
+     "dbx_business_glossary_term": "Critical Component Flag"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "hazardous_material_flag": {
+     "dbx_business_glossary_term": "Hazardous Material Flag"
+    },
+    "inci_name": {
+     "dbx_business_glossary_term": "International Nomenclature of Cosmetic Ingredients (INCI) Name"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time Days"
+    },
+    "lot_size_requirement": {
+     "dbx_business_glossary_term": "Lot Size Requirement",
+     "dbx_value_regex": "exact|minimum|multiple|none"
+    },
+    "minimum_lot_size": {
+     "dbx_business_glossary_term": "Minimum Lot Size"
+    },
+    "plm_system_reference": {
+     "dbx_business_glossary_term": "Product Lifecycle Management (PLM) System Reference"
+    },
+    "regulatory_compliance_notes": {
+     "dbx_business_glossary_term": "Regulatory Compliance Notes"
+    },
+    "scrap_factor_percentage": {
+     "dbx_business_glossary_term": "Scrap Factor Percentage"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification"
+    },
+    "version": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Version"
+    }
+   }
+  },
+  "routing": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "recipe_planning"
+   },
+   "column_tags": {
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Identifier (ID)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "product_bom_id": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Identifier (ID)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Identifier (ID)"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "pending|approved|rejected"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approved Timestamp"
+    },
+    "base_quantity": {
+     "dbx_business_glossary_term": "Base Quantity"
+    },
+    "base_unit_of_measure": {
+     "dbx_business_glossary_term": "Base Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,5}$"
+    },
+    "changeover_time_minutes": {
+     "dbx_business_glossary_term": "Changeover Time (Minutes)"
+    },
+    "cost_currency_code": {
+     "dbx_business_glossary_term": "Cost Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Routing Description"
+    },
+    "expected_scrap_percentage": {
+     "dbx_business_glossary_term": "Expected Scrap Percentage"
+    },
+    "expected_yield_percentage": {
+     "dbx_business_glossary_term": "Expected Yield Percentage"
+    },
+    "gmp_critical_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Critical Flag"
+    },
+    "ipc_checkpoint_count": {
+     "dbx_business_glossary_term": "In-Process Control (IPC) Checkpoint Count"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lot_size_restriction": {
+     "dbx_business_glossary_term": "Lot Size Restriction",
+     "dbx_value_regex": "none|fixed|minimum|maximum|multiple"
+    },
+    "maximum_lot_size": {
+     "dbx_business_glossary_term": "Maximum Lot Size"
+    },
+    "minimum_lot_size": {
+     "dbx_business_glossary_term": "Minimum Lot Size"
+    },
+    "operation_sequence": {
+     "dbx_business_glossary_term": "Operation Sequence"
+    },
+    "production_scheduler_code": {
+     "dbx_business_glossary_term": "Production Scheduler Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "routing_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Routing Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "routing_status": {
+     "dbx_business_glossary_term": "Routing Status",
+     "dbx_value_regex": "draft|active|inactive|obsolete|under_review"
+    },
+    "routing_type": {
+     "dbx_business_glossary_term": "Routing Type",
+     "dbx_value_regex": "standard|reference|rate|alternative|special"
+    },
+    "standard_cost_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Standard Cost Amount"
+    },
+    "total_labor_time_minutes": {
+     "dbx_business_glossary_term": "Total Labor Time (Minutes)"
+    },
+    "total_machine_time_minutes": {
+     "dbx_business_glossary_term": "Total Machine Time (Minutes)"
+    },
+    "total_setup_time_minutes": {
+     "dbx_business_glossary_term": "Total Setup Time (Minutes)"
+    },
+    "total_standard_lead_time_hours": {
+     "dbx_business_glossary_term": "Total Standard Lead Time (Hours)"
+    },
+    "valid_from_date": {
+     "dbx_business_glossary_term": "Valid From Date"
+    },
+    "valid_to_date": {
+     "dbx_business_glossary_term": "Valid To Date"
+    },
+    "version": {
+     "dbx_business_glossary_term": "Routing Version",
+     "dbx_value_regex": "^[A-Z0-9]{1,10}$"
+    }
+   }
+  },
+  "production_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_execution"
+   },
+   "column_tags": {
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan Id (Foreign Key)"
+    },
+    "manufacturing_bom_id": {
+     "dbx_business_glossary_term": "Manufacturing Bom Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Registration Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "production_line_id": {
+     "dbx_internal": "true",
+     "dbx_business_glossary_term": "Production Line Id"
+    },
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Id (Foreign Key)"
+    },
+    "sales_order_id": {
+     "dbx_business_glossary_term": "Sales Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "actual_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Actual Production Cost"
+    },
+    "actual_finish_timestamp": {
+     "dbx_business_glossary_term": "Actual Finish Timestamp"
+    },
+    "actual_start_timestamp": {
+     "dbx_business_glossary_term": "Actual Start Timestamp"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Production Batch Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "changeover_time_minutes": {
+     "dbx_business_glossary_term": "Changeover Time in Minutes"
+    },
+    "confirmed_quantity": {
+     "dbx_business_glossary_term": "Confirmed Production Quantity"
+    },
+    "cost_object": {
+     "dbx_business_glossary_term": "Production Cost Object",
+     "dbx_value_regex": "^[A-Z0-9]{12}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Order Creation Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "downtime_minutes": {
+     "dbx_business_glossary_term": "Production Downtime in Minutes"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "inspection_lot_number": {
+     "dbx_business_glossary_term": "Quality Inspection Lot Number",
+     "dbx_value_regex": "^[A-Z0-9]{10,12}$"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "material_number": {
+     "dbx_business_glossary_term": "Material Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,18}$"
+    },
+    "mrp_controller": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Controller",
+     "dbx_value_regex": "^[A-Z0-9]{3}$"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Production Order Notes"
+    },
+    "oee_percentage": {
+     "dbx_business_glossary_term": "Overall Equipment Effectiveness (OEE) Percentage"
+    },
+    "order_number": {
+     "dbx_business_glossary_term": "Production Order Number",
+     "dbx_value_regex": "^[A-Z0-9]{10,12}$"
+    },
+    "order_quantity": {
+     "dbx_business_glossary_term": "Production Order Quantity"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "Production Order Status"
+    },
+    "order_type": {
+     "dbx_business_glossary_term": "Production Order Type",
+     "dbx_value_regex": "PP01|PP03|PP05|PP10|PP20"
+    },
+    "planned_cost": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Planned Production Cost"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Manufacturing Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "Production Order Priority",
+     "dbx_value_regex": "1|2|3|4|5"
+    },
+    "production_supervisor": {
+     "dbx_business_glossary_term": "Production Supervisor Name"
+    },
+    "production_version": {
+     "dbx_business_glossary_term": "Production Version",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "quality_inspection_required": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "released_by": {
+     "dbx_business_glossary_term": "Released By User"
+    },
+    "released_timestamp": {
+     "dbx_business_glossary_term": "Order Release Timestamp"
+    },
+    "scheduled_finish_date": {
+     "dbx_business_glossary_term": "Scheduled Finish Date"
+    },
+    "scheduled_start_date": {
+     "dbx_business_glossary_term": "Scheduled Start Date"
+    },
+    "scrap_quantity": {
+     "dbx_business_glossary_term": "Scrap Quantity"
+    },
+    "settlement_rule": {
+     "dbx_business_glossary_term": "Cost Settlement Rule",
+     "dbx_value_regex": "FUL|PAR|PER"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "yield_percentage": {
+     "dbx_business_glossary_term": "Production Yield Percentage"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  },
+  "batch_record": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_execution"
+   },
+   "column_tags": {
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "formulation_id": {
+     "dbx_business_glossary_term": "Product Formulation Id (Foreign Key)"
+    },
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt Id (Foreign Key)"
+    },
+    "manufacturing_bom_id": {
+     "dbx_business_glossary_term": "Manufacturing Bom Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "production_line_id": {
+     "dbx_business_glossary_term": "Production Line ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order ID"
+    },
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "actual_cost_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Actual Cost Amount"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "batch_size_actual": {
+     "dbx_business_glossary_term": "Batch Size Actual"
+    },
+    "batch_size_planned": {
+     "dbx_business_glossary_term": "Batch Size Planned"
+    },
+    "batch_status": {
+     "dbx_business_glossary_term": "Batch Status",
+     "dbx_value_regex": "in_process|released|rejected|quarantine|recalled|expired"
+    },
+    "bom_version": {
+     "dbx_business_glossary_term": "Bill of Materials (BOM) Version",
+     "dbx_value_regex": "^[A-Z0-9.]{1,20}$"
+    },
+    "changeover_minutes": {
+     "dbx_business_glossary_term": "Changeover Minutes"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "downtime_minutes": {
+     "dbx_business_glossary_term": "Downtime Minutes"
+    },
+    "electronic_signature_count": {
+     "dbx_business_glossary_term": "Electronic Signature Count"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "gmp_deviation_count": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Deviation Count"
+    },
+    "gmp_deviation_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Deviation Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lot_genealogy_complete_flag": {
+     "dbx_business_glossary_term": "Lot Genealogy Complete Flag"
+    },
+    "manufacturing_date": {
+     "dbx_business_glossary_term": "Manufacturing Date"
+    },
+    "manufacturing_end_timestamp": {
+     "dbx_business_glossary_term": "Manufacturing End Timestamp"
+    },
+    "manufacturing_start_timestamp": {
+     "dbx_business_glossary_term": "Manufacturing Start Timestamp"
+    },
+    "oee_percentage": {
+     "dbx_business_glossary_term": "Overall Equipment Effectiveness (OEE) Percentage"
+    },
+    "quality_release_flag": {
+     "dbx_business_glossary_term": "Quality Release Flag"
+    },
+    "quality_release_timestamp": {
+     "dbx_business_glossary_term": "Quality Release Timestamp"
+    },
+    "recall_flag": {
+     "dbx_business_glossary_term": "Recall Flag"
+    },
+    "recall_initiated_date": {
+     "dbx_business_glossary_term": "Recall Initiated Date"
+    },
+    "record_locked_flag": {
+     "dbx_business_glossary_term": "Record Locked Flag"
+    },
+    "regulatory_hold_flag": {
+     "dbx_business_glossary_term": "Regulatory Hold Flag"
+    },
+    "rework_quantity": {
+     "dbx_business_glossary_term": "Rework Quantity"
+    },
+    "routing_version": {
+     "dbx_business_glossary_term": "Routing Version",
+     "dbx_value_regex": "^[A-Z0-9.]{1,20}$"
+    },
+    "scrap_quantity": {
+     "dbx_business_glossary_term": "Scrap Quantity"
+    },
+    "shelf_life_days": {
+     "dbx_business_glossary_term": "Shelf Life Days"
+    },
+    "standard_cost_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Standard Cost Amount"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,6}$"
+    },
+    "veeva_vault_document_reference": {
+     "dbx_business_glossary_term": "Veeva Vault Document ID",
+     "dbx_value_regex": "^VV[A-Z0-9]{10,30}$"
+    },
+    "yield_percentage": {
+     "dbx_business_glossary_term": "Yield Percentage"
+    }
+   }
+  },
+  "yield_record": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_execution"
+   },
+   "column_tags": {
+    "yield_record_id": {
+     "dbx_business_glossary_term": "Yield Record ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "production_line_id": {
+     "dbx_business_glossary_term": "Production Line Id (Foreign Key)"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "work_center_id": {
+     "dbx_business_glossary_term": "Work Center ID"
+    },
+    "actual_yield_percentage": {
+     "dbx_business_glossary_term": "Actual Yield Percentage"
+    },
+    "comments": {
+     "dbx_business_glossary_term": "Comments"
+    },
+    "cost_center_code": {
+     "dbx_business_glossary_term": "Cost Center Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "erp_document_number": {
+     "dbx_business_glossary_term": "Enterprise Resource Planning (ERP) Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10,20}$"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "input_quantity": {
+     "dbx_business_glossary_term": "Input Quantity"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "measurement_timestamp": {
+     "dbx_business_glossary_term": "Measurement Timestamp"
+    },
+    "mes_transaction_reference": {
+     "dbx_business_glossary_term": "Manufacturing Execution System (MES) Transaction ID",
+     "dbx_value_regex": "^[A-Z0-9]{10,30}$"
+    },
+    "operation_end_timestamp": {
+     "dbx_business_glossary_term": "Operation End Timestamp"
+    },
+    "operation_start_timestamp": {
+     "dbx_business_glossary_term": "Operation Start Timestamp"
+    },
+    "output_quantity": {
+     "dbx_business_glossary_term": "Output Quantity"
+    },
+    "quality_inspection_lot_number": {
+     "dbx_business_glossary_term": "Quality Inspection Lot Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "rework_quantity": {
+     "dbx_business_glossary_term": "Rework Quantity"
+    },
+    "routing_operation_number": {
+     "dbx_business_glossary_term": "Routing Operation Number",
+     "dbx_value_regex": "^[0-9]{4,10}$"
+    },
+    "scrap_quantity": {
+     "dbx_business_glossary_term": "Scrap Quantity"
+    },
+    "shift_code": {
+     "dbx_business_glossary_term": "Shift Code",
+     "dbx_value_regex": "SHIFT_1|SHIFT_2|SHIFT_3|DAY|NIGHT|WEEKEND"
+    },
+    "standard_cost_per_unit": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Standard Cost Per Unit"
+    },
+    "theoretical_yield_percentage": {
+     "dbx_business_glossary_term": "Theoretical Yield Percentage"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "yield_loss_reason_code": {
+     "dbx_business_glossary_term": "Yield Loss Reason Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "yield_loss_reason_description": {
+     "dbx_business_glossary_term": "Yield Loss Reason Description"
+    },
+    "yield_variance_cost_impact": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Yield Variance Cost Impact"
+    },
+    "yield_variance_percentage": {
+     "dbx_business_glossary_term": "Yield Variance Percentage"
+    }
+   }
+  },
+  "production_confirmation": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "batch_execution"
+   },
+   "column_tags": {
+    "production_confirmation_id": {
+     "dbx_business_glossary_term": "Production Confirmation ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order ID"
+    },
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Id (Foreign Key)"
+    },
+    "sales_order_id": {
+     "dbx_business_glossary_term": "Sales Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "work_center_id": {
+     "dbx_business_glossary_term": "Work Center ID"
+    },
+    "activity_type": {
+     "dbx_business_glossary_term": "Activity Type",
+     "dbx_value_regex": "^[A-Z0-9]{4,6}$"
+    },
+    "actual_end_datetime": {
+     "dbx_business_glossary_term": "Actual End Date Time"
+    },
+    "actual_labor_time_minutes": {
+     "dbx_business_glossary_term": "Actual Labor Time (Minutes)"
+    },
+    "actual_machine_time_minutes": {
+     "dbx_business_glossary_term": "Actual Machine Time (Minutes)"
+    },
+    "actual_setup_time_minutes": {
+     "dbx_business_glossary_term": "Actual Setup Time (Minutes)"
+    },
+    "actual_start_datetime": {
+     "dbx_business_glossary_term": "Actual Start Date Time"
+    },
+    "confirmation_notes": {
+     "dbx_business_glossary_term": "Confirmation Notes"
+    },
+    "confirmation_timestamp": {
+     "dbx_business_glossary_term": "Confirmation Timestamp"
+    },
+    "confirmation_type": {
+     "dbx_business_glossary_term": "Confirmation Type",
+     "dbx_value_regex": "partial|final|milestone|rework|cancelled"
+    },
+    "confirmed_scrap_quantity": {
+     "dbx_business_glossary_term": "Confirmed Scrap Quantity"
+    },
+    "confirmed_yield_quantity": {
+     "dbx_business_glossary_term": "Confirmed Yield Quantity"
+    },
+    "downtime_minutes": {
+     "dbx_business_glossary_term": "Downtime (Minutes)"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "mes_transaction_reference": {
+     "dbx_business_glossary_term": "Manufacturing Execution System (MES) Transaction ID",
+     "dbx_value_regex": "^MES[A-Z0-9]{10,20}$"
+    },
+    "oee_availability_percent": {
+     "dbx_business_glossary_term": "Overall Equipment Effectiveness (OEE) Availability Percent"
+    },
+    "oee_performance_percent": {
+     "dbx_business_glossary_term": "Overall Equipment Effectiveness (OEE) Performance Percent"
+    },
+    "oee_quality_percent": {
+     "dbx_business_glossary_term": "Overall Equipment Effectiveness (OEE) Quality Percent"
+    },
+    "operation_number": {
+     "dbx_business_glossary_term": "Operation Number",
+     "dbx_value_regex": "^[0-9]{4}$"
+    },
+    "operation_status": {
+     "dbx_business_glossary_term": "Operation Status",
+     "dbx_value_regex": "open|in_progress|completed|cancelled|on_hold"
+    },
+    "posting_date": {
+     "dbx_business_glossary_term": "Posting Date"
+    },
+    "quality_inspection_required_flag": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "reversal_flag": {
+     "dbx_business_glossary_term": "Reversal Flag"
+    },
+    "reversal_reason_code": {
+     "dbx_business_glossary_term": "Reversal Reason Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    },
+    "rework_flag": {
+     "dbx_business_glossary_term": "Rework Flag"
+    },
+    "scheduled_end_datetime": {
+     "dbx_business_glossary_term": "Scheduled End Date Time"
+    },
+    "scheduled_start_datetime": {
+     "dbx_business_glossary_term": "Scheduled Start Date Time"
+    },
+    "shift_code": {
+     "dbx_business_glossary_term": "Shift Code",
+     "dbx_value_regex": "^(SHIFT_[1-3]|DAY|NIGHT|SWING)$"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code",
+     "dbx_value_regex": "SAP_PP|OPCENTER_MES|MANUAL"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "variance_reason_code": {
+     "dbx_business_glossary_term": "Variance Reason Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,6}$"
+    },
+    "work_order_number": {
+     "dbx_business_glossary_term": "Work Order Number",
+     "dbx_value_regex": "^WO[0-9]{8,12}$"
+    }
+   }
+  },
+  "planned_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "recipe_planning"
+   },
+   "column_tags": {
+    "planned_order_id": {
+     "dbx_business_glossary_term": "Planned Order Identifier (ID)"
+    },
+    "converted_production_order_id": {
+     "dbx_business_glossary_term": "Converted Production Order Identifier"
+    },
+    "manufacturing_bom_id": {
+     "dbx_business_glossary_term": "Manufacturing Bom Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Plant Identifier"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Identifier"
+    },
+    "target_distribution_facility_id": {
+     "dbx_business_glossary_term": "Target Distribution Facility Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "availability_date": {
+     "dbx_business_glossary_term": "Material Availability Date"
+    },
+    "conversion_date": {
+     "dbx_business_glossary_term": "Conversion Date"
+    },
+    "conversion_status": {
+     "dbx_business_glossary_term": "Conversion to Production Order Status",
+     "dbx_value_regex": "NOT_CONVERTED|PARTIALLY_CONVERTED|FULLY_CONVERTED"
+    },
+    "created_by_user": {
+     "dbx_business_glossary_term": "Created By User Identifier"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Creation Timestamp"
+    },
+    "demand_source_reference": {
+     "dbx_business_glossary_term": "Demand Source Reference Number"
+    },
+    "demand_source_type": {
+     "dbx_business_glossary_term": "Demand Source Type",
+     "dbx_value_regex": "FORECAST|CUSTOMER_ORDER|STOCK_TRANSFER|SAFETY_STOCK|PROMOTION"
+    },
+    "exception_message_code": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Exception Message Code",
+     "dbx_value_regex": "^(EX[0-9]{2})?$"
+    },
+    "exception_message_text": {
+     "dbx_business_glossary_term": "Exception Message Description"
+    },
+    "firming_date": {
+     "dbx_business_glossary_term": "Firming Date"
+    },
+    "firming_indicator": {
+     "dbx_business_glossary_term": "Firming Indicator Flag"
+    },
+    "gmp_compliance_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Compliance Flag"
+    },
+    "ibp_plan_version": {
+     "dbx_business_glossary_term": "Integrated Business Planning (IBP) Plan Version",
+     "dbx_value_regex": "^IBP-[0-9]{6}$"
+    },
+    "last_modified_by_user": {
+     "dbx_business_glossary_term": "Last Modified By User Identifier"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lot_size_key": {
+     "dbx_business_glossary_term": "Lot Size Calculation Key",
+     "dbx_value_regex": "EX|HB|FX|PD|WM"
+    },
+    "mrp_controller": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Controller Code",
+     "dbx_value_regex": "^[A-Z0-9]{3,10}$"
+    },
+    "mrp_run_code": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Run Identifier"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Planning Notes"
+    },
+    "order_number": {
+     "dbx_business_glossary_term": "Planned Order Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,12}$"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "Planned Order Status",
+     "dbx_value_regex": "DRAFT|FIRMED|RELEASED|CONVERTED|DELETED|CANCELLED"
+    },
+    "order_type": {
+     "dbx_business_glossary_term": "Planned Order Type",
+     "dbx_value_regex": "MPS|MRP|CBP|MANUAL|FORECAST|SAFETY"
+    },
+    "planned_quantity": {
+     "dbx_business_glossary_term": "Planned Production Quantity"
+    },
+    "planning_period": {
+     "dbx_business_glossary_term": "Planning Period",
+     "dbx_value_regex": "^[0-9]{4}-(W[0-9]{2}|M[0-9]{2}|Q[1-4])$"
+    },
+    "planning_strategy_group": {
+     "dbx_business_glossary_term": "Planning Strategy Group",
+     "dbx_value_regex": "^[0-9]{2}$"
+    },
+    "priority_code": {
+     "dbx_business_glossary_term": "Planning Priority Code",
+     "dbx_value_regex": "LOW|NORMAL|HIGH|URGENT"
+    },
+    "procurement_type": {
+     "dbx_business_glossary_term": "Procurement Type",
+     "dbx_value_regex": "IN_HOUSE|EXTERNAL|BOTH"
+    },
+    "production_version": {
+     "dbx_business_glossary_term": "Production Version",
+     "dbx_value_regex": "^[0-9]{4}$"
+    },
+    "reorder_point_quantity": {
+     "dbx_business_glossary_term": "Reorder Point Quantity"
+    },
+    "safety_stock_quantity": {
+     "dbx_business_glossary_term": "Safety Stock Quantity"
+    },
+    "schedule_version": {
+     "dbx_business_glossary_term": "Master Production Schedule (MPS) Version",
+     "dbx_value_regex": "^V[0-9]{3}$"
+    },
+    "scheduled_finish_date": {
+     "dbx_business_glossary_term": "Scheduled Finish Date"
+    },
+    "scheduled_start_date": {
+     "dbx_business_glossary_term": "Scheduled Start Date"
+    },
+    "sop_cycle_reference": {
+     "dbx_business_glossary_term": "Sales and Operations Planning (S&OP) Cycle Reference",
+     "dbx_value_regex": "^SOP-[0-9]{4}-(M[0-9]{2}|Q[1-4])$"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    }
+   }
+  },
+  "equipment": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "asset_configuration"
+   },
+   "column_tags": {
+    "equipment_id": {
+     "dbx_business_glossary_term": "Equipment Identifier"
+    },
+    "acquisition_purchase_order_id": {
+     "dbx_business_glossary_term": "Acquisition Purchase Order Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id"
+    },
+    "parent_equipment_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Parent Equipment Id"
+    },
+    "production_line_id": {
+     "dbx_business_glossary_term": "Line Id"
+    },
+    "work_center_id": {
+     "dbx_business_glossary_term": "Work Center Id (Foreign Key)"
+    },
+    "acquisition_cost": {
+     "dbx_business_glossary_term": "Acquisition Cost"
+    },
+    "asset_tag": {
+     "dbx_business_glossary_term": "Asset Tag"
+    },
+    "calibration_due_date": {
+     "dbx_business_glossary_term": "Calibration Due Date"
+    },
+    "capacity_units": {
+     "dbx_business_glossary_term": "Capacity Units"
+    },
+    "capacity_value": {
+     "dbx_business_glossary_term": "Capacity Value"
+    },
+    "compliance_gmp": {
+     "dbx_business_glossary_term": "Compliance Gmp"
+    },
+    "currency": {
+     "dbx_business_glossary_term": "Currency"
+    },
+    "department": {
+     "dbx_business_glossary_term": "Department"
+    },
+    "depreciation_end_date": {
+     "dbx_business_glossary_term": "Depreciation End Date"
+    },
+    "depreciation_method": {
+     "dbx_business_glossary_term": "Depreciation Method"
+    },
+    "depreciation_start_date": {
+     "dbx_business_glossary_term": "Depreciation Start Date"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Description"
+    },
+    "energy_consumption_kwh": {
+     "dbx_business_glossary_term": "Energy Consumption Kwh"
+    },
+    "equipment_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "equipment_type": {
+     "dbx_business_glossary_term": "Equipment Type"
+    },
+    "hazard_classification": {
+     "dbx_business_glossary_term": "Hazard Classification"
+    },
+    "installation_date": {
+     "dbx_business_glossary_term": "Installation Date"
+    },
+    "last_calibration_date": {
+     "dbx_business_glossary_term": "Last Calibration Date"
+    },
+    "last_maintenance_date": {
+     "dbx_business_glossary_term": "Last Maintenance Date"
+    },
+    "location_code": {
+     "dbx_business_glossary_term": "Location Code"
+    },
+    "maintenance_cost": {
+     "dbx_business_glossary_term": "Maintenance Cost"
+    },
+    "maintenance_frequency_days": {
+     "dbx_business_glossary_term": "Maintenance Frequency Days"
+    },
+    "manufacturer": {
+     "dbx_business_glossary_term": "Manufacturer"
+    },
+    "model_number": {
+     "dbx_business_glossary_term": "Model Number"
+    },
+    "mtbf_hours": {
+     "dbx_business_glossary_term": "Mtbf Hours"
+    },
+    "mttr_hours": {
+     "dbx_business_glossary_term": "Mttr Hours"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Name"
+    },
+    "next_maintenance_due": {
+     "dbx_business_glossary_term": "Next Maintenance Due"
+    },
+    "oee_actual": {
+     "dbx_business_glossary_term": "Oee Actual"
+    },
+    "oee_target": {
+     "dbx_business_glossary_term": "Oee Target"
+    },
+    "power_rating_kw": {
+     "dbx_business_glossary_term": "Power Rating Kw"
+    },
+    "purchase_date": {
+     "dbx_business_glossary_term": "Purchase Date"
+    },
+    "safety_rating": {
+     "dbx_business_glossary_term": "Safety Rating"
+    },
+    "serial_number": {
+     "dbx_business_glossary_term": "Serial Number"
+    },
+    "total_usage_hours": {
+     "dbx_business_glossary_term": "Total Usage Hours"
+    },
+    "voltage": {
+     "dbx_business_glossary_term": "Voltage"
+    },
+    "warranty_end_date": {
+     "dbx_business_glossary_term": "Warranty End Date"
+    },
+    "warranty_start_date": {
+     "dbx_business_glossary_term": "Warranty Start Date"
+    },
+    "weight_kg": {
+     "dbx_business_glossary_term": "Weight Kg"
+    }
+   }
+  }
+ }
+}

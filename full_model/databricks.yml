@@ -1,0 +1,43 @@
+# =================================================================================================
+# Full industry model - Declarative Automation Bundle (formerly Databricks Asset Bundle)
+#
+# Builds the COMPLETE Lakehouse Industry Data Model "Consumer Goods v2 MVM" for Fjallmark:
+# 10 domains, 116 gold tables with all model foreign keys, 79 industry metric views, ~6,300 tags.
+# Optional / instructor material - the hands-on lab uses ../bootcamp (3 domains).
+#   * pipeline cpg_lakehouse_pipeline  - bronze -> silver -> gold for all 10 domains
+#   * job      cpg_lakehouse_job       - pipeline -> metric views || model tags -> validate
+#
+# 1. Run notebooks/01_setup_catalog.py from the Git folder (copies the CSVs of ../bootcamp/data and
+#    ./data into /Volumes/<catalog>/landing/raw_files).
+# 2. Deploy + run (workspace UI: open full_model/databricks.yml -> Deployments -> target "full"):
+#      databricks bundle deploy -t full            # optionally: --var catalog=<catalog>
+#      databricks bundle run cpg_lakehouse_job -t full
+#
+# The bundle name genie_bootcamp + target full keep the deployment root
+# ~/.bundle/genie_bootcamp/full/<catalog> of earlier deployments of the full model, so a redeploy
+# updates the existing pipeline/job of a catalog instead of creating a second pipeline for it.
+# =================================================================================================
+bundle:
+  name: genie_bootcamp
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: >-
+      Unity Catalog catalog for the full model. Default cpg_full_<your short user name> (a separate
+      catalog from the bootcamp's cpg_<short name>; same rule as notebooks/01_setup_catalog.py).
+    default: cpg_full_${workspace.current_user.short_name}
+
+workspace:
+  root_path: ~/.bundle/${bundle.name}/${bundle.target}/${var.catalog}
+
+sync:
+  exclude:
+    - data/**/*.csv   # copied into the volume from the Git folder by notebooks/01_setup_catalog.py
+
+targets:
+  full:
+    default: true
+    mode: development

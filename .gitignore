@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Declarative Automation Bundles: local deployment state (per target)
+.databricks/

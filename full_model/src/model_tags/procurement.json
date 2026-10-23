@@ -1,0 +1,1750 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "procurement",
+ "schema_comment": "Owns sourcing, supplier management, and purchase order execution for raw materials, packaging, and indirect goods. Manages supplier master data, contracts, RFQs, purchase requisitions, PO lifecycle, goods receipt, invoice verification, MOQ terms, SDS documentation, supplier performance scorecards, VMI programs, and sustainable sourcing initiatives (FSC, RSPO).",
+ "tag_count": 657,
+ "foreign_key_count": 91,
+ "schema_tags": {
+  "dbx_domain": "procurement",
+  "dbx_division": "operations"
+ },
+ "tables": {
+  "supplier": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "vendor_management"
+   },
+   "column_tags": {
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "address_line1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Supplier Code"
+    },
+    "contract_expiration_date": {
+     "dbx_business_glossary_term": "Contract Expiration Date"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "diversity_classification": {
+     "dbx_business_glossary_term": "Supplier Diversity Classification"
+    },
+    "duns_number": {
+     "dbx_business_glossary_term": "Data Universal Numbering System (DUNS) Number",
+     "dbx_value_regex": "^[0-9]{9}$"
+    },
+    "edi_capable_flag": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Capable Flag"
+    },
+    "edi_identifier": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Identifier"
+    },
+    "fsc_certified_flag": {
+     "dbx_business_glossary_term": "Forest Stewardship Council (FSC) Certified Flag"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "gmp_certified_flag": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certified Flag"
+    },
+    "incoterms": {
+     "dbx_business_glossary_term": "International Commercial Terms (Incoterms)"
+    },
+    "iso_9001_certified_flag": {
+     "dbx_business_glossary_term": "ISO 9001 Certified Flag"
+    },
+    "last_audit_date": {
+     "dbx_business_glossary_term": "Last Audit Date"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time in Days"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Record Modified Timestamp"
+    },
+    "moq_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "moq_unit": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ) Unit of Measure"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Supplier Legal Name"
+    },
+    "onboarding_date": {
+     "dbx_business_glossary_term": "Supplier Onboarding Date"
+    },
+    "onboarding_status": {
+     "dbx_business_glossary_term": "Supplier Onboarding Status",
+     "dbx_value_regex": "not_started|in_progress|documentation_review|compliance_check|approved|rejected"
+    },
+    "payment_method": {
+     "dbx_business_glossary_term": "Payment Method",
+     "dbx_value_regex": "wire_transfer|ach|check|credit_card|edi_payment"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "performance_score": {
+     "dbx_business_glossary_term": "Supplier Performance Score"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "primary_contact_email": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Primary Contact Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "primary_contact_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Primary Contact Name"
+    },
+    "primary_contact_phone": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Primary Contact Phone Number"
+    },
+    "risk_rating": {
+     "dbx_business_glossary_term": "Supplier Risk Rating",
+     "dbx_value_regex": "low|medium|high|critical"
+    },
+    "rspo_certified_flag": {
+     "dbx_business_glossary_term": "Roundtable on Sustainable Palm Oil (RSPO) Certified Flag"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "supplier_status": {
+     "dbx_business_glossary_term": "Supplier Status",
+     "dbx_value_regex": "active|inactive|pending_approval|suspended|terminated"
+    },
+    "supplier_type": {
+     "dbx_business_glossary_term": "Supplier Type",
+     "dbx_value_regex": "raw_material|packaging|indirect_goods|contract_manufacturer|service_provider|logistics_provider"
+    },
+    "tax_identification_number": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Tax Identification Number"
+    },
+    "tier": {
+     "dbx_business_glossary_term": "Supplier Tier Classification",
+     "dbx_value_regex": "strategic|preferred|approved|conditional|blocked"
+    },
+    "vmi_eligible_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Eligible Flag"
+    }
+   }
+  },
+  "supplier_site": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "vendor_management"
+   },
+   "column_tags": {
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "address_line_1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line_2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "audit_score": {
+     "dbx_business_glossary_term": "Audit Score"
+    },
+    "capacity_unit_of_measure": {
+     "dbx_business_glossary_term": "Capacity Unit of Measure (UOM)"
+    },
+    "certification_expiry_date": {
+     "dbx_business_glossary_term": "Certification Expiry Date"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "edi_capable": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Capable"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "email_address": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "fax_number": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Fax Number"
+    },
+    "fsc_certified": {
+     "dbx_business_glossary_term": "Forest Stewardship Council (FSC) Certified"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "gmp_certified": {
+     "dbx_business_glossary_term": "Good Manufacturing Practice (GMP) Certified"
+    },
+    "iso_14001_certified": {
+     "dbx_business_glossary_term": "ISO 14001 Certified"
+    },
+    "iso_22716_certified": {
+     "dbx_business_glossary_term": "ISO 22716 Certified"
+    },
+    "iso_9001_certified": {
+     "dbx_business_glossary_term": "ISO 9001 Certified"
+    },
+    "last_audit_date": {
+     "dbx_business_glossary_term": "Last Audit Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time Days"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "moq": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "moq_unit_of_measure": {
+     "dbx_business_glossary_term": "MOQ Unit of Measure (UOM)"
+    },
+    "next_audit_date": {
+     "dbx_business_glossary_term": "Next Audit Date"
+    },
+    "phone_number": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Phone Number"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "preferred_site_flag": {
+     "dbx_business_glossary_term": "Preferred Site Flag"
+    },
+    "rspo_certified": {
+     "dbx_business_glossary_term": "Roundtable on Sustainable Palm Oil (RSPO) Certified"
+    },
+    "site_capacity": {
+     "dbx_business_glossary_term": "Site Capacity"
+    },
+    "site_code": {
+     "dbx_business_glossary_term": "Site Code"
+    },
+    "site_manager_name": {
+     "dbx_business_glossary_term": "Site Manager Name"
+    },
+    "site_name": {
+     "dbx_business_glossary_term": "Site Name"
+    },
+    "site_status": {
+     "dbx_business_glossary_term": "Site Status",
+     "dbx_value_regex": "active|inactive|suspended|pending_approval|decommissioned"
+    },
+    "site_type": {
+     "dbx_business_glossary_term": "Site Type",
+     "dbx_value_regex": "manufacturing|warehouse|office|port|distribution_center|r_and_d"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "time_zone": {
+     "dbx_business_glossary_term": "Time Zone"
+    },
+    "vmi_enabled": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Enabled"
+    }
+   }
+  },
+  "supplier_contract": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "vendor_management"
+   },
+   "column_tags": {
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Specification Id (Foreign Key)"
+    },
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Contract Approval Date"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "auto_renewal_flag": {
+     "dbx_business_glossary_term": "Auto-Renewal Flag"
+    },
+    "contract_document_reference": {
+     "dbx_business_glossary_term": "Contract Document Reference"
+    },
+    "contract_number": {
+     "dbx_business_glossary_term": "Contract Number"
+    },
+    "contract_status": {
+     "dbx_business_glossary_term": "Contract Status"
+    },
+    "contract_type": {
+     "dbx_business_glossary_term": "Contract Type",
+     "dbx_value_regex": "framework_agreement|blanket_order|spot_purchase|long_term_agreement|consignment|vendor_managed_inventory"
+    },
+    "contract_value_total": {
+     "dbx_business_glossary_term": "Total Contract Value"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "delivery_terms": {
+     "dbx_business_glossary_term": "Delivery Terms"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Contract Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Contract Expiry Date"
+    },
+    "governing_law": {
+     "dbx_business_glossary_term": "Governing Law"
+    },
+    "incoterms": {
+     "dbx_business_glossary_term": "Incoterms"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "maximum_order_quantity": {
+     "dbx_business_glossary_term": "Maximum Order Quantity"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Contract Notes"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "penalty_clause": {
+     "dbx_business_glossary_term": "Penalty Clause"
+    },
+    "price_escalation_formula": {
+     "dbx_business_glossary_term": "Price Escalation Formula"
+    },
+    "pricing_mechanism": {
+     "dbx_business_glossary_term": "Pricing Mechanism",
+     "dbx_value_regex": "fixed_price|cost_plus|market_indexed|volume_tiered|rebate_based"
+    },
+    "purchasing_group": {
+     "dbx_business_glossary_term": "Purchasing Group"
+    },
+    "purchasing_organization": {
+     "dbx_business_glossary_term": "Purchasing Organization"
+    },
+    "quantity_unit_of_measure": {
+     "dbx_business_glossary_term": "Quantity Unit of Measure (UoM)"
+    },
+    "rebate_terms": {
+     "dbx_business_glossary_term": "Rebate Terms"
+    },
+    "renewal_notice_period_days": {
+     "dbx_business_glossary_term": "Renewal Notice Period (Days)"
+    },
+    "sds_required_flag": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Required Flag"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification"
+    },
+    "target_quantity_total": {
+     "dbx_business_glossary_term": "Total Target Quantity"
+    },
+    "termination_date": {
+     "dbx_business_glossary_term": "Contract Termination Date"
+    },
+    "termination_reason": {
+     "dbx_business_glossary_term": "Termination Reason"
+    }
+   }
+  },
+  "contract_line": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "vendor_management"
+   },
+   "column_tags": {
+    "contract_line_id": {
+     "dbx_business_glossary_term": "Contract Line Identifier (ID)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Plant Identifier (ID)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material Identifier (ID)"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Specification Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Contract Identifier (ID)"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "blocked_reason": {
+     "dbx_business_glossary_term": "Blocked Reason"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "cumulative_invoiced_value": {
+     "dbx_business_glossary_term": "Cumulative Invoiced Value"
+    },
+    "cumulative_ordered_quantity": {
+     "dbx_business_glossary_term": "Cumulative Ordered Quantity"
+    },
+    "cumulative_received_quantity": {
+     "dbx_business_glossary_term": "Cumulative Received Quantity"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "incoterm_code": {
+     "dbx_business_glossary_term": "Incoterm Code"
+    },
+    "incoterm_location": {
+     "dbx_business_glossary_term": "Incoterm Location"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time (Days)"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Contract Line Number"
+    },
+    "line_status": {
+     "dbx_business_glossary_term": "Contract Line Status",
+     "dbx_value_regex": "active|inactive|blocked|expired|pending_approval"
+    },
+    "maximum_order_quantity": {
+     "dbx_business_glossary_term": "Maximum Order Quantity"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Contract Line Notes"
+    },
+    "order_quantity_uom": {
+     "dbx_business_glossary_term": "Order Quantity Unit of Measure (UOM)"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code"
+    },
+    "price_escalation_formula": {
+     "dbx_business_glossary_term": "Price Escalation Formula"
+    },
+    "price_unit": {
+     "dbx_business_glossary_term": "Price Unit"
+    },
+    "price_uom": {
+     "dbx_business_glossary_term": "Price Unit of Measure (UOM)"
+    },
+    "purchasing_group_code": {
+     "dbx_business_glossary_term": "Purchasing Group Code"
+    },
+    "quality_inspection_required": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "storage_location_code": {
+     "dbx_business_glossary_term": "Storage Location Code"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification"
+    },
+    "target_quantity": {
+     "dbx_business_glossary_term": "Target Quantity"
+    },
+    "target_quantity_uom": {
+     "dbx_business_glossary_term": "Target Quantity Unit of Measure (UOM)"
+    },
+    "tax_code": {
+     "dbx_business_glossary_term": "Tax Code"
+    },
+    "unit_price": {
+     "dbx_business_glossary_term": "Unit Price"
+    },
+    "validity_end_date": {
+     "dbx_business_glossary_term": "Validity End Date"
+    },
+    "validity_start_date": {
+     "dbx_business_glossary_term": "Validity Start Date"
+    }
+   }
+  },
+  "purchase_requisition": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "order_processing"
+   },
+   "column_tags": {
+    "purchase_requisition_id": {
+     "dbx_business_glossary_term": "Purchase Requisition (PR) ID"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Requesting Plant ID"
+    },
+    "planned_order_id": {
+     "dbx_business_glossary_term": "Planned Order Id (Foreign Key)"
+    },
+    "preferred_supplier_id": {
+     "dbx_business_glossary_term": "Preferred Supplier ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "requesting_cost_center_id": {
+     "dbx_business_glossary_term": "Requesting Cost Center ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Contract ID"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "approval_level": {
+     "dbx_business_glossary_term": "Approval Level"
+    },
+    "approval_workflow_reference": {
+     "dbx_business_glossary_term": "Approval Workflow ID"
+    },
+    "approved_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "estimated_total_value": {
+     "dbx_business_glossary_term": "Estimated Total Value"
+    },
+    "estimated_unit_price": {
+     "dbx_business_glossary_term": "Estimated Unit Price"
+    },
+    "internal_order_number": {
+     "dbx_business_glossary_term": "Internal Order Number"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "material_description": {
+     "dbx_business_glossary_term": "Material Description"
+    },
+    "material_group_code": {
+     "dbx_business_glossary_term": "Material Group Code"
+    },
+    "material_number": {
+     "dbx_business_glossary_term": "Material Number"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Requisition Notes"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "Requisition Priority",
+     "dbx_value_regex": "low|normal|high|urgent"
+    },
+    "purchase_requisition_status": {
+     "dbx_business_glossary_term": "Requisition Status"
+    },
+    "purchasing_group_code": {
+     "dbx_business_glossary_term": "Purchasing Group Code"
+    },
+    "purchasing_organization_code": {
+     "dbx_business_glossary_term": "Purchasing Organization Code"
+    },
+    "quantity_requested": {
+     "dbx_business_glossary_term": "Quantity Requested"
+    },
+    "rejection_reason": {
+     "dbx_business_glossary_term": "Rejection Reason"
+    },
+    "requested_date": {
+     "dbx_business_glossary_term": "Requisition Requested Date"
+    },
+    "requester_email": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Requester Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "requester_name": {
+     "dbx_business_glossary_term": "Requester Name"
+    },
+    "required_delivery_date": {
+     "dbx_business_glossary_term": "Required Delivery Date"
+    },
+    "requisition_number": {
+     "dbx_business_glossary_term": "Purchase Requisition (PR) Number",
+     "dbx_value_regex": "^PR[0-9]{10}$"
+    },
+    "requisition_type": {
+     "dbx_business_glossary_term": "Requisition Type",
+     "dbx_value_regex": "standard|subcontracting|consignment|stock_transfer|service|third_party"
+    },
+    "sds_required_flag": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Required Flag"
+    },
+    "source_of_supply": {
+     "dbx_business_glossary_term": "Source of Supply",
+     "dbx_value_regex": "preferred_supplier|contract|stock_transfer|external|internal"
+    },
+    "sustainability_flag": {
+     "dbx_business_glossary_term": "Sustainability Flag"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "wbs_element": {
+     "dbx_business_glossary_term": "Work Breakdown Structure (WBS) Element"
+    }
+   }
+  },
+  "purchase_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "order_processing"
+   },
+   "column_tags": {
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Delivery Plant ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_requisition_id": {
+     "dbx_business_glossary_term": "Purchase Requisition (PR) ID"
+    },
+    "sales_order_id": {
+     "dbx_business_glossary_term": "Sales Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Campaign Id (Foreign Key)"
+    },
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Contract ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "cancellation_date": {
+     "dbx_business_glossary_term": "Cancellation Date"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Cancellation Reason"
+    },
+    "closed_date": {
+     "dbx_business_glossary_term": "Closed Date"
+    },
+    "confirmed_delivery_date": {
+     "dbx_business_glossary_term": "Confirmed Delivery Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "edi_status": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Status",
+     "dbx_value_regex": "not_sent|sent|acknowledged|rejected|error"
+    },
+    "edi_transmission_date": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Transmission Date"
+    },
+    "freight_amount": {
+     "dbx_business_glossary_term": "Freight Amount"
+    },
+    "goods_receipt_required": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Required"
+    },
+    "incoterms": {
+     "dbx_business_glossary_term": "Incoterms"
+    },
+    "incoterms_location": {
+     "dbx_business_glossary_term": "Incoterms Location"
+    },
+    "invoice_receipt_required": {
+     "dbx_business_glossary_term": "Invoice Receipt (IR) Required"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "net_order_value": {
+     "dbx_business_glossary_term": "Net Order Value"
+    },
+    "order_date": {
+     "dbx_business_glossary_term": "Order Date"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "po_number": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "po_status": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Status"
+    },
+    "po_type": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Type",
+     "dbx_value_regex": "standard|blanket|contract|subcontracting|consignment|framework"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "Priority",
+     "dbx_value_regex": "urgent|high|normal|low"
+    },
+    "purchasing_group": {
+     "dbx_business_glossary_term": "Purchasing Group",
+     "dbx_value_regex": "^[A-Z0-9]{3,6}$"
+    },
+    "purchasing_organization": {
+     "dbx_business_glossary_term": "Purchasing Organization",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "requested_delivery_date": {
+     "dbx_business_glossary_term": "Requested Delivery Date"
+    },
+    "supplier_confirmation_date": {
+     "dbx_business_glossary_term": "Supplier Confirmation Date"
+    },
+    "supplier_confirmation_method": {
+     "dbx_business_glossary_term": "Supplier Confirmation Method",
+     "dbx_value_regex": "edi_855|supplier_portal|email|phone|fax|not_confirmed"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification",
+     "dbx_value_regex": "FSC|RSPO|fair_trade|organic|none"
+    },
+    "tax_amount": {
+     "dbx_business_glossary_term": "Tax Amount"
+    },
+    "total_order_value": {
+     "dbx_business_glossary_term": "Total Order Value"
+    },
+    "transport_mode": {
+     "dbx_business_glossary_term": "Transport Mode",
+     "dbx_value_regex": "air|ocean|rail|truck|courier|multimodal"
+    },
+    "vmi_indicator": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Indicator"
+    }
+   }
+  },
+  "po_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "order_processing"
+   },
+   "column_tags": {
+    "po_line_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Line ID"
+    },
+    "contract_line_id": {
+     "dbx_business_glossary_term": "Contract Line Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan Id (Foreign Key)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Header ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Id (Foreign Key)"
+    },
+    "batch_management_indicator": {
+     "dbx_business_glossary_term": "Batch Management Indicator"
+    },
+    "confirmed_delivery_date": {
+     "dbx_business_glossary_term": "Confirmed Delivery Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deletion_indicator": {
+     "dbx_business_glossary_term": "Deletion Indicator"
+    },
+    "delivery_date": {
+     "dbx_business_glossary_term": "Delivery Date"
+    },
+    "goods_receipt_indicator": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Indicator"
+    },
+    "goods_received_quantity": {
+     "dbx_business_glossary_term": "Goods Received Quantity"
+    },
+    "incoterm_code": {
+     "dbx_business_glossary_term": "Incoterm Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "incoterm_location": {
+     "dbx_business_glossary_term": "Incoterm Location"
+    },
+    "invoice_receipt_indicator": {
+     "dbx_business_glossary_term": "Invoice Receipt (IR) Indicator"
+    },
+    "invoiced_quantity": {
+     "dbx_business_glossary_term": "Invoiced Quantity"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time Days"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Line Number"
+    },
+    "line_status": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Line Status",
+     "dbx_value_regex": "open|partially_received|fully_received|closed|cancelled|blocked"
+    },
+    "manufacturer_part_number": {
+     "dbx_business_glossary_term": "Manufacturer Part Number (MPN)"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "net_order_value": {
+     "dbx_business_glossary_term": "Net Order Value"
+    },
+    "net_price": {
+     "dbx_business_glossary_term": "Net Price"
+    },
+    "ordered_quantity": {
+     "dbx_business_glossary_term": "Ordered Quantity"
+    },
+    "outstanding_quantity": {
+     "dbx_business_glossary_term": "Outstanding Quantity"
+    },
+    "over_delivery_tolerance_percent": {
+     "dbx_business_glossary_term": "Over Delivery Tolerance Percent"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "price_unit": {
+     "dbx_business_glossary_term": "Price Unit"
+    },
+    "purchasing_group": {
+     "dbx_business_glossary_term": "Purchasing Group",
+     "dbx_value_regex": "^[A-Z0-9]{3}$"
+    },
+    "requisitioner_name": {
+     "dbx_business_glossary_term": "Requisitioner Name"
+    },
+    "short_text": {
+     "dbx_business_glossary_term": "Short Text"
+    },
+    "storage_location": {
+     "dbx_business_glossary_term": "Storage Location",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "supplier_material_number": {
+     "dbx_business_glossary_term": "Supplier Material Number"
+    },
+    "tax_code": {
+     "dbx_business_glossary_term": "Tax Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    },
+    "under_delivery_tolerance_percent": {
+     "dbx_business_glossary_term": "Under Delivery Tolerance Percent"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    }
+   }
+  },
+  "goods_receipt": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "order_processing"
+   },
+   "column_tags": {
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt Identifier"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Storage Location Id (Foreign Key)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Delivery Schedule Id (Foreign Key)"
+    },
+    "po_line_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Line ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) ID"
+    },
+    "replenishment_order_id": {
+     "dbx_business_glossary_term": "Supply Replenishment Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sds Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "carrier_name": {
+     "dbx_business_glossary_term": "Carrier Name"
+    },
+    "certificate_of_analysis_received_flag": {
+     "dbx_business_glossary_term": "Certificate of Analysis (COA) Received Flag"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "delivery_note_number": {
+     "dbx_business_glossary_term": "Delivery Note Number",
+     "dbx_value_regex": "^[A-Z0-9\\-]{1,20}$"
+    },
+    "document_date": {
+     "dbx_business_glossary_term": "Document Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "gr_document_number": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "gr_reversal_flag": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Reversal Flag"
+    },
+    "gr_status": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Status",
+     "dbx_value_regex": "posted|reversed|cancelled|pending_inspection|blocked"
+    },
+    "inspection_lot_number": {
+     "dbx_business_glossary_term": "Inspection Lot Number",
+     "dbx_value_regex": "^[A-Z0-9]{12}$"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "manufacturing_date": {
+     "dbx_business_glossary_term": "Manufacturing Date"
+    },
+    "movement_type": {
+     "dbx_business_glossary_term": "Movement Type",
+     "dbx_value_regex": "^[0-9]{3}$"
+    },
+    "otif_compliance_flag": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Compliance Flag"
+    },
+    "posting_date": {
+     "dbx_business_glossary_term": "Posting Date"
+    },
+    "quality_inspection_required_flag": {
+     "dbx_business_glossary_term": "Quality Inspection Required Flag"
+    },
+    "received_quantity": {
+     "dbx_business_glossary_term": "Received Quantity"
+    },
+    "receiving_plant_code": {
+     "dbx_business_glossary_term": "Receiving Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "remarks": {
+     "dbx_business_glossary_term": "Remarks"
+    },
+    "reversal_document_number": {
+     "dbx_business_glossary_term": "Reversal Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "reversal_reason_code": {
+     "dbx_business_glossary_term": "Reversal Reason Code",
+     "dbx_value_regex": "quality_reject|quantity_discrepancy|damaged|wrong_material|duplicate_posting|administrative_error"
+    },
+    "storage_location_code": {
+     "dbx_business_glossary_term": "Storage Location Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "sustainable_sourcing_certification": {
+     "dbx_business_glossary_term": "Sustainable Sourcing Certification",
+     "dbx_value_regex": "FSC|RSPO|none"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "unit_price": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Unit Price"
+    },
+    "valuation_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Valuation Amount"
+    }
+   }
+  },
+  "supplier_invoice": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "invoice_reconciliation"
+   },
+   "column_tags": {
+    "supplier_invoice_id": {
+     "dbx_business_glossary_term": "Supplier Invoice ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sds Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By User"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approved Timestamp"
+    },
+    "baseline_date": {
+     "dbx_business_glossary_term": "Baseline Date"
+    },
+    "blocking_reason_code": {
+     "dbx_business_glossary_term": "Invoice Blocking Reason Code"
+    },
+    "blocking_reason_description": {
+     "dbx_business_glossary_term": "Invoice Blocking Reason Description"
+    },
+    "cash_discount_days": {
+     "dbx_business_glossary_term": "Cash Discount Days"
+    },
+    "cash_discount_percentage": {
+     "dbx_business_glossary_term": "Cash Discount Percentage"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Invoice Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "discount_amount": {
+     "dbx_business_glossary_term": "Invoice Discount Amount"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "goods_receipt_date": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Date"
+    },
+    "gross_amount": {
+     "dbx_business_glossary_term": "Invoice Gross Amount"
+    },
+    "invoice_date": {
+     "dbx_business_glossary_term": "Invoice Date"
+    },
+    "invoice_description": {
+     "dbx_business_glossary_term": "Invoice Description"
+    },
+    "invoice_number": {
+     "dbx_business_glossary_term": "Supplier Invoice Number"
+    },
+    "invoice_receipt_date": {
+     "dbx_business_glossary_term": "Invoice Receipt Date"
+    },
+    "invoice_status": {
+     "dbx_business_glossary_term": "Invoice Processing Status"
+    },
+    "invoice_type": {
+     "dbx_business_glossary_term": "Invoice Type",
+     "dbx_value_regex": "standard|credit_memo|debit_memo|prepayment|final|proforma"
+    },
+    "line_item_count": {
+     "dbx_business_glossary_term": "Invoice Line Item Count"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By User"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "net_amount": {
+     "dbx_business_glossary_term": "Invoice Net Amount"
+    },
+    "payment_date": {
+     "dbx_business_glossary_term": "Payment Date"
+    },
+    "payment_due_date": {
+     "dbx_business_glossary_term": "Payment Due Date"
+    },
+    "payment_method": {
+     "dbx_business_glossary_term": "Payment Method",
+     "dbx_value_regex": "wire_transfer|ach|check|credit_card|edi|other"
+    },
+    "payment_reference_number": {
+     "dbx_business_glossary_term": "Payment Reference Number"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code"
+    },
+    "posting_date": {
+     "dbx_business_glossary_term": "Posting Date"
+    },
+    "tax_amount": {
+     "dbx_business_glossary_term": "Invoice Tax Amount"
+    },
+    "three_way_match_status": {
+     "dbx_business_glossary_term": "Three-Way Match Status",
+     "dbx_value_regex": "matched|variance_within_tolerance|variance_exceeds_tolerance|not_matched|bypassed"
+    },
+    "tolerance_check_result": {
+     "dbx_business_glossary_term": "Tolerance Check Result",
+     "dbx_value_regex": "passed|failed|not_applicable"
+    },
+    "withholding_tax_amount": {
+     "dbx_business_glossary_term": "Withholding Tax Amount"
+    },
+    "withholding_tax_code": {
+     "dbx_business_glossary_term": "Withholding Tax Code"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  },
+  "invoice_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "invoice_reconciliation"
+   },
+   "column_tags": {
+    "invoice_line_id": {
+     "dbx_business_glossary_term": "Invoice Line Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "goods_receipt_id": {
+     "dbx_business_glossary_term": "Goods Receipt (GR) Line ID"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material ID"
+    },
+    "po_line_id": {
+     "dbx_business_glossary_term": "Purchase Order (PO) Line ID"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Service Entry Sheet Line ID"
+    },
+    "supplier_invoice_id": {
+     "dbx_business_glossary_term": "Invoice ID"
+    },
+    "amount_variance": {
+     "dbx_business_glossary_term": "Amount Variance"
+    },
+    "batch_number": {
+     "dbx_business_glossary_term": "Batch Number"
+    },
+    "blocking_reason": {
+     "dbx_business_glossary_term": "Blocking Reason"
+    },
+    "country_of_origin": {
+     "dbx_business_glossary_term": "Country of Origin"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code"
+    },
+    "delivery_note_number": {
+     "dbx_business_glossary_term": "Delivery Note Number"
+    },
+    "discount_amount": {
+     "dbx_business_glossary_term": "Discount Amount"
+    },
+    "discount_percentage": {
+     "dbx_business_glossary_term": "Discount Percentage"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "invoiced_quantity": {
+     "dbx_business_glossary_term": "Invoiced Quantity"
+    },
+    "line_gross_amount": {
+     "dbx_business_glossary_term": "Line Gross Amount"
+    },
+    "line_net_amount": {
+     "dbx_business_glossary_term": "Line Net Amount"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Invoice Line Number"
+    },
+    "line_tax_amount": {
+     "dbx_business_glossary_term": "Line Tax Amount"
+    },
+    "line_text": {
+     "dbx_business_glossary_term": "Line Text"
+    },
+    "match_status": {
+     "dbx_business_glossary_term": "Match Status",
+     "dbx_value_regex": "matched|quantity_variance|price_variance|unmatched|blocked|approved"
+    },
+    "material_description": {
+     "dbx_business_glossary_term": "Material Description"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code"
+    },
+    "price_variance": {
+     "dbx_business_glossary_term": "Price Variance"
+    },
+    "quantity_variance": {
+     "dbx_business_glossary_term": "Quantity Variance"
+    },
+    "sds_document_number": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Document Number"
+    },
+    "storage_location_code": {
+     "dbx_business_glossary_term": "Storage Location Code"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification",
+     "dbx_value_regex": "FSC|RSPO|FAIRTRADE|ORGANIC|RAINFOREST_ALLIANCE|NONE"
+    },
+    "tax_code": {
+     "dbx_business_glossary_term": "Tax Code"
+    },
+    "tax_rate_percentage": {
+     "dbx_business_glossary_term": "Tax Rate Percentage"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "unit_price": {
+     "dbx_business_glossary_term": "Unit Price"
+    },
+    "withholding_tax_amount": {
+     "dbx_business_glossary_term": "Withholding Tax Amount"
+    },
+    "withholding_tax_code": {
+     "dbx_business_glossary_term": "Withholding Tax Code"
+    }
+   }
+  },
+  "spend_category": {
+   "table_tags": {
+    "dbx_data_type": "reference_data",
+    "dbx_subdomain": "invoice_reconciliation"
+   },
+   "column_tags": {
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "parent_category_spend_category_id": {
+     "dbx_business_glossary_term": "Parent Category ID"
+    },
+    "annual_spend_budget_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Annual Spend Budget Amount"
+    },
+    "category_code": {
+     "dbx_business_glossary_term": "Category Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,12}$"
+    },
+    "category_description": {
+     "dbx_business_glossary_term": "Category Description"
+    },
+    "category_level": {
+     "dbx_business_glossary_term": "Category Level",
+     "dbx_value_regex": "L1|L2|L3|L4"
+    },
+    "category_name": {
+     "dbx_business_glossary_term": "Category Name"
+    },
+    "category_status": {
+     "dbx_business_glossary_term": "Category Status",
+     "dbx_value_regex": "active|inactive|under_review|consolidating|phasing_out"
+    },
+    "commodity_type": {
+     "dbx_business_glossary_term": "Commodity Type"
+    },
+    "contract_coverage_percentage": {
+     "dbx_business_glossary_term": "Contract Coverage Percentage"
+    },
+    "cost_savings_target_percentage": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost Savings Target Percentage"
+    },
+    "created_by_user": {
+     "dbx_business_glossary_term": "Created By User"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "last_modified_by_user": {
+     "dbx_business_glossary_term": "Last Modified By User"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "last_review_date": {
+     "dbx_business_glossary_term": "Last Review Date"
+    },
+    "lead_time_days_typical": {
+     "dbx_business_glossary_term": "Typical Lead Time Days"
+    },
+    "material_group": {
+     "dbx_business_glossary_term": "Material Group"
+    },
+    "moq_applicable_flag": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ) Applicable Flag"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "preferred_sourcing_strategy": {
+     "dbx_business_glossary_term": "Preferred Sourcing Strategy"
+    },
+    "procurement_organization": {
+     "dbx_business_glossary_term": "Procurement Organization"
+    },
+    "purchasing_group": {
+     "dbx_business_glossary_term": "Purchasing Group",
+     "dbx_value_regex": "^[A-Z0-9]{3}$"
+    },
+    "regulatory_framework": {
+     "dbx_business_glossary_term": "Applicable Regulatory Framework"
+    },
+    "risk_profile": {
+     "dbx_business_glossary_term": "Risk Profile",
+     "dbx_value_regex": "high_risk|medium_risk|low_risk"
+    },
+    "sds_required_flag": {
+     "dbx_business_glossary_term": "Safety Data Sheet (SDS) Required Flag"
+    },
+    "spend_visibility_level": {
+     "dbx_business_glossary_term": "Spend Visibility Level",
+     "dbx_value_regex": "high|medium|low"
+    },
+    "strategic_importance": {
+     "dbx_business_glossary_term": "Strategic Importance",
+     "dbx_value_regex": "critical|strategic|tactical|non_critical"
+    },
+    "supplier_consolidation_target": {
+     "dbx_business_glossary_term": "Supplier Consolidation Target"
+    },
+    "sustainable_sourcing_flag": {
+     "dbx_business_glossary_term": "Sustainable Sourcing Flag"
+    },
+    "unspsc_code": {
+     "dbx_business_glossary_term": "United Nations Standard Products and Services Code (UNSPSC)",
+     "dbx_value_regex": "^[0-9]{8}$"
+    }
+   }
+  },
+  "approved_supplier_list": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "vendor_management"
+   },
+   "column_tags": {
+    "approved_supplier_list_id": {
+     "dbx_business_glossary_term": "Approved Supplier List (ASL) ID"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan Id (Foreign Key)"
+    },
+    "material_id": {
+     "dbx_business_glossary_term": "Material Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Specification Id (Foreign Key)"
+    },
+    "spend_category_id": {
+     "dbx_business_glossary_term": "Spend Category Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Contract ID"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier ID"
+    },
+    "supplier_site_id": {
+     "dbx_business_glossary_term": "Supplier Site Id (Foreign Key)"
+    },
+    "approval_authority": {
+     "dbx_business_glossary_term": "Approval Authority"
+    },
+    "approval_basis": {
+     "dbx_business_glossary_term": "Approval Basis",
+     "dbx_value_regex": "audit|certification|qualification_test|performance_review|risk_assessment|legacy_approval"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approval_expiration_date": {
+     "dbx_business_glossary_term": "Approval Expiration Date"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "approved|conditional|blocked|delisted|pending|suspended"
+    },
+    "blocking_date": {
+     "dbx_business_glossary_term": "Blocking Date"
+    },
+    "blocking_reason": {
+     "dbx_business_glossary_term": "Blocking Reason"
+    },
+    "compliance_status": {
+     "dbx_business_glossary_term": "Compliance Status",
+     "dbx_value_regex": "compliant|non_compliant|under_review|exempted"
+    },
+    "conditional_terms": {
+     "dbx_business_glossary_term": "Conditional Terms"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "delivery_rating": {
+     "dbx_business_glossary_term": "Delivery Rating",
+     "dbx_value_regex": "A|B|C|D|F"
+    },
+    "edi_enabled_flag": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Enabled Flag"
+    },
+    "inspection_required_flag": {
+     "dbx_business_glossary_term": "Inspection Required Flag"
+    },
+    "last_audit_date": {
+     "dbx_business_glossary_term": "Last Audit Date"
+    },
+    "last_modified_by": {
+     "dbx_business_glossary_term": "Last Modified By User"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time Days"
+    },
+    "moq_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "moq_unit": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ) Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "next_audit_date": {
+     "dbx_business_glossary_term": "Next Audit Date"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "preferred_supplier_flag": {
+     "dbx_business_glossary_term": "Preferred Supplier Flag"
+    },
+    "price_validity_end_date": {
+     "dbx_business_glossary_term": "Price Validity End Date"
+    },
+    "price_validity_start_date": {
+     "dbx_business_glossary_term": "Price Validity Start Date"
+    },
+    "quality_rating": {
+     "dbx_business_glossary_term": "Quality Rating",
+     "dbx_value_regex": "A|B|C|D|F"
+    },
+    "re_evaluation_due_date": {
+     "dbx_business_glossary_term": "Re-evaluation Due Date"
+    },
+    "risk_category": {
+     "dbx_business_glossary_term": "Risk Category",
+     "dbx_value_regex": "low|medium|high|critical"
+    },
+    "sole_source_flag": {
+     "dbx_business_glossary_term": "Sole Source Flag"
+    },
+    "sustainability_certification": {
+     "dbx_business_glossary_term": "Sustainability Certification"
+    },
+    "vmi_eligible_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Eligible Flag"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  }
+ }
+}

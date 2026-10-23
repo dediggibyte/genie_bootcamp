@@ -1,0 +1,1344 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "promotion",
+ "schema_comment": "Owns trade promotion planning, execution, and optimization (TPM/TPO). Manages promotional calendars, trade spend allocation, retailer funding agreements, promotional pricing (Hi-Lo, EDLP), accruals, deductions, post-event analysis, promotional lift measurement, ROI/GMROI analysis, and retailer rebate settlements. Integrates with Salesforce TPM.",
+ "tag_count": 499,
+ "foreign_key_count": 65,
+ "schema_tags": {
+  "dbx_domain": "promotion",
+  "dbx_division": "business"
+ },
+ "tables": {
+  "trade_promotion": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "campaign_management"
+   },
+   "column_tags": {
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_calendar_id": {
+     "dbx_business_glossary_term": "Trade Calendar Id (Foreign Key)"
+    },
+    "accrual_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Trade Promotion Accrual Amount"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Promotion Approval Date"
+    },
+    "authorized_budget_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Authorized Trade Spend Budget Amount"
+    },
+    "baseline_volume_units": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Baseline Volume Units"
+    },
+    "channel_type": {
+     "dbx_business_glossary_term": "Retail Channel Type",
+     "dbx_value_regex": "grocery|mass_merchandiser|drug|convenience|club|ecommerce"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "coupon_flag": {
+     "dbx_business_glossary_term": "Coupon Included Flag"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Trade Promotion Deduction Amount"
+    },
+    "discount_percentage": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Promotional Discount Percentage"
+    },
+    "display_type": {
+     "dbx_business_glossary_term": "In-Store Display Type",
+     "dbx_value_regex": "end_cap|free_standing|shelf_talker|pallet|cooler|none"
+    },
+    "end_date": {
+     "dbx_business_glossary_term": "Promotion End Date"
+    },
+    "expected_roi_percentage": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Expected Return on Investment (ROI) Percentage"
+    },
+    "feature_ad_flag": {
+     "dbx_business_glossary_term": "Feature Advertisement Flag"
+    },
+    "funding_type": {
+     "dbx_business_glossary_term": "Trade Promotion Funding Type",
+     "dbx_value_regex": "off_invoice|scan_back|bill_back|lump_sum|accrual"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope",
+     "dbx_value_regex": "national|regional|local|store_specific"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "maximum_purchase_quantity": {
+     "dbx_business_glossary_term": "Maximum Purchase Quantity"
+    },
+    "minimum_purchase_quantity": {
+     "dbx_business_glossary_term": "Minimum Purchase Quantity (MOQ)"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Promotion Notes"
+    },
+    "pricing_strategy": {
+     "dbx_business_glossary_term": "Pricing Strategy Classification",
+     "dbx_value_regex": "hi_lo|edlp|hybrid"
+    },
+    "promotion_name": {
+     "dbx_business_glossary_term": "Trade Promotion Name"
+    },
+    "promotion_number": {
+     "dbx_business_glossary_term": "Trade Promotion Number",
+     "dbx_value_regex": "^TPM-[0-9]{8}$"
+    },
+    "promotion_objective": {
+     "dbx_business_glossary_term": "Trade Promotion Objective",
+     "dbx_value_regex": "volume_growth|market_share_gain|new_product_launch|competitive_defense|inventory_clearance|seasonal_event"
+    },
+    "promotion_status": {
+     "dbx_business_glossary_term": "Trade Promotion Status",
+     "dbx_value_regex": "planned|approved|active|closed|cancelled|on_hold"
+    },
+    "promotion_type": {
+     "dbx_business_glossary_term": "Trade Promotion Type",
+     "dbx_value_regex": "temporary_price_reduction|feature_ad|display|bogo|multi_buy|scan_back"
+    },
+    "settlement_status": {
+     "dbx_business_glossary_term": "Financial Settlement Status",
+     "dbx_value_regex": "pending|in_progress|settled|disputed"
+    },
+    "start_date": {
+     "dbx_business_glossary_term": "Promotion Start Date"
+    },
+    "target_volume_units": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Target Volume Units"
+    },
+    "tpm_system_reference_code": {
+     "dbx_business_glossary_term": "Trade Promotion Management (TPM) System Reference ID"
+    }
+   }
+  },
+  "event": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "campaign_management"
+   },
+   "column_tags": {
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Ship-To Location ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Campaign Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_calendar_id": {
+     "dbx_business_glossary_term": "Trade Calendar Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Promotion Program ID"
+    },
+    "accrual_amount": {
+     "dbx_business_glossary_term": "Accrual Amount"
+    },
+    "actual_trade_spend_amount": {
+     "dbx_business_glossary_term": "Actual Trade Spend Amount"
+    },
+    "actual_volume_units": {
+     "dbx_business_glossary_term": "Actual Volume Units"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "baseline_volume_units": {
+     "dbx_business_glossary_term": "Baseline Volume Units"
+    },
+    "cancellation_date": {
+     "dbx_business_glossary_term": "Cancellation Date"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Cancellation Reason"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_amount": {
+     "dbx_business_glossary_term": "Deduction Amount"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Event Description"
+    },
+    "end_date": {
+     "dbx_business_glossary_term": "Event End Date"
+    },
+    "event_number": {
+     "dbx_business_glossary_term": "Event Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "event_status": {
+     "dbx_business_glossary_term": "Event Status",
+     "dbx_value_regex": "planned|approved|in_execution|completed|cancelled"
+    },
+    "event_type": {
+     "dbx_business_glossary_term": "Event Type",
+     "dbx_value_regex": "feature_ad|display|temporary_price_reduction|bogo|scan_back|coupon"
+    },
+    "funding_source": {
+     "dbx_business_glossary_term": "Funding Source",
+     "dbx_value_regex": "manufacturer|retailer|cooperative"
+    },
+    "geography_code": {
+     "dbx_business_glossary_term": "Geography Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "gmroi_ratio": {
+     "dbx_business_glossary_term": "Gross Margin Return on Investment (GMROI) Ratio"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Event Name"
+    },
+    "planned_trade_spend_amount": {
+     "dbx_business_glossary_term": "Planned Trade Spend Amount"
+    },
+    "planned_volume_units": {
+     "dbx_business_glossary_term": "Planned Volume Units"
+    },
+    "post_event_analysis_completed_flag": {
+     "dbx_business_glossary_term": "Post-Event Analysis Completed Flag"
+    },
+    "post_event_analysis_date": {
+     "dbx_business_glossary_term": "Post-Event Analysis Date"
+    },
+    "pricing_strategy": {
+     "dbx_business_glossary_term": "Pricing Strategy",
+     "dbx_value_regex": "hi_lo|edlp|hybrid"
+    },
+    "promotional_lift_percentage": {
+     "dbx_business_glossary_term": "Promotional Lift Percentage"
+    },
+    "rebate_amount": {
+     "dbx_business_glossary_term": "Rebate Amount"
+    },
+    "roi_percentage": {
+     "dbx_business_glossary_term": "Return on Investment (ROI) Percentage"
+    },
+    "salesforce_tpm_event_code": {
+     "dbx_business_glossary_term": "Salesforce Trade Promotion Management (TPM) Event ID",
+     "dbx_value_regex": "^[a-zA-Z0-9]{15,18}$"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "settlement_status": {
+     "dbx_business_glossary_term": "Settlement Status",
+     "dbx_value_regex": "pending|in_progress|settled|disputed"
+    },
+    "start_date": {
+     "dbx_business_glossary_term": "Event Start Date"
+    }
+   }
+  },
+  "event_sku": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "campaign_management"
+   },
+   "column_tags": {
+    "event_sku_id": {
+     "dbx_business_glossary_term": "Promotion Event SKU (Stock Keeping Unit) ID"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "manufacturing_bom_id": {
+     "dbx_business_glossary_term": "Manufacturing Bom Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id"
+    },
+    "promoted_price_id": {
+     "dbx_business_glossary_term": "Promoted Price Id (Foreign Key)"
+    },
+    "retailer_funding_agreement_id": {
+     "dbx_business_glossary_term": "Retailer Funding Agreement ID"
+    },
+    "routing_id": {
+     "dbx_business_glossary_term": "Routing Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "SKU (Stock Keeping Unit) ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "accrual_amount": {
+     "dbx_business_glossary_term": "Accrual Amount"
+    },
+    "actual_promotional_volume_cases": {
+     "dbx_business_glossary_term": "Actual Promotional Volume (Cases)"
+    },
+    "actual_promotional_volume_units": {
+     "dbx_business_glossary_term": "Actual Promotional Volume (Units)"
+    },
+    "baseline_volume_estimate_units": {
+     "dbx_business_glossary_term": "Baseline Volume Estimate (Units)"
+    },
+    "compliance_check_status": {
+     "dbx_business_glossary_term": "Compliance Check Status",
+     "dbx_value_regex": "Not Checked|Compliant|Non-Compliant|Under Review"
+    },
+    "compliance_verified_date": {
+     "dbx_business_glossary_term": "Compliance Verified Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "deduction_amount": {
+     "dbx_business_glossary_term": "Deduction Amount"
+    },
+    "display_location_type": {
+     "dbx_business_glossary_term": "Display Location Type"
+    },
+    "feature_type": {
+     "dbx_business_glossary_term": "Feature Type"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "GTIN (Global Trade Item Number)",
+     "dbx_value_regex": "^[0-9]{8,14}$"
+    },
+    "incremental_lift_percent": {
+     "dbx_business_glossary_term": "Incremental Lift Percentage"
+    },
+    "incremental_lift_volume_units": {
+     "dbx_business_glossary_term": "Incremental Lift Volume (Units)"
+    },
+    "is_featured_sku": {
+     "dbx_business_glossary_term": "Is Featured SKU Flag"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "planned_promotional_volume_cases": {
+     "dbx_business_glossary_term": "Planned Promotional Volume (Cases)"
+    },
+    "planned_promotional_volume_units": {
+     "dbx_business_glossary_term": "Planned Promotional Volume (Units)"
+    },
+    "price_reduction_depth_percent": {
+     "dbx_business_glossary_term": "Price Reduction Depth Percentage"
+    },
+    "pricing_approval_status": {
+     "dbx_business_glossary_term": "Pricing Approval Status"
+    },
+    "pricing_approved_timestamp": {
+     "dbx_business_glossary_term": "Pricing Approved Timestamp"
+    },
+    "promoted_price_type": {
+     "dbx_business_glossary_term": "Promoted Price Type"
+    },
+    "promotion_effective_end_date": {
+     "dbx_business_glossary_term": "Promotion Effective End Date"
+    },
+    "promotion_effective_start_date": {
+     "dbx_business_glossary_term": "Promotion Effective Start Date"
+    },
+    "promotional_discount_per_unit": {
+     "dbx_business_glossary_term": "Promotional Discount Per Unit"
+    },
+    "promotional_gmroi": {
+     "dbx_business_glossary_term": "Promotional GMROI (Gross Margin Return on Investment)"
+    },
+    "promotional_roi_percent": {
+     "dbx_business_glossary_term": "Promotional ROI (Return on Investment) Percentage"
+    },
+    "rebate_amount": {
+     "dbx_business_glossary_term": "Rebate Amount"
+    },
+    "regular_shelf_price": {
+     "dbx_business_glossary_term": "Regular Shelf Price (RSP)"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "settlement_status": {
+     "dbx_business_glossary_term": "Settlement Status",
+     "dbx_value_regex": "Not Started|In Progress|Reconciled|Settled|Disputed"
+    },
+    "total_trade_spend_amount": {
+     "dbx_business_glossary_term": "Total Trade Spend Amount"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "UPC (Universal Product Code)",
+     "dbx_value_regex": "^[0-9]{12}$"
+    }
+   }
+  },
+  "trade_calendar": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "campaign_management"
+   },
+   "column_tags": {
+    "trade_calendar_id": {
+     "dbx_business_glossary_term": "Trade Calendar Identifier"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "parent_calendar_trade_calendar_id": {
+     "dbx_business_glossary_term": "Parent Calendar ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "actual_event_count": {
+     "dbx_business_glossary_term": "Actual Event Count"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "calendar_code": {
+     "dbx_business_glossary_term": "Calendar Code"
+    },
+    "calendar_name": {
+     "dbx_business_glossary_term": "Calendar Name"
+    },
+    "calendar_status": {
+     "dbx_business_glossary_term": "Calendar Status",
+     "dbx_value_regex": "draft|submitted|approved|locked|active|closed"
+    },
+    "closed_date": {
+     "dbx_business_glossary_term": "Closed Date"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Calendar Description"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "is_baseline_calendar": {
+     "dbx_business_glossary_term": "Is Baseline Calendar"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "locked_date": {
+     "dbx_business_glossary_term": "Locked Date"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Calendar Notes"
+    },
+    "planned_event_count": {
+     "dbx_business_glossary_term": "Planned Event Count"
+    },
+    "planning_cycle": {
+     "dbx_business_glossary_term": "Planning Cycle",
+     "dbx_value_regex": "annual|semi-annual|quarterly|monthly"
+    },
+    "pricing_strategy": {
+     "dbx_business_glossary_term": "Pricing Strategy",
+     "dbx_value_regex": "hi-lo|edlp|hybrid|promotional|premium"
+    },
+    "region_code": {
+     "dbx_business_glossary_term": "Region Code"
+    },
+    "total_planned_trade_spend": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Total Planned Trade Spend"
+    },
+    "tpm_system_code": {
+     "dbx_business_glossary_term": "Trade Promotion Management (TPM) System ID"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Version Number"
+    }
+   }
+  },
+  "trade_spend_allocation": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "financial_settlement"
+   },
+   "column_tags": {
+    "trade_spend_allocation_id": {
+     "dbx_business_glossary_term": "Trade Spend Allocation ID"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Campaign Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_calendar_id": {
+     "dbx_business_glossary_term": "Trade Calendar Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "accrual_amount": {
+     "dbx_business_glossary_term": "Accrual Amount"
+    },
+    "actual_amount": {
+     "dbx_business_glossary_term": "Actual Spend Amount"
+    },
+    "actual_volume": {
+     "dbx_business_glossary_term": "Actual Volume"
+    },
+    "allocated_amount": {
+     "dbx_business_glossary_term": "Allocated Amount"
+    },
+    "allocation_date": {
+     "dbx_business_glossary_term": "Allocation Date"
+    },
+    "allocation_number": {
+     "dbx_business_glossary_term": "Trade Spend Allocation Number",
+     "dbx_value_regex": "^TSA-[0-9]{8}-[A-Z0-9]{6}$"
+    },
+    "allocation_status": {
+     "dbx_business_glossary_term": "Allocation Status"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "baseline_volume": {
+     "dbx_business_glossary_term": "Baseline Volume"
+    },
+    "committed_amount": {
+     "dbx_business_glossary_term": "Committed Amount"
+    },
+    "cost_center_code": {
+     "dbx_business_glossary_term": "Cost Center Code",
+     "dbx_value_regex": "^CC[0-9]{6}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_amount": {
+     "dbx_business_glossary_term": "Deduction Amount"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "gmroi_percentage": {
+     "dbx_business_glossary_term": "Gross Margin Return on Investment (GMROI) Percentage"
+    },
+    "is_active": {
+     "dbx_business_glossary_term": "Is Active Flag"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Record Modified Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Allocation Notes"
+    },
+    "pricing_strategy": {
+     "dbx_business_glossary_term": "Pricing Strategy",
+     "dbx_value_regex": "hi_lo|edlp|hybrid|premium|penetration|competitive"
+    },
+    "profit_center_code": {
+     "dbx_business_glossary_term": "Profit Center Code",
+     "dbx_value_regex": "^PC[0-9]{6}$"
+    },
+    "promotion_end_date": {
+     "dbx_business_glossary_term": "Promotion End Date"
+    },
+    "promotion_start_date": {
+     "dbx_business_glossary_term": "Promotion Start Date"
+    },
+    "roi_percentage": {
+     "dbx_business_glossary_term": "Return on Investment (ROI) Percentage"
+    },
+    "settlement_amount": {
+     "dbx_business_glossary_term": "Settlement Amount"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "spend_category": {
+     "dbx_business_glossary_term": "Trade Spend Category",
+     "dbx_value_regex": "price_discount|merchandising|marketing|listing|performance_incentive|other"
+    },
+    "spend_type": {
+     "dbx_business_glossary_term": "Trade Spend Type",
+     "dbx_value_regex": "off_invoice_discount|scan_back|bill_back|lump_sum|coop_advertising|slotting_fee"
+    },
+    "target_volume": {
+     "dbx_business_glossary_term": "Target Volume"
+    },
+    "variance_amount": {
+     "dbx_business_glossary_term": "Variance Amount"
+    },
+    "volume_uom": {
+     "dbx_business_glossary_term": "Volume Unit of Measure (UOM)",
+     "dbx_value_regex": "units|cases|pallets|kg|liters"
+    }
+   }
+  },
+  "funding_agreement": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "financial_settlement"
+   },
+   "column_tags": {
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "previous_agreement_funding_agreement_id": {
+     "dbx_business_glossary_term": "Previous Agreement ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "accrual_method": {
+     "dbx_business_glossary_term": "Accrual Method",
+     "dbx_value_regex": "straight_line|event_based|scan_based|milestone_based"
+    },
+    "accrued_to_date_amount": {
+     "dbx_business_glossary_term": "Accrued To Date Amount"
+    },
+    "agreement_name": {
+     "dbx_business_glossary_term": "Agreement Name"
+    },
+    "agreement_number": {
+     "dbx_business_glossary_term": "Agreement Number",
+     "dbx_value_regex": "^[A-Z]{3}-[0-9]{6,10}$"
+    },
+    "agreement_status": {
+     "dbx_business_glossary_term": "Agreement Status"
+    },
+    "agreement_type": {
+     "dbx_business_glossary_term": "Agreement Type",
+     "dbx_value_regex": "annual_lump_sum|scan_back|co_op|slotting|performance_based|volume_rebate"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "not_submitted|pending_review|approved|rejected|revision_required"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "approved_date": {
+     "dbx_business_glossary_term": "Approved Date"
+    },
+    "auto_renewal_flag": {
+     "dbx_business_glossary_term": "Auto Renewal Flag"
+    },
+    "contract_document_url": {
+     "dbx_business_glossary_term": "Contract Document URL"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_settlement_terms": {
+     "dbx_business_glossary_term": "Deduction Settlement Terms"
+    },
+    "funding_period_end_date": {
+     "dbx_business_glossary_term": "Funding Period End Date"
+    },
+    "funding_period_start_date": {
+     "dbx_business_glossary_term": "Funding Period Start Date"
+    },
+    "gmroi_target": {
+     "dbx_business_glossary_term": "Gross Margin Return on Investment (GMROI) Target"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "manufacturer_signatory_name": {
+     "dbx_business_glossary_term": "Manufacturer Signatory Name"
+    },
+    "manufacturer_signatory_title": {
+     "dbx_business_glossary_term": "Manufacturer Signatory Title"
+    },
+    "manufacturer_signature_date": {
+     "dbx_business_glossary_term": "Manufacturer Signature Date"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "paid_to_date_amount": {
+     "dbx_business_glossary_term": "Paid To Date Amount"
+    },
+    "payment_frequency": {
+     "dbx_business_glossary_term": "Payment Frequency",
+     "dbx_value_regex": "one_time|monthly|quarterly|semi_annual|annual|event_based"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "performance_conditions": {
+     "dbx_business_glossary_term": "Performance Conditions"
+    },
+    "remaining_balance_amount": {
+     "dbx_business_glossary_term": "Remaining Balance Amount"
+    },
+    "renewal_flag": {
+     "dbx_business_glossary_term": "Renewal Flag"
+    },
+    "retailer_signatory_name": {
+     "dbx_business_glossary_term": "Retailer Signatory Name"
+    },
+    "retailer_signatory_title": {
+     "dbx_business_glossary_term": "Retailer Signatory Title"
+    },
+    "retailer_signature_date": {
+     "dbx_business_glossary_term": "Retailer Signature Date"
+    },
+    "roi_target_percentage": {
+     "dbx_business_glossary_term": "Return on Investment (ROI) Target Percentage"
+    },
+    "termination_date": {
+     "dbx_business_glossary_term": "Termination Date"
+    },
+    "termination_notice_days": {
+     "dbx_business_glossary_term": "Termination Notice Days"
+    },
+    "termination_reason": {
+     "dbx_business_glossary_term": "Termination Reason"
+    },
+    "total_committed_amount": {
+     "dbx_business_glossary_term": "Total Committed Amount"
+    }
+   }
+  },
+  "accrual": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "financial_settlement"
+   },
+   "column_tags": {
+    "accrual_id": {
+     "dbx_business_glossary_term": "Promotion Accrual ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "accrual_number": {
+     "dbx_business_glossary_term": "Accrual Number",
+     "dbx_value_regex": "^ACR-[0-9]{10}$"
+    },
+    "accrual_status": {
+     "dbx_business_glossary_term": "Accrual Status",
+     "dbx_value_regex": "open|pending_approval|approved|settled|reversed|cancelled"
+    },
+    "accrual_type": {
+     "dbx_business_glossary_term": "Accrual Type",
+     "dbx_value_regex": "scan_back|bill_back|off_invoice|lump_sum|volume_rebate|performance_bonus"
+    },
+    "amount": {
+     "dbx_business_glossary_term": "Accrual Amount"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "pending|approved|rejected"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "baseline_volume": {
+     "dbx_business_glossary_term": "Baseline Volume"
+    },
+    "cost_center_code": {
+     "dbx_business_glossary_term": "Cost Center Code",
+     "dbx_value_regex": "^CC[0-9]{6}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_claim_number": {
+     "dbx_business_glossary_term": "Deduction Claim Number",
+     "dbx_value_regex": "^DED-[0-9]{10}$"
+    },
+    "dispute_reason": {
+     "dbx_business_glossary_term": "Dispute Reason"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "gmroi": {
+     "dbx_business_glossary_term": "Gross Margin Return on Investment (GMROI)"
+    },
+    "incremental_volume": {
+     "dbx_business_glossary_term": "Incremental Volume"
+    },
+    "is_disputed": {
+     "dbx_business_glossary_term": "Is Disputed"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "payment_reference_number": {
+     "dbx_business_glossary_term": "Payment Reference Number",
+     "dbx_value_regex": "^PAY-[0-9]{10}$"
+    },
+    "period_end_date": {
+     "dbx_business_glossary_term": "Accrual Period End Date"
+    },
+    "period_start_date": {
+     "dbx_business_glossary_term": "Accrual Period Start Date"
+    },
+    "profit_center_code": {
+     "dbx_business_glossary_term": "Profit Center Code",
+     "dbx_value_regex": "^PC[0-9]{6}$"
+    },
+    "quantity_sold": {
+     "dbx_business_glossary_term": "Quantity Sold"
+    },
+    "rate": {
+     "dbx_business_glossary_term": "Accrual Rate"
+    },
+    "recognition_date": {
+     "dbx_business_glossary_term": "Recognition Date"
+    },
+    "reversal_date": {
+     "dbx_business_glossary_term": "Reversal Date"
+    },
+    "roi_percentage": {
+     "dbx_business_glossary_term": "Return on Investment (ROI) Percentage"
+    },
+    "sap_co_document_number": {
+     "dbx_business_glossary_term": "SAP Controlling (CO) Document Number",
+     "dbx_value_regex": "^[0-9]{10}$"
+    },
+    "sap_fi_document_number": {
+     "dbx_business_glossary_term": "SAP Financial Accounting (FI) Document Number",
+     "dbx_value_regex": "^[0-9]{10}$"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System ID"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure",
+     "dbx_value_regex": "each|case|pallet|kilogram|liter"
+    }
+   }
+  },
+  "deduction": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "financial_settlement"
+   },
+   "column_tags": {
+    "deduction_id": {
+     "dbx_business_glossary_term": "Promotion Deduction ID"
+    },
+    "accrual_id": {
+     "dbx_business_glossary_term": "Promotion Accrual Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "invoice_id": {
+     "dbx_business_glossary_term": "Invoice ID"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "accrual_impact_flag": {
+     "dbx_business_glossary_term": "Accrual Impact Flag"
+    },
+    "aging_days": {
+     "dbx_business_glossary_term": "Aging Days"
+    },
+    "amount": {
+     "dbx_business_glossary_term": "Deduction Amount"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approved_amount": {
+     "dbx_business_glossary_term": "Approved Amount"
+    },
+    "business_unit_code": {
+     "dbx_business_glossary_term": "Business Unit Code"
+    },
+    "claim_reference_number": {
+     "dbx_business_glossary_term": "Claim Reference Number"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_date": {
+     "dbx_business_glossary_term": "Deduction Date"
+    },
+    "deduction_number": {
+     "dbx_business_glossary_term": "Deduction Number"
+    },
+    "deduction_type": {
+     "dbx_business_glossary_term": "Deduction Type"
+    },
+    "dispute_reason": {
+     "dbx_business_glossary_term": "Dispute Reason"
+    },
+    "dispute_status": {
+     "dbx_business_glossary_term": "Dispute Status",
+     "dbx_value_regex": "open|approved|disputed|partially_approved|written_off|pending_review"
+    },
+    "disputed_amount": {
+     "dbx_business_glossary_term": "Disputed Amount"
+    },
+    "gmroi_impact_percentage": {
+     "dbx_business_glossary_term": "Gross Margin Return on Investment (GMROI) Impact Percentage"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "priority_level": {
+     "dbx_business_glossary_term": "Priority Level",
+     "dbx_value_regex": "critical|high|medium|low"
+    },
+    "resolution_notes": {
+     "dbx_business_glossary_term": "Resolution Notes"
+    },
+    "retailer_claim_date": {
+     "dbx_business_glossary_term": "Retailer Claim Date"
+    },
+    "retailer_contact_email": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Retailer Contact Email",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "retailer_contact_name": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Retailer Contact Name"
+    },
+    "roi_impact_amount": {
+     "dbx_business_glossary_term": "Return on Investment (ROI) Impact Amount"
+    },
+    "settled_amount": {
+     "dbx_business_glossary_term": "Settled Amount"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "settlement_method": {
+     "dbx_business_glossary_term": "Settlement Method",
+     "dbx_value_regex": "credit_memo|check|offset_future_invoice|write_off|bank_transfer"
+    },
+    "settlement_reason_code": {
+     "dbx_business_glossary_term": "Settlement Reason Code"
+    },
+    "sla_resolution_date": {
+     "dbx_business_glossary_term": "Service Level Agreement (SLA) Resolution Date"
+    },
+    "source": {
+     "dbx_business_glossary_term": "Deduction Source",
+     "dbx_value_regex": "retailer_portal|edi_846|manual_entry|bank_reconciliation|automated_matching"
+    },
+    "supporting_document_url": {
+     "dbx_business_glossary_term": "Supporting Document URL"
+    }
+   }
+  },
+  "deduction_settlement": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "financial_settlement"
+   },
+   "column_tags": {
+    "deduction_settlement_id": {
+     "dbx_business_glossary_term": "Deduction Settlement Identifier (ID)"
+    },
+    "accrual_id": {
+     "dbx_business_glossary_term": "Promotion Accrual Id (Foreign Key)"
+    },
+    "deduction_id": {
+     "dbx_business_glossary_term": "Deduction Identifier (ID)"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Identifier (ID)"
+    },
+    "parent_settlement_deduction_settlement_id": {
+     "dbx_business_glossary_term": "Parent Settlement Identifier (ID)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Identifier (ID)"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approved_amount": {
+     "dbx_business_glossary_term": "Approved Settlement Amount"
+    },
+    "business_unit_code": {
+     "dbx_business_glossary_term": "Business Unit Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "cost_center_code": {
+     "dbx_business_glossary_term": "Cost Center Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,12}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "deduction_claimed_amount": {
+     "dbx_business_glossary_term": "Deduction Claimed Amount"
+    },
+    "dispute_resolution_method": {
+     "dbx_business_glossary_term": "Dispute Resolution Method",
+     "dbx_value_regex": "negotiation|arbitration|escalation|partial_approval|full_approval|write_off"
+    },
+    "disputed_amount": {
+     "dbx_business_glossary_term": "Disputed Amount"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "gl_account_code": {
+     "dbx_business_glossary_term": "General Ledger (GL) Account Code",
+     "dbx_value_regex": "^[0-9]{4,10}$"
+    },
+    "is_partial_settlement": {
+     "dbx_business_glossary_term": "Is Partial Settlement Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "payment_date": {
+     "dbx_business_glossary_term": "Payment Date"
+    },
+    "payment_reference_number": {
+     "dbx_business_glossary_term": "Payment Reference Number"
+    },
+    "profit_center_code": {
+     "dbx_business_glossary_term": "Profit Center Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,12}$"
+    },
+    "settled_amount": {
+     "dbx_business_glossary_term": "Settled Amount"
+    },
+    "settlement_cycle_time_days": {
+     "dbx_business_glossary_term": "Settlement Cycle Time in Days"
+    },
+    "settlement_date": {
+     "dbx_business_glossary_term": "Settlement Date"
+    },
+    "settlement_method": {
+     "dbx_business_glossary_term": "Settlement Method",
+     "dbx_value_regex": "credit_memo|check|wire_transfer|offset_invoice|write_off|accrual_adjustment"
+    },
+    "settlement_notes": {
+     "dbx_business_glossary_term": "Settlement Notes"
+    },
+    "settlement_number": {
+     "dbx_business_glossary_term": "Settlement Number",
+     "dbx_value_regex": "^STL-[0-9]{8,12}$"
+    },
+    "settlement_reason_code": {
+     "dbx_business_glossary_term": "Settlement Reason Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "settlement_reason_description": {
+     "dbx_business_glossary_term": "Settlement Reason Description"
+    },
+    "settlement_status": {
+     "dbx_business_glossary_term": "Settlement Status"
+    },
+    "sla_compliance_flag": {
+     "dbx_business_glossary_term": "Service Level Agreement (SLA) Compliance Flag"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code",
+     "dbx_value_regex": "^[A-Z0-9_]{2,20}$"
+    },
+    "source_system_record_code": {
+     "dbx_business_glossary_term": "Source System Record Identifier (ID)"
+    }
+   }
+  },
+  "promoted_price": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "campaign_management"
+   },
+   "column_tags": {
+    "promoted_price_id": {
+     "dbx_business_glossary_term": "Promoted Price Identifier"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event ID"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "accrual_method": {
+     "dbx_business_glossary_term": "Accrual Method",
+     "dbx_value_regex": "scan_back|bill_back|off_invoice|lump_sum|performance_based"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status"
+    },
+    "cost_of_goods_sold": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost of Goods Sold (COGS)"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "estimated_volume_lift": {
+     "dbx_business_glossary_term": "Estimated Volume Lift Percentage"
+    },
+    "funding_source": {
+     "dbx_business_glossary_term": "Funding Source",
+     "dbx_value_regex": "manufacturer|retailer|co_op|vendor|third_party"
+    },
+    "is_advertised": {
+     "dbx_business_glossary_term": "Is Advertised Flag"
+    },
+    "is_stackable": {
+     "dbx_business_glossary_term": "Is Stackable Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "maximum_purchase_quantity": {
+     "dbx_business_glossary_term": "Maximum Purchase Quantity"
+    },
+    "minimum_purchase_quantity": {
+     "dbx_business_glossary_term": "Minimum Purchase Quantity"
+    },
+    "price_reduction_percentage": {
+     "dbx_business_glossary_term": "Price Reduction Percentage"
+    },
+    "pricing_strategy_type": {
+     "dbx_business_glossary_term": "Pricing Strategy Type"
+    },
+    "promotional_allowance_amount": {
+     "dbx_business_glossary_term": "Promotional Allowance Amount"
+    },
+    "promotional_price_amount": {
+     "dbx_business_glossary_term": "Promotional Price Amount"
+    },
+    "promotional_price_code": {
+     "dbx_business_glossary_term": "Promotional Price Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{4,20}$"
+    },
+    "promotional_price_description": {
+     "dbx_business_glossary_term": "Promotional Price Description"
+    },
+    "promotional_price_name": {
+     "dbx_business_glossary_term": "Promotional Price Name"
+    },
+    "region_code": {
+     "dbx_business_glossary_term": "Region Code",
+     "dbx_value_regex": "^[A-Z]{2,10}$"
+    },
+    "regular_shelf_price": {
+     "dbx_business_glossary_term": "Regular Shelf Price (RSP)"
+    },
+    "retailer_margin_percentage": {
+     "dbx_business_glossary_term": "Retailer Margin Percentage"
+    },
+    "scan_back_rate": {
+     "dbx_business_glossary_term": "Scan-Back Rate"
+    },
+    "tpm_system_code": {
+     "dbx_business_glossary_term": "Trade Promotion Management (TPM) System ID"
+    }
+   }
+  }
+ }
+}

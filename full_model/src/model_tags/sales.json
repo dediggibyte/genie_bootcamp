@@ -1,0 +1,2000 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "sales",
+ "schema_comment": "Owns commercial sales execution, order management, and revenue transactions across all channels (retail, wholesale, DTC, e-commerce). Manages sales orders, pricing agreements, sales force automation (SFA), retail account call records, POG compliance, RSP/MSRP price management, ACV/TDP/SOM metrics, and field sales KPIs. Integrates with Salesforce Consumer Goods Cloud.",
+ "tag_count": 801,
+ "foreign_key_count": 80,
+ "schema_tags": {
+  "dbx_domain": "sales",
+  "dbx_division": "business"
+ },
+ "tables": {
+  "trade_account": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "territory_id": {
+     "dbx_business_glossary_term": "Territory Id (Foreign Key)"
+    },
+    "account_close_date": {
+     "dbx_business_glossary_term": "Account Close Date"
+    },
+    "account_open_date": {
+     "dbx_business_glossary_term": "Account Open Date"
+    },
+    "account_status": {
+     "dbx_business_glossary_term": "Account Status",
+     "dbx_value_regex": "active|inactive|suspended|pending_approval|credit_hold|closed"
+    },
+    "account_tier": {
+     "dbx_business_glossary_term": "Account Tier",
+     "dbx_value_regex": "tier_1_national|tier_2_regional|tier_3_local|tier_4_independent"
+    },
+    "account_type": {
+     "dbx_business_glossary_term": "Account Type",
+     "dbx_value_regex": "retailer|distributor|wholesaler|foodservice_operator|broker"
+    },
+    "acv_total": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "All Commodity Volume (ACV) Total"
+    },
+    "credit_limit_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Credit Limit Amount"
+    },
+    "credit_rating": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Credit Rating"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "dba_name": {
+     "dbx_business_glossary_term": "Doing Business As (DBA) Name"
+    },
+    "dsd_delivery_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Flag"
+    },
+    "duns_number": {
+     "dbx_business_glossary_term": "Data Universal Numbering System (DUNS) Number",
+     "dbx_value_regex": "^[0-9]{9}$"
+    },
+    "edi_capable_flag": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Capable Flag"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "headquarters_address_line1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Headquarters Address Line 1"
+    },
+    "headquarters_address_line2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Headquarters Address Line 2"
+    },
+    "headquarters_city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Headquarters City"
+    },
+    "headquarters_country_code": {
+     "dbx_business_glossary_term": "Headquarters Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "headquarters_postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Headquarters Postal Code"
+    },
+    "headquarters_state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Headquarters State or Province"
+    },
+    "last_order_date": {
+     "dbx_business_glossary_term": "Last Order Date"
+    },
+    "legal_entity_name": {
+     "dbx_business_glossary_term": "Legal Entity Name"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "otif_sla_target_percent": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Service Level Agreement (SLA) Target Percent"
+    },
+    "payment_method": {
+     "dbx_business_glossary_term": "Payment Method",
+     "dbx_value_regex": "ach|wire_transfer|check|edi_payment|credit_card"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code"
+    },
+    "previous_status": {
+     "dbx_business_glossary_term": "Previous Account Status"
+    },
+    "primary_contact_email": {
+     "dbx_confidential": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Primary Contact Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "primary_contact_name": {
+     "dbx_confidential": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Primary Contact Name"
+    },
+    "primary_contact_phone": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Primary Contact Phone Number"
+    },
+    "primary_language_code": {
+     "dbx_business_glossary_term": "Primary Language Code",
+     "dbx_value_regex": "^[a-z]{2}$"
+    },
+    "record_created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "record_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "status_change_reason": {
+     "dbx_business_glossary_term": "Status Change Reason"
+    },
+    "status_change_timestamp": {
+     "dbx_business_glossary_term": "Status Change Timestamp"
+    },
+    "status_changed_by_user": {
+     "dbx_business_glossary_term": "Status Changed By User"
+    },
+    "tax_exemption_flag": {
+     "dbx_business_glossary_term": "Tax Exemption Flag"
+    },
+    "tax_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Tax Identification Number"
+    },
+    "tdp_count": {
+     "dbx_business_glossary_term": "Total Distribution Points (TDP) Count"
+    },
+    "trade_channel": {
+     "dbx_business_glossary_term": "Trade Channel Classification"
+    },
+    "vmi_enabled_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Enabled Flag"
+    }
+   }
+  },
+  "account_contact": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "account_contact_id": {
+     "dbx_business_glossary_term": "Account Contact Identifier (ID)"
+    },
+    "reports_to_contact_account_contact_id": {
+     "dbx_business_glossary_term": "Reports To Contact Identifier (ID)"
+    },
+    "territory_id": {
+     "dbx_business_glossary_term": "Territory Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Account Identifier (ID)"
+    },
+    "assistant_name": {
+     "dbx_business_glossary_term": "Assistant Name"
+    },
+    "assistant_phone": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Assistant Phone Number"
+    },
+    "contact_notes": {
+     "dbx_business_glossary_term": "Contact Notes"
+    },
+    "contact_role": {
+     "dbx_business_glossary_term": "Contact Role",
+     "dbx_value_regex": "primary_buyer|secondary_buyer|decision_maker|influencer|gatekeeper|end_user"
+    },
+    "contact_status": {
+     "dbx_business_glossary_term": "Contact Status",
+     "dbx_value_regex": "active|inactive|on_leave|terminated|transferred"
+    },
+    "contact_type": {
+     "dbx_business_glossary_term": "Contact Type",
+     "dbx_value_regex": "buyer|category_manager|logistics_coordinator|finance_contact|marketing_contact|operations_manager"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "department": {
+     "dbx_business_glossary_term": "Department"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "email_address": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "fax_number": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Fax Number"
+    },
+    "first_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Contact First Name"
+    },
+    "full_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Contact Full Name"
+    },
+    "is_decision_maker": {
+     "dbx_business_glossary_term": "Is Decision Maker Flag"
+    },
+    "is_primary_contact": {
+     "dbx_business_glossary_term": "Is Primary Contact Flag"
+    },
+    "job_title": {
+     "dbx_business_glossary_term": "Job Title"
+    },
+    "language_preference": {
+     "dbx_business_glossary_term": "Language Preference",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "last_contact_date": {
+     "dbx_business_glossary_term": "Last Contact Date"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "last_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Contact Last Name"
+    },
+    "linkedin_profile_url": {
+     "dbx_business_glossary_term": "LinkedIn Profile Uniform Resource Locator (URL)"
+    },
+    "mobile_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Mobile Phone Number"
+    },
+    "next_follow_up_date": {
+     "dbx_business_glossary_term": "Next Follow-Up Date"
+    },
+    "opt_in_email": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Opt-In Flag"
+    },
+    "opt_in_phone": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Phone Opt-In Flag"
+    },
+    "opt_in_sms": {
+     "dbx_business_glossary_term": "Short Message Service (SMS) Opt-In Flag"
+    },
+    "phone_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Phone Number"
+    },
+    "preferred_communication_channel": {
+     "dbx_business_glossary_term": "Preferred Communication Channel",
+     "dbx_value_regex": "email|phone|mobile|fax|portal|in_person"
+    },
+    "salesforce_user_code": {
+     "dbx_confidential": "true",
+     "dbx_pii": "true",
+     "dbx_business_glossary_term": "Salesforce User Identifier (ID)"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Identifier (ID)"
+    }
+   }
+  },
+  "account_address": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "account_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Account Address Identifier (ID)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Account Identifier (ID)"
+    },
+    "account_address_status": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Status",
+     "dbx_value_regex": "active|inactive|pending|closed"
+    },
+    "address_line_1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line_2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "address_line_3": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 3"
+    },
+    "address_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Name"
+    },
+    "address_type": {
+     "dbx_business_glossary_term": "Address Type",
+     "dbx_value_regex": "headquarters|billing|ship_to|sold_to|returns|warehouse"
+    },
+    "address_validation_date": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Validation Date"
+    },
+    "address_validation_status": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Validation Status",
+     "dbx_value_regex": "validated|unvalidated|invalid|pending"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "delivery_instructions": {
+     "dbx_business_glossary_term": "Delivery Instructions"
+    },
+    "dock_door_number": {
+     "dbx_business_glossary_term": "Dock Door Number"
+    },
+    "dsd_route_eligible_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Route Eligible Flag"
+    },
+    "edi_location_qualifier": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Location Qualifier"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "inactivation_reason": {
+     "dbx_business_glossary_term": "Inactivation Reason"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "primary_address_flag": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Primary Address Flag"
+    },
+    "receiving_hours_end": {
+     "dbx_business_glossary_term": "Receiving Hours End Time",
+     "dbx_value_regex": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "receiving_hours_start": {
+     "dbx_business_glossary_term": "Receiving Hours Start Time",
+     "dbx_value_regex": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Identifier (ID)"
+    },
+    "standardized_address_flag": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Standardized Address Flag"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "tax_jurisdiction_code": {
+     "dbx_business_glossary_term": "Tax Jurisdiction Code"
+    },
+    "time_zone": {
+     "dbx_business_glossary_term": "Time Zone"
+    }
+   }
+  },
+  "retail_store": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store ID"
+    },
+    "account_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Account Address Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Serving Distribution Center Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "acv_weight": {
+     "dbx_business_glossary_term": "All Commodity Volume (ACV) Weight"
+    },
+    "banner_name": {
+     "dbx_business_glossary_term": "Banner Name"
+    },
+    "close_date": {
+     "dbx_business_glossary_term": "Store Close Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "dsd_route_code": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Route Code"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "last_visit_date": {
+     "dbx_business_glossary_term": "Last Visit Date"
+    },
+    "next_scheduled_visit_date": {
+     "dbx_business_glossary_term": "Next Scheduled Visit Date"
+    },
+    "open_date": {
+     "dbx_business_glossary_term": "Store Open Date"
+    },
+    "operating_hours": {
+     "dbx_business_glossary_term": "Operating Hours"
+    },
+    "osa_target_pct": {
+     "dbx_business_glossary_term": "On Shelf Availability (OSA) Target Percentage"
+    },
+    "otif_sla_target_pct": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Service Level Agreement (SLA) Target Percentage"
+    },
+    "planogram_zone": {
+     "dbx_business_glossary_term": "Planogram (POG) Zone"
+    },
+    "pos_system_type": {
+     "dbx_business_glossary_term": "Point of Sale (POS) System Type"
+    },
+    "store_format": {
+     "dbx_business_glossary_term": "Store Format"
+    },
+    "store_name": {
+     "dbx_business_glossary_term": "Store Name"
+    },
+    "store_number": {
+     "dbx_business_glossary_term": "Store Number"
+    },
+    "store_phone": {
+     "dbx_confidential": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Store Phone Number"
+    },
+    "store_size_sq_ft": {
+     "dbx_business_glossary_term": "Store Size (Square Feet)"
+    },
+    "store_status": {
+     "dbx_business_glossary_term": "Store Status",
+     "dbx_value_regex": "active|inactive|pending_opening|temporarily_closed|permanently_closed|under_renovation"
+    },
+    "store_tier": {
+     "dbx_business_glossary_term": "Store Tier",
+     "dbx_value_regex": "tier_1|tier_2|tier_3|tier_4"
+    },
+    "tdp_weight": {
+     "dbx_business_glossary_term": "Total Distribution Points (TDP) Weight"
+    },
+    "trading_area": {
+     "dbx_business_glossary_term": "Trading Area"
+    },
+    "vmi_enabled_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Enabled Flag"
+    }
+   }
+  },
+  "order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "transaction_processing"
+   },
+   "column_tags": {
+    "order_id": {
+     "dbx_business_glossary_term": "Order Identifier"
+    },
+    "account_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Bill-To Location Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Fulfillment Warehouse Identifier"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "pricing_agreement_id": {
+     "dbx_business_glossary_term": "Pricing Agreement Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Ship-To Location Identifier"
+    },
+    "sales_rep_id": {
+     "dbx_business_glossary_term": "Sales Representative Identifier"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "territory_id": {
+     "dbx_business_glossary_term": "Territory Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Customer Identifier"
+    },
+    "actual_delivery_date": {
+     "dbx_business_glossary_term": "Actual Delivery Date"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Order Approval Timestamp"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Order Cancellation Reason"
+    },
+    "channel_type": {
+     "dbx_business_glossary_term": "Sales Channel Type",
+     "dbx_value_regex": "retail|wholesale|dtc|ecommerce|distributor"
+    },
+    "cogs_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost of Goods Sold (COGS) Amount"
+    },
+    "confirmed_delivery_date": {
+     "dbx_business_glossary_term": "Confirmed Delivery Date"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "discount_amount": {
+     "dbx_business_glossary_term": "Total Discount Amount"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "freight_amount": {
+     "dbx_business_glossary_term": "Freight Charge Amount"
+    },
+    "gross_margin_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Gross Margin Amount"
+    },
+    "incoterm": {
+     "dbx_business_glossary_term": "Incoterm Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "order_date": {
+     "dbx_business_glossary_term": "Order Date"
+    },
+    "order_number": {
+     "dbx_business_glossary_term": "Order Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "Order Status"
+    },
+    "order_type": {
+     "dbx_business_glossary_term": "Order Type",
+     "dbx_value_regex": "standard|rush|drop_ship|direct_store_delivery|promotional|sample"
+    },
+    "otif_status": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Status",
+     "dbx_value_regex": "on_time_in_full|late|partial|not_applicable"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "priority": {
+     "dbx_business_glossary_term": "Order Priority Level",
+     "dbx_value_regex": "standard|high|urgent|critical"
+    },
+    "purchase_order_number": {
+     "dbx_business_glossary_term": "Customer Purchase Order Number",
+     "dbx_value_regex": "^[A-Z0-9\\-]{6,30}$"
+    },
+    "requested_delivery_date": {
+     "dbx_business_glossary_term": "Requested Delivery Date"
+    },
+    "sales_office": {
+     "dbx_business_glossary_term": "Sales Office Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "sap_sd_document_number": {
+     "dbx_business_glossary_term": "SAP Sales and Distribution (SD) Document Number",
+     "dbx_value_regex": "^[0-9]{10}$"
+    },
+    "shipping_method": {
+     "dbx_business_glossary_term": "Shipping Method",
+     "dbx_value_regex": "ground|air|ocean|rail|courier|dsd"
+    },
+    "source": {
+     "dbx_business_glossary_term": "Order Source System",
+     "dbx_value_regex": "web_portal|edi|sales_rep|call_center|mobile_app|marketplace"
+    },
+    "special_instructions": {
+     "dbx_business_glossary_term": "Special Handling Instructions"
+    },
+    "subtotal_amount": {
+     "dbx_business_glossary_term": "Order Subtotal Amount"
+    },
+    "tax_amount": {
+     "dbx_business_glossary_term": "Total Tax Amount"
+    },
+    "total_amount": {
+     "dbx_business_glossary_term": "Order Total Amount"
+    }
+   }
+  },
+  "invoice": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "transaction_processing"
+   },
+   "column_tags": {
+    "invoice_id": {
+     "dbx_business_glossary_term": "Invoice Identifier"
+    },
+    "account_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Bill-To Location Identifier"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id"
+    },
+    "pricing_agreement_id": {
+     "dbx_business_glossary_term": "Pricing Agreement Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Ship-To Location Identifier"
+    },
+    "sales_order_id": {
+     "dbx_business_glossary_term": "Sales Order Identifier"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Distribution Shipment Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Customer Account Identifier"
+    },
+    "billing_period_end_date": {
+     "dbx_business_glossary_term": "Billing Period End Date"
+    },
+    "billing_period_start_date": {
+     "dbx_business_glossary_term": "Billing Period Start Date"
+    },
+    "billing_type": {
+     "dbx_business_glossary_term": "Billing Document Type",
+     "dbx_value_regex": "standard|credit_memo|debit_memo|proforma|intercompany|consignment"
+    },
+    "cancelled_timestamp": {
+     "dbx_business_glossary_term": "Invoice Cancellation Timestamp"
+    },
+    "cost_of_goods_sold_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost of Goods Sold (COGS) Amount"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Creation Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Transaction Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "days_sales_outstanding": {
+     "dbx_business_glossary_term": "Days Sales Outstanding (DSO)"
+    },
+    "dispute_flag": {
+     "dbx_business_glossary_term": "Invoice Dispute Flag"
+    },
+    "dispute_reason_code": {
+     "dbx_business_glossary_term": "Dispute Reason Code"
+    },
+    "distribution_channel_code": {
+     "dbx_business_glossary_term": "Distribution Channel Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    },
+    "division_code": {
+     "dbx_business_glossary_term": "Product Division Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    },
+    "due_date": {
+     "dbx_business_glossary_term": "Payment Due Date"
+    },
+    "edi_document_number": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Document Number"
+    },
+    "edi_transmission_status": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Transmission Status",
+     "dbx_value_regex": "not_applicable|pending|transmitted|acknowledged|rejected|failed"
+    },
+    "freight_charge_amount": {
+     "dbx_business_glossary_term": "Freight and Shipping Charge Amount"
+    },
+    "gross_amount": {
+     "dbx_business_glossary_term": "Gross Invoice Amount"
+    },
+    "gross_margin_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Gross Margin Amount"
+    },
+    "incoterm_code": {
+     "dbx_business_glossary_term": "International Commercial Terms (Incoterm) Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "invoice_date": {
+     "dbx_business_glossary_term": "Invoice Issue Date"
+    },
+    "invoice_number": {
+     "dbx_business_glossary_term": "Invoice Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "invoice_status": {
+     "dbx_business_glossary_term": "Invoice Lifecycle Status"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Record Last Modified Timestamp"
+    },
+    "net_amount": {
+     "dbx_business_glossary_term": "Net Invoice Amount"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Invoice Notes and Comments"
+    },
+    "outstanding_amount": {
+     "dbx_business_glossary_term": "Outstanding Receivable Amount"
+    },
+    "paid_amount": {
+     "dbx_business_glossary_term": "Amount Paid to Date"
+    },
+    "payment_method": {
+     "dbx_business_glossary_term": "Payment Method"
+    },
+    "payment_reference_number": {
+     "dbx_business_glossary_term": "Payment Reference Number"
+    },
+    "payment_status": {
+     "dbx_business_glossary_term": "Payment Settlement Status",
+     "dbx_value_regex": "unpaid|partially_paid|paid|overpaid|written_off"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,10}$"
+    },
+    "purchase_order_number": {
+     "dbx_business_glossary_term": "Customer Purchase Order (PO) Number"
+    },
+    "revenue_recognition_category": {
+     "dbx_business_glossary_term": "Revenue Recognition Category",
+     "dbx_value_regex": "point_in_time|over_time|deferred|subscription|service"
+    },
+    "sales_organization_code": {
+     "dbx_business_glossary_term": "Sales Organization Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,6}$"
+    },
+    "tax_amount": {
+     "dbx_business_glossary_term": "Total Tax Amount"
+    },
+    "trade_discount_amount": {
+     "dbx_business_glossary_term": "Trade Discount Amount"
+    }
+   }
+  },
+  "pricing_agreement": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "pricing_strategy"
+   },
+   "column_tags": {
+    "pricing_agreement_id": {
+     "dbx_business_glossary_term": "Pricing Agreement ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "funding_agreement_id": {
+     "dbx_business_glossary_term": "Funding Agreement Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "hierarchy_id": {
+     "dbx_business_glossary_term": "Product Hierarchy Id (Foreign Key)"
+    },
+    "price_list_id": {
+     "dbx_business_glossary_term": "Price List Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "rep_id": {
+     "dbx_business_glossary_term": "Rep Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "specification_id": {
+     "dbx_business_glossary_term": "Specification Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Supplier Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "agreement_name": {
+     "dbx_business_glossary_term": "Pricing Agreement Name"
+    },
+    "agreement_number": {
+     "dbx_business_glossary_term": "Pricing Agreement Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "agreement_type": {
+     "dbx_business_glossary_term": "Pricing Agreement Type",
+     "dbx_value_regex": "standard|volume_tiered|promotional|rebate|contract|spot"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "not_submitted|pending|approved|rejected"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "approved_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "auto_renewal_flag": {
+     "dbx_business_glossary_term": "Auto Renewal Flag"
+    },
+    "base_list_price": {
+     "dbx_business_glossary_term": "Base List Price"
+    },
+    "contract_document_reference": {
+     "dbx_business_glossary_term": "Contract Document Reference"
+    },
+    "contracted_net_price": {
+     "dbx_business_glossary_term": "Contracted Net Price"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "discount_percentage": {
+     "dbx_business_glossary_term": "Discount Percentage"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "minimum_order_value": {
+     "dbx_business_glossary_term": "Minimum Order Value"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "msrp_price": {
+     "dbx_business_glossary_term": "Manufacturer Suggested Retail Price (MSRP)"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Pricing Agreement Notes"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "price_protection_flag": {
+     "dbx_business_glossary_term": "Price Protection Flag"
+    },
+    "pricing_agreement_status": {
+     "dbx_business_glossary_term": "Pricing Agreement Status",
+     "dbx_value_regex": "draft|pending_approval|active|suspended|expired|terminated"
+    },
+    "pricing_tier": {
+     "dbx_business_glossary_term": "Pricing Tier",
+     "dbx_value_regex": "tier_1|tier_2|tier_3|tier_4|tier_5|custom"
+    },
+    "product_scope": {
+     "dbx_business_glossary_term": "Product Scope",
+     "dbx_value_regex": "all_products|product_category|specific_skus|brand"
+    },
+    "promotional_allowance": {
+     "dbx_business_glossary_term": "Promotional Allowance"
+    },
+    "rebate_amount": {
+     "dbx_business_glossary_term": "Rebate Amount"
+    },
+    "rebate_percentage": {
+     "dbx_business_glossary_term": "Rebate Percentage"
+    },
+    "rsp_price": {
+     "dbx_business_glossary_term": "Recommended Selling Price (RSP)"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization"
+    },
+    "volume_threshold_quantity": {
+     "dbx_business_glossary_term": "Volume Threshold Quantity"
+    },
+    "volume_threshold_uom": {
+     "dbx_business_glossary_term": "Volume Threshold Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By"
+    }
+   }
+  },
+  "pos_transaction": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "transaction_processing"
+   },
+   "column_tags": {
+    "pos_transaction_id": {
+     "dbx_business_glossary_term": "Point-of-Sale (POS) Transaction ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Order Id"
+    },
+    "promoted_price_id": {
+     "dbx_business_glossary_term": "Promoted Price Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Store ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Product ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "acv_flag": {
+     "dbx_business_glossary_term": "All Commodity Volume (ACV) Flag"
+    },
+    "baseline_sales_flag": {
+     "dbx_business_glossary_term": "Baseline Sales Flag"
+    },
+    "channel_type": {
+     "dbx_business_glossary_term": "Channel Type"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "data_quality_score": {
+     "dbx_business_glossary_term": "Data Quality Score"
+    },
+    "data_source": {
+     "dbx_business_glossary_term": "Data Source",
+     "dbx_value_regex": "nielsen_iq|iri_circana|retailer_edi|retailer_portal|tradeedge|internal"
+    },
+    "data_source_file_code": {
+     "dbx_business_glossary_term": "Data Source File ID"
+    },
+    "discount_amount": {
+     "dbx_business_glossary_term": "Discount Amount"
+    },
+    "ean": {
+     "dbx_business_glossary_term": "European Article Number (EAN)",
+     "dbx_value_regex": "^\\d{13}$"
+    },
+    "extended_retail_value": {
+     "dbx_business_glossary_term": "Extended Retail Value"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^\\d{8}$|^\\d{12}$|^\\d{13}$|^\\d{14}$"
+    },
+    "market_name": {
+     "dbx_business_glossary_term": "Market Name"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "out_of_stock_flag": {
+     "dbx_business_glossary_term": "Out of Stock (OOS) Flag"
+    },
+    "processed_timestamp": {
+     "dbx_business_glossary_term": "Processed Timestamp"
+    },
+    "product_description": {
+     "dbx_business_glossary_term": "Product Description"
+    },
+    "promotional_flag": {
+     "dbx_business_glossary_term": "Promotional Flag"
+    },
+    "received_timestamp": {
+     "dbx_business_glossary_term": "Received Timestamp"
+    },
+    "reporting_period": {
+     "dbx_business_glossary_term": "Reporting Period",
+     "dbx_value_regex": "daily|weekly|monthly"
+    },
+    "retail_selling_price": {
+     "dbx_business_glossary_term": "Retail Selling Price"
+    },
+    "retailer_name": {
+     "dbx_business_glossary_term": "Retailer Name"
+    },
+    "sku": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU)"
+    },
+    "store_city": {
+     "dbx_business_glossary_term": "Store City"
+    },
+    "store_country_code": {
+     "dbx_business_glossary_term": "Store Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "store_format": {
+     "dbx_business_glossary_term": "Store Format"
+    },
+    "store_name": {
+     "dbx_business_glossary_term": "Store Name"
+    },
+    "store_postal_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Store Postal Code"
+    },
+    "store_state_province": {
+     "dbx_business_glossary_term": "Store State or Province"
+    },
+    "transaction_date": {
+     "dbx_business_glossary_term": "Transaction Date"
+    },
+    "transaction_number": {
+     "dbx_business_glossary_term": "Transaction Number"
+    },
+    "transaction_timestamp": {
+     "dbx_business_glossary_term": "Transaction Timestamp"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "units_sold": {
+     "dbx_business_glossary_term": "Units Sold"
+    },
+    "upc": {
+     "dbx_business_glossary_term": "Universal Product Code (UPC)",
+     "dbx_value_regex": "^\\d{12}$"
+    },
+    "week_ending_date": {
+     "dbx_business_glossary_term": "Week Ending Date"
+    }
+   }
+  },
+  "return_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "transaction_processing"
+   },
+   "column_tags": {
+    "return_order_id": {
+     "dbx_business_glossary_term": "Return Order ID"
+    },
+    "batch_record_id": {
+     "dbx_business_glossary_term": "Batch Record Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Product Recall Id (Foreign Key)"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "inbound_receipt_id": {
+     "dbx_business_glossary_term": "Inbound Receipt Id (Foreign Key)"
+    },
+    "invoice_id": {
+     "dbx_business_glossary_term": "Invoice Id (Foreign Key)"
+    },
+    "originating_sales_order_id": {
+     "dbx_business_glossary_term": "Originating Sales Order ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "product_complaint_id": {
+     "dbx_business_glossary_term": "Product Complaint Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Retail Store Id (Foreign Key)"
+    },
+    "return_distribution_facility_id": {
+     "dbx_business_glossary_term": "Return Distribution Facility Id (Foreign Key)"
+    },
+    "return_network_node_id": {
+     "dbx_business_glossary_term": "Return Network Node Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Sku Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account ID"
+    },
+    "adjustment_amount": {
+     "dbx_business_glossary_term": "Adjustment Amount"
+    },
+    "carrier_name": {
+     "dbx_business_glossary_term": "Carrier Name"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "credit_memo_issued_date": {
+     "dbx_business_glossary_term": "Credit Memo Issued Date"
+    },
+    "credit_memo_posted_date": {
+     "dbx_business_glossary_term": "Credit Memo Posted Date"
+    },
+    "credit_memo_status": {
+     "dbx_business_glossary_term": "Credit Memo Status"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "customer_responsible_flag": {
+     "dbx_business_glossary_term": "Customer Responsible Flag"
+    },
+    "disposition_instruction": {
+     "dbx_business_glossary_term": "Disposition Instruction"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel",
+     "dbx_value_regex": "^[A-Z0-9]{2}$"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division",
+     "dbx_value_regex": "^[A-Z0-9]{2}$"
+    },
+    "goods_received_date": {
+     "dbx_business_glossary_term": "Goods Received Date"
+    },
+    "inspection_completed_date": {
+     "dbx_business_glossary_term": "Inspection Completed Date"
+    },
+    "inspector_name": {
+     "dbx_business_glossary_term": "Inspector Name"
+    },
+    "lot_batch_number": {
+     "dbx_business_glossary_term": "Lot Batch Number",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "original_unit_price": {
+     "dbx_business_glossary_term": "Original Unit Price"
+    },
+    "quality_inspection_result": {
+     "dbx_business_glossary_term": "Quality Inspection Result",
+     "dbx_value_regex": "passed|failed|partial|not_inspected"
+    },
+    "restocking_fee_amount": {
+     "dbx_business_glossary_term": "Restocking Fee Amount"
+    },
+    "return_authorization_date": {
+     "dbx_business_glossary_term": "Return Authorization Date"
+    },
+    "return_authorization_number": {
+     "dbx_business_glossary_term": "Return Merchandise Authorization (RMA) Number",
+     "dbx_value_regex": "^RMA-[A-Z0-9]{8,12}$"
+    },
+    "return_order_type": {
+     "dbx_business_glossary_term": "Return Order Type",
+     "dbx_value_regex": "retail_account_return|distributor_return|dtc_consumer_return|wholesale_return"
+    },
+    "return_reason_code": {
+     "dbx_business_glossary_term": "Return Reason Code"
+    },
+    "return_reason_description": {
+     "dbx_business_glossary_term": "Return Reason Description"
+    },
+    "return_request_date": {
+     "dbx_business_glossary_term": "Return Request Date"
+    },
+    "return_shipping_cost": {
+     "dbx_business_glossary_term": "Return Shipping Cost"
+    },
+    "return_status": {
+     "dbx_business_glossary_term": "Return Status"
+    },
+    "return_value_gross": {
+     "dbx_business_glossary_term": "Return Value Gross"
+    },
+    "return_value_net": {
+     "dbx_business_glossary_term": "Return Value Net"
+    },
+    "returned_quantity": {
+     "dbx_business_glossary_term": "Returned Quantity"
+    },
+    "returned_quantity_uom": {
+     "dbx_business_glossary_term": "Returned Quantity Unit of Measure (UOM)"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "tracking_number": {
+     "dbx_business_glossary_term": "Tracking Number",
+     "dbx_value_regex": "^[A-Z0-9]{10,30}$"
+    },
+    "warehouse_location_code": {
+     "dbx_business_glossary_term": "Warehouse Location Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By"
+    }
+   }
+  },
+  "territory": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "territory_id": {
+     "dbx_business_glossary_term": "Territory Identifier"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Facility Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "account_count": {
+     "dbx_business_glossary_term": "Account Count"
+    },
+    "acv_coverage": {
+     "dbx_business_glossary_term": "All Commodity Volume (ACV) Coverage"
+    },
+    "annual_quota_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Annual Quota Amount"
+    },
+    "call_frequency_days": {
+     "dbx_business_glossary_term": "Call Frequency in Days"
+    },
+    "channel_assignment": {
+     "dbx_business_glossary_term": "Channel Assignment"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Territory Code",
+     "dbx_value_regex": "^[A-Z0-9]{3,12}$"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel"
+    },
+    "district": {
+     "dbx_business_glossary_term": "Sales District"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division"
+    },
+    "dsd_eligible_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Eligible Flag"
+    },
+    "edi_capability_flag": {
+     "dbx_business_glossary_term": "Electronic Data Interchange (EDI) Capability Flag"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By User"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Territory Name"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Territory Notes"
+    },
+    "pog_compliance_required_flag": {
+     "dbx_business_glossary_term": "Planogram (POG) Compliance Required Flag"
+    },
+    "postal_code_list": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code List"
+    },
+    "priority_tier": {
+     "dbx_business_glossary_term": "Priority Tier",
+     "dbx_value_regex": "tier_1|tier_2|tier_3|strategic|standard"
+    },
+    "quota_currency_code": {
+     "dbx_business_glossary_term": "Quota Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "region": {
+     "dbx_business_glossary_term": "Sales Region"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization"
+    },
+    "state_province_list": {
+     "dbx_business_glossary_term": "State or Province List"
+    },
+    "store_count": {
+     "dbx_business_glossary_term": "Store Count"
+    },
+    "tdp_coverage": {
+     "dbx_business_glossary_term": "Total Distribution Points (TDP) Coverage"
+    },
+    "territory_status": {
+     "dbx_business_glossary_term": "Territory Status",
+     "dbx_value_regex": "active|inactive|pending|suspended|archived"
+    },
+    "territory_type": {
+     "dbx_business_glossary_term": "Territory Type",
+     "dbx_value_regex": "field|key_account|national_account|regional|district|channel"
+    },
+    "trade_class": {
+     "dbx_business_glossary_term": "Trade Class"
+    },
+    "vmi_eligible_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Eligible Flag"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  },
+  "rep": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "account_management"
+   },
+   "column_tags": {
+    "rep_id": {
+     "dbx_business_glossary_term": "Rep Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Org Unit Id (Foreign Key)"
+    },
+    "manager_rep_id": {
+     "dbx_business_glossary_term": "Manager Sales Representative ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "territory_id": {
+     "dbx_business_glossary_term": "Sales Territory ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "badge_number": {
+     "dbx_business_glossary_term": "Badge Number"
+    },
+    "certification_status": {
+     "dbx_business_glossary_term": "Certification Status",
+     "dbx_value_regex": "certified|pending|expired|not_required"
+    },
+    "channel_specialization": {
+     "dbx_business_glossary_term": "Channel Specialization"
+    },
+    "commission_plan_code": {
+     "dbx_business_glossary_term": "Commission Plan Code"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "current_quota_amount": {
+     "dbx_business_glossary_term": "Current Quota Amount"
+    },
+    "email_address": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "first_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "First Name"
+    },
+    "full_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Full Name"
+    },
+    "hire_date": {
+     "dbx_business_glossary_term": "Hire Date"
+    },
+    "language_code": {
+     "dbx_business_glossary_term": "Language Code",
+     "dbx_value_regex": "^[a-z]{2}$"
+    },
+    "last_certification_date": {
+     "dbx_business_glossary_term": "Last Certification Date"
+    },
+    "last_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Last Name"
+    },
+    "last_performance_review_date": {
+     "dbx_business_glossary_term": "Last Performance Review Date"
+    },
+    "mobile_device_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Mobile Device ID"
+    },
+    "mobile_phone": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Mobile Phone Number"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By User"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "performance_rating": {
+     "dbx_business_glossary_term": "Performance Rating",
+     "dbx_value_regex": "exceeds|meets|below|new_hire"
+    },
+    "quota_currency_code": {
+     "dbx_business_glossary_term": "Quota Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "quota_period": {
+     "dbx_business_glossary_term": "Quota Period",
+     "dbx_value_regex": "monthly|quarterly|annual"
+    },
+    "rep_number": {
+     "dbx_business_glossary_term": "Sales Representative Number",
+     "dbx_value_regex": "^[A-Z0-9]{6,12}$"
+    },
+    "rep_status": {
+     "dbx_business_glossary_term": "Sales Representative Status",
+     "dbx_value_regex": "active|inactive|on_leave|suspended|terminated"
+    },
+    "rep_type": {
+     "dbx_business_glossary_term": "Sales Representative Type",
+     "dbx_value_regex": "field_sales|key_account_manager|national_account_manager|inside_sales|dsd_driver|regional_manager"
+    },
+    "sales_group": {
+     "dbx_business_glossary_term": "Sales Group"
+    },
+    "sales_office": {
+     "dbx_business_glossary_term": "Sales Office"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization"
+    },
+    "sfa_user_code": {
+     "dbx_confidential": "true",
+     "dbx_pii": "true",
+     "dbx_business_glossary_term": "Sales Force Automation (SFA) User ID"
+    },
+    "termination_date": {
+     "dbx_business_glossary_term": "Termination Date"
+    },
+    "vehicle_assigned": {
+     "dbx_business_glossary_term": "Vehicle Assigned Flag"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  },
+  "price_list": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "pricing_strategy"
+   },
+   "column_tags": {
+    "price_list_id": {
+     "dbx_business_glossary_term": "Price List ID"
+    },
+    "superseded_by_price_list_id": {
+     "dbx_business_glossary_term": "Superseded By Price List ID"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract Id (Foreign Key)"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "not_submitted|pending|approved|rejected"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approved Timestamp"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Price List Code",
+     "dbx_value_regex": "^[A-Z0-9_-]{4,20}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "description": {
+     "dbx_business_glossary_term": "Price List Description"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel",
+     "dbx_value_regex": "retail|wholesale|dtc|ecommerce|foodservice|institutional"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "external_reference_code": {
+     "dbx_business_glossary_term": "External Reference ID"
+    },
+    "freight_inclusion_flag": {
+     "dbx_business_glossary_term": "Freight Inclusion Flag"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope"
+    },
+    "incoterm": {
+     "dbx_business_glossary_term": "Incoterm",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "moq_uom": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ) Unit of Measure (UoM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "msrp_flag": {
+     "dbx_business_glossary_term": "Manufacturer Suggested Retail Price (MSRP) Flag"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Price List Name"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Notes"
+    },
+    "payment_terms": {
+     "dbx_business_glossary_term": "Payment Terms"
+    },
+    "price_basis": {
+     "dbx_business_glossary_term": "Price Basis",
+     "dbx_value_regex": "list_price|cost_plus|market_based|competitive|value_based"
+    },
+    "price_list_status": {
+     "dbx_business_glossary_term": "Price List Status",
+     "dbx_value_regex": "draft|pending_approval|active|inactive|expired|superseded"
+    },
+    "price_list_type": {
+     "dbx_business_glossary_term": "Price List Type",
+     "dbx_value_regex": "standard|promotional|contract|channel_specific|seasonal|clearance"
+    },
+    "price_protection_days": {
+     "dbx_business_glossary_term": "Price Protection Days"
+    },
+    "price_protection_flag": {
+     "dbx_business_glossary_term": "Price Protection Flag"
+    },
+    "price_rounding_rule": {
+     "dbx_business_glossary_term": "Price Rounding Rule",
+     "dbx_value_regex": "none|nearest_cent|nearest_nickel|nearest_dime|nearest_dollar|up_to_99"
+    },
+    "price_uom": {
+     "dbx_business_glossary_term": "Price Unit of Measure (UoM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "pricing_condition_type": {
+     "dbx_business_glossary_term": "Pricing Condition Type",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "rsp_flag": {
+     "dbx_business_glossary_term": "Recommended Selling Price (RSP) Flag"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "tax_classification": {
+     "dbx_business_glossary_term": "Tax Classification"
+    },
+    "trade_class": {
+     "dbx_business_glossary_term": "Trade Class"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Version Number"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By"
+    }
+   }
+  },
+  "price_list_item": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "pricing_strategy"
+   },
+   "column_tags": {
+    "price_list_item_id": {
+     "dbx_business_glossary_term": "Price List Item ID"
+    },
+    "price_list_id": {
+     "dbx_business_glossary_term": "Price List ID"
+    },
+    "promoted_price_id": {
+     "dbx_business_glossary_term": "Promoted Price Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Product ID"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "draft|pending|approved|rejected"
+    },
+    "approved_by": {
+     "dbx_business_glossary_term": "Approved By User"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "channel_type": {
+     "dbx_business_glossary_term": "Sales Channel Type",
+     "dbx_value_regex": "retail|wholesale|dtc|ecommerce|foodservice|export"
+    },
+    "condition_type": {
+     "dbx_business_glossary_term": "SAP Condition Type"
+    },
+    "cost_price": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost Price"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "customer_segment": {
+     "dbx_business_glossary_term": "Customer Segment"
+    },
+    "distribution_channel": {
+     "dbx_business_glossary_term": "Distribution Channel"
+    },
+    "division": {
+     "dbx_business_glossary_term": "Division"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{8}$|^[0-9]{12}$|^[0-9]{13}$|^[0-9]{14}$"
+    },
+    "item_sequence": {
+     "dbx_business_glossary_term": "Item Sequence Number"
+    },
+    "list_price": {
+     "dbx_business_glossary_term": "List Price"
+    },
+    "margin_percentage": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Gross Margin Percentage"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Record Modified By User"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Record Modified Timestamp"
+    },
+    "moq_uom": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ) Unit of Measure"
+    },
+    "msrp_price": {
+     "dbx_business_glossary_term": "Manufacturer Suggested Retail Price (MSRP)"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Price List Item Notes"
+    },
+    "override_flag": {
+     "dbx_business_glossary_term": "Price Override Flag"
+    },
+    "price_list_item_status": {
+     "dbx_business_glossary_term": "Price List Item Status",
+     "dbx_value_regex": "active|inactive|pending|expired|superseded"
+    },
+    "price_uom": {
+     "dbx_business_glossary_term": "Price Unit of Measure (UOM)"
+    },
+    "pricing_unit_quantity": {
+     "dbx_business_glossary_term": "Pricing Unit Quantity"
+    },
+    "promotional_flag": {
+     "dbx_business_glossary_term": "Promotional Price Flag"
+    },
+    "rsp_price": {
+     "dbx_business_glossary_term": "Recommended Selling Price (RSP)"
+    },
+    "sales_organization": {
+     "dbx_business_glossary_term": "Sales Organization"
+    },
+    "sap_condition_record_number": {
+     "dbx_business_glossary_term": "SAP Condition Record Number"
+    },
+    "scale_basis": {
+     "dbx_business_glossary_term": "Price Scale Basis",
+     "dbx_value_regex": "quantity|value|weight|volume"
+    },
+    "scale_quantity_from": {
+     "dbx_business_glossary_term": "Scale Quantity From"
+    },
+    "scale_quantity_to": {
+     "dbx_business_glossary_term": "Scale Quantity To"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Record Created By User"
+    }
+   }
+  },
+  "assignment": {
+   "table_tags": {
+    "dbx_data_type": "association_data",
+    "dbx_subdomain": "account_management",
+    "dbx_association_edges": "sales.rep,sales.trade_account"
+   },
+   "column_tags": {
+    "assignment_id": {
+     "dbx_business_glossary_term": "Assignment Identifier"
+    },
+    "rep_id": {
+     "dbx_business_glossary_term": "Assignment - Rep Id"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Assignment - Trade Account Id"
+    },
+    "assignment_role": {
+     "dbx_business_glossary_term": "Assignment Role"
+    },
+    "assignment_status": {
+     "dbx_business_glossary_term": "Assignment Status"
+    },
+    "call_frequency_days": {
+     "dbx_business_glossary_term": "Call Frequency in Days"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Assignment Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Assignment Effective Start Date"
+    },
+    "is_primary_rep": {
+     "dbx_business_glossary_term": "Primary Representative Flag"
+    },
+    "modified_by": {
+     "dbx_business_glossary_term": "Modified By User"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "created_by": {
+     "dbx_business_glossary_term": "Created By User"
+    }
+   }
+  }
+ }
+}

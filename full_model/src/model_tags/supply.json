@@ -1,0 +1,1508 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_lakehouse.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "supply",
+ "schema_comment": "Owns end-to-end supply chain planning and orchestration including demand planning, supply planning, inventory optimization, S&OP/IBP processes, DRP execution, safety stock targets, ATP/CTP calculations, supply network design, demand sensing, forecast accuracy tracking, and supply risk management. Integrates with SAP IBP.",
+ "tag_count": 549,
+ "foreign_key_count": 75,
+ "schema_tags": {
+  "dbx_domain": "supply",
+  "dbx_division": "operations"
+ },
+ "tables": {
+  "demand_plan": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "demand_planning"
+   },
+   "column_tags": {
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Brand Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "sku_planning_param_id": {
+     "dbx_business_glossary_term": "Sku Planning Param Id (Foreign Key)"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Planning Cycle ID"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Location ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "draft|submitted|under_review|approved|rejected|locked"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approved Timestamp"
+    },
+    "commercial_overlay_quantity": {
+     "dbx_business_glossary_term": "Commercial Overlay Quantity"
+    },
+    "confidence_level": {
+     "dbx_business_glossary_term": "Confidence Level",
+     "dbx_value_regex": "high|medium|low"
+    },
+    "consensus_quantity": {
+     "dbx_business_glossary_term": "Consensus Quantity"
+    },
+    "created_by_persona": {
+     "dbx_business_glossary_term": "Created By Persona",
+     "dbx_value_regex": "demand_planner|sales_manager|marketing_analyst|supply_planner|system_generated"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "demand_pattern_type": {
+     "dbx_business_glossary_term": "Demand Pattern Type",
+     "dbx_value_regex": "stable|seasonal|trending|intermittent|lumpy|erratic"
+    },
+    "demand_sensing_signal": {
+     "dbx_business_glossary_term": "Demand Sensing Signal",
+     "dbx_value_regex": "increasing|stable|decreasing|volatile"
+    },
+    "effective_from_date": {
+     "dbx_business_glossary_term": "Effective From Date"
+    },
+    "effective_to_date": {
+     "dbx_business_glossary_term": "Effective To Date"
+    },
+    "forecast_accuracy_percentage": {
+     "dbx_business_glossary_term": "Forecast Accuracy Percentage"
+    },
+    "forecast_bias_percentage": {
+     "dbx_business_glossary_term": "Forecast Bias Percentage"
+    },
+    "is_consensus_version": {
+     "dbx_business_glossary_term": "Is Consensus Version"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lifecycle_stage": {
+     "dbx_business_glossary_term": "Lifecycle Stage",
+     "dbx_value_regex": "introduction|growth|maturity|decline|phase_out"
+    },
+    "marketing_event_uplift_quantity": {
+     "dbx_business_glossary_term": "Marketing Event Uplift Quantity"
+    },
+    "npd_launch_volume_quantity": {
+     "dbx_business_glossary_term": "New Product Development (NPD) Launch Volume Quantity"
+    },
+    "planner_notes": {
+     "dbx_business_glossary_term": "Planner Notes"
+    },
+    "planning_bucket": {
+     "dbx_business_glossary_term": "Planning Bucket",
+     "dbx_value_regex": "daily|weekly|monthly|quarterly"
+    },
+    "planning_period_end_date": {
+     "dbx_business_glossary_term": "Planning Period End Date"
+    },
+    "planning_period_start_date": {
+     "dbx_business_glossary_term": "Planning Period Start Date"
+    },
+    "promotional_overlay_quantity": {
+     "dbx_business_glossary_term": "Promotional Overlay Quantity"
+    },
+    "risk_category": {
+     "dbx_business_glossary_term": "Risk Category",
+     "dbx_value_regex": "supply_constraint|demand_volatility|new_product_uncertainty|promotional_risk|market_disruption|none"
+    },
+    "risk_flag": {
+     "dbx_business_glossary_term": "Risk Flag"
+    },
+    "source_system_record_code": {
+     "dbx_business_glossary_term": "Source System Record ID"
+    },
+    "statistical_baseline_quantity": {
+     "dbx_business_glossary_term": "Statistical Baseline Quantity"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "variance_to_baseline_quantity": {
+     "dbx_business_glossary_term": "Variance to Baseline Quantity"
+    },
+    "version_name": {
+     "dbx_business_glossary_term": "Version Name"
+    },
+    "version_sequence_number": {
+     "dbx_business_glossary_term": "Version Sequence Number"
+    },
+    "version_type": {
+     "dbx_business_glossary_term": "Version Type",
+     "dbx_value_regex": "statistical_baseline|field_sales_overlay|marketing_adjusted|consensus|final_approved|promotional_overlay"
+    }
+   }
+  },
+  "forecast_version": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "demand_planning"
+   },
+   "column_tags": {
+    "forecast_version_id": {
+     "dbx_business_glossary_term": "Forecast Version Identifier (ID)"
+    },
+    "baseline_version_forecast_version_id": {
+     "dbx_business_glossary_term": "Baseline Version Identifier (ID)"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id"
+    },
+    "forecast_sop_cycle_id": {
+     "dbx_business_glossary_term": "Planning Cycle Identifier (ID)"
+    },
+    "primary_forecast_sop_cycle_id": {
+     "dbx_business_glossary_term": "Sop Cycle Id (Foreign Key)"
+    },
+    "aggregation_level": {
+     "dbx_business_glossary_term": "Forecast Aggregation Level"
+    },
+    "approval_notes": {
+     "dbx_business_glossary_term": "Approval Notes"
+    },
+    "approved_timestamp": {
+     "dbx_business_glossary_term": "Approved Timestamp"
+    },
+    "archived_timestamp": {
+     "dbx_business_glossary_term": "Archived Timestamp"
+    },
+    "bias_percentage": {
+     "dbx_business_glossary_term": "Forecast Bias Percentage"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "demand_sensing_applied": {
+     "dbx_business_glossary_term": "Demand Sensing Applied Flag"
+    },
+    "effective_from_date": {
+     "dbx_business_glossary_term": "Effective From Date"
+    },
+    "effective_to_date": {
+     "dbx_business_glossary_term": "Effective To Date"
+    },
+    "forecast_accuracy_percentage": {
+     "dbx_business_glossary_term": "Forecast Accuracy Percentage"
+    },
+    "forecast_source_system": {
+     "dbx_business_glossary_term": "Forecast Source System"
+    },
+    "is_active_version": {
+     "dbx_business_glossary_term": "Is Active Version Flag"
+    },
+    "is_consensus_version": {
+     "dbx_business_glossary_term": "Is Consensus Version Flag"
+    },
+    "is_final_approved_version": {
+     "dbx_business_glossary_term": "Is Final Approved Version Flag"
+    },
+    "mean_absolute_percentage_error": {
+     "dbx_business_glossary_term": "Mean Absolute Percentage Error (MAPE)"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "new_product_introduction_included": {
+     "dbx_business_glossary_term": "New Product Introduction (NPI) Included Flag"
+    },
+    "planning_horizon_end_date": {
+     "dbx_business_glossary_term": "Planning Horizon End Date"
+    },
+    "planning_horizon_start_date": {
+     "dbx_business_glossary_term": "Planning Horizon Start Date"
+    },
+    "promotional_events_included": {
+     "dbx_business_glossary_term": "Promotional Events Included Flag"
+    },
+    "rejection_reason": {
+     "dbx_business_glossary_term": "Rejection Reason"
+    },
+    "statistical_model_applied": {
+     "dbx_business_glossary_term": "Statistical Model Applied"
+    },
+    "time_bucket": {
+     "dbx_business_glossary_term": "Forecast Time Bucket",
+     "dbx_value_regex": "daily|weekly|monthly|quarterly|annual"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "version_code": {
+     "dbx_business_glossary_term": "Forecast Version Code"
+    },
+    "version_description": {
+     "dbx_business_glossary_term": "Forecast Version Description"
+    },
+    "version_name": {
+     "dbx_business_glossary_term": "Forecast Version Name"
+    },
+    "version_sequence_number": {
+     "dbx_business_glossary_term": "Version Sequence Number"
+    },
+    "version_status": {
+     "dbx_business_glossary_term": "Forecast Version Status",
+     "dbx_value_regex": "draft|in_review|approved|rejected|archived|active"
+    },
+    "version_type": {
+     "dbx_business_glossary_term": "Forecast Version Type",
+     "dbx_value_regex": "statistical_baseline|field_sales_overlay|marketing_adjusted|consensus|final_approved|simulation"
+    }
+   }
+  },
+  "inventory_policy": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "inventory_management"
+   },
+   "column_tags": {
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy ID"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sop Cycle Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Location ID"
+    },
+    "approval_date": {
+     "dbx_business_glossary_term": "Approval Date"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "not_submitted|pending_review|approved|rejected|revision_required"
+    },
+    "approved_by_name": {
+     "dbx_business_glossary_term": "Approved By Name"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "customer_otif_commitment_percent": {
+     "dbx_business_glossary_term": "Customer OTIF Commitment Percent"
+    },
+    "cycle_stock_target_units": {
+     "dbx_business_glossary_term": "Cycle Stock Target Units"
+    },
+    "demand_variability_coefficient": {
+     "dbx_business_glossary_term": "Demand Variability Coefficient"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "fill_rate_target_percent": {
+     "dbx_business_glossary_term": "Fill Rate Target Percent"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "last_review_date": {
+     "dbx_business_glossary_term": "Last Review Date"
+    },
+    "lead_time_variability_days": {
+     "dbx_business_glossary_term": "Lead Time Variability Days"
+    },
+    "maximum_stock_level_units": {
+     "dbx_business_glossary_term": "Maximum Stock Level Units"
+    },
+    "measurement_window_days": {
+     "dbx_business_glossary_term": "Measurement Window Days"
+    },
+    "minimum_stock_level_units": {
+     "dbx_business_glossary_term": "Minimum Stock Level Units"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "on_time_delivery_target_percent": {
+     "dbx_business_glossary_term": "On Time Delivery Target Percent"
+    },
+    "otif_composite_target_percent": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Composite Target Percent"
+    },
+    "penalty_clause_indicator": {
+     "dbx_business_glossary_term": "Penalty Clause Indicator"
+    },
+    "policy_code": {
+     "dbx_business_glossary_term": "Inventory Policy Code",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "policy_notes": {
+     "dbx_business_glossary_term": "Policy Notes"
+    },
+    "policy_status": {
+     "dbx_business_glossary_term": "Inventory Policy Status"
+    },
+    "reorder_point_units": {
+     "dbx_business_glossary_term": "Reorder Point Units"
+    },
+    "replenishment_method": {
+     "dbx_business_glossary_term": "Replenishment Method",
+     "dbx_value_regex": "MRP|DRP|VMI|JIT|kanban|fixed_order_quantity"
+    },
+    "retailer_mandated_target_flag": {
+     "dbx_business_glossary_term": "Retailer Mandated Target Flag"
+    },
+    "review_cycle_days": {
+     "dbx_business_glossary_term": "Review Cycle Days"
+    },
+    "safety_stock_calculated_units": {
+     "dbx_business_glossary_term": "Safety Stock Calculated Units"
+    },
+    "safety_stock_calculation_method": {
+     "dbx_business_glossary_term": "Safety Stock Calculation Method",
+     "dbx_value_regex": "fixed|forecast_error|demand_variability|lead_time_variability|combined_variability|service_level_driven"
+    },
+    "safety_stock_days_of_supply": {
+     "dbx_business_glossary_term": "Safety Stock Days of Supply"
+    },
+    "safety_stock_target_units": {
+     "dbx_business_glossary_term": "Safety Stock Target Units"
+    },
+    "service_level_target_percent": {
+     "dbx_business_glossary_term": "Service Level Target Percent"
+    }
+   }
+  },
+  "safety_stock": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inventory_management"
+   },
+   "column_tags": {
+    "safety_stock_id": {
+     "dbx_business_glossary_term": "Safety Stock Identifier (ID)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Identifier (ID)"
+    },
+    "sku_planning_param_id": {
+     "dbx_business_glossary_term": "Sku Planning Param Id (Foreign Key)"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sop Cycle Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Location Identifier (ID)"
+    },
+    "abc_classification": {
+     "dbx_business_glossary_term": "ABC Inventory Classification",
+     "dbx_value_regex": "A|B|C"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Safety Stock Approval Timestamp"
+    },
+    "approved_safety_stock_units": {
+     "dbx_business_glossary_term": "Approved Safety Stock Quantity (Units)"
+    },
+    "average_daily_demand_units": {
+     "dbx_business_glossary_term": "Average Daily Demand (Units)"
+    },
+    "average_lead_time_days": {
+     "dbx_business_glossary_term": "Average Lead Time (Days)"
+    },
+    "calculated_safety_stock_units": {
+     "dbx_business_glossary_term": "Calculated Safety Stock Quantity (Units)"
+    },
+    "calculation_method": {
+     "dbx_business_glossary_term": "Safety Stock Calculation Method",
+     "dbx_value_regex": "statistical|days_of_supply|manual_override|service_level_based|lead_time_based|hybrid"
+    },
+    "calculation_timestamp": {
+     "dbx_business_glossary_term": "Safety Stock Calculation Timestamp"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Creation Timestamp"
+    },
+    "days_of_supply_target": {
+     "dbx_business_glossary_term": "Days of Supply Target"
+    },
+    "demand_classification": {
+     "dbx_business_glossary_term": "Demand Pattern Classification",
+     "dbx_value_regex": "steady|seasonal|erratic|lumpy|intermittent|obsolete"
+    },
+    "demand_variability_coefficient": {
+     "dbx_business_glossary_term": "Demand Variability Coefficient"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Safety Stock Effective Date"
+    },
+    "expiration_date": {
+     "dbx_business_glossary_term": "Safety Stock Expiration Date"
+    },
+    "forecast_accuracy_percent": {
+     "dbx_business_glossary_term": "Forecast Accuracy Percentage"
+    },
+    "holding_cost_per_unit": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Inventory Holding Cost Per Unit"
+    },
+    "is_active": {
+     "dbx_business_glossary_term": "Active Status Indicator"
+    },
+    "last_review_timestamp": {
+     "dbx_business_glossary_term": "Last Review Timestamp"
+    },
+    "lead_time_variability_days": {
+     "dbx_business_glossary_term": "Lead Time Variability (Days)"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Record Modification Timestamp"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Scheduled Review Date"
+    },
+    "order_multiple": {
+     "dbx_business_glossary_term": "Order Multiple Quantity"
+    },
+    "override_notes": {
+     "dbx_business_glossary_term": "Safety Stock Override Notes"
+    },
+    "override_reason_code": {
+     "dbx_business_glossary_term": "Safety Stock Override Reason Code",
+     "dbx_value_regex": "promotional_event|seasonal_peak|supply_risk|new_product_launch|phase_out|quality_issue"
+    },
+    "planning_period_end_date": {
+     "dbx_business_glossary_term": "Planning Period End Date"
+    },
+    "planning_period_start_date": {
+     "dbx_business_glossary_term": "Planning Period Start Date"
+    },
+    "review_status": {
+     "dbx_business_glossary_term": "Safety Stock Review Status",
+     "dbx_value_regex": "pending_review|approved|rejected|under_revision|expired"
+    },
+    "shelf_life_days": {
+     "dbx_business_glossary_term": "Product Shelf Life (Days)"
+    },
+    "stockout_cost_per_unit": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Stockout Cost Per Unit"
+    },
+    "supply_risk_score": {
+     "dbx_business_glossary_term": "Supply Risk Score"
+    },
+    "target_service_level_percent": {
+     "dbx_business_glossary_term": "Target Service Level Percentage"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "xyz_classification": {
+     "dbx_business_glossary_term": "XYZ Demand Variability Classification",
+     "dbx_value_regex": "X|Y|Z"
+    },
+    "z_score": {
+     "dbx_business_glossary_term": "Z-Score (Standard Normal Deviate)"
+    }
+   }
+  },
+  "replenishment_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "network_operations"
+   },
+   "column_tags": {
+    "replenishment_order_id": {
+     "dbx_business_glossary_term": "Supply Replenishment Order ID"
+    },
+    "consensus_demand_id": {
+     "dbx_business_glossary_term": "Consensus Demand Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "destination_location_supply_network_node_id": {
+     "dbx_business_glossary_term": "Destination Location ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "inbound_receipt_id": {
+     "dbx_business_glossary_term": "Inbound Receipt Id (Foreign Key)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "network_lane_id": {
+     "dbx_business_glossary_term": "Network Lane Id (Foreign Key)"
+    },
+    "primary_supply_network_node_id": {
+     "dbx_business_glossary_term": "Source Location ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "safety_stock_id": {
+     "dbx_business_glossary_term": "Safety Stock Id (Foreign Key)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Shipment ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sop Cycle Id (Foreign Key)"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract Id (Foreign Key)"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "actual_receipt_date": {
+     "dbx_business_glossary_term": "Actual Receipt Date"
+    },
+    "actual_ship_date": {
+     "dbx_business_glossary_term": "Actual Ship Date"
+    },
+    "available_to_promise_quantity": {
+     "dbx_business_glossary_term": "Available to Promise (ATP) Quantity"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Cancellation Reason"
+    },
+    "confirmed_quantity": {
+     "dbx_business_glossary_term": "Confirmed Quantity"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "drp_run_timestamp": {
+     "dbx_business_glossary_term": "Distribution Requirements Planning (DRP) Run Timestamp"
+    },
+    "forecast_demand_quantity": {
+     "dbx_business_glossary_term": "Forecast Demand Quantity"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "order_cost_amount": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Replenishment Order Cost Amount"
+    },
+    "order_notes": {
+     "dbx_business_glossary_term": "Replenishment Order Notes"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "Replenishment Order Status",
+     "dbx_value_regex": "draft|open|in_transit|received|cancelled|closed"
+    },
+    "order_type": {
+     "dbx_business_glossary_term": "Replenishment Order Type",
+     "dbx_value_regex": "planned|firmed|released"
+    },
+    "planned_receipt_date": {
+     "dbx_business_glossary_term": "Planned Receipt Date"
+    },
+    "planned_ship_date": {
+     "dbx_business_glossary_term": "Planned Ship Date"
+    },
+    "priority_code": {
+     "dbx_business_glossary_term": "Replenishment Priority Code",
+     "dbx_value_regex": "critical|high|normal|low"
+    },
+    "received_quantity": {
+     "dbx_business_glossary_term": "Received Quantity"
+    },
+    "replenishment_order_number": {
+     "dbx_business_glossary_term": "Replenishment Order Number",
+     "dbx_value_regex": "^REP-[0-9]{10}$"
+    },
+    "requested_quantity": {
+     "dbx_business_glossary_term": "Requested Quantity"
+    },
+    "safety_stock_trigger_flag": {
+     "dbx_business_glossary_term": "Safety Stock Trigger Flag"
+    },
+    "shipped_quantity": {
+     "dbx_business_glossary_term": "Shipped Quantity"
+    },
+    "transit_lead_time_days": {
+     "dbx_business_glossary_term": "Transit Lead Time (Days)"
+    },
+    "transportation_mode": {
+     "dbx_business_glossary_term": "Transportation Mode",
+     "dbx_value_regex": "truck|rail|air|ocean|intermodal"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    }
+   }
+  },
+  "network_node": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "network_operations"
+   },
+   "column_tags": {
+    "network_node_id": {
+     "dbx_business_glossary_term": "Network Node Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "address_line_1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "address_line_2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "capacity_class": {
+     "dbx_business_glossary_term": "Capacity Class",
+     "dbx_value_regex": "small|medium|large|extra_large|mega"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "cross_dock_enabled_flag": {
+     "dbx_business_glossary_term": "Cross-Dock Enabled Flag"
+    },
+    "dsd_enabled_flag": {
+     "dbx_business_glossary_term": "Direct Store Delivery (DSD) Enabled Flag"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "gln": {
+     "dbx_business_glossary_term": "Global Location Number (GLN)",
+     "dbx_value_regex": "^[0-9]{13}$"
+    },
+    "hazmat_certified_flag": {
+     "dbx_business_glossary_term": "Hazardous Materials (HAZMAT) Certified Flag"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "lead_time_days": {
+     "dbx_business_glossary_term": "Lead Time Days"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "node_code": {
+     "dbx_business_glossary_term": "Node Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,20}$"
+    },
+    "node_name": {
+     "dbx_business_glossary_term": "Node Name"
+    },
+    "node_status": {
+     "dbx_business_glossary_term": "Node Status",
+     "dbx_value_regex": "active|inactive|planned|decommissioned|temporarily_closed"
+    },
+    "node_type": {
+     "dbx_business_glossary_term": "Node Type"
+    },
+    "ownership_type": {
+     "dbx_business_glossary_term": "Ownership Type",
+     "dbx_value_regex": "owned|leased|3pl_managed|co_manufacturer|contract"
+    },
+    "planning_group": {
+     "dbx_business_glossary_term": "Planning Group"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "replenishment_frequency": {
+     "dbx_business_glossary_term": "Replenishment Frequency",
+     "dbx_value_regex": "daily|weekly|biweekly|monthly|on_demand"
+    },
+    "safety_stock_days": {
+     "dbx_business_glossary_term": "Safety Stock Days"
+    },
+    "sourcing_priority": {
+     "dbx_business_glossary_term": "Sourcing Priority"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "storage_capacity_units": {
+     "dbx_business_glossary_term": "Storage Capacity Units"
+    },
+    "storage_capacity_uom": {
+     "dbx_business_glossary_term": "Storage Capacity Unit of Measure (UOM)",
+     "dbx_value_regex": "pallets|cases|cubic_meters|square_meters"
+    },
+    "temperature_controlled_flag": {
+     "dbx_business_glossary_term": "Temperature Controlled Flag"
+    },
+    "throughput_capacity_daily": {
+     "dbx_business_glossary_term": "Daily Throughput Capacity"
+    },
+    "throughput_capacity_uom": {
+     "dbx_business_glossary_term": "Throughput Capacity Unit of Measure (UOM)",
+     "dbx_value_regex": "cases_per_day|pallets_per_day|units_per_day|tons_per_day"
+    },
+    "time_zone": {
+     "dbx_business_glossary_term": "Time Zone"
+    },
+    "vmi_enabled_flag": {
+     "dbx_business_glossary_term": "Vendor Managed Inventory (VMI) Enabled Flag"
+    }
+   }
+  },
+  "network_lane": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "network_operations"
+   },
+   "column_tags": {
+    "network_lane_id": {
+     "dbx_business_glossary_term": "Network Lane Identifier"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "destination_location_supply_network_node_id": {
+     "dbx_business_glossary_term": "Destination Location ID"
+    },
+    "primary_supply_network_node_id": {
+     "dbx_business_glossary_term": "Source Location ID"
+    },
+    "supplier_contract_id": {
+     "dbx_business_glossary_term": "Supplier Contract Id (Foreign Key)"
+    },
+    "supplier_id": {
+     "dbx_business_glossary_term": "Carrier ID"
+    },
+    "capacity_quantity": {
+     "dbx_business_glossary_term": "Capacity Quantity"
+    },
+    "capacity_uom": {
+     "dbx_business_glossary_term": "Capacity Unit of Measure"
+    },
+    "compliance_requirements": {
+     "dbx_business_glossary_term": "Compliance Requirements"
+    },
+    "cost_per_unit": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost Per Unit"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "is_active": {
+     "dbx_business_glossary_term": "Is Active Flag"
+    },
+    "is_primary_lane": {
+     "dbx_business_glossary_term": "Is Primary Lane Flag"
+    },
+    "lane_code": {
+     "dbx_business_glossary_term": "Lane Code",
+     "dbx_value_regex": "^[A-Z0-9]{6,20}$"
+    },
+    "lane_name": {
+     "dbx_business_glossary_term": "Lane Name"
+    },
+    "lane_type": {
+     "dbx_business_glossary_term": "Lane Type",
+     "dbx_value_regex": "production|transfer|external_procurement|direct_shipment|cross_dock|drop_ship"
+    },
+    "last_modified_by": {
+     "dbx_business_glossary_term": "Last Modified By User"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "lot_size_quantity": {
+     "dbx_business_glossary_term": "Lot Size Quantity"
+    },
+    "maximum_order_quantity": {
+     "dbx_business_glossary_term": "Maximum Order Quantity"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "network_lane_status": {
+     "dbx_business_glossary_term": "Lane Status",
+     "dbx_value_regex": "active|inactive|suspended|planned|decommissioned"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Lane Notes"
+    },
+    "otif_target_pct": {
+     "dbx_business_glossary_term": "On Time In Full (OTIF) Target Percentage"
+    },
+    "planning_group": {
+     "dbx_business_glossary_term": "Planning Group"
+    },
+    "processing_lead_time_days": {
+     "dbx_business_glossary_term": "Processing Lead Time (Days)"
+    },
+    "risk_category": {
+     "dbx_business_glossary_term": "Risk Category",
+     "dbx_value_regex": "low|medium|high|critical"
+    },
+    "safety_stock_days": {
+     "dbx_business_glossary_term": "Safety Stock Days"
+    },
+    "service_level_target_pct": {
+     "dbx_business_glossary_term": "Service Level Target Percentage"
+    },
+    "sourcing_priority": {
+     "dbx_business_glossary_term": "Sourcing Priority"
+    },
+    "standard_lead_time_days": {
+     "dbx_business_glossary_term": "Standard Lead Time (Days)"
+    },
+    "transportation_lead_time_days": {
+     "dbx_business_glossary_term": "Transportation Lead Time (Days)"
+    },
+    "transportation_mode": {
+     "dbx_business_glossary_term": "Transportation Mode",
+     "dbx_value_regex": "truck|rail|ocean|air|intermodal|parcel"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    }
+   }
+  },
+  "atp_record": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "inventory_management"
+   },
+   "column_tags": {
+    "atp_record_id": {
+     "dbx_business_glossary_term": "Atp Record Identifier"
+    },
+    "consensus_demand_id": {
+     "dbx_business_glossary_term": "Consensus Demand Id (Foreign Key)"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id (Foreign Key)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Lot Batch ID"
+    },
+    "production_order_id": {
+     "dbx_business_glossary_term": "Production Order Id (Foreign Key)"
+    },
+    "purchase_order_id": {
+     "dbx_business_glossary_term": "Purchase Order Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sop Cycle Id (Foreign Key)"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Location ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "allocated_quantity": {
+     "dbx_business_glossary_term": "Allocated Quantity"
+    },
+    "atp_calculation_method": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Calculation Method",
+     "dbx_value_regex": "simple|cumulative|multi_level|product_allocation"
+    },
+    "atp_check_horizon_days": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Check Horizon Days"
+    },
+    "atp_confirmation_number": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Confirmation Number"
+    },
+    "atp_date": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Date"
+    },
+    "atp_quantity": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Quantity"
+    },
+    "atp_status": {
+     "dbx_business_glossary_term": "Available-to-Promise (ATP) Status",
+     "dbx_value_regex": "available|constrained|blocked|expired"
+    },
+    "backorder_quantity": {
+     "dbx_business_glossary_term": "Backorder Quantity"
+    },
+    "calculation_timestamp": {
+     "dbx_business_glossary_term": "ATP Calculation Timestamp"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "ctp_quantity": {
+     "dbx_business_glossary_term": "Capable-to-Promise (CTP) Quantity"
+    },
+    "cumulative_atp_quantity": {
+     "dbx_business_glossary_term": "Cumulative Available-to-Promise (ATP) Quantity"
+    },
+    "customer_priority_tier": {
+     "dbx_business_glossary_term": "Customer Priority Tier",
+     "dbx_value_regex": "tier_1|tier_2|tier_3|standard"
+    },
+    "demand_pegging_reference": {
+     "dbx_business_glossary_term": "Demand Pegging Reference"
+    },
+    "expiration_date": {
+     "dbx_business_glossary_term": "Expiration Date"
+    },
+    "forecast_consumption_quantity": {
+     "dbx_business_glossary_term": "Forecast Consumption Quantity"
+    },
+    "intransit_quantity": {
+     "dbx_business_glossary_term": "In-Transit Quantity"
+    },
+    "minimum_shelf_life_days": {
+     "dbx_business_glossary_term": "Minimum Shelf Life Days"
+    },
+    "on_hand_inventory": {
+     "dbx_business_glossary_term": "On-Hand Inventory Quantity"
+    },
+    "planned_receipt_quantity": {
+     "dbx_business_glossary_term": "Planned Receipt Quantity"
+    },
+    "planning_version": {
+     "dbx_business_glossary_term": "Planning Version"
+    },
+    "product_allocation_group": {
+     "dbx_business_glossary_term": "Product Allocation Group"
+    },
+    "production_order_quantity": {
+     "dbx_business_glossary_term": "Production Order Quantity"
+    },
+    "purchase_order_quantity": {
+     "dbx_business_glossary_term": "Purchase Order Quantity"
+    },
+    "safety_stock_quantity": {
+     "dbx_business_glossary_term": "Safety Stock Quantity"
+    },
+    "source_system_record_code": {
+     "dbx_business_glossary_term": "Source System Record ID"
+    },
+    "supply_pegging_reference": {
+     "dbx_business_glossary_term": "Supply Pegging Reference"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    }
+   }
+  },
+  "sop_cycle": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "demand_planning"
+   },
+   "column_tags": {
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sales and Operations Planning (S&OP) Cycle ID"
+    },
+    "baseline_demand_volume": {
+     "dbx_business_glossary_term": "Baseline Demand Volume"
+    },
+    "consensus_demand_volume": {
+     "dbx_business_glossary_term": "Consensus Demand Volume"
+    },
+    "constrained_supply_volume": {
+     "dbx_business_glossary_term": "Constrained Supply Volume"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "cycle_code": {
+     "dbx_business_glossary_term": "Cycle Code"
+    },
+    "cycle_end_date": {
+     "dbx_business_glossary_term": "Cycle End Date"
+    },
+    "cycle_locked_date": {
+     "dbx_business_glossary_term": "Cycle Locked Date"
+    },
+    "cycle_locked_flag": {
+     "dbx_business_glossary_term": "Cycle Locked Flag"
+    },
+    "cycle_name": {
+     "dbx_business_glossary_term": "Cycle Name"
+    },
+    "cycle_notes": {
+     "dbx_business_glossary_term": "Cycle Notes"
+    },
+    "cycle_phase": {
+     "dbx_business_glossary_term": "Cycle Phase",
+     "dbx_value_regex": "statistical_forecast|demand_review|supply_review|pre_sop|executive_sop|closed"
+    },
+    "cycle_start_date": {
+     "dbx_business_glossary_term": "Cycle Start Date"
+    },
+    "cycle_type": {
+     "dbx_business_glossary_term": "Cycle Type",
+     "dbx_value_regex": "monthly|quarterly|annual|rolling|event_driven"
+    },
+    "demand_consensus_achieved_flag": {
+     "dbx_business_glossary_term": "Demand Consensus Achieved Flag"
+    },
+    "demand_review_due_date": {
+     "dbx_business_glossary_term": "Demand Review Due Date"
+    },
+    "executive_approval_date": {
+     "dbx_business_glossary_term": "Executive Approval Date"
+    },
+    "executive_approval_flag": {
+     "dbx_business_glossary_term": "Executive Approval Flag"
+    },
+    "executive_approval_notes": {
+     "dbx_business_glossary_term": "Executive Approval Notes"
+    },
+    "executive_sop_meeting_date": {
+     "dbx_business_glossary_term": "Executive S&OP Meeting Date"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "frozen_period_months": {
+     "dbx_business_glossary_term": "Frozen Period Months"
+    },
+    "key_assumptions": {
+     "dbx_business_glossary_term": "Key Assumptions"
+    },
+    "key_risks": {
+     "dbx_business_glossary_term": "Key Risks"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "mitigation_actions": {
+     "dbx_business_glossary_term": "Mitigation Actions"
+    },
+    "phase_status": {
+     "dbx_business_glossary_term": "Phase Status",
+     "dbx_value_regex": "not_started|in_progress|completed|on_hold|cancelled"
+    },
+    "planning_horizon_months": {
+     "dbx_business_glossary_term": "Planning Horizon Months"
+    },
+    "planning_month": {
+     "dbx_business_glossary_term": "Planning Month"
+    },
+    "pre_sop_meeting_date": {
+     "dbx_business_glossary_term": "Pre-S&OP Meeting Date"
+    },
+    "statistical_forecast_due_date": {
+     "dbx_business_glossary_term": "Statistical Forecast Due Date"
+    },
+    "supply_consensus_achieved_flag": {
+     "dbx_business_glossary_term": "Supply Consensus Achieved Flag"
+    },
+    "supply_gap_volume": {
+     "dbx_business_glossary_term": "Supply Gap Volume"
+    },
+    "supply_review_due_date": {
+     "dbx_business_glossary_term": "Supply Review Due Date"
+    }
+   }
+  },
+  "consensus_demand": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "demand_planning"
+   },
+   "column_tags": {
+    "consensus_demand_id": {
+     "dbx_business_glossary_term": "Consensus Demand ID"
+    },
+    "demand_plan_id": {
+     "dbx_business_glossary_term": "Demand Plan Id"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion ID"
+    },
+    "forecast_version_id": {
+     "dbx_business_glossary_term": "Forecast Version Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Facility Id (Foreign Key)"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "sop_cycle_id": {
+     "dbx_business_glossary_term": "Sales and Operations Planning (S&OP) Cycle ID"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Planning Location ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "active_flag": {
+     "dbx_business_glossary_term": "Active Record Flag"
+    },
+    "approval_status": {
+     "dbx_business_glossary_term": "Approval Status",
+     "dbx_value_regex": "draft|submitted|approved|rejected|revised"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "bias_indicator": {
+     "dbx_business_glossary_term": "Forecast Bias Indicator",
+     "dbx_value_regex": "over_forecast|under_forecast|neutral"
+    },
+    "comments": {
+     "dbx_business_glossary_term": "Planning Comments"
+    },
+    "commercial_overlay_quantity": {
+     "dbx_business_glossary_term": "Commercial Overlay Quantity"
+    },
+    "confidence_level": {
+     "dbx_business_glossary_term": "Forecast Confidence Level",
+     "dbx_value_regex": "high|medium|low"
+    },
+    "consensus_quantity": {
+     "dbx_business_glossary_term": "Consensus Demand Quantity"
+    },
+    "constrained_flag": {
+     "dbx_business_glossary_term": "Constrained Demand Flag"
+    },
+    "constraint_reason": {
+     "dbx_business_glossary_term": "Constraint Reason"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "customer_commitment_quantity": {
+     "dbx_business_glossary_term": "Customer Commitment Quantity"
+    },
+    "demand_category": {
+     "dbx_business_glossary_term": "Demand Category",
+     "dbx_value_regex": "base|promotional|seasonal|new_launch|phase_out|special_order"
+    },
+    "demand_driver_code": {
+     "dbx_business_glossary_term": "Demand Driver Code"
+    },
+    "demand_driver_description": {
+     "dbx_business_glossary_term": "Demand Driver Description"
+    },
+    "demand_volatility_index": {
+     "dbx_business_glossary_term": "Demand Volatility Index"
+    },
+    "forecast_accuracy_previous_period": {
+     "dbx_business_glossary_term": "Forecast Accuracy Previous Period"
+    },
+    "forecast_model_code": {
+     "dbx_business_glossary_term": "Forecast Model Code"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "last_review_date": {
+     "dbx_business_glossary_term": "Last Review Date"
+    },
+    "marketing_event_uplift_quantity": {
+     "dbx_business_glossary_term": "Marketing Event Uplift Quantity"
+    },
+    "new_product_launch_quantity": {
+     "dbx_business_glossary_term": "New Product Development (NPD) Launch Quantity"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "planning_horizon_type": {
+     "dbx_business_glossary_term": "Planning Horizon Type",
+     "dbx_value_regex": "short_term|medium_term|long_term"
+    },
+    "promotion_flag": {
+     "dbx_business_glossary_term": "Promotion Flag"
+    },
+    "seasonality_factor": {
+     "dbx_business_glossary_term": "Seasonality Factor"
+    },
+    "statistical_forecast_quantity": {
+     "dbx_business_glossary_term": "Statistical Forecast Quantity"
+    },
+    "unconstrained_demand_quantity": {
+     "dbx_business_glossary_term": "Unconstrained Demand Quantity"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "variance_percentage": {
+     "dbx_business_glossary_term": "Variance Percentage"
+    },
+    "variance_to_statistical": {
+     "dbx_business_glossary_term": "Variance to Statistical Forecast"
+    },
+    "version_number": {
+     "dbx_business_glossary_term": "Version Number"
+    }
+   }
+  },
+  "sku_planning_param": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "network_operations"
+   },
+   "column_tags": {
+    "sku_planning_param_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Planning Parameter ID"
+    },
+    "inspection_plan_id": {
+     "dbx_business_glossary_term": "Inspection Plan Id (Foreign Key)"
+    },
+    "inventory_policy_id": {
+     "dbx_business_glossary_term": "Inventory Policy Id (Foreign Key)"
+    },
+    "manufacturing_facility_id": {
+     "dbx_business_glossary_term": "Manufacturing Plant ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "supply_network_node_id": {
+     "dbx_business_glossary_term": "Supply Network Node Id (Foreign Key)"
+    },
+    "abc_classification": {
+     "dbx_business_glossary_term": "ABC Classification",
+     "dbx_value_regex": "A|B|C"
+    },
+    "backorder_allowed_flag": {
+     "dbx_business_glossary_term": "Backorder Allowed Flag"
+    },
+    "coverage_profile_days": {
+     "dbx_business_glossary_term": "Coverage Profile Days"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "critical_part_flag": {
+     "dbx_business_glossary_term": "Critical Part Flag"
+    },
+    "demand_pattern_type": {
+     "dbx_business_glossary_term": "Demand Pattern Type",
+     "dbx_value_regex": "steady|seasonal|trending|intermittent|lumpy|erratic"
+    },
+    "effective_end_date": {
+     "dbx_business_glossary_term": "Effective End Date"
+    },
+    "effective_start_date": {
+     "dbx_business_glossary_term": "Effective Start Date"
+    },
+    "fixed_lot_size_quantity": {
+     "dbx_business_glossary_term": "Fixed Lot Size Quantity"
+    },
+    "forecast_model_type": {
+     "dbx_business_glossary_term": "Forecast Model Type",
+     "dbx_value_regex": "moving_average|exponential_smoothing|holt_winters|arima|machine_learning|consensus"
+    },
+    "goods_receipt_processing_time_days": {
+     "dbx_business_glossary_term": "Goods Receipt Processing Time Days"
+    },
+    "inventory_valuation_method": {
+     "dbx_business_glossary_term": "Inventory Valuation Method",
+     "dbx_value_regex": "fifo|fefo|lifo|weighted_average|standard_cost"
+    },
+    "last_modified_timestamp": {
+     "dbx_business_glossary_term": "Last Modified Timestamp"
+    },
+    "last_review_date": {
+     "dbx_business_glossary_term": "Last Review Date"
+    },
+    "lot_size_method": {
+     "dbx_business_glossary_term": "Lot Size Method",
+     "dbx_value_regex": "fixed_lot_size|economic_order_quantity|lot_for_lot|period_order_quantity|weekly_lot_size|monthly_lot_size"
+    },
+    "maximum_order_quantity": {
+     "dbx_business_glossary_term": "Maximum Order Quantity"
+    },
+    "maximum_stock_level_quantity": {
+     "dbx_business_glossary_term": "Maximum Stock Level Quantity"
+    },
+    "minimum_order_quantity": {
+     "dbx_business_glossary_term": "Minimum Order Quantity (MOQ)"
+    },
+    "minimum_remaining_shelf_life_days": {
+     "dbx_business_glossary_term": "Minimum Remaining Shelf Life Days"
+    },
+    "mrp_controller_code": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Controller Code"
+    },
+    "mrp_type": {
+     "dbx_business_glossary_term": "Material Requirements Planning (MRP) Type",
+     "dbx_value_regex": "mrp|reorder_point|forecast_based|time_phased|no_planning"
+    },
+    "next_review_date": {
+     "dbx_business_glossary_term": "Next Review Date"
+    },
+    "order_multiple_quantity": {
+     "dbx_business_glossary_term": "Order Multiple Quantity"
+    },
+    "parameter_notes": {
+     "dbx_business_glossary_term": "Parameter Notes"
+    },
+    "parameter_status": {
+     "dbx_business_glossary_term": "Parameter Status",
+     "dbx_value_regex": "active|inactive|pending_approval|obsolete"
+    },
+    "planned_delivery_time_days": {
+     "dbx_business_glossary_term": "Planned Delivery Time Days"
+    },
+    "planning_group": {
+     "dbx_business_glossary_term": "Integrated Business Planning (IBP) Planning Group"
+    },
+    "planning_horizon_days": {
+     "dbx_business_glossary_term": "Planning Horizon Days"
+    },
+    "planning_strategy": {
+     "dbx_business_glossary_term": "Planning Strategy",
+     "dbx_value_regex": "make_to_stock|make_to_order|assemble_to_order|engineer_to_order|planning_without_final_assembly"
+    },
+    "planning_time_fence_days": {
+     "dbx_business_glossary_term": "Planning Time Fence Days"
+    },
+    "procurement_type": {
+     "dbx_business_glossary_term": "Procurement Type",
+     "dbx_value_regex": "external_procurement|in_house_production|both|subcontracting"
+    },
+    "reorder_point_quantity": {
+     "dbx_business_glossary_term": "Reorder Point Quantity"
+    },
+    "rounding_profile_code": {
+     "dbx_business_glossary_term": "Rounding Profile Code"
+    },
+    "safety_stock_method": {
+     "dbx_business_glossary_term": "Safety Stock Calculation Method",
+     "dbx_value_regex": "fixed_quantity|days_of_supply|dynamic_calculation|service_level_based"
+    },
+    "seasonality_profile_code": {
+     "dbx_business_glossary_term": "Seasonality Profile Code"
+    },
+    "service_level_target_percent": {
+     "dbx_business_glossary_term": "Service Level Target Percent"
+    },
+    "shelf_life_days": {
+     "dbx_business_glossary_term": "Shelf Life Days"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "xyz_classification": {
+     "dbx_business_glossary_term": "XYZ Classification",
+     "dbx_value_regex": "X|Y|Z"
+    }
+   }
+  }
+ }
+}
