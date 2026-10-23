@@ -136,7 +136,7 @@ sequenceDiagram
     Genie->>MV: 3 Calculate with the curated metric view
     MV->>UC: 4 Enforce: row filter keeps SE01 rows only
     UC-->>Genie: governed result
-    Genie-->>Anna: 5 Answer for SE01; the Group CFO (ALL) gets every entity
+    Genie-->>Anna: 5 Answer for SE01 only, while the Group CFO (ALL) gets every entity
 ```
 
 Two answers, both right. Context makes the definition the same for everyone; governance makes the scope
