@@ -40,6 +40,7 @@ sync:
   exclude:
     - data/**/*.csv   # copied into the volume from the Git folder by notebooks/01_setup_catalog.py
                       # (data/manifest.json IS deployed: the validate task compares row counts with it)
+    - slides/**       # the session deck is not needed by the deployed pipeline or job
 
 targets:
   dev:

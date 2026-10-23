@@ -18,7 +18,7 @@ agent template and the business context. The company is fictional and all data i
   suite, and business context in Unity Catalog.
 
 > Instructors: see [INSTRUCTOR.md](INSTRUCTOR.md) for the pre-event checklist, recovery checkpoints and the
-> demo scripts.
+> demo scripts. The session deck is [`slides/Databricks-Genie-bootcamp-diggibyte-stockholm.pptx`](slides/Databricks-Genie-bootcamp-diggibyte-stockholm.pptx).
 
 ---
 
@@ -630,6 +630,7 @@ never touches them.
 | [`metric_views/industry/`](metric_views/industry/), [`metric_views/curated/`](metric_views/curated/README.md) | 22 generated industry metric views, 4 hand-written curated views |
 | [`model_tags/`](model_tags/) | the industry model's `dbx_*` tags (generated) |
 | [`genie/`](genie/README.md) | the Genie Agent template (generated), source selection, all 25 benchmarks with expected values |
+| [`slides/`](slides/) | the session deck (`.pptx`) and slide images used in the repository README |
 | [`context/`](context/README.md) | business glossary: company profile, domains, subdomains, 27 Pages, agent instructions |
 
 The complete model with all 10 domains and 116 tables is in [`../full_model/`](../full_model/README.md). The
