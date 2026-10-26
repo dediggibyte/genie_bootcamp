@@ -16,7 +16,7 @@
 # MAGIC
 # MAGIC | # | Where | How | Who |
 # MAGIC |---|---|---|---|
-# MAGIC | A | **UC Semantics → Pages** (Discover) | Genie Code *Bulk import pages* from GitHub | instructor, once |
+# MAGIC | A | **UC Semantics → Pages** (Discover) | Genie Code *Bulk import pages* in the Page editor, with the prompt this notebook writes (step 8) | you (UI) |
 # MAGIC | B | **Your Genie Agents** | GitHub MCP (`system.ai.github`) as an agent source, Agent mode | you (UI, step 8) |
 # MAGIC | C | **Your own draft Page** | Discover → Pages → Create page | you (UI, step 9) |
 # MAGIC
@@ -34,7 +34,7 @@
 # MAGIC | 5 | tag your **gold tables and metric views** with the subdomain tags |
 # MAGIC | 6 | tag your three **Genie Agents** with their domain (Consumer / Finance / Manufacturing Analyst) |
 # MAGIC | 7 | **verify** in `information_schema` |
-# MAGIC | 8 | the **business glossary** in `bootcamp/context/` and how to attach it to your agents (GitHub MCP) |
+# MAGIC | 8 | the **business glossary** in `bootcamp/context/`: **import it as Pages** under your domains and subdomains (Genie Code *Bulk import pages*, prompt written by the notebook) and attach it to your agents (GitHub MCP) |
 # MAGIC | 9 | your turn: **draft a Page** for your own business question |
 # MAGIC
 # MAGIC ▶ **How to run:** Serverless compute → **Run all**. Set `action = remove` to take all tags off again.
@@ -42,8 +42,8 @@
 # MAGIC 🔁 **Re-running is a no-op.** The notebook first reads which domain / subdomain tags your schemas, tables,
 # MAGIC metric views and agent already carry (`information_schema.schema_tags` / `table_tags`, the entity tag
 # MAGIC API) and only sets the missing ones - everything else is reported as `already tagged`. It never touches
-# MAGIC your data or the pipeline, and it never creates account-level objects (domains and governed tags are the
-# MAGIC instructor's job).
+# MAGIC your data or the pipeline, and it never creates domains or governed tags (the instructor's job). The Pages
+# MAGIC import of step 8 is a UI step: the notebook only writes the prompts (`import_pages = false` skips them).
 # MAGIC
 # MAGIC **Expected result:** every gold schema shows its domain, every gold table its subdomain
 # MAGIC (Catalog Explorer → table → *Tags*; Discover → *Domains* → e.g. Finance → your tables), and a printed
@@ -60,6 +60,7 @@
 # MAGIC | `tag_consumer`, `tag_finance`, `tag_manufacturing` | the domain tags the instructor created — keep the defaults unless told otherwise |
 # MAGIC | `subdomain_tag_pattern` | how subdomain tags are named; default `{domain_tag}/{subdomain}`, e.g. `Finance/General Ledger` |
 # MAGIC | `action` | `apply` (default) or `remove` |
+# MAGIC | `import_pages` | `true` (default) = step 8 writes the *Bulk import pages* prompt per domain; `false` = skip |
 
 # COMMAND ----------
 
@@ -80,6 +81,7 @@ dbutils.widgets.text("tag_finance", "Finance", "Domain tag: finance")
 dbutils.widgets.text("tag_manufacturing", "Manufacturing", "Domain tag: manufacturing")
 dbutils.widgets.text("subdomain_tag_pattern", "{domain_tag}/{subdomain}", "Subdomain tag pattern")
 dbutils.widgets.dropdown("action", "apply", ["apply", "remove"], "Action")
+dbutils.widgets.dropdown("import_pages", "true", ["true", "false"], "Import glossary Pages")
 
 GOLD_SCHEMAS = ["consumer", "finance", "manufacturing"]   # the bootcamp domains
 GITHUB_REPO = "dediggibyte/genie_bootcamp"
@@ -96,6 +98,7 @@ def bundle_short_name(user_name: str) -> str:
 user_name = spark.sql("SELECT current_user()").first()[0]
 catalog = dbutils.widgets.get("catalog").strip() or f"cpg_{bundle_short_name(user_name)}"
 action = dbutils.widgets.get("action")
+import_pages = dbutils.widgets.get("import_pages") == "true"
 pattern = dbutils.widgets.get("subdomain_tag_pattern").strip()
 DOMAIN_TAG = {d: dbutils.widgets.get(f"tag_{d}").strip() for d in GOLD_SCHEMAS}
 
@@ -105,6 +108,7 @@ host = w.config.host.rstrip("/")
 print(f"You are        : {user_name}")
 print(f"Catalog        : {catalog}")
 print(f"Action         : {action}")
+print(f"Import Pages   : {import_pages}")
 print(f"Domain tags    : {DOMAIN_TAG}")
 print(f"Subdomain tags : {pattern}")
 print("Genie Agents   : found by title in step 6 (built by notebook 04)")
@@ -406,8 +410,8 @@ for d, space_id in genie_agents.items():
         txt = str(e)
         ok = ("already exists" in txt.lower() and action == "apply") or ("not found" in txt.lower() and action == "remove")
         genie_result.append((AGENT_TITLES[d], key, f"{verb} OK (nothing to do)" if ok else f"FAILED: {txt[:200]}"))
-for title, k, r in genie_result:
-    print(f"  {title:60} {k:15} {r}")
+for agent_title, k, r in genie_result:   # not `title`: that would shadow the title() helper used in step 8
+    print(f"  {agent_title:60} {k:15} {r}")
 for d, space_id in genie_agents.items():
     print(f"  {AGENT_TITLES[d]}: {host}/genie/rooms/{space_id}")
 
@@ -466,8 +470,8 @@ print("\n✅ All good." if ok else "\n⚠️  Something is missing - check the r
 # MAGIC
 # MAGIC The folder `bootcamp/context/` of this repository is Fjällmark's business glossary: one page per term, with
 # MAGIC definition, business rules, calculation SQL against your gold tables, pitfalls ("common wrong answers")
-# MAGIC and example questions. The instructor imported these files as **Pages** (Discover → Pages, step A in
-# MAGIC `bootcamp/context/README.md`) — Genie One now cites them. Below is the index (`bootcamp/context/glossary.csv`).
+# MAGIC and example questions. Below is the index (`bootcamp/context/glossary.csv`); the next cell imports the files
+# MAGIC as **Pages** under the domains and subdomains you just filed your data into, so Genie One cites them.
 
 # COMMAND ----------
 
@@ -478,6 +482,65 @@ if os.path.isfile(glossary_path):
     display(spark.createDataFrame(rows, "domain string, subdomain string, term string, definition string, page string"))
 else:
     print(f"{glossary_path} not found (is this the bootcamp Git folder?)")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Import the glossary as Pages (Genie Code *Bulk import pages*, UI)
+# MAGIC
+# MAGIC Pages have **no API**, and a Genie Code task in a job has **no tool to create them**: only the **Bulk import
+# MAGIC pages** mode of the Genie Code pane in the Page editor creates Pages (it reads the sources you attach,
+# MAGIC proposes one Page per term, flags duplicates and conflicts, and creates them all as drafts). So this is a
+# MAGIC UI step - the cell below writes the exact prompt for each domain, with your catalog and the workspace paths
+# MAGIC of the glossary files filled in:
+# MAGIC
+# MAGIC 1. **Discover → Pages → Create page**. If the Genie Code pane is not open, click the Genie Code icon (top
+# MAGIC    right), then **Bulk import pages**.
+# MAGIC 2. In the chat box click **+ → Add context** and add the domain's `pages` folder and `glossary.csv` (paths below).
+# MAGIC 3. Paste the domain's prompt, send, review the proposed Pages (resolve duplicate / low-confidence flags,
+# MAGIC    check each Page's subdomain) and let Genie Code create them. They are created as **drafts**.
+# MAGIC 4. Repeat for the next domain. Check the result in **Discover → Pages** (filter *Draft*).
+# MAGIC
+# MAGIC Drafts are visible only to you (and curators), and Genie One uses them in your own conversations, the same
+# MAGIC rule as step 9. `import_pages = false` skips the cell.
+
+# COMMAND ----------
+
+PAGE_FIELDS = ("title", "synonyms", "description", "related_assets", "sources")   # front matter of every page file
+pages_result = []   # (domain_tag, number of terms)
+if action != "apply" or not import_pages:
+    print(f"Skipped (action = {action}, import_pages = {import_pages}).")
+elif not os.path.isfile(glossary_path):
+    print(f"Skipped: {glossary_path} not found.")
+else:
+    with open(glossary_path, encoding="utf-8", newline="") as fh:
+        glossary = list(csv.DictReader(fh))
+    repo_root = os.path.dirname(BUNDLE_ROOT)   # page_path in glossary.csv is relative to the repository root
+    print(f"Open: {host}/discover/pages  →  Create page  →  Genie Code  →  Bulk import pages\n")
+    for d in GOLD_SCHEMAS:
+        terms = [r for r in glossary if r["domain"] == title(d)]
+        if not terms:
+            continue
+        pages_dir = f"{repo_root}/{os.path.dirname(terms[0]['page_path'])}"
+        subdomains = sorted({r["subdomain"] for r in terms})
+        filing = "; ".join(f"subdomain '{r}' -> '{subdomain_tag(d, r.lower().replace(' ', '_'))}'" for r in subdomains)
+        prompt = (
+            f"Bulk import the Fjällmark business glossary for the domain '{DOMAIN_TAG[d]}'. Use only the attached "
+            f"workspace files as sources: the index {glossary_path} and the term pages in the folder {pages_dir}. "
+            f"Create exactly one Page per index row whose domain column is '{title(d)}' ({len(terms)} terms: "
+            f"{', '.join(r['term'] for r in terms)}) - no other terms, do not merge or split terms. For each row read "
+            f"the Markdown file named in page_path and fill the Page from its YAML front matter and body: Page name = "
+            f"title; Synonyms = synonyms; Description = description; Page body = the Markdown after the front matter, "
+            f"unchanged (definition, business rules, calculation SQL, pitfalls, example questions); Related assets = "
+            f"related_assets with '<catalog>' replaced by '{catalog}'; Sources = sources. File each Page under its "
+            f"subdomain from the subdomain column: {filing}. If a Page with the same name already exists, flag it as a "
+            f"duplicate instead of creating a second one. Create all Pages as drafts; do not publish."
+        )
+        pages_result.append((DOMAIN_TAG[d], len(terms)))
+        print("=" * 110)
+        print(f"Domain {DOMAIN_TAG[d]} - {len(terms)} terms in {len(subdomains)} subdomains")
+        print(f"Add context:  {pages_dir}   and   {glossary_path}")
+        print(f"Prompt:\n{prompt}\n")
 
 # COMMAND ----------
 
@@ -553,6 +616,7 @@ summary = {
     "model_tables_missing_in_catalog": len(missing_tables),
     "genie_agents": genie_agents,
     "genie_agent_tags": [f"{title} - {k}: {r}" for title, k, r in genie_result],
+    "glossary_pages": [f"{tag}: {n} terms (prompt written; import in the Page editor)" for tag, n in pages_result],
     "ok": ok,
 }
 print(json.dumps(summary, indent=2))
