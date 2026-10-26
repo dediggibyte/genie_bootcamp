@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 00 · Instructor setup (admins only - run once before the event)
 # MAGIC
@@ -59,12 +63,14 @@
 # MAGIC | `tag_prefix` | blank | prefix for every domain tag key (use `zz_test_` when testing) |
 # MAGIC | `create_subdomains` / `publish_domains` | `true` / `true` | subdomains from the industry model; publish (draft = false) so everybody sees them |
 # MAGIC | `github_repo` | `dediggibyte/genie_bootcamp` | repository the participants clone and the GitHub MCP reads |
+# MAGIC | `lakebase_project` | `fjallmark-genie-bootcamp` | Lakebase project for the router app of lab step 6 (one branch per participant, created by notebook 06) |
 
 # COMMAND ----------
 
 import json
 import os
 import re
+import time
 import unicodedata
 import urllib.parse
 import urllib.request
@@ -88,6 +94,7 @@ dbutils.widgets.dropdown("create_subdomains", "true", ["true", "false"], "13 Cre
 dbutils.widgets.dropdown("publish_domains", "true", ["true", "false"], "14 Publish domains")
 dbutils.widgets.text("github_repo", "dediggibyte/genie_bootcamp", "15 GitHub repository")
 dbutils.widgets.dropdown("create_groups", "true", ["true", "false"], "16 Create missing account groups")
+dbutils.widgets.text("lakebase_project", "fjallmark-genie-bootcamp", "17 Lakebase project (router app)")
 
 
 def split_list(value: str) -> list:
@@ -111,6 +118,7 @@ CREATE_SUBDOMAINS = dbutils.widgets.get("create_subdomains") == "true"
 PUBLISH_DOMAINS = dbutils.widgets.get("publish_domains") == "true"
 GITHUB_REPO = dbutils.widgets.get("github_repo").strip()
 CREATE_GROUPS = dbutils.widgets.get("create_groups") == "true"
+LAKEBASE_PROJECT = dbutils.widgets.get("lakebase_project").strip()
 
 w = WorkspaceClient()
 me = spark.sql("SELECT current_user()").first()[0]
@@ -364,6 +372,22 @@ else:
                 record("teardown", f"account group {gname}", "KEEP", f"not created by this notebook (not in {LEDGER_PATH})")
             else:
                 act("teardown", f"delete account group {gname}", lambda i=g["group_id"]: delete_group(i))
+
+    # 5) the router app's Lakebase project - only if the ledger says this notebook created it. Deleting it deletes
+    #    the participants' branches in it (their apps stop remembering; notebook 99 deletes the apps).
+    if everything and LAKEBASE_PROJECT:
+        proj, _ = api_try("GET", f"/api/2.0/postgres/projects/{LAKEBASE_PROJECT}")
+        if not proj:
+            record("teardown", f"Lakebase project {LAKEBASE_PROJECT}", "OK", "does not exist")
+        elif LAKEBASE_PROJECT not in read_ledger().get("lakebase_projects", {}):
+            record("teardown", f"Lakebase project {LAKEBASE_PROJECT}", "KEEP", f"not created by this notebook (not in {LEDGER_PATH})")
+        else:
+            def delete_project():
+                api("DELETE", f"/api/2.0/postgres/projects/{LAKEBASE_PROJECT}")
+                ledger = read_ledger()
+                ledger.get("lakebase_projects", {}).pop(LAKEBASE_PROJECT, None)
+                write_ledger(ledger)
+            act("teardown", f"delete Lakebase project {LAKEBASE_PROJECT} (and every participant branch in it)", delete_project)
 
     rows = [list(c) for c in CHECKLIST if c[0] == "teardown"] or [["teardown", "nothing in scope", "-", ""]]
     display(spark.createDataFrame(rows, "area string, item string, status string, detail string"))
@@ -829,6 +853,63 @@ else:
            "participant can read it (GitHub account added to the repo/org + Git credential in Databricks)")
 record("github", "each participant has a GitHub account (needed for the GitHub MCP OAuth sign-in)", "ACTION",
        "announce in the event invitation")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## 8b · Lakebase project for the router app (lab step 6)
+# MAGIC
+# MAGIC Notebook 06 deploys each participant's **router app** (Databricks App from the template *Custom Agent
+# MAGIC (Advanced)*), which keeps conversation memory in Lakebase Postgres. One Lakebase project serves the whole
+# MAGIC bootcamp; notebook 06 gives every participant **their own branch** of it (copy-on-write, own `databricks_postgres`
+# MAGIC database and own compute that suspends when idle), because the template's tables live in the default database
+# MAGIC under fixed schema names and two apps must never share them.
+# MAGIC
+# MAGIC This step creates the project (autoscaling 0.5-4 CU, suspends after 10 idle minutes) and grants the
+# MAGIC participants group **CAN USE** on it. The project goes into the ledger, so `teardown_everything` deletes it.
+
+# COMMAND ----------
+
+LAKEBASE_SPEC = {"spec": {"display_name": "Fjällmark Genie bootcamp - router app memory",
+                          "default_endpoint_settings": {"autoscaling_limit_min_cu": 0.5, "autoscaling_limit_max_cu": 4,
+                                                        "suspend_timeout_duration": "600s"}}}
+
+
+def create_lakebase_project():
+    op = api("POST", "/api/2.0/postgres/projects", query={"project_id": LAKEBASE_PROJECT}, body=LAKEBASE_SPEC)
+    for _ in range(120):
+        if op.get("done"):
+            break
+        time.sleep(5)
+        op = api("GET", f"/api/2.0/postgres/{op['name']}")
+    if op.get("error") or not op.get("done"):
+        raise RuntimeError(f"project creation: {op.get('error') or 'not done after 10 minutes'}")
+    ledger = read_ledger()
+    ledger.setdefault("lakebase_projects", {})[LAKEBASE_PROJECT] = MARKER
+    write_ledger(ledger)
+
+
+if not LAKEBASE_PROJECT:
+    record("lakebase", "Lakebase project", "SKIP", "lakebase_project is blank - lab step 6 (router app) is not prepared")
+else:
+    proj, err = api_try("GET", f"/api/2.0/postgres/projects/{LAKEBASE_PROJECT}")
+    if proj:
+        record("lakebase", f"project {LAKEBASE_PROJECT}", "OK", f"exists (owner {(proj.get('status') or {}).get('owner')})")
+    elif err and "not found" not in err.lower() and "does not exist" not in err.lower():
+        record("lakebase", f"project {LAKEBASE_PROJECT}", "ERROR", f"cannot read it: {err[:200]}")
+    else:
+        act("lakebase", f"create project {LAKEBASE_PROJECT}", create_lakebase_project, "autoscaling 0.5-4 CU, branch production")
+    perms, err = api_try("GET", f"/api/2.0/permissions/database-projects/{LAKEBASE_PROJECT}")
+    has_use = any(a.get("group_name") == PARTICIPANTS_GROUP
+                  and any(p.get("permission_level") in ("CAN_USE", "CAN_MANAGE") for p in a.get("all_permissions", []))
+                  for a in (perms or {}).get("access_control_list", []))
+    if has_use:
+        record("lakebase", f"CAN USE on {LAKEBASE_PROJECT} for {PARTICIPANTS_GROUP}", "OK")
+    else:
+        act("lakebase", f"grant CAN USE on {LAKEBASE_PROJECT} to {PARTICIPANTS_GROUP}",
+            lambda: api("PATCH", f"/api/2.0/permissions/database-projects/{LAKEBASE_PROJECT}",
+                        body={"access_control_list": [{"group_name": PARTICIPANTS_GROUP, "permission_level": "CAN_USE"}]}),
+            grant=True)
 
 # COMMAND ----------
 

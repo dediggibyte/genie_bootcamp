@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 03 · Governance — who may see which rows, and who may see PII
 # MAGIC
@@ -817,9 +821,10 @@ display(run(f"""
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### Ask your Genie Agent (only if it exists already)
-# MAGIC You build the agent **Fjällmark Business Analyst** in step 4. When you come back here afterwards, this
-# MAGIC cell asks it a question through the Genie Conversation API - the answer only contains your company codes.
+# MAGIC ### Ask your Finance Analyst Genie Agent (only if it exists already)
+# MAGIC You build the agent **Fjällmark Finance Analyst** (one of the three domain agents) in step 4. When you come back
+# MAGIC here afterwards, this cell asks it a question through the Genie Conversation API - the answer only contains
+# MAGIC your company codes.
 # MAGIC On the first run (no agent yet) the cell just tells you so.
 
 # COMMAND ----------
@@ -827,7 +832,7 @@ display(run(f"""
 from databricks.sdk import WorkspaceClient
 
 w = WorkspaceClient()
-AGENT_TITLE_PREFIX = "Fjällmark Business Analyst"
+AGENT_TITLE_PREFIX = "Fjällmark Finance Analyst"
 
 
 def my_agents():

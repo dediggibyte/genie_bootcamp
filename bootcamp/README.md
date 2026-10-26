@@ -4,9 +4,11 @@
 Hands-on lab 15:35-17:35. Speakers: Nivethan Venkatachalam (Databricks MVP) and Kashif Ahmed (Databricks
 Solutions Architect Champion).
 
-In this lab you build **one Genie Agent**, the *Fjällmark Business Analyst*, and you prove that its answers can
-be trusted. Everything you need is in this `bootcamp/` folder: data, pipeline, metric views, governance, the
-agent template and the business context. The company is fictional and all data is synthetic.
+In this lab you build **three Genie Agents**, one per business domain - the *Fjällmark Consumer Analyst*, *Finance
+Analyst* and *Manufacturing Analyst* - put **one chat entry point** in front of them (a custom agent deployed as a
+Databricks App), and you prove that the answers can be trusted. Everything you need is in this `bootcamp/` folder:
+data, pipeline, metric views, governance, the agent templates, the app and the business context. The company is
+fictional and all data is synthetic.
 
 * **The company:** Fjällmark Consumer Goods AB (HQ Stockholm). It sells Nordic foods, beverages and personal
   care through six legal entities, four plants and a webshop. The group currency is EUR. Data runs from
@@ -14,8 +16,8 @@ agent template and the business context. The company is fictional and all data i
 * **The data model:** three domains of the Databricks *Lakehouse Industry Data Model, Consumer Goods v2 (MVM)*:
   **consumer**, **finance** and **manufacturing**. That is 36 gold tables with the exact industry names,
   123 foreign keys, 22 industry metric views and 4 curated metric views.
-* **What you build:** your own catalog, a governed lakehouse, a curated Genie Agent with a benchmark test
-  suite, and business context in Unity Catalog.
+* **What you build:** your own catalog, a governed lakehouse, three curated domain Genie Agents with benchmark
+  test suites, business context in Unity Catalog, and a router app that answers across the three domains.
 
 > Instructors: see [INSTRUCTOR.md](INSTRUCTOR.md) for the pre-event checklist, recovery checkpoints and the
 > demo scripts. The session deck is [`slides/Databricks-Genie-bootcamp-diggibyte-stockholm.pptx`](slides/Databricks-Genie-bootcamp-diggibyte-stockholm.pptx).
@@ -31,8 +33,9 @@ agent template and the business context. The company is fictional and all data i
 * [Step 1: Set up your catalog](#step-1-set-up-your-catalog-5-min)
 * [Step 2: Deploy and run the lakehouse bundle](#step-2-deploy-and-run-the-lakehouse-bundle-20-min)
 * [Step 3: Governance](#step-3-governance-25-min)
-* [Step 4: The Genie Agent](#step-4-the-genie-agent-30-min)
-* [Step 5: Business context](#step-5-business-context-15-min)
+* [Step 4: The Genie Agents](#step-4-the-genie-agents-25-min)
+* [Step 5: Business context](#step-5-business-context-10-min)
+* [Step 6: One entry point - the router app](#step-6-one-entry-point---the-router-app-15-min)
 * [Exercise: bring your own question](#exercise-bring-your-own-question-15-min)
 * [Governance checklist for the 17:35 "prove it works" slot](#governance-checklist-for-the-1735-prove-it-works-slot)
 * [Troubleshooting](#troubleshooting)
@@ -52,6 +55,7 @@ agent template and the business context. The company is fictional and all data i
 | your own catalog `cpg_<your short user name>`, or the right to create it | your sandbox, so nobody else writes into it | instructor (pre-created) or you (step 1) |
 | read access to the GitHub repository `dediggibyte/genie_bootcamp` | the Git folder (step 0) and the GitHub MCP (step 5) read it | instructor (public repo or credentials) |
 | a GitHub account | the GitHub MCP signs in with *your* GitHub account | you |
+| **CAN USE** on the bootcamp Lakebase project, and the right to create a Databricks App | the router app of step 6 keeps its conversation memory in your own Lakebase branch | instructor (`00_instructor_setup`) |
 
 Your **short user name** is the part of your login before `@`, in lower case, with every character that is
 not a letter or digit replaced by `_`. For example, `jane.doe@example.com` becomes `jane_doe` and the catalog
@@ -61,15 +65,16 @@ is `cpg_jane_doe`. Notebook 01 and the bundle compute it the same way, so you ne
 
 ## Architecture
 
-The Genie Agent is only as trustworthy as the four things that feed it: **(1) Data**, **(2) Governance**,
-**(3) Genie** curation and **(4) Context**.
+A Genie Agent is only as trustworthy as the four things that feed it: **(1) Data**, **(2) Governance**,
+**(3) Genie** curation and **(4) Context**. The **(5) router app** is the single entry point on top.
 
 ```mermaid
 flowchart LR
     subgraph REPO["GitHub repository: bootcamp/"]
         CSV["data/ - 36 CSV files"]
         SQL["pipeline/ + metric_views/"]
-        TPL["genie/ agent template"]
+        TPL["genie/ three agent templates"]
+        APPC["app/ router app code"]
         CTX["context/ business glossary"]
     end
 
@@ -87,8 +92,12 @@ flowchart LR
         CM["column masks on shopper PII"]
     end
 
-    subgraph GEN["3 Genie"]
-        AG["Fjällmark Business Analyst<br/>instructions, examples, benchmarks"]
+    subgraph GEN["3 Genie - one agent per domain"]
+        AG["Consumer, Finance and<br/>Manufacturing Analyst<br/>instructions, examples, benchmarks"]
+    end
+
+    subgraph APPS["5 One entry point"]
+        RT["Fjällmark router app<br/>chat UI, memory in Lakebase"]
     end
 
     subgraph CON["4 Context"]
@@ -110,6 +119,8 @@ flowchart LR
     CTX --> MCP
     MCP --> AG
     DOM -->|"notebook 05"| AG
+    APPC -->|"notebook 06"| RT
+    RT -->|"Genie MCP"| AG
 ```
 
 | layer | built by | where it lives |
@@ -119,8 +130,9 @@ flowchart LR
 | metric views | job task `metric_views` ([02a](notebooks/job_tasks/02a_create_metric_views.py)) | inside the gold schemas |
 | model tags | job task `model_tags` ([02b](notebooks/job_tasks/02b_apply_model_tags.py)) | `dbx_*` tags on schemas, tables and columns |
 | governance | notebook [03_governance](notebooks/03_governance.py) | functions and mapping tables in schema `governance`, policies on gold |
-| Genie Agent | notebook [04_genie_agent](notebooks/04_genie_agent.py) | your workspace home folder |
+| Genie Agents | notebook [04_genie_agent](notebooks/04_genie_agent.py) | your workspace home folder |
 | context | notebook [05_business_context](notebooks/05_business_context.py) + UI | domain tags, Pages, GitHub MCP source |
+| router app | notebook [06_router_app](notebooks/06_router_app.py) ([app/](app/README.md)) | Databricks App `router-<short name>`, your Lakebase branch, an MLflow experiment |
 
 ---
 
@@ -135,9 +147,10 @@ test workspace (serverless, fresh catalog).
 | 15:45 | [1](#step-1-set-up-your-catalog-5-min) | run notebook 01 | ≈ 1 min |
 | 15:50 | [2](#step-2-deploy-and-run-the-lakehouse-bundle-20-min) | deploy the bundle, run the job, explore the layers while it runs | ≈ 9 min (first run) |
 | 16:10 | [3](#step-3-governance-25-min) | run notebook 03, switch personas, try to break it | ≈ 4-5 min for *Run all* |
-| 16:35 | [4](#step-4-the-genie-agent-30-min) | run notebook 04, then test, benchmark and improve the agent in the UI | ≈ 10 min for *Run all* |
-| 17:05 | [5](#step-5-business-context-15-min) | run notebook 05, attach the GitHub MCP, draft a Page | ≈ 1 min for *Run all* |
-| 17:20 | [exercise](#exercise-bring-your-own-question-15-min) | bring your own question, then the governance checklist | - |
+| 16:35 | [4](#step-4-the-genie-agents-25-min) | run notebook 04, then test, benchmark and improve the agents in the UI | ≈ 6 min for *Run all* |
+| 17:00 | [5](#step-5-business-context-10-min) | run notebook 05, attach the GitHub MCP, draft a Page | ≈ 1 min for *Run all* |
+| 17:10 | [6](#step-6-one-entry-point---the-router-app-15-min) | run notebook 06, then ask the router app questions across the domains | ≈ 4 min for *Run all*, plus the app's first start |
+| 17:25 | [exercise](#exercise-bring-your-own-question-10-min) | bring your own question, then the governance checklist | - |
 | 17:35 | [demo slot](#governance-checklist-for-the-1735-prove-it-works-slot) | "prove it works" | - |
 
 If you fall behind, keep going: every step can be re-run and only adds what is missing. Ask an instructor
@@ -376,42 +389,42 @@ look like `n***@example.com`.
 
 ---
 
-## Step 4: The Genie Agent (30 min)
+## Step 4: The Genie Agents (25 min)
 
-### 4a. Create the agent (notebook)
+### 4a. Create the agents (notebook)
 
-Open [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) and click **Run all** (about 10 minutes,
-mostly the benchmark run). The notebook reads the template
-[`genie/fjallmark_business_analyst.json`](genie/README.md), puts in your catalog and creates the agent
-**"Fjällmark Business Analyst (\<catalog\>)"** in your home folder.
+Open [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) and click **Run all** (about 6 minutes, mostly
+the benchmark runs of the three agents, which run at the same time). The notebook reads the three templates in
+[`genie/`](genie/README.md), puts in your catalog and creates one agent per domain in your home folder:
 
-| building block | in the template |
-|---|---|
-| data sources | 4 curated metric views, 6 industry metric views, 21 gold tables |
-| column settings | synonyms, entity matching (Genie knows values such as `PL-POZ-L2`), hidden personal and technical columns |
-| text instruction | business rules: which revenue is official, EUR for group totals, fiscal calendar, privacy |
-| example SQL | 19 trusted query patterns |
-| SQL snippets | 16 measures, filters and expressions |
-| joins | 1 (foreign-key joins come from Unity Catalog automatically) |
-| sample questions | 9 |
-| benchmarks | 25 questions with a checked SQL answer, 8 of them deliberately tricky |
+| agent | data sources | example SQL | benchmarks |
+|---|---|---|---|
+| **Fjällmark Consumer Analyst (\<catalog\>)** | 4 consumer metric views (incl. the curated `dtc_sales_metrics`), 7 consumer tables, `finance.company_code` as entity reference | 7 | 8 |
+| **Fjällmark Finance Analyst (\<catalog\>)** | `net_revenue_metrics`, `receivables_metrics`, 8 finance tables | 7 | 9 |
+| **Fjällmark Manufacturing Analyst (\<catalog\>)** | 4 manufacturing metric views (incl. `production_performance_metrics`), 6 manufacturing tables | 4 | 7 |
 
-The notebook asks three test questions through the Conversation API, runs the benchmarks and prints the
-**Space ID** and a link. Copy the Space ID: step 5 needs it.
+Every agent has column settings (synonyms, entity matching on values such as `PL-POZ-L2`, hidden personal and
+technical columns), one text instruction (shared rules - company, calendar, currency, privacy, *who answers
+what* - plus its domain's business rules), SQL snippets and sample questions. A question that needs two domains
+("webshop sales vs finance revenue") belongs to none of them: the router app of step 6 answers it.
+
+The notebook asks test questions through the Conversation API - one of them on purpose to the wrong agent: the
+Consumer Analyst should say that revenue is the Finance Analyst's - runs the benchmarks of all three agents and
+prints the links.
 
 > **Your answers are governed.** Genie runs every query *as the person who asks*. With the step 3 defaults
-> you are Anna (SE01). "Net revenue by company code in 2026" therefore returns one row: SE01, 4,614,311 EUR.
-> The CFO would see all six. The expected values in [`genie/README.md`](genie/README.md) are for a user who
-> sees all companies. To compare with them, re-run notebook 03 with `company_code = ALL` (only the mapping row
-> changes), and switch back to `SE01` for the demo.
+> you are Anna (SE01). "Net revenue by company code in 2026" (Finance Analyst) therefore returns one row: SE01,
+> 4,614,311 EUR. The CFO would see all six. The expected values in [`genie/README.md`](genie/README.md) are for a
+> user who sees all companies. To compare with them, re-run notebook 03 with `company_code = ALL` (only the
+> mapping row changes), and switch back to `SE01` for the demo.
 >
-> **Expect 24 of 25 benchmarks with the SE01 mapping.** The benchmark "How much of DE01's open receivables is
-> overdue, in EUR?" returns an empty result for Anna, because the DE01 rows are filtered out. That is governance
-> working as intended, and a score you can explain. With `company_code = ALL` the run scores 25 of 25.
+> **Expect 23 of 24 benchmarks with the SE01 mapping** (Consumer 8/8, Finance 8/9, Manufacturing 7/7). The Finance
+> benchmark "How much of DE01's open receivables is overdue, in EUR?" returns an empty result for Anna, because
+> the DE01 rows are filtered out. That is governance working as intended, and a score you can explain.
 
-### 4b. Work with the agent (UI)
+### 4b. Work with the agents (UI)
 
-Open the agent from the link printed in section 4 of the notebook.
+Open an agent from the links printed in section 4 of the notebook - start with the Finance Analyst.
 
 1. **Try the sample questions** on the chat page. For each answer, open the generated SQL and check three
    things. Does revenue come from `finance.net_revenue_metrics`? Are totals across companies in EUR? Does it
@@ -438,11 +451,11 @@ Open the agent from the link printed in section 4 of the notebook.
    Then run the benchmark again. Never paste a benchmark's answer in as an example: benchmarks test the agent,
    they must not teach it the answers.
 
-🔁 **Re-running notebook 04 keeps your UI edits.** The agent is found by its title. If the template has not
-changed, nothing is touched (measured: "unchanged" in 50 s). Only `force_update = true` overwrites the agent
-with the template.
+🔁 **Re-running notebook 04 keeps your UI edits.** Each agent is found by its title. If its template has not
+changed, nothing is touched. Only `force_update = true` overwrites the agents with the templates; the `domains`
+widget limits a run to some of them (for example `finance`).
 
-**Share the agent (instructions, not yet rehearsed with a second user):** **Share** > add a user or group >
+**Share an agent (instructions, not yet rehearsed with a second user):** **Share** > add a user or group >
 **CAN RUN**. The viewer also needs:
 
 * **CAN USE** on the agent's SQL warehouse,
@@ -458,7 +471,7 @@ yet: if a viewer gets a permission error instead of filtered rows, tell the inst
 
 ---
 
-## Step 5: Business context (15 min)
+## Step 5: Business context (10 min)
 
 Tables tell Genie *what the data is*. The business context tells it *what the business means*. Fjällmark keeps
 that context as code in [`context/`](context/README.md): one Markdown page per business term, with the
@@ -468,12 +481,12 @@ definition, business rules, calculation SQL and pitfalls.
 
 The instructor has created the account-level **domains** `Consumer`, `Finance` and `Manufacturing` and their
 subdomains. A domain *is* a governed tag. Open
-[`notebooks/05_business_context.py`](notebooks/05_business_context.py), paste the Space ID from step 4 into
-`genie_space_id` and click **Run all** (about 1 minute). The notebook:
+[`notebooks/05_business_context.py`](notebooks/05_business_context.py) and click **Run all** (about 1 minute).
+The notebook:
 
 * tags your three gold schemas with their domain (`ALTER SCHEMA ... SET TAGS ('Finance')`),
 * tags each gold table and metric view with its subdomain (for example `Finance/General Ledger`),
-* tags your Genie Agent with its domains,
+* tags each of your three Genie Agents with its own domain (it finds them by their titles),
 * verifies the result in `information_schema`.
 
 Check it in **Discover** > **Domains** > for example *Finance*: your tables are listed there. If the notebook
@@ -484,8 +497,8 @@ ran 0 statements, 62 objects "already as wanted" (36 tables and 26 metric views)
 
 ### 5b. Give the agent the glossary: GitHub MCP in Agent mode
 
-1. Open your Genie Agent, open the **Sources** tab and click **Add**. Select the GitHub MCP service
-   (`system.ai.github`).
+1. Open your **Finance Analyst**, open the **Sources** tab and click **Add**. Select the GitHub MCP service
+   (`system.ai.github`). (Repeat for the other two agents if you have time.)
 2. In the source's **Description**, tell the agent when to use it, for example:
    > Business glossary of Fjällmark Consumer Goods in the GitHub repository `dediggibyte/genie_bootcamp`,
    > folder `bootcamp/context/domains/<domain>/pages/` (index `bootcamp/context/glossary.csv`). Read the
@@ -518,7 +531,46 @@ Never put personal data in a Page. Pages are account-level.
 
 ---
 
-## Exercise: bring your own question (15 min)
+## Step 6: One entry point - the router app (15 min)
+
+A business user should not have to know which agent to ask, and some questions need two of them. Open
+[`notebooks/06_router_app.py`](notebooks/06_router_app.py) and click **Run all** (about 4 minutes, plus a few
+minutes for the app's first start). It deploys a **custom agent as a Databricks App**, built from the Databricks
+app template **Custom Agent (Advanced)** ([`agent-openai-advanced`](https://github.com/databricks/app-templates/tree/main/agent-openai-advanced):
+OpenAI Agents SDK, chat UI, conversation memory and long-running tasks in Lakebase). The code is in
+[`app/`](app/README.md); `app/agent_server/agent.py` is the router.
+
+```text
+  you ──► router app ──┬──► Consumer Analyst       (Genie MCP)
+          (chat UI,    ├──► Finance Analyst        (Genie MCP)
+           memory)     └──► Manufacturing Analyst  (Genie MCP)
+```
+
+The notebook:
+
+1. finds your three agents,
+2. creates an MLflow experiment for the traces and **your own branch** of the bootcamp Lakebase project (memory),
+3. creates the app `router-<short name>` with its resources: the three agents (*Can run*), their SQL warehouse
+   (*Can use*), the router model, the experiment and your Lakebase branch,
+4. gives the app's **service principal** access to your data like a colleague: `SELECT` on the gold schemas only,
+   and **your** company codes in the step 3 mapping table (no PII) - so the app is governed exactly like you,
+5. deploys `app/` and prints the app's link.
+
+Open the app and ask:
+
+* *"What was our total revenue in 2025?"* - one analyst (Finance), official Net Revenue in EUR. As SE01: 5,977,382 EUR,
+  and the router points out that only SE01 is visible.
+* *"Why is webshop revenue higher than the revenue finance reports?"* - two analysts (Consumer + Finance), compared
+  in one currency, explained with VAT, shipping, discounts and returns.
+* *"What happened on Poznań line PL-POZ-L2 in March 2026, and what did it do to COGS?"* - Manufacturing + Finance.
+* A follow-up without context, such as *"And in 2024?"* - the router remembers the conversation (Lakebase).
+
+Every answer ends with a **Sources** line: which analyst answered which part, with definition, period and
+currency. In the MLflow experiment (*Traces*) you can follow a conversation through the router and the Genie calls.
+
+---
+
+## Exercise: bring your own question (10 min)
 
 Take a question from *your* business and translate it to Fjällmark.
 
@@ -557,9 +609,12 @@ Tick these before 17:35. In the demo slot the speakers ask a few of you to show 
 - [ ] **PII:** asking the agent for shopper e-mails gets a refusal or an aggregate answer, never clear text.
 - [ ] **Persona switch:** changing your mapping in notebook 03 (section 10) changes the agent's next answer,
       with no pipeline run and no agent change.
-- [ ] **Benchmarks:** your latest evaluation, with the score you can explain (which questions failed and why).
+- [ ] **Benchmarks:** the latest evaluation of each agent, with the score you can explain (which questions failed
+      and why).
 - [ ] **Context:** in Agent mode the agent cites a glossary page. Your schemas appear under **Discover** >
       **Domains**.
+- [ ] **One entry point:** the router app answers a cross-domain question with a **Sources** line naming two
+      analysts, and shows only your company codes.
 - [ ] **No copies:** you did not leave a `CREATE TABLE ... AS SELECT` copy of a governed table behind
       (exercise A drops its own copy).
 
@@ -584,6 +639,11 @@ Tick these before 17:35. In the demo slot the speakers ask a few of you to show 
 | Notebook 04: no warehouse found / permission denied on the warehouse | Enter a warehouse name or ID in the `warehouse` widget. Ask the instructor for **CAN USE**. |
 | Notebook 05 stops: governed tags missing, or no permission to assign a tag | The instructor has not run `00_instructor_setup` (domains, tag `ASSIGN`) yet. Continue with 5b and 5c. |
 | GitHub MCP is not offered, or cannot read the repository | You are in Chat mode (switch to **Agent mode**), you have not signed in under **Configure**, or the repository is private without the connector app. Tell the instructor. |
+| Notebook 06: "Genie Agents not found" | Run notebook 04 first, with the same catalog. |
+| Notebook 06 fails on the Lakebase branch | The instructor's Lakebase project is missing or you lack **CAN USE** on it (`00_instructor_setup`, section 8b). |
+| The app shows "App crashed" or 502 right after the deployment | Open the app → **Logs**. "permission ... experiment": the grants were still arriving - re-run notebook 06. Lakebase errors: re-run notebook 06; it re-binds your branch. |
+| The router says an analyst is "not available" | The app's service principal cannot open that agent (HTTP 403 in the app's logs). Re-run notebook 06: it re-binds the three agents as app resources. |
+| The router's answers contain no rows for your companies | The app's mapping is copied from yours when notebook 06 runs. After you change your mapping in notebook 03, re-run notebook 06 (section 5b). |
 
 **Re-runs load nothing.** Notebook 01 skips existing files. The pipeline reads only new files and never needs a
 full refresh (after step 3 it rebuilds 11 gold tables from silver on every run, see step 2). Metric views and tags apply only what is missing or changed. Notebook 03 reports
@@ -599,7 +659,8 @@ The instructor's `00_instructor_setup` grants all of them.
 ## Cleanup (after the event)
 
 1. Open [`notebooks/99_cleanup.py`](notebooks/99_cleanup.py) and **Run all** once *without* confirmation. It
-   lists what it would delete: your bootcamp Genie Agents, the governance policies and your catalog.
+   lists what it would delete: your three bootcamp Genie Agents, your router app with its Lakebase branch and
+   MLflow experiment, the governance policies and your catalog.
 2. Type your catalog name into the `confirm` widget and **Run all** again. Trashed agents can be restored from
    the workspace **Trash** for 30 days.
 3. Delete the job and the pipeline: in **Jobs & Pipelines**, delete
@@ -621,20 +682,21 @@ never touches them.
 | [`databricks.yml`](databricks.yml), [`resources/`](resources/) | step 2: the bundle (target `dev`): pipeline `cpg_lakehouse_pipeline`, job `cpg_lakehouse_job` |
 | [`notebooks/job_tasks/`](notebooks/job_tasks/) | the job's notebook tasks: metric views (`02a`), model tags (`02b`), validation (`02c`) |
 | [`notebooks/03_governance.py`](notebooks/03_governance.py) | step 3: row filters, column masks, personas, break-it exercises, optional ABAC |
-| [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) | step 4: create or update the Genie Agent, test questions, benchmarks |
+| [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) | step 4: create or update the three Genie Agents, test questions, benchmarks |
 | [`notebooks/05_business_context.py`](notebooks/05_business_context.py) | step 5: domain and subdomain tags, GitHub MCP, draft Page |
-| [`notebooks/99_cleanup.py`](notebooks/99_cleanup.py) | after the event: remove your agents, policies and catalog |
+| [`notebooks/06_router_app.py`](notebooks/06_router_app.py), [`app/`](app/README.md) | step 6: the router app (Databricks App from the template *Custom Agent (Advanced)*) |
+| [`notebooks/99_cleanup.py`](notebooks/99_cleanup.py) | after the event: remove your agents, router app, policies and catalog |
 | [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) | instructors only, once per event ([INSTRUCTOR.md](INSTRUCTOR.md)) |
 | [`data/`](data/README.md) | 36 CSV files, `manifest.json`, data dictionary, storylines S1-S7, data-quality issues |
 | [`pipeline/`](pipeline/README.md) | bronze, silver and gold SQL per domain (generated), first-run evidence |
 | [`metric_views/industry/`](metric_views/industry/), [`metric_views/curated/`](metric_views/curated/README.md) | 22 generated industry metric views, 4 hand-written curated views |
 | [`model_tags/`](model_tags/) | the industry model's `dbx_*` tags (generated) |
-| [`genie/`](genie/README.md) | the Genie Agent template (generated), source selection, all 25 benchmarks with expected values |
+| [`genie/`](genie/README.md) | the three Genie Agent templates and the cross-domain benchmarks (generated), source selection, all 25 benchmarks with expected values |
 | [`slides/`](slides/) | the session deck (`.pptx`) and slide images used in the repository README |
 | [`context/`](context/README.md) | business glossary: company profile, domains, subdomains, 27 Pages, agent instructions |
 
 The complete model with all 10 domains and 116 tables is in [`../full_model/`](../full_model/README.md). The
-maintainer tools that generate the pipeline, data, tags and agent template are in [`../tools/`](../tools/).
+maintainer tools that generate the pipeline, data, tags and agent templates are in [`../tools/`](../tools/).
 
 **License.** The tables, columns, keys, tags and industry metric views come from the Databricks *Lakehouse Industry
 Data Model, Consumer Goods v2 (MVM)* (© Databricks, Inc.), licensed under the Databricks license. See

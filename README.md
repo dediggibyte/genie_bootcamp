@@ -1,8 +1,9 @@
 # genie_bootcamp
 
 Material for **"Genie, Governed: From impressive demo to trusted business application"**, Diggibyte,
-Stockholm, 29 October 2026. In a two-hour hands-on lab, participants build one trusted **Genie Agent** on a
-governed lakehouse. It covers data, governance, Genie curation and business context, on the Databricks
+Stockholm, 29 October 2026. In a two-hour hands-on lab, participants build three trusted domain **Genie Agents** on a
+governed lakehouse, with one router app as the single entry point. It covers data, governance, Genie curation,
+business context and a custom agent on Databricks Apps, on the Databricks
 *Lakehouse Industry Data Model, Consumer Goods v2 (MVM)* with synthetic data for the fictional company
 Fjällmark Consumer Goods AB.
 
@@ -34,7 +35,7 @@ order.
 flowchart LR
     D["1 Data<br/>bronze to gold, then metric views"]
     G["2 Governance<br/>row filters and column masks"]
-    GE["3 Genie<br/>a curated Genie Agent"]
+    GE["3 Genie<br/>three curated domain agents"]
     C["4 Context<br/>domains, sub-domains and pages"]
     A(["Agent<br/>answers as you"])
     D --> A
@@ -47,9 +48,9 @@ flowchart LR
 |---|---|---|---|
 | 1 Data | steps 1-2 | Catalog, volume and CSVs; Lakeflow pipeline bronze, silver, gold; metric views | [`notebooks/01_setup_catalog.py`](bootcamp/notebooks/01_setup_catalog.py), [`pipeline/`](bootcamp/pipeline/), [`metric_views/`](bootcamp/metric_views/), [`databricks.yml`](bootcamp/databricks.yml) |
 | 2 Governance | step 3 | Unity Catalog row filters by company code, column masks on shopper PII | [`notebooks/03_governance.py`](bootcamp/notebooks/03_governance.py) |
-| 3 Genie | step 4 | The Genie Agent, kept as a manifest in the repo, with benchmarks | [`genie/`](bootcamp/genie/), [`notebooks/04_genie_agent.py`](bootcamp/notebooks/04_genie_agent.py) |
+| 3 Genie | step 4 | Three Genie Agents (Consumer, Finance, Manufacturing Analyst), kept as manifests in the repo, with benchmarks | [`genie/`](bootcamp/genie/), [`notebooks/04_genie_agent.py`](bootcamp/notebooks/04_genie_agent.py) |
 | 4 Context | step 5 | Domains, sub-domains and Pages from Git, GitHub MCP in Agent mode | [`context/`](bootcamp/context/), [`notebooks/05_business_context.py`](bootcamp/notebooks/05_business_context.py) |
-| Agent | - | Genie One, or any agent through Genie MCP | - |
+| Agent | step 6 | The Fjällmark router app: a custom agent (Databricks App template *Custom Agent (Advanced)*) that asks the three Genie Agents through Genie MCP; also Genie One | [`app/`](bootcamp/app/), [`notebooks/06_router_app.py`](bootcamp/notebooks/06_router_app.py) |
 
 ### How it fits together
 
@@ -73,12 +74,12 @@ flowchart LR
         PAGES["Pages<br/>terms, owners, linked assets"]
     end
     subgraph S4["ANSWER · step 4"]
-        AG["Genie Agent<br/>curated, benchmarked"]
-        WH["SQL warehouse<br/>data access as the signed-in user"]
+        AG["Genie Agents<br/>Consumer, Finance, Manufacturing<br/>curated, benchmarked"]
+        WH["SQL warehouse<br/>data access governed by Unity Catalog"]
     end
-    subgraph CON["CONSUME"]
+    subgraph CON["CONSUME · step 6"]
+        RT["Router app<br/>one entry point, Genie MCP"]
         G1["Genie One<br/>business users"]
-        ANY["Any agent<br/>through Genie MCP"]
     end
     CSV --> PIPE
     PIPE --> UC
@@ -88,11 +89,11 @@ flowchart LR
     DOM --> AG
     PAGES --> AG
     AG --- WH
+    AG --> RT
     AG --> G1
-    AG --> ANY
 ```
 
-The lab builds context (step 5) after the Genie Agent (step 4), but in the answer path context comes first: the
+The lab builds context (step 5) after the Genie Agents (step 4), but in the answer path context comes first: the
 agent reads it to choose the right definition.
 
 ### Inside step 2: the lakehouse
@@ -146,9 +147,9 @@ different.
 
 | folder | for | contents |
 |---|---|---|
-| [`bootcamp/`](bootcamp/README.md) | **participants** | Self-contained lab folder with its own bundle (`databricks.yml`). Covers 3 domains (consumer, finance, manufacturing; 36 tables). Includes the data, the bronze/silver/gold pipeline, 22 industry and 4 curated metric views, model tags, and notebooks for setup, governance, the Genie Agent, business context and cleanup. Also holds the Genie Agent template, the business glossary (`context/`), the lab guide ([README](bootcamp/README.md)), the [instructor guide](bootcamp/INSTRUCTOR.md) and the session deck ([`slides/`](bootcamp/slides/)). |
+| [`bootcamp/`](bootcamp/README.md) | **participants** | Self-contained lab folder with its own bundle (`databricks.yml`). Covers 3 domains (consumer, finance, manufacturing; 36 tables). Includes the data, the bronze/silver/gold pipeline, 22 industry and 4 curated metric views, model tags, and notebooks for setup, governance, the Genie Agents, business context, the router app and cleanup. Also holds the three Genie Agent templates, the router app (`app/`), the business glossary (`context/`), the lab guide ([README](bootcamp/README.md)), the [instructor guide](bootcamp/INSTRUCTOR.md) and the session deck ([`slides/`](bootcamp/slides/)). |
 | [`full_model/`](full_model/README.md) | instructors, further work | The complete model (10 domains, 116 tables, 733 foreign keys, 79 metric views) with its own bundle. It reuses the bootcamp CSVs, so every CSV is stored once. |
-| [`tools/`](tools/) | maintainers | Generators and checkers, Python standard library only. `generate_lakehouse.py` builds the pipeline SQL, metric views and tags. `generate_data.py` and `verify_data.py` build and check the data. `build_genie_template.py` builds the Genie Agent template, and `check_context.py` checks the glossary. Also holds the vendored model in `model/`. |
+| [`tools/`](tools/) | maintainers | Generators and checkers, Python standard library only. `generate_lakehouse.py` builds the pipeline SQL, metric views and tags. `generate_data.py` and `verify_data.py` build and check the data. `build_genie_template.py` builds the three Genie Agent templates, and `check_context.py` checks the glossary. Also holds the vendored model in `model/`. |
 | `archive/` | history | the earlier v1 material (Maison Europa); not used by the bootcamp |
 
 ## Quick start
@@ -160,8 +161,9 @@ different.
    * the bundle deploys the pipeline (`bootcamp/databricks.yml` > **Deployments** > `dev` > **Deploy** > run
      `cpg_lakehouse_job`; CLI fallback in the README's step 2),
    * notebook 03 adds governance,
-   * notebook 04 creates the Genie Agent,
-   * notebook 05 adds the business context.
+   * notebook 04 creates the three Genie Agents,
+   * notebook 05 adds the business context,
+   * notebook 06 deploys the router app, the single entry point over the three agents.
 
 ## Maintainers
 
@@ -170,7 +172,7 @@ different.
 python3 -I tools/generate_lakehouse.py --check   # generated pipeline SQL, metric views and tags are up to date
 python3 -I tools/generate_data.py                # regenerate the CSVs, manifests and data READMEs (deterministic)
 python3 -I tools/verify_data.py                  # data checks and storyline KPIs
-python3 -I tools/build_genie_template.py --check # Genie Agent template is up to date
+python3 -I tools/build_genie_template.py --check # Genie Agent templates are up to date
 python3 -I tools/check_context.py                # business glossary references the model correctly
 ```
 

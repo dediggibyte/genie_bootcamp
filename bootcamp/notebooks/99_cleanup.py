@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 99 · Clean up after the bootcamp
 # MAGIC
@@ -6,7 +10,8 @@
 # MAGIC
 # MAGIC | step | what is removed | how we make sure it is yours |
 # MAGIC |---|---|---|
-# MAGIC | 3 | Genie Agents built by notebook 04 | title starts with **Fjällmark Business Analyst**, stored in **your** home folder, uses **this** catalog |
+# MAGIC | 3 | Genie Agents built by notebook 04 | title starts with **Fjällmark** (the Consumer, Finance and Manufacturing Analyst), stored in **your** home folder, uses **this** catalog |
+# MAGIC | 3b | the router app of notebook 06, its Lakebase branch and MLflow experiment | app created by **you** for **this** catalog; branch `router-<your short name>`; experiment `/Users/<you>/fjallmark_router_<catalog>` |
 # MAGIC | 4 | governance policies: ABAC policies, row filters, column masks | only inside **this** catalog, and you must **own** it |
 # MAGIC | 5 | the catalog itself (`DROP CATALOG ... CASCADE`: schemas, tables, metric views, volume, files) | you must **own** the catalog |
 # MAGIC | 6 | the bundle's job and pipeline | `bundle destroy` - explained at the end (not done by this notebook) |
@@ -37,10 +42,13 @@
 # MAGIC | `confirm` | blank | type the **catalog name** here to actually delete; blank = inventory only (dry run) |
 # MAGIC | `delete_genie_agents` | `true` | move your bootcamp Genie Agents on this catalog to the trash |
 # MAGIC | `drop_catalog` | `true` | `false` = only remove the governance policies and keep the data |
+# MAGIC | `delete_router_app` | `true` | delete your router app (notebook 06), its Lakebase branch and its experiment |
+# MAGIC | `lakebase_project` | `fjallmark-genie-bootcamp` | the bootcamp Lakebase project that holds your app's branch |
 
 # COMMAND ----------
 
 import json
+import re
 import unicodedata
 
 from databricks.sdk import WorkspaceClient
@@ -49,6 +57,8 @@ dbutils.widgets.text("catalog", "", "1 Catalog (blank = automatic)")
 dbutils.widgets.text("confirm", "", "2 Type the catalog name to confirm")
 dbutils.widgets.dropdown("delete_genie_agents", "true", ["true", "false"], "3 Delete my Genie Agents")
 dbutils.widgets.dropdown("drop_catalog", "true", ["true", "false"], "4 Drop the catalog")
+dbutils.widgets.dropdown("delete_router_app", "true", ["true", "false"], "5 Delete my router app")
+dbutils.widgets.text("lakebase_project", "fjallmark-genie-bootcamp", "6 Bootcamp Lakebase project")
 
 
 def bundle_short_name(user_name: str) -> str:
@@ -70,7 +80,9 @@ def qname(full_name: str) -> str:
     return ".".join(f"`{part}`" for part in full_name.split("."))
 DELETE_AGENTS = dbutils.widgets.get("delete_genie_agents") == "true"
 DROP_CATALOG = dbutils.widgets.get("drop_catalog") == "true"
-AGENT_TITLE_PREFIX = "Fjällmark Business Analyst"
+DELETE_APP = dbutils.widgets.get("delete_router_app") == "true"
+LAKEBASE_PROJECT = dbutils.widgets.get("lakebase_project").strip()
+AGENT_TITLE_PREFIX = "Fjällmark "   # the Consumer / Finance / Manufacturing Analyst (and the earlier Business Analyst)
 MY_HOME = f"/Users/{me}"
 
 print(f"You are   : {me}")
@@ -163,11 +175,33 @@ print(f"Your pipelines that write to {C}: {len(my_pipelines)}")
 for pid, name in my_pipelines:
     print(f"  {pid}  {name}")
 
+# --- router app of notebook 06, its Lakebase database and MLflow experiment ----------------------------
+ROUTER_MARK = f"Genie Agents on {C}"   # end of the app description notebook 06 writes
+router_apps = [a for a in w.api_client.do("GET", "/api/2.0/apps", query={"page_size": 200}).get("apps", [])
+               if (a.get("creator") or "").lower() == me.lower() and (a.get("description") or "").endswith(ROUTER_MARK)]
+router_db = None   # the participant's Lakebase branch (notebook 06)
+if LAKEBASE_PROJECT:
+    branch_id = re.sub(r"[^a-z0-9]+", "-", f"router-{bundle_short_name(me)}").strip("-")[:63]
+    try:
+        router_db = w.api_client.do("GET", f"/api/2.0/postgres/projects/{LAKEBASE_PROJECT}/branches/{branch_id}")["name"]
+    except Exception:
+        router_db = None   # no branch (or no access to the project)
+try:
+    router_experiment = w.api_client.do("GET", "/api/2.0/mlflow/experiments/get-by-name",
+                                        query={"experiment_name": f"/Users/{me}/fjallmark_router_{C}"})["experiment"]
+except Exception:
+    router_experiment = None
+print(f"Router apps on {C}: {[a['name'] for a in router_apps]}")
+print(f"Router branch      : {router_db or '-'}")
+print(f"Router experiment  : {router_experiment['name'] if router_experiment else '-'}")
+
 # COMMAND ----------
 
 if not CONFIRMED:
     dbutils.notebook.exit(json.dumps({"mode": "dry_run", "catalog": C, "catalog_exists": catalog_exists,
-                                      "i_own_catalog": i_own_catalog, "agents": len(agents), "row_filters": len(row_filters),
+                                      "i_own_catalog": i_own_catalog, "agents": len(agents),
+                                      "router_apps": [a["name"] for a in router_apps], "router_branch": router_db,
+                                      "row_filters": len(row_filters),
                                       "column_masks": len(column_masks), "abac_policies": len(abac_policies)}))
 
 # COMMAND ----------
@@ -185,6 +219,30 @@ if DELETE_AGENTS:
         deleted_agents.append(a["space_id"])
         print(f"trashed  {a['space_id']}  {a['title']}")
 print(f"{len(deleted_agents)} Genie Agent(s) trashed.")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## 3b · Delete the router app, its Lakebase branch and experiment
+# MAGIC The app first (it stops using the database), then your branch of the bootcamp Lakebase project, then the
+# MAGIC MLflow experiment with the traces (restorable from the experiment's trash for 30 days).
+
+# COMMAND ----------
+
+deleted_router = []
+if DELETE_APP:
+    for a in router_apps:
+        w.api_client.do("DELETE", f"/api/2.0/apps/{a['name']}")
+        deleted_router.append(f"app {a['name']}")
+    if router_db:
+        w.api_client.do("DELETE", f"/api/2.0/postgres/{router_db}")
+        deleted_router.append(f"Lakebase branch {router_db}")
+    if router_experiment:
+        w.api_client.do("POST", "/api/2.0/mlflow/experiments/delete", body={"experiment_id": router_experiment["experiment_id"]})
+        deleted_router.append(f"experiment {router_experiment['name']}")
+for x in deleted_router:
+    print(f"deleted  {x}")
+print(f"{len(deleted_router)} router object(s) deleted.")
 
 # COMMAND ----------
 
@@ -278,6 +336,7 @@ if my_pipelines:
 dbutils.notebook.exit(json.dumps({"mode": "deleted", "catalog": C, "catalog_owner": catalog_owner,
                                   "catalog_dropped": dropped,
                                   "catalog_still_exists": catalog_left, "agents_trashed": deleted_agents,
+                                  "router_deleted": deleted_router,
                                   "policies_removed": policies_removed,
                                   "policies_found": {"abac": len(abac_policies), "row_filters": len(row_filters),
                                                      "column_masks": len(column_masks)},

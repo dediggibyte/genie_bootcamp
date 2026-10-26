@@ -1,27 +1,32 @@
 #!/usr/bin/env python3
-"""Build the bootcamp's Genie Agent template ``bootcamp/genie/fjallmark_business_analyst.json``.
+"""Build the bootcamp's three Genie Agent templates ``bootcamp/genie/fjallmark_<domain>_analyst.json``.
 
-The template is a serialized Genie space (version 2) for the agent "Fjällmark Business Analyst" over the
-three bootcamp domains (consumer, finance, manufacturing) of the Lakehouse Industry Data Model - Consumer
-Goods v2 MVM (Copyright Databricks, Inc.; Databricks license - see tools/model/LICENSE.md and
-tools/model/NOTICE.md). Every table and column name comes from that model; the agent content (descriptions,
+Each template is a serialized Genie space (version 2) for one domain agent - "Fjällmark Consumer Analyst",
+"Fjällmark Finance Analyst", "Fjällmark Manufacturing Analyst" - on that domain of the Lakehouse Industry
+Data Model - Consumer Goods v2 MVM (Copyright Databricks, Inc.; Databricks license - see tools/model/LICENSE.md
+and tools/model/NOTICE.md). Every table and column name comes from that model; the agent content (descriptions,
 instructions, example SQL, benchmarks) is written for the fictional company Fjällmark Consumer Goods AB.
 
+Every data source, example, snippet and benchmark below is written once; its domain follows from the schemas
+its SQL reads (``domain_of``). Items that read two domains are not given to any Genie Agent: they go to
+``bootcamp/genie/cross_domain_benchmarks.json``, the evaluation set of the router app (bootcamp/app/), which
+asks the domain agents and combines their answers.
+
 Single sources reused here (not copied by hand):
-  * the text instruction = the ```text block of bootcamp/context/genie/agent_instructions.md (business rules,
-    owned by the context stream) + a short "HOW TO QUERY" block written below;
+  * the text instruction = the shared ```text block of bootcamp/context/genie/agent_instructions.md + the
+    agent's domain block (business rules, owned by the context stream) + a "HOW TO QUERY" block written below;
   * the curated metric views bootcamp/metric_views/curated/*.sql (measure / dimension names).
 
-The template uses the placeholder ``__CATALOG__``; notebook bootcamp/notebooks/04_genie_agent.py replaces it
-with the participant's catalog and creates or updates the agent (REST /api/2.0/genie/spaces).
+The templates use the placeholder ``__CATALOG__``; notebook bootcamp/notebooks/04_genie_agent.py replaces it
+with the participant's catalog and creates or updates the agents (REST /api/2.0/genie/spaces).
 
 IDs are deterministic (md5 of a stable key), so re-building keeps question / instruction IDs stable and
 benchmark history comparable. The output is deterministic (same input -> same bytes).
 
 Usage (from the repository root):
 
-  python3 -I tools/build_genie_template.py            # (re)write the template
-  python3 -I tools/build_genie_template.py --check    # exit 1 if the template is missing or stale
+  python3 -I tools/build_genie_template.py            # (re)write the templates
+  python3 -I tools/build_genie_template.py --check    # exit 1 if a template is missing or stale
   python3 -I tools/build_genie_template.py --run-sql --catalog zz_cpg_bc_e2e --warehouse <id> --profile <p>
         # live check: every data source exists, every example / benchmark SQL and every SQL snippet
         # (wrapped in a test query) runs on the catalog; prints row counts and the first row
@@ -36,19 +41,58 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "bootcamp", "genie", "fjallmark_business_analyst.json")
+GENIE_DIR = os.path.join(ROOT, "bootcamp", "genie")
+CROSS_OUT = os.path.join(GENIE_DIR, "cross_domain_benchmarks.json")
 INSTRUCTIONS_MD = os.path.join(ROOT, "bootcamp", "context", "genie", "agent_instructions.md")
 SCRIPT = "tools/build_genie_template.py"
 C = "__CATALOG__"
+CROSS = "cross_domain"
 
-TITLE = "Fjällmark Business Analyst"
-DESCRIPTION = (
-    "Business analyst for Fjällmark Consumer Goods AB (fictional Nordic consumer-goods group: Björkö Pantry, "
-    "Kallkälla, Mjuk Care). Answers questions on official Net Revenue, COGS and gross margin (general ledger, EUR), "
-    "receivables and DSO, webshop (DTC) sales, shoppers and loyalty tiers, and plant performance (OEE, yield, "
-    "scrap, downtime, cost variance) from the consumer, finance and manufacturing gold tables and governed "
-    "metric views of the Lakehouse Industry Data Model - Consumer Goods v2. Data: 2024-01 to 2026-09."
-)
+_COMPANY = ("Fjällmark Consumer Goods AB (fictional Nordic consumer-goods group: Björkö Pantry, Kallkälla, Mjuk "
+            "Care)")
+_DATA = "Lakehouse Industry Data Model - Consumer Goods v2. Data: 2024-01 to 2026-09."
+DOMAINS = {
+    "consumer": {
+        "title": "Fjällmark Consumer Analyst",
+        "instruction_heading": "Consumer Analyst",
+        "description": f"Consumer analyst for {_COMPANY}. Answers questions on webshop (DTC) GMV, net sales, orders, "
+                       "AOV and returns by market, brand and product, shoppers and CLTV segments, Fjällmark Friends "
+                       "loyalty tiers, subscriptions and GDPR consents from the consumer gold tables and governed "
+                       f"metric views of the {_DATA}",
+    },
+    "finance": {
+        "title": "Fjällmark Finance Analyst",
+        "instruction_heading": "Finance Analyst",
+        "description": f"Finance analyst for {_COMPANY}. Answers questions on the official Net Revenue, COGS and gross "
+                       "margin (general ledger, EUR) by entity, brand and channel, production variances, receivables, "
+                       "overdue AR and DSO, payables and cost estimates from the finance gold tables and governed "
+                       f"metric views of the {_DATA}",
+    },
+    "manufacturing": {
+        "title": "Fjällmark Manufacturing Analyst",
+        "instruction_heading": "Manufacturing Analyst",
+        "description": f"Manufacturing analyst for {_COMPANY}. Answers questions on plant and line performance - OEE, "
+                       "yield, scrap, downtime, on-time completion, late orders - yield loss reasons, batches, equipment "
+                       "and production cost variance (plant currency and EUR) from the manufacturing gold tables and "
+                       f"governed metric views of the {_DATA}",
+    },
+}
+# Conformed reference tables an agent may read although they live in another domain's schema.
+SHARED_REFERENCE = {"consumer": {"finance.company_code"}}
+
+
+def out_path(domain):
+    return os.path.join(GENIE_DIR, f"fjallmark_{domain}_analyst.json")
+
+
+def domain_of(sql, domain_hint=None):
+    """The one domain whose schemas the SQL reads (a shared reference table does not count), or CROSS."""
+    refs = set(re.findall(re.escape(C) + r"\.([a-z_]+)\.([a-z_]+)", sql))
+    for d in DOMAINS:
+        if all(s == d or f"{s}.{t}" in SHARED_REFERENCE.get(d, ()) for s, t in refs):
+            if any(s == d for s, _ in refs) or d == domain_hint:
+                return d
+    return CROSS
 
 
 def nid(key):
@@ -511,32 +555,57 @@ TABLES = [
 # ---------------------------------------------------------------------------------------------------------
 # 2. Text instruction (exactly one item)
 # ---------------------------------------------------------------------------------------------------------
-HOW_TO_QUERY = """
-HOW TO QUERY (agent template, tools/build_genie_template.py)
-- Prefer the four curated metric views: finance.net_revenue_metrics (revenue, COGS, margin, production
-  variances), consumer.dtc_sales_metrics (webshop GMV, net sales, AOV, returns, active shoppers),
-  finance.receivables_metrics (open / overdue / disputed AR, DSO) and manufacturing.production_performance_metrics
-  (OEE, yield, scrap, downtime, on-time, cost variance). Query them with MEASURE(<measure>) and GROUP BY ALL;
-  filter only on dimensions, never put a measure in WHERE, never SELECT *.
+HOW_TO_QUERY_COMMON = """
+- Query metric views with MEASURE(<measure>) and GROUP BY ALL; filter only on dimensions, never put a measure in
+  WHERE, never SELECT *.
 - Return only the columns the question needs: the grouping dimensions plus the requested measures.
-- A total "across all markets / company codes / the group" is ONE number in EUR (the *_eur measure, no
-  grouping) - never answer it with a per-currency breakdown of *_local measures.
 - When the user groups categories ("Gold and Platinum members vs non-members", "food and beverages"), build that
   grouping with a CASE on the dimension and compute the measure per group; do not just list every category.
-- Use the gold tables only for row-level detail or attributes the metric views do not have (yield loss reasons
-  per line, subscriptions, payables, loyalty accounts, production line notes).
 - Industry metric views named <table>_metrics are generic model views; their amounts are NOT currency converted.
+"""
+HOW_TO_QUERY = {
+    "consumer": """
+- Prefer the curated metric view consumer.dtc_sales_metrics (webshop GMV, net sales, AOV, returns, active
+  shoppers, order frequency).
+- A total "across all markets / the whole webshop" is ONE number in EUR (the *_eur measure, no grouping) - never
+  answer it with a per-currency breakdown of *_local measures.
+- Use the gold tables only for row-level detail or attributes the metric views do not have (subscriptions,
+  loyalty accounts and tiers, ship-to market of single orders).
+""",
+    "finance": """
+- Prefer the curated metric views finance.net_revenue_metrics (revenue, COGS, margin, production variances) and
+  finance.receivables_metrics (open / overdue / disputed AR, DSO).
+- A total "across all company codes / the group" is ONE number in EUR (the *_eur measure, no grouping).
+- Use the gold tables only for row-level detail the metric views do not have (GL lines, payables, cost
+  estimates, profit centres).
+""",
+    "manufacturing": """
+- Prefer the curated metric view manufacturing.production_performance_metrics (OEE, yield, scrap, downtime,
+  on-time completion, late orders, cost variance).
 - Production lines are named by production_line.mes_asset_tag (e.g. PL-POZ-L2) = production_performance_metrics.production_line;
   plants by manufacturing_facility.erp_plant_code (e.g. FI-TMP) = production_performance_metrics.plant.
-"""
+- When the answer names plants or lines, return the code AND the name (plant with plant_name, production_line
+  with line_name), so people recognise them.
+- Use the gold tables only for row-level detail the metric views do not have (yield loss reasons per line,
+  production line notes, batches, equipment).
+""",
+}
 
 
-def text_instruction():
-    md = open(INSTRUCTIONS_MD, encoding="utf-8").read()
-    m = re.search(r"^```text\n(.*?)^```", md, re.S | re.M)
+def instruction_block(md, heading):
+    """The ```text block under the markdown heading '### <n>. <heading>' of agent_instructions.md."""
+    m = re.search(r"^### \d+[a-z]?\. " + re.escape(heading) + r".*?\n```text\n(.*?)^```", md, re.S | re.M)
     if not m:
-        sys.exit(f"no ```text block in {INSTRUCTIONS_MD}")
-    body = m.group(1).rstrip("\n") + "\n" + HOW_TO_QUERY.rstrip("\n")
+        sys.exit(f"no ```text block under '### ... {heading}' in {INSTRUCTIONS_MD}")
+    return m.group(1).rstrip("\n")
+
+
+def text_instruction(domain):
+    md = open(INSTRUCTIONS_MD, encoding="utf-8").read()
+    how = ("HOW TO QUERY (agent template, tools/build_genie_template.py)" + HOW_TO_QUERY[domain].rstrip("\n")
+           + HOW_TO_QUERY_COMMON.rstrip("\n"))
+    body = "\n\n".join([instruction_block(md, "Shared rules"),
+                        instruction_block(md, DOMAINS[domain]["instruction_heading"]), how])
     return lines(body)
 
 
@@ -851,16 +920,18 @@ JOINS = [
 # ---------------------------------------------------------------------------------------------------------
 # 5. Sample questions (shown in the UI)
 # ---------------------------------------------------------------------------------------------------------
-SAMPLE_QUESTIONS = [
-    ("sq_nr_quarter", "What were net revenue and gross margin by quarter in 2026?"),
-    ("sq_webshop_vs_finance", "Why is webshop revenue higher than the revenue finance reports?"),
-    ("sq_worst_ar", "Which company has the most overdue receivables, and why?"),
-    ("sq_tampere", "How did the Tampere plant's OEE develop since start-up?"),
-    ("sq_poznan", "What happened on Poznań line PL-POZ-L2 in March 2026?"),
-    ("sq_loyalty", "How do Gold and Platinum members shop compared with non-members?"),
-    ("sq_market_sep", "Show webshop sales by market for September 2026"),
-    ("sq_brand_margin", "Which brand has the highest gross margin?"),
-    ("sq_returns", "What are the top reasons for webshop returns?"),
+SAMPLE_QUESTIONS = [   # (key, domain, question); cross_domain ones are the router app's starter questions
+    ("sq_nr_quarter", "finance", "What were net revenue and gross margin by quarter in 2026?"),
+    ("sq_webshop_vs_finance", CROSS, "Why is webshop revenue higher than the revenue finance reports?"),
+    ("sq_worst_ar", "finance", "Which company has the most overdue receivables, and why?"),
+    ("sq_tampere", "manufacturing", "How did the Tampere plant's OEE develop since start-up?"),
+    ("sq_poznan", "manufacturing", "What happened on Poznań line PL-POZ-L2 in March 2026?"),
+    ("sq_scrap_plant", "manufacturing", "Which plant had the highest scrap rate in 2026?"),
+    ("sq_loyalty", "consumer", "How do Gold and Platinum members shop compared with non-members?"),
+    ("sq_market_sep", "consumer", "Show webshop sales by market for September 2026"),
+    ("sq_brand_margin", "finance", "Which brand has the highest gross margin?"),
+    ("sq_returns", "consumer", "What are the top reasons for webshop returns?"),
+    ("sq_poznan_cost", CROSS, "What did the Poznań line incident in March 2026 cost us, and how did it show up in COGS?"),
 ]
 
 # ---------------------------------------------------------------------------------------------------------
@@ -981,38 +1052,67 @@ def source_entry(s):
     return e
 
 
-def build_space():
+def items_of(domain):
+    """The data sources, examples, snippets, joins, sample questions and benchmarks of one domain agent."""
+    def source_domain(s):
+        return s["id"].split(".")[0]
+    in_domain = lambda s: source_domain(s) == domain or s["id"] in SHARED_REFERENCE.get(domain, ())  # noqa: E731
+    return {
+        "tables": [t for t in TABLES if in_domain(t)],
+        "metric_views": [m for m in METRIC_VIEWS if in_domain(m)],
+        "examples": [e for e in EXAMPLES if domain_of(e[2]) == domain],
+        "measures": [s for s in SNIPPETS["measures"] if domain_of(s[5]) == domain],
+        "filters": [s for s in SNIPPETS["filters"] if domain_of(s[4]) == domain],
+        "expressions": [s for s in SNIPPETS["expressions"] if domain_of(s[5]) == domain],
+        "joins": [j for j in JOINS if domain_of(f"{C}.{j[1][0]} {C}.{j[2][0]}") == domain],
+        "sample_questions": [(k, q) for k, d, q in SAMPLE_QUESTIONS if d == domain],
+        "benchmarks": [b for b in BENCHMARKS if domain_of(b[2]) == domain],
+    }
+
+
+def build_space(domain):
     by_id = lambda xs: sorted(xs, key=lambda x: x["id"])  # noqa: E731
+    it = items_of(domain)
     space = {
         "version": 2,
-        "config": {"sample_questions": by_id([{"id": nid(k), "question": [q]} for k, q in SAMPLE_QUESTIONS])},
+        "config": {"sample_questions": by_id([{"id": nid(k), "question": [q]} for k, q in it["sample_questions"]])},
         "data_sources": {
-            "tables": sorted([source_entry(t) for t in TABLES], key=lambda x: x["identifier"]),
-            "metric_views": sorted([source_entry(m) for m in METRIC_VIEWS], key=lambda x: x["identifier"]),
+            "tables": sorted([source_entry(t) for t in it["tables"]], key=lambda x: x["identifier"]),
+            "metric_views": sorted([source_entry(m) for m in it["metric_views"]], key=lambda x: x["identifier"]),
         },
         "instructions": {
-            "text_instructions": [{"id": nid("text_instruction"), "content": text_instruction()}],
+            "text_instructions": [{"id": nid(f"text_instruction:{domain}"), "content": text_instruction(domain)}],
             "example_question_sqls": by_id([
-                {"id": nid(k), "question": [q], "sql": lines(sql), "usage_guidance": [g]} for k, q, sql, g in EXAMPLES]),
+                {"id": nid(k), "question": [q], "sql": lines(sql), "usage_guidance": [g]} for k, q, sql, g in it["examples"]]),
             "join_specs": by_id([
                 {"id": nid(k), "left": {"identifier": f"{C}.{l[0]}", "alias": l[1]},
                  "right": {"identifier": f"{C}.{r[0]}", "alias": r[1]},
-                 "sql": [cond, f"--rt=FROM_RELATIONSHIP_TYPE_{rt}--"]} for k, l, r, cond, rt in JOINS]),
+                 "sql": [cond, f"--rt=FROM_RELATIONSHIP_TYPE_{rt}--"]} for k, l, r, cond, rt in it["joins"]]),
             "sql_snippets": {
                 "measures": by_id([{"id": nid(k), "alias": a, "display_name": dn, "sql": [s], "synonyms": syn}
-                                   for k, a, dn, s, syn, _ in SNIPPETS["measures"]]),
+                                   for k, a, dn, s, syn, _ in it["measures"]]),
                 "filters": by_id([{"id": nid(k), "display_name": dn, "sql": [s], "synonyms": syn}
-                                  for k, dn, s, syn, _ in SNIPPETS["filters"]]),
+                                  for k, dn, s, syn, _ in it["filters"]]),
                 "expressions": by_id([{"id": nid(k), "alias": a, "display_name": dn, "sql": [s], "synonyms": syn}
-                                      for k, a, dn, s, syn, _ in SNIPPETS["expressions"]]),
+                                      for k, a, dn, s, syn, _ in it["expressions"]]),
             },
         },
         "benchmarks": {"questions": by_id([
             {"id": nid(k), "question": [q], "answer": [{"format": "SQL", "content": lines(sql)}]}
-            for k, q, sql in BENCHMARKS])},
+            for k, q, sql in it["benchmarks"]])},
     }
     validate(space)
     return space
+
+
+def cross_domain_items():
+    """What no single domain agent can answer: the router app's starter questions and evaluation set."""
+    return {
+        "sample_questions": [q for _, d, q in SAMPLE_QUESTIONS if d == CROSS],
+        "examples": [(k, q, sql, g) for k, q, sql, g in EXAMPLES if domain_of(sql) == CROSS],
+        "benchmarks": [(k, q, sql) for k, q, sql in BENCHMARKS if domain_of(sql) == CROSS],
+        "joins": [j for j in JOINS if domain_of(f"{C}.{j[1][0]} {C}.{j[2][0]}") == CROSS],
+    }
 
 
 def validate(space):
@@ -1046,19 +1146,36 @@ LICENSE_NOTE = [
 
 
 def render():
-    space = build_space()
-    space_json = json.dumps(space, ensure_ascii=False, sort_keys=False)
-    version = hashlib.sha256(space_json.encode("utf-8")).hexdigest()[:12]
-    doc = {
-        "_license": LICENSE_NOTE,
+    """{path: file text} for the three domain templates and the cross-domain set, plus {domain: space}."""
+    files, spaces = {}, {}
+    for domain, cfg in DOMAINS.items():
+        space = build_space(domain)
+        space_json = json.dumps(space, ensure_ascii=False, sort_keys=False)
+        doc = {
+            "_license": LICENSE_NOTE,
+            "_generated_by": SCRIPT,
+            "template_version": hashlib.sha256(space_json.encode("utf-8")).hexdigest()[:12],
+            "domain": domain,
+            "title": cfg["title"],
+            "description": cfg["description"],
+            "tricky_benchmark_ids": sorted(nid(k) for k, _, sql in BENCHMARKS if k in TRICKY and domain_of(sql) == domain),
+            "serialized_space": space,
+        }
+        files[out_path(domain)] = json.dumps(doc, ensure_ascii=False, indent=1) + "\n"
+        spaces[domain] = space
+    x = cross_domain_items()
+    cross = {
+        "_license": LICENSE_NOTE[:3] + ["Questions that need two domains: no single Genie Agent answers them; the router app",
+                                        "(bootcamp/app/) asks the domain agents. Placeholder __CATALOG__ = participant catalog."],
         "_generated_by": SCRIPT,
-        "template_version": version,
-        "title": TITLE,
-        "description": DESCRIPTION,
-        "tricky_benchmark_ids": sorted(nid(k) for k in TRICKY),
-        "serialized_space": space,
+        "sample_questions": x["sample_questions"],
+        "benchmarks": [{"id": nid(k), "question": q, "tricky": k in TRICKY, "answer_sql": sql.strip("\n")}
+                       for k, q, sql in x["benchmarks"]]
+                      + [{"id": nid(k), "question": q, "tricky": False, "answer_sql": sql.strip("\n")}
+                         for k, q, sql, _ in x["examples"]],
     }
-    return json.dumps(doc, ensure_ascii=False, indent=1) + "\n", space
+    files[CROSS_OUT] = json.dumps(cross, ensure_ascii=False, indent=1) + "\n"
+    return files, spaces
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -1085,24 +1202,30 @@ def run_sql(sql, warehouse, profile):
     return "OK", len(rows), (cols, rows[:6])
 
 
-def live_check(space, catalog, warehouse, profile):
+def live_check(spaces, catalog, warehouse, profile):
     rep = lambda s: s.replace(C, catalog)  # noqa: E731
     jobs = []
-    for s in space["data_sources"]["tables"] + space["data_sources"]["metric_views"]:
-        jobs.append(("source", s["identifier"], f"DESCRIBE TABLE {rep(s['identifier'])}"))
-    for x in space["instructions"]["example_question_sqls"]:
-        jobs.append(("example", x["question"][0], rep("".join(x["sql"]))))
-    for k, a, dn, s, syn, frm in SNIPPETS["measures"]:
-        jobs.append(("snippet", dn, rep(f"SELECT {s} AS v FROM {frm}")))
-    for k, dn, s, syn, frm in SNIPPETS["filters"]:
-        jobs.append(("snippet", dn, rep(f"SELECT COUNT(*) AS n FROM {frm} WHERE {s}")))
-    for k, a, dn, s, syn, frm in SNIPPETS["expressions"]:
-        jobs.append(("snippet", dn, rep(f"SELECT {s} AS v, COUNT(*) AS n FROM {frm} GROUP BY 1 ORDER BY 2 DESC LIMIT 3")))
-    for k, l, r, cond, rt in JOINS:
-        cond_sql = cond.replace("`", "")
-        jobs.append(("join", k, rep(f"SELECT COUNT(*) AS n FROM {C}.{l[0]} {l[1]} JOIN {C}.{r[0]} {r[1]} ON {cond_sql}")))
-    for x in space["benchmarks"]["questions"]:
-        jobs.append(("benchmark", x["question"][0], rep("".join(x["answer"][0]["content"]))))
+    for domain, space in spaces.items():
+        it = items_of(domain)
+        for s in space["data_sources"]["tables"] + space["data_sources"]["metric_views"]:
+            jobs.append(("source", f"{domain}: {s['identifier']}", f"DESCRIBE TABLE {rep(s['identifier'])}"))
+        for x in space["instructions"]["example_question_sqls"]:
+            jobs.append(("example", f"{domain}: {x['question'][0]}", rep("".join(x["sql"]))))
+        for k, a_, dn, s, syn, frm in it["measures"]:
+            jobs.append(("snippet", f"{domain}: {dn}", rep(f"SELECT {s} AS v FROM {frm}")))
+        for k, dn, s, syn, frm in it["filters"]:
+            jobs.append(("snippet", f"{domain}: {dn}", rep(f"SELECT COUNT(*) AS n FROM {frm} WHERE {s}")))
+        for k, a_, dn, s, syn, frm in it["expressions"]:
+            jobs.append(("snippet", f"{domain}: {dn}",
+                         rep(f"SELECT {s} AS v, COUNT(*) AS n FROM {frm} GROUP BY 1 ORDER BY 2 DESC LIMIT 3")))
+        for k, l, r, cond, rt in it["joins"]:
+            cond_sql = cond.replace("`", "")
+            jobs.append(("join", f"{domain}: {k}",
+                         rep(f"SELECT COUNT(*) AS n FROM {C}.{l[0]} {l[1]} JOIN {C}.{r[0]} {r[1]} ON {cond_sql}")))
+        for x in space["benchmarks"]["questions"]:
+            jobs.append(("benchmark", f"{domain}: {x['question'][0]}", rep("".join(x["answer"][0]["content"]))))
+    for k, q, sql in cross_domain_items()["benchmarks"]:
+        jobs.append(("benchmark", f"{CROSS}: {q}", rep(sql)))
     with ThreadPoolExecutor(8) as ex:
         results = list(ex.map(lambda j: (j, run_sql(j[2], warehouse, profile)), jobs))
     errors = 0
@@ -1128,32 +1251,41 @@ def main():
     ap.add_argument("--warehouse")
     ap.add_argument("--profile", default="DEFAULT")
     a = ap.parse_args()
-    text, space = render()
+    files, spaces = render()
     if a.run_sql:
         if not (a.catalog and a.warehouse):
             sys.exit("--run-sql needs --catalog and --warehouse")
-        sys.exit(1 if live_check(space, a.catalog, a.warehouse, a.profile) else 0)
-    current = open(OUT, encoding="utf-8").read() if os.path.exists(OUT) else None
+        sys.exit(1 if live_check(spaces, a.catalog, a.warehouse, a.profile) else 0)
+    stale = []
+    for path, text in files.items():
+        current = open(path, encoding="utf-8").read() if os.path.exists(path) else None
+        if current == text:
+            continue
+        stale.append(os.path.relpath(path, ROOT))
+        if not a.check:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(text)
+            print(f"wrote {os.path.relpath(path, ROOT)}")
     if a.check:
-        if current != text:
-            print(f"STALE: {os.path.relpath(OUT, ROOT)} - run python3 -I {SCRIPT}")
+        if stale:
+            print("STALE: " + ", ".join(stale) + f" - run python3 -I {SCRIPT}")
             sys.exit(1)
-        print("template is up to date")
+        print("templates are up to date")
         return
-    if current != text:
-        os.makedirs(os.path.dirname(OUT), exist_ok=True)
-        with open(OUT, "w", encoding="utf-8") as f:
-            f.write(text)
-        print(f"wrote {os.path.relpath(OUT, ROOT)}")
-    else:
-        print("template unchanged")
-    n_src = len(space["data_sources"]["tables"]) + len(space["data_sources"]["metric_views"])
-    print(f"{n_src} data sources ({len(space['data_sources']['metric_views'])} metric views), "
-          f"{len(space['instructions']['example_question_sqls'])} example SQLs, "
-          f"{sum(len(v) for v in space['instructions']['sql_snippets'].values())} snippets, "
-          f"{len(space['instructions']['join_specs'])} join specs, "
-          f"{len(space['config']['sample_questions'])} sample questions, "
-          f"{len(space['benchmarks']['questions'])} benchmarks")
+    if not stale:
+        print("templates unchanged")
+    for domain, space in spaces.items():
+        n_src = len(space["data_sources"]["tables"]) + len(space["data_sources"]["metric_views"])
+        print(f"{domain:13} {n_src} data sources ({len(space['data_sources']['metric_views'])} metric views), "
+              f"{len(space['instructions']['example_question_sqls'])} example SQLs, "
+              f"{sum(len(v) for v in space['instructions']['sql_snippets'].values())} snippets, "
+              f"{len(space['instructions']['join_specs'])} join specs, "
+              f"{len(space['config']['sample_questions'])} sample questions, "
+              f"{len(space['benchmarks']['questions'])} benchmarks")
+    x = cross_domain_items()
+    print(f"{CROSS:13} {len(x['benchmarks']) + len(x['examples'])} router benchmarks, "
+          f"{len(x['sample_questions'])} sample questions, {len(x['joins'])} join(s) left to the router")
 
 
 if __name__ == "__main__":
