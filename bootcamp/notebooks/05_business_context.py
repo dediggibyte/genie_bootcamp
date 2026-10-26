@@ -530,11 +530,16 @@ else:
             f"Create exactly one Page per index row whose domain column is '{title(d)}' ({len(terms)} terms: "
             f"{', '.join(r['term'] for r in terms)}) - no other terms, do not merge or split terms. For each row read "
             f"the Markdown file named in page_path and fill the Page from its YAML front matter and body: Page name = "
-            f"title; Synonyms = synonyms; Description = description; Page body = the Markdown after the front matter, "
-            f"unchanged (definition, business rules, calculation SQL, pitfalls, example questions); Related assets = "
-            f"related_assets with '<catalog>' replaced by '{catalog}'; Sources = sources. File each Page under its "
-            f"subdomain from the subdomain column: {filing}. If a Page with the same name already exists, flag it as a "
-            f"duplicate instead of creating a second one. Create all Pages as drafts; do not publish."
+            f"title; Synonyms = synonyms; Description = description; Page body = the Markdown after the front matter "
+            f"(definition, business rules, calculation SQL, pitfalls, example questions) word for word, except that "
+            f"every '<catalog>' - in the body as well - becomes '{catalog}', followed by a 'Sources' list with the "
+            f"front matter sources; Related assets = related_assets with '<catalog>' replaced by '{catalog}'; "
+            f"Sources (links only, must be https URLs) = the single link "
+            f"https://github.com/{GITHUB_REPO}/blob/main/<page_path> of the row. File each Page under its subdomain "
+            f"from the subdomain column: {filing}. The index rows are distinct terms: similarity or overlap warnings "
+            f"between them (e.g. CLTV Segment and Active Shopper) are expected - create every term anyway. If a Page "
+            f"with the same name already exists, flag it as a duplicate instead of creating a second one. Create all "
+            f"Pages as drafts; do not publish."
         )
         pages_result.append((DOMAIN_TAG[d], len(terms)))
         print("=" * 110)
