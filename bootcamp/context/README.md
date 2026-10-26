@@ -11,10 +11,10 @@ reviewed in pull requests and reused in three places:
 | Where | How it gets there | Who uses it |
 |---|---|---|
 | **Unity Catalog Semantics → Pages** (Discover) | Instructor bulk-imports the pages with Genie Code (step A) | Genie One, every Discover user |
-| **Your Genie Agent** ("Fjällmark Business Analyst") | You attach the GitHub MCP as a source in Agent mode (step B) | You and the users of your agent |
+| **Your Genie Agents** (Consumer, Finance and Manufacturing Analyst) | You attach the GitHub MCP as a source in Agent mode (step B) | You and the users of your agents |
 | **Your own draft Page** | You draft a Page for your own business question (step C) | Only you, until it is published |
 
-In the lab, steps B and C are step 5 of the participant guide ([`bootcamp/README.md`](../README.md#step-5-business-context-15-min));
+In the lab, steps B and C are step 5 of the participant guide ([`bootcamp/README.md`](../README.md#step-5-business-context-10-min));
 step A is part of the instructor preparation ([`bootcamp/INSTRUCTOR.md`](../INSTRUCTOR.md#3-bulk-import-the-business-glossary-as-pages-once-per-event)).
 
 > The company, its people, brands, plants and customers are **fictional**. There is no
@@ -148,11 +148,12 @@ Import:
 > Tip: if the GitHub connection is not available yet, use **Attach files** in step 4 and
 > upload the `pages/*.md` files of one domain at a time — the front matter works the same.
 
-## 4. Step B — Participant: give your Genie Agent the business context (GitHub MCP)
+## 4. Step B — Participant: give your Genie Agents the business context (GitHub MCP)
 
-Your agent "Fjällmark Business Analyst" (created in notebook `04_genie_agent`) already has
-text instructions (from `bootcamp/context/genie/agent_instructions.md`). In **Agent mode** it can
-also *look up* definitions in this folder while it answers.
+Your three agents - "Fjällmark Consumer / Finance / Manufacturing Analyst" (created in notebook
+`04_genie_agent`) - already have text instructions (from `bootcamp/context/genie/agent_instructions.md`:
+the shared rules plus their domain's rules). In **Agent mode** an agent can also *look up* definitions in
+this folder while it answers. Start with the Finance Analyst.
 
 Prerequisites: the workspace preview **MCP tools in Genie Agents** is on (instructor),
 you have the *Workspace access* and *Databricks SQL access* entitlements, and the repository

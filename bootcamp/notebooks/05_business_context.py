@@ -1,8 +1,12 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 05 · Business context — domains, Pages and the GitHub MCP
 # MAGIC
-# MAGIC Your Genie Agent already knows **what the data is** (table and column comments, primary/foreign keys,
+# MAGIC Your Genie Agents already know **what the data is** (table and column comments, primary/foreign keys,
 # MAGIC metric views) and **who may see what** (row filters and masks from notebook 03). What it still lacks is
 # MAGIC **what the business means**: which revenue is the official one, why you never add SEK to EUR, which
 # MAGIC production order statuses count as "completed".
@@ -13,7 +17,7 @@
 # MAGIC | # | Where | How | Who |
 # MAGIC |---|---|---|---|
 # MAGIC | A | **UC Semantics → Pages** (Discover) | Genie Code *Bulk import pages* from GitHub | instructor, once |
-# MAGIC | B | **Your Genie Agent** | GitHub MCP (`system.ai.github`) as an agent source, Agent mode | you (UI, step 8) |
+# MAGIC | B | **Your Genie Agents** | GitHub MCP (`system.ai.github`) as an agent source, Agent mode | you (UI, step 8) |
 # MAGIC | C | **Your own draft Page** | Discover → Pages → Create page | you (UI, step 9) |
 # MAGIC
 # MAGIC Pages live in **domains**. A domain *is* a governed tag: an asset belongs to the domain `Finance` when it
@@ -28,9 +32,9 @@
 # MAGIC | 3 | check that the instructor's governed tags exist (otherwise stop with a clear message) |
 # MAGIC | 4 | tag your **gold schemas** with the domain tags (`ALTER SCHEMA ... SET TAGS ('Finance')`) |
 # MAGIC | 5 | tag your **gold tables and metric views** with the subdomain tags |
-# MAGIC | 6 | optionally tag your **Genie Agent** with its domains |
+# MAGIC | 6 | tag your three **Genie Agents** with their domain (Consumer / Finance / Manufacturing Analyst) |
 # MAGIC | 7 | **verify** in `information_schema` |
-# MAGIC | 8 | the **business glossary** in `bootcamp/context/` and how to attach it to your agent (GitHub MCP) |
+# MAGIC | 8 | the **business glossary** in `bootcamp/context/` and how to attach it to your agents (GitHub MCP) |
 # MAGIC | 9 | your turn: **draft a Page** for your own business question |
 # MAGIC
 # MAGIC ▶ **How to run:** Serverless compute → **Run all**. Set `action = remove` to take all tags off again.
@@ -53,7 +57,6 @@
 # MAGIC | widget | meaning |
 # MAGIC |---|---|
 # MAGIC | `catalog` | leave **blank** for `cpg_<your short user name>` (same rule as the bundle) |
-# MAGIC | `genie_space_id` | optional: the ID of your Genie Agent (from notebook 04 or the URL `.../genie/rooms/<id>`) |
 # MAGIC | `tag_consumer`, `tag_finance`, `tag_manufacturing` | the domain tags the instructor created — keep the defaults unless told otherwise |
 # MAGIC | `subdomain_tag_pattern` | how subdomain tags are named; default `{domain_tag}/{subdomain}`, e.g. `Finance/General Ledger` |
 # MAGIC | `action` | `apply` (default) or `remove` |
@@ -72,7 +75,6 @@ from databricks.sdk import WorkspaceClient
 from databricks.sdk.errors import DatabricksError, NotFound, PermissionDenied
 
 dbutils.widgets.text("catalog", "", "Catalog (blank = automatic)")
-dbutils.widgets.text("genie_space_id", "", "Genie Agent ID (optional)")
 dbutils.widgets.text("tag_consumer", "Consumer", "Domain tag: consumer")
 dbutils.widgets.text("tag_finance", "Finance", "Domain tag: finance")
 dbutils.widgets.text("tag_manufacturing", "Manufacturing", "Domain tag: manufacturing")
@@ -93,7 +95,6 @@ def bundle_short_name(user_name: str) -> str:
 
 user_name = spark.sql("SELECT current_user()").first()[0]
 catalog = dbutils.widgets.get("catalog").strip() or f"cpg_{bundle_short_name(user_name)}"
-genie_space_id = dbutils.widgets.get("genie_space_id").strip()
 action = dbutils.widgets.get("action")
 pattern = dbutils.widgets.get("subdomain_tag_pattern").strip()
 DOMAIN_TAG = {d: dbutils.widgets.get(f"tag_{d}").strip() for d in GOLD_SCHEMAS}
@@ -106,7 +107,7 @@ print(f"Catalog        : {catalog}")
 print(f"Action         : {action}")
 print(f"Domain tags    : {DOMAIN_TAG}")
 print(f"Subdomain tags : {pattern}")
-print(f"Genie Agent    : {genie_space_id or '(not given - step 6 is skipped)'}")
+print("Genie Agents   : found by title in step 6 (built by notebook 04)")
 
 # COMMAND ----------
 
@@ -351,52 +352,64 @@ display(spark.createDataFrame(table_results, "gold_schema string, object string,
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 6 · (Optional) Tag your Genie Agent with its domains
+# MAGIC ## 6 · Tag your Genie Agents with their domain
 # MAGIC
 # MAGIC Genie Agents are workspace objects, so they are tagged with the **workspace entity tag assignments** API
-# MAGIC (`POST /api/2.0/entity-tag-assignments`, Beta). The agent gets the domain tag of every gold schema it uses
-# MAGIC (read from the agent's own data sources), so it shows up under *Consumer*, *Finance* and *Manufacturing*
-# MAGIC in Discover. Subdomain tags (with `/`) cannot be assigned to workspace objects.
+# MAGIC (`POST /api/2.0/entity-tag-assignments`, Beta). Notebook 04 built one agent per domain; each gets **its own**
+# MAGIC domain tag (the Consumer Analyst reads `finance.company_code` as a reference table, but it is not a Finance
+# MAGIC agent), so it shows up under *Consumer*, *Finance* or *Manufacturing* in Discover. The agents are found by
+# MAGIC their titles `Fjällmark <Domain> Analyst (<catalog>)`. Subdomain tags (with `/`) cannot be assigned to
+# MAGIC workspace objects.
 
 # COMMAND ----------
 
-genie_result = []
-if not genie_space_id:
-    print("No genie_space_id given - skipped. (Find it in notebook 04's output or in the agent URL .../genie/rooms/<id>.)")
-else:
+AGENT_TITLES = {d: f"Fjällmark {d.capitalize()} Analyst ({catalog})" for d in GOLD_SCHEMAS}
+
+
+def find_agents():
+    """domain -> space id of the agents notebook 04 built on this catalog (matched by title)."""
+    found, token = {}, None
+    while True:
+        query = {"page_size": 100, **({"page_token": token} if token else {})}
+        resp = rest("GET", "/api/2.0/genie/spaces", query=query)
+        for s in resp.get("spaces", []):
+            for d, title in AGENT_TITLES.items():
+                if s.get("title") == title and d not in found:
+                    found[d] = s["space_id"]
+        token = resp.get("next_page_token")
+        if not token:
+            return found
+
+
+genie_agents = find_agents()
+genie_result = []   # (agent, tag, result)
+if not genie_agents:
+    print(f"No agents titled {sorted(AGENT_TITLES.values())} yet - run notebook 04 first, then re-run this cell.")
+for d, space_id in genie_agents.items():
+    key = DOMAIN_TAG[d]
     try:
-        space = rest("GET", f"/api/2.0/genie/spaces/{genie_space_id}", query={"include_serialized_space": "true"})
-        sources = json.loads(space.get("serialized_space") or "{}").get("data_sources", {})
-        idents = [t["identifier"] for k in ("tables", "metric_views") for t in sources.get(k, [])]
-        schemas = sorted({i.split(".")[1] for i in idents if i.split(".")[1] in DOMAIN_TAG})
-        print(f"Agent '{space.get('title')}' uses {len(idents)} data sources in schemas {schemas}")
-    except DatabricksError as e:
-        schemas = ["consumer", "finance", "manufacturing"]
-        print(f"Could not read the agent's sources ({str(e)[:100]}); using {schemas}")
-    try:
-        have = {t["tag_key"] for t in rest("GET", f"/api/2.0/entity-tag-assignments/geniespaces/{genie_space_id}/tags")
+        have = {t["tag_key"] for t in rest("GET", f"/api/2.0/entity-tag-assignments/geniespaces/{space_id}/tags")
                 .get("tag_assignments", [])}
     except DatabricksError:
         have = set()
-    for s in schemas:
-        key = DOMAIN_TAG[s]
-        if (key in have) == (action == "apply"):
-            genie_result.append((key, "already tagged" if action == "apply" else "not tagged"))
-            continue
-        try:
-            if action == "apply":
-                rest("POST", "/api/2.0/entity-tag-assignments",
-                     {"entity_type": "geniespaces", "entity_id": genie_space_id, "tag_key": key})
-            else:
-                rest("DELETE", f"/api/2.0/entity-tag-assignments/geniespaces/{genie_space_id}/tags/{quote(key, safe='')}")
-            genie_result.append((key, f"{verb} OK"))
-        except DatabricksError as e:
-            txt = str(e)
-            ok = ("already exists" in txt.lower() and action == "apply") or ("not found" in txt.lower() and action == "remove")
-            genie_result.append((key, f"{verb} OK (nothing to do)" if ok else f"FAILED: {txt[:200]}"))
-    for k, r in genie_result:
-        print(f"  {k:20} {r}")
-    print(f"\nYour agent: {host}/genie/rooms/{genie_space_id}")
+    if (key in have) == (action == "apply"):
+        genie_result.append((AGENT_TITLES[d], key, "already tagged" if action == "apply" else "not tagged"))
+        continue
+    try:
+        if action == "apply":
+            rest("POST", "/api/2.0/entity-tag-assignments",
+                 {"entity_type": "geniespaces", "entity_id": space_id, "tag_key": key})
+        else:
+            rest("DELETE", f"/api/2.0/entity-tag-assignments/geniespaces/{space_id}/tags/{quote(key, safe='')}")
+        genie_result.append((AGENT_TITLES[d], key, f"{verb} OK"))
+    except DatabricksError as e:
+        txt = str(e)
+        ok = ("already exists" in txt.lower() and action == "apply") or ("not found" in txt.lower() and action == "remove")
+        genie_result.append((AGENT_TITLES[d], key, f"{verb} OK (nothing to do)" if ok else f"FAILED: {txt[:200]}"))
+for title, k, r in genie_result:
+    print(f"  {title:60} {k:15} {r}")
+for d, space_id in genie_agents.items():
+    print(f"  {AGENT_TITLES[d]}: {host}/genie/rooms/{space_id}")
 
 # COMMAND ----------
 
@@ -438,18 +451,18 @@ else:
     ok = n_schema == 0 and n_tables == 0
 print(f"Schemas with a domain tag    : {n_schema} (expected {expected_schemas if action == 'apply' else 0})")
 print(f"Objects with a subdomain tag : {n_tables} (expected {expected_tables if action == 'apply' else 0})")
-if genie_space_id:
+for d, space_id in genie_agents.items():
     try:
-        tags = rest("GET", f"/api/2.0/entity-tag-assignments/geniespaces/{genie_space_id}/tags")
-        print(f"Genie Agent tags             : {[t['tag_key'] for t in tags.get('tag_assignments', [])]}")
+        tags = rest("GET", f"/api/2.0/entity-tag-assignments/geniespaces/{space_id}/tags")
+        print(f"Genie Agent tags ({d:13}): {[t['tag_key'] for t in tags.get('tag_assignments', [])]}")
     except DatabricksError as e:
-        print(f"Genie Agent tags             : could not read ({str(e)[:100]})")
+        print(f"Genie Agent tags ({d:13}): could not read ({str(e)[:100]})")
 print("\n✅ All good." if ok else "\n⚠️  Something is missing - check the result tables above.")
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 8 · The business glossary — and how your agent reads it (GitHub MCP)
+# MAGIC ## 8 · The business glossary — and how your agents read it (GitHub MCP)
 # MAGIC
 # MAGIC The folder `bootcamp/context/` of this repository is Fjällmark's business glossary: one page per term, with
 # MAGIC definition, business rules, calculation SQL against your gold tables, pitfalls ("common wrong answers")
@@ -469,7 +482,7 @@ else:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### Attach the GitHub MCP to your Genie Agent (UI, 3 minutes)
+# MAGIC ### Attach the GitHub MCP to your Finance Analyst (UI, 3 minutes)
 # MAGIC
 # MAGIC There is no API for MCP sources yet, so this is a UI step. Run the next cell for your personal click-path.
 # MAGIC
@@ -484,7 +497,8 @@ else:
 
 # COMMAND ----------
 
-agent_url = f"{host}/genie/rooms/{genie_space_id}" if genie_space_id else "(open your agent from the Genie page)"
+agent_url = (f"{host}/genie/rooms/{genie_agents['finance']}" if "finance" in genie_agents
+             else "(open your Finance Analyst from the Genie page)")
 description = (
     "Business glossary of Fjällmark Consumer Goods. Before you answer a question that uses a business term "
     "(revenue, net revenue, GMV, margin, COGS, DSO, overdue, OEE, yield, scrap, active shopper, AOV, loyalty tier, "
@@ -495,7 +509,7 @@ description = (
     "issues, branches or pull requests."
 )
 print(f"""
-1. Open your agent: {agent_url}
+1. Open your Finance Analyst: {agent_url}   (repeat for the other two agents if you have time)
 2. Tab  Sources  ->  Add  ->  MCP services  ->  select  system.ai.github  (GitHub)
 3. Paste this as the source Description:
 
@@ -537,8 +551,8 @@ summary = {
     "already_as_wanted": len(unchanged),
     "failed_statements": sum(1 for e in errors if e is not None),
     "model_tables_missing_in_catalog": len(missing_tables),
-    "genie_agent": genie_space_id or None,
-    "genie_agent_tags": [f"{k}: {r}" for k, r in genie_result],
+    "genie_agents": genie_agents,
+    "genie_agent_tags": [f"{title} - {k}: {r}" for title, k, r in genie_result],
     "ok": ok,
 }
 print(json.dumps(summary, indent=2))

@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 99 · Clean up the full-model catalog
 # MAGIC
@@ -6,7 +10,7 @@
 # MAGIC
 # MAGIC | step | what is removed | how we make sure it is yours |
 # MAGIC |---|---|---|
-# MAGIC | 3 | Genie Agents you built on this catalog (e.g. with the bootcamp's notebook 04) | title starts with **Fjällmark Business Analyst**, stored in **your** home folder, uses **this** catalog |
+# MAGIC | 3 | Genie Agents you built on this catalog (e.g. with the bootcamp's notebook 04) | title starts with **Fjällmark** (the Consumer, Finance and Manufacturing Analyst), stored in **your** home folder, uses **this** catalog |
 # MAGIC | 4 | governance policies: ABAC policies, row filters, column masks | only inside **this** catalog, and you must **own** it |
 # MAGIC | 5 | the catalog itself (`DROP CATALOG ... CASCADE`: schemas, tables, metric views, volume, files) | you must **own** the catalog |
 # MAGIC
@@ -67,7 +71,7 @@ def qname(full_name: str) -> str:
     return ".".join(f"`{part}`" for part in full_name.split("."))
 DELETE_AGENTS = dbutils.widgets.get("delete_genie_agents") == "true"
 DROP_CATALOG = dbutils.widgets.get("drop_catalog") == "true"
-AGENT_TITLE_PREFIX = "Fjällmark Business Analyst"
+AGENT_TITLE_PREFIX = "Fjällmark "   # the Consumer / Finance / Manufacturing Analyst (and the earlier Business Analyst)
 MY_HOME = f"/Users/{me}"
 
 print(f"You are   : {me}")
