@@ -279,7 +279,7 @@ Account-level objects (the domain, governed tags, published Pages) are never tou
 | path | what | written by |
 |---|---|---|
 | [`notebooks/`](notebooks/) | steps 1 and 3-6, cleanup, and the job tasks (`job_tasks/`) | hand |
-| [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py), [`INSTRUCTOR.md`](INSTRUCTOR.md) | admins, once per workshop: runs the bootcamp instructor notebook with this sample's values | hand |
+| [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py), [`INSTRUCTOR.md`](INSTRUCTOR.md) | admins, once per workshop: the domain's governed tags, domain, subdomains and ASSIGN, and a list of all its tags | hand |
 | [`databricks.yml`](databricks.yml), [`resources/`](resources/) | the bundle: pipeline `cpg_finance_pipeline`, job `cpg_finance_job` | hand |
 | [`app/`](app/README.md) | the router app; `app/glossary/` is generated | hand |
 | [`pipeline/`](pipeline/), [`metric_views/`](metric_views/), [`model_tags/`](model_tags/) | bronze, silver and gold SQL, metric views, `dbx_*` tags | [`../tools/build_domain_samples.py`](../tools/build_domain_samples.py) |

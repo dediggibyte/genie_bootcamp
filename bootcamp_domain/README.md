@@ -33,7 +33,7 @@ Every sample folder has the same layout and the same steps as the bootcamp:
 | 5 | `notebooks/05_business_context.py` | domain and subdomain tags, Bulk import prompt for the domain's Pages, GitHub MCP |
 | 6 | `notebooks/06_router_app.py`, `app/` | router app: the Genie Agent for numbers plus a glossary tool for definitions; memory in Lakebase |
 | - | `notebooks/99_cleanup.py` | removes everything the sample created (dry run first) |
-| 0 | `instructor/00_instructor_setup.py`, `INSTRUCTOR.md` | admins, once per workshop: groups, grants, catalogs, the domain, the Lakebase project |
+| 0 | `instructor/00_instructor_setup.py`, `INSTRUCTOR.md` | admins, once per workshop: the domain's governed tags, domain and subdomains, ASSIGN, and a list of all its tags |
 
 ### Why a single-domain router?
 
@@ -66,11 +66,12 @@ was omitted.
    `cpg_manufacturing_<short>`), so you can run any of them next to each other and next to the bootcamp.
 
 **Workspace prerequisites** are the bootcamp's. For a workshop, an admin first runs the sample's
-`instructor/00_instructor_setup.py` (see the sample's `INSTRUCTOR.md`): it runs the bootcamp's tested instructor
-notebook with the sample's values (catalog prefix `cpg_<sample>_`, the one domain, the Lakebase project
-`fjallmark-<sample>-sample`) and creates the groups, grants, catalogs, the domain and the project. A single person
-trying a sample alone can skip it: notebook 06 creates the Lakebase project when it does not exist, and notebook 05
-carries on without the domain tag.
+`instructor/00_instructor_setup.py` (see the sample's `INSTRUCTOR.md`). It prepares **the sample's domain only**:
+the governed tags, the domain and its subdomains, ASSIGN for the participants group, and a list of all the domain's
+tags (with a SQL query on a warehouse that shows where they are applied). Groups, warehouse permissions and
+catalogs come from the bootcamp's instructor notebook or your admins; the sample's `INSTRUCTOR.md` lists them. A
+single person trying a sample alone can skip it: notebook 06 creates the Lakebase project when it does not exist,
+and notebook 05 carries on without the domain tag.
 
 ---
 

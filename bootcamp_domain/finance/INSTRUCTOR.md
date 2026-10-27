@@ -1,70 +1,71 @@
 # Instructor guide - Finance sample
 
-For instructors who run the **Finance sample** ([`README.md`](README.md)) as a workshop. The sample's participant
-notebooks are self-service, but a workshop for several people needs one admin run first: groups, warehouse
-access, catalogs, the **Finance** domain, GitHub MCP checks and the shared Lakebase project. The full background is in
-the bootcamp's [`INSTRUCTOR.md`](../../bootcamp/INSTRUCTOR.md); this page lists only what differs.
+For instructors who run the **Finance sample** ([`README.md`](README.md)) as a workshop. The sample's instructor
+notebook prepares **the Finance domain only**; everything else a workshop needs is listed in section 1 with where it
+comes from. Background: the bootcamp's [`INSTRUCTOR.md`](../../bootcamp/INSTRUCTOR.md).
 
-> **Not yet rehearsed.** The notebook below runs the tested bootcamp instructor notebook, but not yet with the
-> Finance values. Do a dry run (`dry_run = true`) on the event workspace first.
+> **Not yet rehearsed.** Run the notebook once with `dry_run = true` on the event workspace first.
 
 ## 1. Pre-event checklist
 
 | item | where | done by |
 |---|---|---|
-| the repository is readable by every participant (public, or Git credentials) | bootcamp INSTRUCTOR.md 1.1 | GitHub org admin |
-| serverless for notebooks, jobs and pipelines; the workspace previews (MCP in Genie, Discover, tags on Genie Agents) | bootcamp INSTRUCTOR.md 1.2, checked by the notebook | workspace admin |
-| groups, warehouse **CAN USE**, catalogs `cpg_finance_<short name>`, the **Finance** domain with its subdomains, `ASSIGN` on the tags, `system.ai.github`, Lakebase project `fjallmark-finance-sample` | [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) (section 2 below) | you |
-| Default Storage metastores: a `managed_location` for pre-created catalogs | bootcamp INSTRUCTOR.md 1.4 | metastore admin |
+| governed tags, the domain **Finance** with its subdomains (published), `ASSIGN` for the participants group | [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) (section 2) | you |
+| the account group `cpg_bootcamp_participants` (and `cpg_bootcamp_admins`) with the participants in it | the bootcamp instructor notebook, step 4, or your IdP | workspace admin |
+| **CAN USE** on a SQL warehouse for every participant (Genie runs its SQL there) | the bootcamp instructor notebook, step 3.3, or the warehouse's *Permissions* | workspace admin |
+| catalogs `cpg_finance_<short name>`, or `CREATE CATALOG` | participants create them in notebook 01, or the bootcamp instructor notebook with `catalog_prefix = cpg_finance_` | metastore admin |
+| the Lakebase project `fjallmark-finance-sample` | notebook 06 creates it (the first participant owns it), or create it and grant **CAN USE** | you |
+| serverless, the repository as a Git folder, GitHub MCP | bootcamp INSTRUCTOR.md 1.1-1.2 | admins |
 | one rehearsal of steps 1-6 as a **non-admin** participant | this sample's README | you |
 
 ## 2. Running `instructor/00_instructor_setup.py`
 
-The notebook does not copy the bootcamp instructor notebook: it **runs**
-[`bootcamp/instructor/00_instructor_setup.py`](../../bootcamp/instructor/00_instructor_setup.py) with this sample's
-values, so there is one tested notebook to maintain.
+Attach to **Serverless** and **Run all**.
 
-| widget | default here | why |
+| widget | default | meaning |
 |---|---|---|
-| `mode` | `setup` | `teardown_*` after the event (section 4) |
-| `dry_run` | **`false`** | Run all makes the changes. Set `true` for a check-only run (the morning of the event, or on a new workspace) |
-| `confirm_teardown` | blank | teardown modes stay a dry run until this equals the mode name |
-| `participants`, `instructors` | blank | e-mails, comma separated; they become members of the groups |
-| `catalog_prefix` | `cpg_finance_` | the sample's catalogs are `cpg_finance_<short name>` |
-| `domain_names` | `Finance` | the one domain of this sample, with its subdomains |
-| `lakebase_project` | `fjallmark-finance-sample` | the project notebook 06 of the sample uses; each participant gets a branch |
-| every other widget | as in the bootcamp | see bootcamp INSTRUCTOR.md section 2 |
+| `mode` | `setup` | `teardown_domain` after the event (section 4) |
+| `dry_run` | **`false`** | Run all makes the changes; `true` = check only |
+| `confirm_teardown` | blank | teardown deletes only when this equals `teardown_domain` |
+| `apply_grants` | `true` | `false` = report the ASSIGN permissions, change nothing |
+| `participants_group` | `cpg_bootcamp_participants` | gets ASSIGN on the domain tags; the notebook does not create it |
+| `warehouse_id` | blank = first serverless warehouse | the warehouse step 6 runs its tag queries on |
+| `tag_prefix` | blank | `zz_test_` when testing |
+| `create_subdomains` / `publish_domains` | `true` / `true` | |
 
-1. Attach to **Serverless**, fill in `participants` (and `instructors`), **Run all**.
-2. Read the summary table at the end: every line should be `OK`, `CREATED`, `GRANTED` or `SKIP` with a reason.
-   The full, section-by-section output is in the child run the cell links to.
-3. Re-running is safe: what exists is reported, not created again.
+What it does:
 
-**Groups.** The sample uses the bootcamp's groups `cpg_bootcamp_participants` and `cpg_bootcamp_admins`: notebook 03
-of the sample exempts members of `cpg_bootcamp_admins` from the policies. Never put a participant in the admins
-group.
+| step | what |
+|---|---|
+| 2 | admin check, account id |
+| 3.1 | Domains API reachable; the previews *Discover* and *tags on Genie Agents* |
+| 3.3 | resolves the **SQL warehouse id** (widget, or the first serverless warehouse). It does **not** check or grant warehouse permissions |
+| 4 | the governed tag `Finance` and one per subdomain (`Finance/<Subdomain>`), the domain and its subdomains, published |
+| 5 | ASSIGN on those tags for the participants group |
+| 6 | **all tags of the domain**: a table of definitions (tag, domain state, origin, ASSIGN), and - through SQL on the warehouse - where the tags are applied (`system.information_schema.schema_tags` / `table_tags`) |
+| 7 | summary |
+
+Re-running is safe, and useful during the workshop: step 6 then shows which participants' schemas and tables
+already carry the domain tags (only for catalogs you can see).
 
 ## 3. During the workshop
 
 | symptom | fix |
 |---|---|
-| a participant's catalog is missing | re-run this notebook with their e-mail in `participants`, or let them create it (`catalog_strategy = grant_create_catalog`) |
-| notebook 05: "governed tags missing" | this notebook has not run with `domain_names = Finance`, or `publish_domains = false` |
-| notebook 06: no permission on the Lakebase project | the participant is not in `cpg_bootcamp_participants`; add them and re-run this notebook |
+| notebook 05: "governed tags missing" | this notebook has not run (or ran with `dry_run = true` or a `tag_prefix`) |
+| notebook 05: no permission to assign a tag | the participant is not in `cpg_bootcamp_participants`, or step 5 reported `ACTION` (group missing) - fix and re-run |
+| notebook 06: no permission on the Lakebase project | another participant created it first: they (or an admin) grant **CAN USE**, or create it beforehand |
 | everything else | the sample README's troubleshooting table, then bootcamp INSTRUCTOR.md section 4 |
 
-**Pages.** Unlike the bootcamp, the sample has no instructor-side Pages import: each participant imports the
-Finance pages as drafts with the prompt notebook 05 prints. If you want *published* Pages for everyone, import
-them once yourself the same way and publish them.
+The optional ABAC step of notebook 03 needs ASSIGN on another tag (`class.name`, or the manufacturing sample's
+`abac_tag`); that is not a domain tag, so this notebook leaves it alone.
 
 ## 4. After the workshop
 
-1. Participants run `notebooks/99_cleanup.py` (their agent, app, branch, policies, catalog).
-2. Run this notebook with `mode = teardown_domains_and_tags` or `teardown_everything`. The first run is a dry run;
-   type the mode name into `confirm_teardown` and run again to delete.
+1. Participants run `notebooks/99_cleanup.py` (dropping a catalog removes its tags).
+2. Run this notebook with `mode = teardown_domain`. The first run is a dry run; set
+   `confirm_teardown = teardown_domain` and run again to delete.
 
-> **Shared objects.** Domains, governed tags and groups are account-level, and the bootcamp notebook marks
-> everything it creates with one marker and one ledger per instructor. If the bootcamp or another sample still
-> uses the workspace, do **not** tear down: `teardown_domains_and_tags` would also remove a **Finance** domain the
-> bootcamp created, and `teardown_everything` also removes the shared groups. Catalogs are only removed for the
-> prefix `cpg_finance_`, and only the Lakebase project `fjallmark-finance-sample`.
+It deletes only the tags and domains **this** notebook created (marker
+`[created by genie_bootcamp/bootcamp_domain/finance/00_instructor_setup]`). A Finance domain the bootcamp's instructor
+notebook created, or one that existed before, is reused during setup and **kept** by teardown.
