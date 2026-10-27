@@ -1,0 +1,1750 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I bootcamp_domain/tools/build_domain_samples.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "consumer",
+ "schema_comment": "SSOT for all end consumers, shoppers, households, and loyalty program members in B2C and DTC channels. Manages consumer profiles, preferences, purchase history, segmentation, NPS scores, CLTV calculations, consent and privacy preferences (GDPR/CCPA), and contact data. Supports CRM, personalization, and consumer engagement programs.",
+ "tag_count": 707,
+ "foreign_key_count": 36,
+ "schema_tags": {
+  "dbx_domain": "consumer",
+  "dbx_division": "business"
+ },
+ "tables": {
+  "shopper": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "customer_identity"
+   },
+   "column_tags": {
+    "shopper_id": {
+     "dbx_business_glossary_term": "Shopper ID"
+    },
+    "loyalty_program_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Loyalty Program Member ID"
+    },
+    "loyalty_tier_id": {
+     "dbx_business_glossary_term": "Loyalty Tier Id (Foreign Key)"
+    },
+    "acquisition_channel": {
+     "dbx_business_glossary_term": "Acquisition Channel"
+    },
+    "acquisition_date": {
+     "dbx_business_glossary_term": "Consumer Acquisition Date"
+    },
+    "age_verified": {
+     "dbx_business_glossary_term": "Age Verification Flag"
+    },
+    "birth_date": {
+     "dbx_restricted": "true",
+     "dbx_pii_dob": "true",
+     "dbx_business_glossary_term": "Date of Birth"
+    },
+    "ccpa_subject": {
+     "dbx_business_glossary_term": "California Consumer Privacy Act (CCPA) Subject Flag"
+    },
+    "cltv_segment": {
+     "dbx_business_glossary_term": "Customer Lifetime Value (CLTV) Segment",
+     "dbx_value_regex": "high_value|mid_value|low_value|at_risk|churned"
+    },
+    "consent_timestamp": {
+     "dbx_business_glossary_term": "Privacy Consent Timestamp"
+    },
+    "consent_version": {
+     "dbx_business_glossary_term": "Privacy Consent Version"
+    },
+    "consumer_type": {
+     "dbx_business_glossary_term": "Consumer Type Classification",
+     "dbx_value_regex": "individual|household|business_buyer|loyalty_member|guest"
+    },
+    "country_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Country of Residence Code (ISO 3166-1 Alpha-3)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "data_sharing_consent": {
+     "dbx_business_glossary_term": "Third-Party Data Sharing Consent"
+    },
+    "display_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Display Name (Preferred Name)"
+    },
+    "email_opt_in": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Marketing Opt-In Consent"
+    },
+    "family_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Family Name (Last Name / Surname)"
+    },
+    "gdpr_subject": {
+     "dbx_business_glossary_term": "GDPR Data Subject Flag"
+    },
+    "gender": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Gender Identity",
+     "dbx_value_regex": "male|female|non_binary|prefer_not_to_say|other"
+    },
+    "given_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Given Name (First Name)"
+    },
+    "identity_verification_date": {
+     "dbx_business_glossary_term": "Identity Verification Date"
+    },
+    "identity_verified": {
+     "dbx_business_glossary_term": "Identity Verification Status Flag"
+    },
+    "last_purchase_date": {
+     "dbx_business_glossary_term": "Last Purchase Date"
+    },
+    "lifecycle_status": {
+     "dbx_business_glossary_term": "Consumer Lifecycle Status",
+     "dbx_value_regex": "active|inactive|opted_out|suspended|pending_verification"
+    },
+    "loyalty_enrollment_date": {
+     "dbx_business_glossary_term": "Loyalty Program Enrollment Date"
+    },
+    "loyalty_points_balance": {
+     "dbx_business_glossary_term": "Loyalty Points Balance"
+    },
+    "nps_score": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS)"
+    },
+    "nps_survey_date": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS) Survey Date"
+    },
+    "postal_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal / ZIP Code"
+    },
+    "preferred_currency": {
+     "dbx_business_glossary_term": "Preferred Currency Code (ISO 4217)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "preferred_language": {
+     "dbx_business_glossary_term": "Preferred Language Code",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "preferred_store_banner": {
+     "dbx_business_glossary_term": "Preferred Retail Store Banner"
+    },
+    "primary_email": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Primary Email Address",
+     "dbx_value_regex": "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+    },
+    "primary_phone": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Primary Phone Number",
+     "dbx_value_regex": "^\\+?[1-9]\\d{6,14}$"
+    },
+    "push_notification_opt_in": {
+     "dbx_business_glossary_term": "Push Notification Opt-In Consent"
+    },
+    "registration_source_url": {
+     "dbx_business_glossary_term": "Registration Source URL"
+    },
+    "sms_opt_in": {
+     "dbx_business_glossary_term": "SMS Marketing Opt-In Consent"
+    },
+    "source_system_consumer_ref": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Source System Consumer Identifier"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    }
+   }
+  },
+  "household": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "customer_identity"
+   },
+   "column_tags": {
+    "household_id": {
+     "dbx_business_glossary_term": "Household ID"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "loyalty_tier_id": {
+     "dbx_business_glossary_term": "Loyalty Tier Id (Foreign Key)"
+    },
+    "merged_from_household_id": {
+     "dbx_business_glossary_term": "Merged From Household ID"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Primary Consumer ID"
+    },
+    "brand_affinity_flag": {
+     "dbx_business_glossary_term": "Brand Affinity Flag"
+    },
+    "ccpa_opt_out_flag": {
+     "dbx_business_glossary_term": "CCPA Opt-Out Flag"
+    },
+    "children_present_flag": {
+     "dbx_business_glossary_term": "Children Present Flag"
+    },
+    "cltv_band": {
+     "dbx_business_glossary_term": "Customer Lifetime Value (CLTV) Band",
+     "dbx_value_regex": "low|medium|high|very_high"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Household Code",
+     "dbx_value_regex": "^HH-[A-Z0-9]{8,16}$"
+    },
+    "consent_last_updated_timestamp": {
+     "dbx_business_glossary_term": "Consent Last Updated Timestamp"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "data_source": {
+     "dbx_business_glossary_term": "Data Source"
+    },
+    "digital_engagement_flag": {
+     "dbx_business_glossary_term": "Digital Engagement Flag"
+    },
+    "dissolution_date": {
+     "dbx_business_glossary_term": "Household Dissolution Date"
+    },
+    "dwelling_type": {
+     "dbx_business_glossary_term": "Dwelling Type",
+     "dbx_value_regex": "house|apartment|condo|townhouse|mobile_home|other"
+    },
+    "estimated_size": {
+     "dbx_business_glossary_term": "Estimated Household Size"
+    },
+    "formation_date": {
+     "dbx_business_glossary_term": "Household Formation Date"
+    },
+    "gdpr_consent_flag": {
+     "dbx_business_glossary_term": "GDPR Consent Flag"
+    },
+    "geographic_region": {
+     "dbx_business_glossary_term": "Geographic Region"
+    },
+    "household_status": {
+     "dbx_business_glossary_term": "Household Status",
+     "dbx_value_regex": "active|inactive|suspended|merged|dissolved"
+    },
+    "household_type": {
+     "dbx_business_glossary_term": "Household Type",
+     "dbx_value_regex": "single|couple|family|multi_generational|shared_living|other"
+    },
+    "income_band": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Household Income Band",
+     "dbx_value_regex": "low|lower_middle|middle|upper_middle|high"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "life_stage": {
+     "dbx_business_glossary_term": "Household Life Stage"
+    },
+    "loyalty_enrollment_date": {
+     "dbx_business_glossary_term": "Loyalty Enrollment Date"
+    },
+    "loyalty_points_balance": {
+     "dbx_business_glossary_term": "Loyalty Points Balance"
+    },
+    "market_segment": {
+     "dbx_business_glossary_term": "Market Segment"
+    },
+    "marketing_opt_in_flag": {
+     "dbx_business_glossary_term": "Marketing Opt-In Flag"
+    },
+    "name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Household Name"
+    },
+    "nps_score": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS)"
+    },
+    "nps_survey_date": {
+     "dbx_business_glossary_term": "NPS Survey Date"
+    },
+    "panel_member_flag": {
+     "dbx_business_glossary_term": "Consumer Panel Member Flag"
+    },
+    "pet_owner_flag": {
+     "dbx_business_glossary_term": "Pet Owner Flag"
+    },
+    "postal_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "preferred_language": {
+     "dbx_business_glossary_term": "Preferred Language",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "primary_channel": {
+     "dbx_business_glossary_term": "Primary Purchase Channel",
+     "dbx_value_regex": "retail|ecommerce|dtc|wholesale|omnichannel"
+    },
+    "primary_retailer_banner": {
+     "dbx_business_glossary_term": "Primary Retailer Banner"
+    },
+    "private_label_buyer_flag": {
+     "dbx_business_glossary_term": "Private Label Buyer Flag"
+    },
+    "purchase_frequency_band": {
+     "dbx_business_glossary_term": "Purchase Frequency Band",
+     "dbx_value_regex": "occasional|regular|frequent|very_frequent"
+    },
+    "tenure_type": {
+     "dbx_business_glossary_term": "Dwelling Tenure Type",
+     "dbx_value_regex": "owner|renter|other"
+    }
+   }
+  },
+  "address": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "customer_identity"
+   },
+   "column_tags": {
+    "address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Consumer Address ID"
+    },
+    "household_id": {
+     "dbx_business_glossary_term": "Household Id"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "address_status": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Status",
+     "dbx_value_regex": "active|inactive|deleted|pending_review"
+    },
+    "address_type": {
+     "dbx_business_glossary_term": "Address Type",
+     "dbx_value_regex": "billing|shipping|home|work|preferred"
+    },
+    "carrier_route": {
+     "dbx_business_glossary_term": "USPS Carrier Route Code"
+    },
+    "census_tract": {
+     "dbx_business_glossary_term": "Census Tract Code"
+    },
+    "city": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "consent_captured": {
+     "dbx_business_glossary_term": "Address Consent Captured Flag"
+    },
+    "consent_date": {
+     "dbx_business_glossary_term": "Address Consent Date"
+    },
+    "country_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "data_residency_region": {
+     "dbx_business_glossary_term": "Data Residency Region",
+     "dbx_value_regex": "EU|US|APAC|LATAM|MEA|CA"
+    },
+    "deliverability_score": {
+     "dbx_business_glossary_term": "Address Deliverability Score"
+    },
+    "dma_code": {
+     "dbx_business_glossary_term": "Designated Market Area (DMA) Code"
+    },
+    "do_not_mail": {
+     "dbx_business_glossary_term": "Do Not Mail Flag"
+    },
+    "dpv_confirmation": {
+     "dbx_business_glossary_term": "Delivery Point Validation (DPV) Confirmation Code",
+     "dbx_value_regex": "Y|S|D|N"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Expiry Date"
+    },
+    "format_type": {
+     "dbx_business_glossary_term": "Address Format Type",
+     "dbx_value_regex": "domestic|international|po_box|military|rural_route"
+    },
+    "geocoding_accuracy": {
+     "dbx_business_glossary_term": "Geocoding Accuracy Level",
+     "dbx_value_regex": "rooftop|range_interpolated|geometric_center|approximate|failed"
+    },
+    "is_default_billing": {
+     "dbx_business_glossary_term": "Is Default Billing Address Flag"
+    },
+    "is_default_shipping": {
+     "dbx_business_glossary_term": "Is Default Shipping Address Flag"
+    },
+    "is_primary": {
+     "dbx_business_glossary_term": "Is Primary Address Flag"
+    },
+    "latitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Latitude"
+    },
+    "line_1": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 1"
+    },
+    "line_2": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 2"
+    },
+    "line_3": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line 3"
+    },
+    "longitude": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Longitude"
+    },
+    "plus4_code": {
+     "dbx_business_glossary_term": "ZIP+4 Code",
+     "dbx_value_regex": "^[0-9]{4}$"
+    },
+    "postal_code": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "residential_indicator": {
+     "dbx_business_glossary_term": "Residential Indicator",
+     "dbx_value_regex": "residential|commercial|mixed|unknown"
+    },
+    "sales_territory_code": {
+     "dbx_business_glossary_term": "Sales Territory Code"
+    },
+    "source": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Source"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Record ID"
+    },
+    "source_system_name": {
+     "dbx_business_glossary_term": "Source System Name",
+     "dbx_value_regex": "salesforce_cgc|sap_s4hana|oracle_cloud|dtc_platform|loyalty_platform|manual"
+    },
+    "standardized_address": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Standardized Address"
+    },
+    "state_province": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State or Province"
+    },
+    "timezone": {
+     "dbx_business_glossary_term": "Time Zone"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    },
+    "validation_provider": {
+     "dbx_business_glossary_term": "Address Validation Provider"
+    },
+    "validation_status": {
+     "dbx_business_glossary_term": "Address Validation Status",
+     "dbx_value_regex": "validated|unvalidated|failed|corrected|pending"
+    },
+    "validation_timestamp": {
+     "dbx_business_glossary_term": "Address Validation Timestamp"
+    }
+   }
+  },
+  "loyalty_account": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "loyalty_programs"
+   },
+   "column_tags": {
+    "loyalty_account_id": {
+     "dbx_business_glossary_term": "Loyalty Account ID"
+    },
+    "consent_record_id": {
+     "dbx_business_glossary_term": "Consent Record Id (Foreign Key)"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "loyalty_tier_id": {
+     "dbx_business_glossary_term": "Loyalty Tier Id (Foreign Key)"
+    },
+    "pos_transaction_id": {
+     "dbx_business_glossary_term": "Pos Transaction Id (Foreign Key)"
+    },
+    "referral_account_loyalty_account_id": {
+     "dbx_business_glossary_term": "Referral Account ID"
+    },
+    "retail_store_id": {
+     "dbx_business_glossary_term": "Home Store ID"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "account_number": {
+     "dbx_confidential": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Loyalty Account Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,20}$"
+    },
+    "account_status": {
+     "dbx_business_glossary_term": "Loyalty Account Status",
+     "dbx_value_regex": "active|suspended|closed|pending|frozen"
+    },
+    "account_type": {
+     "dbx_business_glossary_term": "Loyalty Account Type",
+     "dbx_value_regex": "individual|household|business|coalition"
+    },
+    "cltv_segment": {
+     "dbx_business_glossary_term": "Customer Lifetime Value (CLTV) Segment",
+     "dbx_value_regex": "high_value|mid_value|low_value|at_risk|lapsed"
+    },
+    "communication_preference": {
+     "dbx_business_glossary_term": "Communication Preference",
+     "dbx_value_regex": "email|sms|push|post|none"
+    },
+    "consent_data_sharing": {
+     "dbx_business_glossary_term": "Data Sharing Consent Flag"
+    },
+    "consent_marketing": {
+     "dbx_business_glossary_term": "Marketing Consent Flag"
+    },
+    "consent_timestamp": {
+     "dbx_business_glossary_term": "Consent Capture Timestamp"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "enrollment_channel": {
+     "dbx_business_glossary_term": "Enrollment Channel",
+     "dbx_value_regex": "web|mobile_app|in_store|call_center|partner|dtc"
+    },
+    "enrollment_date": {
+     "dbx_business_glossary_term": "Enrollment Date"
+    },
+    "enrollment_source_code": {
+     "dbx_business_glossary_term": "Enrollment Source Code"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Account Expiry Date"
+    },
+    "fraud_flag": {
+     "dbx_business_glossary_term": "Fraud Flag"
+    },
+    "fraud_review_date": {
+     "dbx_business_glossary_term": "Fraud Review Date"
+    },
+    "language_code": {
+     "dbx_business_glossary_term": "Preferred Language Code",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "last_activity_date": {
+     "dbx_business_glossary_term": "Last Activity Date"
+    },
+    "last_earn_date": {
+     "dbx_business_glossary_term": "Last Points Earn Date"
+    },
+    "last_redemption_date": {
+     "dbx_business_glossary_term": "Last Points Redemption Date"
+    },
+    "lifetime_points_earned": {
+     "dbx_business_glossary_term": "Lifetime Points Earned"
+    },
+    "lifetime_points_expired": {
+     "dbx_business_glossary_term": "Lifetime Points Expired"
+    },
+    "lifetime_points_redeemed": {
+     "dbx_business_glossary_term": "Lifetime Points Redeemed"
+    },
+    "nps_score": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS)"
+    },
+    "nps_survey_date": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS) Survey Date"
+    },
+    "opt_out_date": {
+     "dbx_business_glossary_term": "Program Opt-Out Date"
+    },
+    "points_balance": {
+     "dbx_business_glossary_term": "Points Balance"
+    },
+    "points_currency_code": {
+     "dbx_business_glossary_term": "Points Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "points_expiry_policy": {
+     "dbx_business_glossary_term": "Points Expiry Policy",
+     "dbx_value_regex": "rolling_12_months|annual|never|program_end|activity_based"
+    },
+    "preferred_redemption_type": {
+     "dbx_business_glossary_term": "Preferred Redemption Type",
+     "dbx_value_regex": "discount|free_product|gift_card|charity|cashback|experience"
+    },
+    "previous_tier": {
+     "dbx_business_glossary_term": "Previous Membership Tier",
+     "dbx_value_regex": "standard|silver|gold|platinum|elite"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code",
+     "dbx_value_regex": "SFCGC|SAP_S4|ORACLE_ERP|CUSTOM_CRM|TRADEEDGE"
+    },
+    "tier_effective_date": {
+     "dbx_business_glossary_term": "Tier Effective Date"
+    },
+    "tier_qualification_spend": {
+     "dbx_business_glossary_term": "Tier Qualification Spend"
+    },
+    "tier_review_date": {
+     "dbx_business_glossary_term": "Tier Review Date"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    }
+   }
+  },
+  "loyalty_transaction": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "loyalty_programs"
+   },
+   "column_tags": {
+    "loyalty_transaction_id": {
+     "dbx_business_glossary_term": "Loyalty Transaction ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "loyalty_account_id": {
+     "dbx_business_glossary_term": "Loyalty Account ID"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "loyalty_tier_id": {
+     "dbx_business_glossary_term": "Loyalty Tier ID"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Order ID"
+    },
+    "pos_transaction_id": {
+     "dbx_business_glossary_term": "Pos Transaction Id (Foreign Key)"
+    },
+    "reversal_reference_loyalty_transaction_id": {
+     "dbx_business_glossary_term": "Reversal Reference Transaction ID"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "trade_promotion_id": {
+     "dbx_business_glossary_term": "Trade Promotion Id (Foreign Key)"
+    },
+    "adjustment_notes": {
+     "dbx_business_glossary_term": "Adjustment Notes"
+    },
+    "adjustment_reason_code": {
+     "dbx_business_glossary_term": "Adjustment Reason Code"
+    },
+    "bonus_multiplier": {
+     "dbx_business_glossary_term": "Bonus Points Multiplier"
+    },
+    "channel": {
+     "dbx_business_glossary_term": "Transaction Channel",
+     "dbx_value_regex": "ecommerce|mobile_app|retail_store|dtc_website|call_centre|kiosk"
+    },
+    "consent_verified": {
+     "dbx_business_glossary_term": "Consent Verified Flag"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "data_retention_flag": {
+     "dbx_business_glossary_term": "Data Retention Flag"
+    },
+    "earn_rate": {
+     "dbx_business_glossary_term": "Earn Rate"
+    },
+    "fraud_flag": {
+     "dbx_business_glossary_term": "Fraud Flag"
+    },
+    "fraud_review_status": {
+     "dbx_business_glossary_term": "Fraud Review Status",
+     "dbx_value_regex": "not_reviewed|under_review|cleared|confirmed_fraud"
+    },
+    "is_bonus_transaction": {
+     "dbx_business_glossary_term": "Is Bonus Transaction Flag"
+    },
+    "monetary_value": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Monetary Value"
+    },
+    "points_amount": {
+     "dbx_business_glossary_term": "Points Amount"
+    },
+    "points_balance_after": {
+     "dbx_business_glossary_term": "Points Balance After Transaction"
+    },
+    "points_balance_before": {
+     "dbx_business_glossary_term": "Points Balance Before Transaction"
+    },
+    "points_direction": {
+     "dbx_business_glossary_term": "Points Direction",
+     "dbx_value_regex": "credit|debit"
+    },
+    "points_expiry_date": {
+     "dbx_business_glossary_term": "Points Expiry Date"
+    },
+    "points_liability_flag": {
+     "dbx_business_glossary_term": "Points Liability Flag"
+    },
+    "processing_timestamp": {
+     "dbx_business_glossary_term": "Processing Timestamp"
+    },
+    "program_year": {
+     "dbx_business_glossary_term": "Loyalty Program Year"
+    },
+    "qualifying_spend_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Qualifying Spend Amount"
+    },
+    "redemption_value": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Redemption Value"
+    },
+    "source_transaction_ref": {
+     "dbx_business_glossary_term": "Source System Transaction Reference"
+    },
+    "transaction_number": {
+     "dbx_business_glossary_term": "Loyalty Transaction Number",
+     "dbx_value_regex": "^LT-[0-9]{4}-[0-9]{8}$"
+    },
+    "transaction_status": {
+     "dbx_business_glossary_term": "Loyalty Transaction Status",
+     "dbx_value_regex": "pending|processed|reversed|failed|cancelled"
+    },
+    "transaction_timestamp": {
+     "dbx_business_glossary_term": "Loyalty Transaction Timestamp"
+    },
+    "transaction_type": {
+     "dbx_business_glossary_term": "Loyalty Transaction Type",
+     "dbx_value_regex": "earn|redeem|adjust|expire|transfer|reversal"
+    },
+    "trigger_event": {
+     "dbx_business_glossary_term": "Loyalty Trigger Event"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    }
+   }
+  },
+  "preference": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "customer_identity"
+   },
+   "column_tags": {
+    "preference_id": {
+     "dbx_business_glossary_term": "Consumer Preference ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "consent_record_id": {
+     "dbx_business_glossary_term": "Consent Record ID"
+    },
+    "household_id": {
+     "dbx_business_glossary_term": "Household ID"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Product Category Id (Foreign Key)"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Packaging Profile Id (Foreign Key)"
+    },
+    "brand_override_flag": {
+     "dbx_business_glossary_term": "Brand-Level Override Flag"
+    },
+    "brand_override_reason": {
+     "dbx_business_glossary_term": "Brand Override Reason",
+     "dbx_value_regex": "regulatory_restriction|brand_policy|consumer_request|loyalty_program_rule|campaign_exclusion"
+    },
+    "category": {
+     "dbx_business_glossary_term": "Preference Category"
+    },
+    "cltv_tier": {
+     "dbx_business_glossary_term": "Customer Lifetime Value (CLTV) Tier",
+     "dbx_value_regex": "platinum|gold|silver|bronze|unclassified"
+    },
+    "confidence_score": {
+     "dbx_business_glossary_term": "Preference Confidence Score"
+    },
+    "consent_basis": {
+     "dbx_business_glossary_term": "Consent Legal Basis",
+     "dbx_value_regex": "explicit_consent|legitimate_interest|contractual_necessity|legal_obligation|vital_interest|public_task"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Preference Created Timestamp"
+    },
+    "data_subject_request_flag": {
+     "dbx_business_glossary_term": "Data Subject Request Flag"
+    },
+    "effective_date": {
+     "dbx_business_glossary_term": "Preference Effective Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Preference Expiry Date"
+    },
+    "flavor_fragrance_preference": {
+     "dbx_business_glossary_term": "Flavor / Fragrance Preference"
+    },
+    "geographic_scope": {
+     "dbx_business_glossary_term": "Geographic Scope",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "inference_basis": {
+     "dbx_business_glossary_term": "Preference Inference Basis",
+     "dbx_value_regex": "purchase_history|browsing_behavior|survey_response|loyalty_redemption|pos_transaction|panel_data"
+    },
+    "inference_model_version": {
+     "dbx_business_glossary_term": "Inference Model Version"
+    },
+    "is_global_preference": {
+     "dbx_business_glossary_term": "Global Preference Indicator"
+    },
+    "last_updated_timestamp": {
+     "dbx_business_glossary_term": "Preference Last Updated Timestamp"
+    },
+    "notes": {
+     "dbx_business_glossary_term": "Preference Notes"
+    },
+    "nps_segment": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS) Segment",
+     "dbx_value_regex": "promoter|passive|detractor|unknown"
+    },
+    "opt_in_status": {
+     "dbx_business_glossary_term": "Opt-In Status"
+    },
+    "pack_size_preference": {
+     "dbx_business_glossary_term": "Pack Size Preference"
+    },
+    "preference_status": {
+     "dbx_business_glossary_term": "Preference Status",
+     "dbx_value_regex": "active|inactive|pending_verification|suppressed|expired"
+    },
+    "preferred_channel": {
+     "dbx_business_glossary_term": "Preferred Communication Channel"
+    },
+    "preferred_contact_frequency": {
+     "dbx_business_glossary_term": "Preferred Contact Frequency"
+    },
+    "preferred_language": {
+     "dbx_business_glossary_term": "Preferred Language",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "preferred_time_of_day": {
+     "dbx_business_glossary_term": "Preferred Time of Day",
+     "dbx_value_regex": "morning|afternoon|evening|night|no_preference"
+    },
+    "preferred_timezone": {
+     "dbx_business_glossary_term": "Preferred Timezone"
+    },
+    "rank": {
+     "dbx_business_glossary_term": "Preference Rank"
+    },
+    "retail_channel_preference": {
+     "dbx_business_glossary_term": "Retail Channel Preference"
+    },
+    "sku_preference": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) Preference"
+    },
+    "source": {
+     "dbx_business_glossary_term": "Preference Source"
+    },
+    "source_system_preference_ref": {
+     "dbx_business_glossary_term": "Source System Preference ID"
+    },
+    "subcategory": {
+     "dbx_business_glossary_term": "Preference Subcategory"
+    },
+    "suppression_reason": {
+     "dbx_business_glossary_term": "Preference Suppression Reason",
+     "dbx_value_regex": "gdpr_erasure|ccpa_opt_out|consumer_request|regulatory_hold|fraud_flag|deceased"
+    },
+    "value": {
+     "dbx_business_glossary_term": "Preference Value"
+    }
+   }
+  },
+  "consent_record": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "customer_identity"
+   },
+   "column_tags": {
+    "consent_record_id": {
+     "dbx_business_glossary_term": "Consent Record ID"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "shopper_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "capture_method": {
+     "dbx_business_glossary_term": "Consent Capture Method",
+     "dbx_value_regex": "web_form|mobile_app|in_store|call_center|paper_form|email_link"
+    },
+    "capture_timestamp": {
+     "dbx_business_glossary_term": "Consent Capture Timestamp"
+    },
+    "change_trigger": {
+     "dbx_business_glossary_term": "Consent Change Trigger",
+     "dbx_value_regex": "consumer_action|system_expiry|admin_override|legal_request|data_breach|re_consent_campaign"
+    },
+    "consent_language_code": {
+     "dbx_business_glossary_term": "Consent Language Code",
+     "dbx_value_regex": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "consent_proof_reference": {
+     "dbx_business_glossary_term": "Consent Proof Reference"
+    },
+    "consent_scope": {
+     "dbx_business_glossary_term": "Consent Scope",
+     "dbx_value_regex": "global|brand_specific|product_category|campaign_specific"
+    },
+    "consent_status": {
+     "dbx_business_glossary_term": "Consent Status",
+     "dbx_value_regex": "granted|withdrawn|pending|expired"
+    },
+    "consent_text_snapshot": {
+     "dbx_business_glossary_term": "Consent Notice Text Snapshot"
+    },
+    "consent_type": {
+     "dbx_business_glossary_term": "Consent Type",
+     "dbx_value_regex": "marketing_email|sms|push_notification|data_sharing|profiling|cookies"
+    },
+    "consent_version": {
+     "dbx_business_glossary_term": "Consent Version",
+     "dbx_value_regex": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "cookie_consent_categories": {
+     "dbx_business_glossary_term": "Cookie Consent Categories"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Consumer Country Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "device_type": {
+     "dbx_business_glossary_term": "Consent Capture Device Type",
+     "dbx_value_regex": "desktop|mobile|tablet|kiosk|other"
+    },
+    "double_opt_in_flag": {
+     "dbx_business_glossary_term": "Double Opt-In Flag"
+    },
+    "double_opt_in_timestamp": {
+     "dbx_business_glossary_term": "Double Opt-In Confirmation Timestamp"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Consent Effective From Date"
+    },
+    "expiry_date": {
+     "dbx_business_glossary_term": "Consent Expiry Date"
+    },
+    "ip_address": {
+     "dbx_confidential": "true",
+     "dbx_pii_ip": "true",
+     "dbx_business_glossary_term": "Consent Capture IP Address"
+    },
+    "is_current_record": {
+     "dbx_business_glossary_term": "Is Current Record Flag"
+    },
+    "legal_basis": {
+     "dbx_business_glossary_term": "Legal Basis for Processing",
+     "dbx_value_regex": "consent|legitimate_interest|contract|legal_obligation|vital_interest|public_task"
+    },
+    "minor_age_threshold": {
+     "dbx_business_glossary_term": "Minor Age Threshold"
+    },
+    "parental_consent_flag": {
+     "dbx_business_glossary_term": "Parental Consent Flag"
+    },
+    "prior_consent_status": {
+     "dbx_business_glossary_term": "Prior Consent Status",
+     "dbx_value_regex": "granted|withdrawn|pending|expired|none"
+    },
+    "processing_agent": {
+     "dbx_business_glossary_term": "Consent Processing Agent"
+    },
+    "profiling_consent_flag": {
+     "dbx_business_glossary_term": "Profiling and Automated Decision-Making Consent Flag"
+    },
+    "re_consent_deadline": {
+     "dbx_business_glossary_term": "Re-Consent Deadline Date"
+    },
+    "re_consent_required_flag": {
+     "dbx_business_glossary_term": "Re-Consent Required Flag"
+    },
+    "record_version": {
+     "dbx_business_glossary_term": "Consent Record Version Number"
+    },
+    "regulatory_jurisdiction": {
+     "dbx_business_glossary_term": "Regulatory Jurisdiction",
+     "dbx_value_regex": "GDPR|CCPA|LGPD|PIPEDA|PDPA|OTHER"
+    },
+    "retention_period_days": {
+     "dbx_business_glossary_term": "Consent Record Retention Period (Days)"
+    },
+    "third_party_sharing_flag": {
+     "dbx_business_glossary_term": "Third-Party Data Sharing Consent Flag"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    },
+    "withdrawal_method": {
+     "dbx_business_glossary_term": "Consent Withdrawal Method",
+     "dbx_value_regex": "web_form|mobile_app|in_store|call_center|email_link|automated_expiry"
+    },
+    "withdrawal_timestamp": {
+     "dbx_business_glossary_term": "Consent Withdrawal Timestamp"
+    }
+   }
+  },
+  "dtc_order": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "direct_sales"
+   },
+   "column_tags": {
+    "dtc_order_id": {
+     "dbx_business_glossary_term": "Direct-to-Consumer (DTC) Order ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Distribution Center Id (Foreign Key)"
+    },
+    "loyalty_account_id": {
+     "dbx_business_glossary_term": "Loyalty Account Id (Foreign Key)"
+    },
+    "order_id": {
+     "dbx_business_glossary_term": "Order Id (Foreign Key)"
+    },
+    "outbound_order_id": {
+     "dbx_business_glossary_term": "Outbound Order Id (Foreign Key)"
+    },
+    "primary_dtc_procurement_purchase_order_id": {
+     "dbx_business_glossary_term": "Primary Dtc Procurement Purchase Order Id"
+    },
+    "ship_to_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Ship To Address Id (Foreign Key)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Shipment Id (Foreign Key)"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Campaign Id (Foreign Key)"
+    },
+    "subscription_id": {
+     "dbx_business_glossary_term": "Subscription ID"
+    },
+    "trade_account_id": {
+     "dbx_business_glossary_term": "Trade Account Id (Foreign Key)"
+    },
+    "actual_delivery_date": {
+     "dbx_business_glossary_term": "Actual Delivery Date"
+    },
+    "billing_address_same_flag": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Billing Address Same as Shipping Flag"
+    },
+    "carrier_code": {
+     "dbx_business_glossary_term": "Carrier Code"
+    },
+    "channel_code": {
+     "dbx_business_glossary_term": "DTC Channel Code",
+     "dbx_value_regex": "brand_website|mobile_app|social_commerce|voice_commerce|dtc_subscription"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code (ISO 4217)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "device_type": {
+     "dbx_business_glossary_term": "Consumer Device Type",
+     "dbx_value_regex": "desktop|mobile|tablet|smart_tv|voice_assistant"
+    },
+    "discount_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Discount Amount"
+    },
+    "fulfillment_ref": {
+     "dbx_business_glossary_term": "Fulfillment Reference Number"
+    },
+    "fulfillment_status": {
+     "dbx_business_glossary_term": "Fulfillment Status",
+     "dbx_value_regex": "unfulfilled|partially_fulfilled|fulfilled|cancelled"
+    },
+    "gift_order_flag": {
+     "dbx_business_glossary_term": "Gift Order Flag"
+    },
+    "ip_country_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_ip": "true",
+     "dbx_business_glossary_term": "IP Geolocation Country Code (ISO 3166-1 Alpha-3)",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "loyalty_points_earned": {
+     "dbx_business_glossary_term": "Loyalty Points Earned"
+    },
+    "loyalty_points_redeemed": {
+     "dbx_business_glossary_term": "Loyalty Points Redeemed"
+    },
+    "order_date": {
+     "dbx_business_glossary_term": "DTC Order Placement Date and Time"
+    },
+    "order_status": {
+     "dbx_business_glossary_term": "DTC Order Status"
+    },
+    "order_total_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Total Amount"
+    },
+    "payment_method": {
+     "dbx_business_glossary_term": "Payment Method",
+     "dbx_value_regex": "credit_card|debit_card|paypal|apple_pay|google_pay|gift_card"
+    },
+    "payment_status": {
+     "dbx_business_glossary_term": "Payment Status",
+     "dbx_value_regex": "pending|authorized|captured|failed|refunded|partially_refunded"
+    },
+    "payment_transaction_ref": {
+     "dbx_business_glossary_term": "Payment Transaction Reference"
+    },
+    "promised_delivery_date": {
+     "dbx_business_glossary_term": "Promised Delivery Date"
+    },
+    "promotion_code": {
+     "dbx_business_glossary_term": "Promotion Code"
+    },
+    "return_flag": {
+     "dbx_business_glossary_term": "Return Flag"
+    },
+    "return_reason_code": {
+     "dbx_business_glossary_term": "Return Reason Code"
+    },
+    "ship_to_name": {
+     "dbx_restricted": "true",
+     "dbx_pii_name": "true",
+     "dbx_business_glossary_term": "Ship-To Recipient Name"
+    },
+    "shipped_date": {
+     "dbx_business_glossary_term": "Order Shipped Date"
+    },
+    "shipping_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Shipping Amount"
+    },
+    "source_system_order_ref": {
+     "dbx_business_glossary_term": "Source System Order Reference"
+    },
+    "subscription_order_flag": {
+     "dbx_business_glossary_term": "Subscription Order Flag"
+    },
+    "subtotal_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Subtotal Amount"
+    },
+    "tax_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Tax Amount"
+    },
+    "tracking_number": {
+     "dbx_business_glossary_term": "Shipment Tracking Number"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Last Updated Timestamp"
+    }
+   }
+  },
+  "dtc_order_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "direct_sales"
+   },
+   "column_tags": {
+    "dtc_order_line_id": {
+     "dbx_business_glossary_term": "Direct-to-Consumer (DTC) Order Line ID"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Warehouse ID"
+    },
+    "dtc_order_id": {
+     "dbx_business_glossary_term": "Direct-to-Consumer (DTC) Order ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion ID"
+    },
+    "outbound_order_line_id": {
+     "dbx_business_glossary_term": "Outbound Order Line Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "shipment_id": {
+     "dbx_business_glossary_term": "Shipment ID"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "subscription_id": {
+     "dbx_business_glossary_term": "Subscription ID"
+    },
+    "supply_atp_record_id": {
+     "dbx_business_glossary_term": "Supply Atp Record Id (Foreign Key)"
+    },
+    "actual_delivery_date": {
+     "dbx_business_glossary_term": "Actual Delivery Date"
+    },
+    "actual_ship_date": {
+     "dbx_business_glossary_term": "Actual Ship Date"
+    },
+    "brand_code": {
+     "dbx_business_glossary_term": "Brand Code"
+    },
+    "channel_code": {
+     "dbx_business_glossary_term": "Direct-to-Consumer (DTC) Channel Code",
+     "dbx_value_regex": "DTC_WEB|DTC_MOBILE|DTC_APP|DTC_SUBSCRIPTION|DTC_SOCIAL"
+    },
+    "cost_of_goods_sold": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Cost of Goods Sold (COGS)"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "fulfillment_status": {
+     "dbx_business_glossary_term": "Fulfillment Status"
+    },
+    "gift_flag": {
+     "dbx_business_glossary_term": "Gift Order Flag"
+    },
+    "gtin": {
+     "dbx_business_glossary_term": "Global Trade Item Number (GTIN)",
+     "dbx_value_regex": "^[0-9]{8,14}$"
+    },
+    "hazmat_flag": {
+     "dbx_business_glossary_term": "Hazardous Material (HAZMAT) Flag"
+    },
+    "is_returned": {
+     "dbx_business_glossary_term": "Return Flag"
+    },
+    "line_discount_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Line Discount Amount"
+    },
+    "line_discount_pct": {
+     "dbx_business_glossary_term": "Order Line Discount Percentage"
+    },
+    "line_net_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Line Net Amount"
+    },
+    "line_number": {
+     "dbx_business_glossary_term": "Order Line Number"
+    },
+    "line_subtotal": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Line Subtotal"
+    },
+    "line_total_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Order Line Total Amount"
+    },
+    "loyalty_points_earned": {
+     "dbx_business_glossary_term": "Loyalty Points Earned"
+    },
+    "loyalty_points_redeemed": {
+     "dbx_business_glossary_term": "Loyalty Points Redeemed"
+    },
+    "product_category_code": {
+     "dbx_business_glossary_term": "Product Category Code"
+    },
+    "product_name": {
+     "dbx_business_glossary_term": "Product Name"
+    },
+    "promised_delivery_date": {
+     "dbx_business_glossary_term": "Promised Delivery Date"
+    },
+    "promised_ship_date": {
+     "dbx_business_glossary_term": "Promised Ship Date"
+    },
+    "promotion_code": {
+     "dbx_business_glossary_term": "Promotion Code"
+    },
+    "quantity_cancelled": {
+     "dbx_business_glossary_term": "Quantity Cancelled"
+    },
+    "quantity_ordered": {
+     "dbx_business_glossary_term": "Quantity Ordered"
+    },
+    "quantity_shipped": {
+     "dbx_business_glossary_term": "Quantity Shipped"
+    },
+    "regulatory_hold_flag": {
+     "dbx_business_glossary_term": "Regulatory Hold Flag"
+    },
+    "return_reason_code": {
+     "dbx_business_glossary_term": "Return Reason Code"
+    },
+    "subscription_flag": {
+     "dbx_business_glossary_term": "Subscription Order Flag"
+    },
+    "tax_amount": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Tax Amount"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)"
+    },
+    "unit_price": {
+     "dbx_confidential": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Unit Price"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    }
+   }
+  },
+  "subscription": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "direct_sales"
+   },
+   "column_tags": {
+    "subscription_id": {
+     "dbx_business_glossary_term": "Subscription Identifier"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "delivery_address_id": {
+     "dbx_restricted": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Delivery Address ID"
+    },
+    "distribution_facility_id": {
+     "dbx_business_glossary_term": "Fulfillment Warehouse ID"
+    },
+    "event_id": {
+     "dbx_business_glossary_term": "Promotion Event Id (Foreign Key)"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program ID"
+    },
+    "shopper_id": {
+     "dbx_business_glossary_term": "Consumer ID"
+    },
+    "sku_id": {
+     "dbx_business_glossary_term": "Stock Keeping Unit (SKU) ID"
+    },
+    "acquisition_source": {
+     "dbx_business_glossary_term": "Subscription Acquisition Source"
+    },
+    "auto_renew_flag": {
+     "dbx_business_glossary_term": "Auto-Renewal Flag"
+    },
+    "billing_cycle_day": {
+     "dbx_business_glossary_term": "Billing Cycle Day"
+    },
+    "cancellation_date": {
+     "dbx_business_glossary_term": "Subscription Cancellation Date"
+    },
+    "cancellation_reason": {
+     "dbx_business_glossary_term": "Subscription Cancellation Reason",
+     "dbx_value_regex": "price_too_high|product_dissatisfaction|found_alternative|no_longer_needed|financial_hardship|other"
+    },
+    "ccpa_opt_out_flag": {
+     "dbx_business_glossary_term": "CCPA Opt-Out Flag"
+    },
+    "channel": {
+     "dbx_business_glossary_term": "Subscription Channel",
+     "dbx_value_regex": "dtc_web|dtc_mobile|dtc_app|retail_partner|voice_assistant"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Record Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "discount_rate": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Subscription Discount Rate"
+    },
+    "end_date": {
+     "dbx_business_glossary_term": "Subscription End Date"
+    },
+    "failed_payment_count": {
+     "dbx_business_glossary_term": "Failed Payment Count"
+    },
+    "frequency": {
+     "dbx_business_glossary_term": "Subscription Frequency",
+     "dbx_value_regex": "weekly|bi_weekly|monthly|bi_monthly|quarterly"
+    },
+    "gdpr_consent_flag": {
+     "dbx_business_glossary_term": "GDPR Consent Flag"
+    },
+    "last_order_date": {
+     "dbx_business_glossary_term": "Last Order Date"
+    },
+    "net_price": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Net Subscription Price"
+    },
+    "next_order_date": {
+     "dbx_business_glossary_term": "Next Order Date"
+    },
+    "nps_score": {
+     "dbx_business_glossary_term": "Net Promoter Score (NPS)"
+    },
+    "pause_end_date": {
+     "dbx_business_glossary_term": "Pause End Date"
+    },
+    "pause_reason": {
+     "dbx_business_glossary_term": "Subscription Pause Reason",
+     "dbx_value_regex": "financial_hardship|travel|product_overstock|temporary_unavailability|other"
+    },
+    "pause_start_date": {
+     "dbx_business_glossary_term": "Pause Start Date"
+    },
+    "payment_method_type": {
+     "dbx_business_glossary_term": "Payment Method Type",
+     "dbx_value_regex": "credit_card|debit_card|digital_wallet|bank_transfer|gift_card"
+    },
+    "payment_token_reference": {
+     "dbx_restricted": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Payment Token Reference"
+    },
+    "price": {
+     "dbx_confidential": "true",
+     "dbx_business_glossary_term": "Subscription Price"
+    },
+    "promotion_code": {
+     "dbx_business_glossary_term": "Promotion Code"
+    },
+    "quantity": {
+     "dbx_business_glossary_term": "Subscription Quantity"
+    },
+    "start_date": {
+     "dbx_business_glossary_term": "Subscription Start Date"
+    },
+    "subscription_number": {
+     "dbx_business_glossary_term": "Subscription Number",
+     "dbx_value_regex": "^SUB-[A-Z0-9]{8,16}$"
+    },
+    "subscription_status": {
+     "dbx_business_glossary_term": "Subscription Status",
+     "dbx_value_regex": "active|paused|cancelled|pending|expired"
+    },
+    "subscription_type": {
+     "dbx_business_glossary_term": "Subscription Type",
+     "dbx_value_regex": "auto_replenishment|subscription_box|bundle|trial"
+    },
+    "total_orders_fulfilled": {
+     "dbx_business_glossary_term": "Total Orders Fulfilled"
+    },
+    "trial_end_date": {
+     "dbx_business_glossary_term": "Trial End Date"
+    },
+    "trial_flag": {
+     "dbx_business_glossary_term": "Trial Subscription Flag"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Record Updated Timestamp"
+    }
+   }
+  },
+  "loyalty_program": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "loyalty_programs"
+   },
+   "column_tags": {
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program Identifier"
+    },
+    "brand_id": {
+     "dbx_business_glossary_term": "Product Brand Id (Foreign Key)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "predecessor_loyalty_program_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Predecessor Loyalty Program Id"
+    },
+    "cltv_estimate": {
+     "dbx_business_glossary_term": "Cltv Estimate"
+    },
+    "consent_status": {
+     "dbx_business_glossary_term": "Consent Status"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "Effective Until"
+    },
+    "enrollment_channel": {
+     "dbx_business_glossary_term": "Enrollment Channel"
+    },
+    "enrollment_date": {
+     "dbx_business_glossary_term": "Enrollment Date"
+    },
+    "loyalty_program_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "nps_score": {
+     "dbx_business_glossary_term": "Nps Score"
+    },
+    "points_balance": {
+     "dbx_business_glossary_term": "Points Balance"
+    },
+    "points_earned": {
+     "dbx_business_glossary_term": "Points Earned"
+    },
+    "points_expiration_date": {
+     "dbx_business_glossary_term": "Points Expiration Date"
+    },
+    "privacy_opt_in": {
+     "dbx_business_glossary_term": "Privacy Opt In"
+    },
+    "program_code": {
+     "dbx_business_glossary_term": "Program Code"
+    },
+    "program_description": {
+     "dbx_business_glossary_term": "Program Description"
+    },
+    "program_name": {
+     "dbx_business_glossary_term": "Program Name"
+    },
+    "program_type": {
+     "dbx_business_glossary_term": "Program Type"
+    },
+    "record_audit_created": {
+     "dbx_business_glossary_term": "Record Audit Created"
+    },
+    "record_audit_updated": {
+     "dbx_business_glossary_term": "Record Audit Updated"
+    },
+    "reward_rate": {
+     "dbx_business_glossary_term": "Reward Rate"
+    },
+    "tier_level": {
+     "dbx_business_glossary_term": "Tier Level"
+    }
+   }
+  },
+  "loyalty_tier": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "loyalty_programs"
+   },
+   "column_tags": {
+    "loyalty_tier_id": {
+     "dbx_business_glossary_term": "Loyalty Tier Identifier"
+    },
+    "loyalty_program_id": {
+     "dbx_business_glossary_term": "Loyalty Program Id"
+    },
+    "next_loyalty_tier_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Next Loyalty Tier Id"
+    },
+    "benefits_description": {
+     "dbx_business_glossary_term": "Benefits Description"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "discount_percent": {
+     "dbx_business_glossary_term": "Discount Percent"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From"
+    },
+    "effective_until": {
+     "dbx_business_glossary_term": "Effective Until"
+    },
+    "eligibility_criteria": {
+     "dbx_business_glossary_term": "Eligibility Criteria"
+    },
+    "exclusive_offers": {
+     "dbx_business_glossary_term": "Exclusive Offers"
+    },
+    "expiration_policy": {
+     "dbx_business_glossary_term": "Expiration Policy"
+    },
+    "free_shipping": {
+     "dbx_business_glossary_term": "Free Shipping"
+    },
+    "is_default": {
+     "dbx_business_glossary_term": "Is Default"
+    },
+    "loyalty_tier_status": {
+     "dbx_business_glossary_term": "Status"
+    },
+    "max_points_per_year": {
+     "dbx_business_glossary_term": "Max Points Per Year"
+    },
+    "points_multiplier": {
+     "dbx_business_glossary_term": "Points Multiplier"
+    },
+    "priority_support": {
+     "dbx_business_glossary_term": "Priority Support"
+    },
+    "promotional_code": {
+     "dbx_business_glossary_term": "Promotional Code"
+    },
+    "required_points": {
+     "dbx_business_glossary_term": "Required Points"
+    },
+    "required_spend_usd": {
+     "dbx_business_glossary_term": "Required Spend Usd"
+    },
+    "reward_points_per_dollar": {
+     "dbx_business_glossary_term": "Reward Points Per Dollar"
+    },
+    "spend_multiplier": {
+     "dbx_business_glossary_term": "Spend Multiplier"
+    },
+    "tier_code": {
+     "dbx_business_glossary_term": "Tier Code"
+    },
+    "tier_name": {
+     "dbx_business_glossary_term": "Tier Name"
+    },
+    "tier_rank": {
+     "dbx_business_glossary_term": "Tier Rank"
+    },
+    "tier_type": {
+     "dbx_business_glossary_term": "Tier Type"
+    },
+    "updated_timestamp": {
+     "dbx_business_glossary_term": "Updated Timestamp"
+    }
+   }
+  }
+ }
+}

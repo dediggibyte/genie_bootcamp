@@ -1,0 +1,434 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I bootcamp_domain/tools/build_domain_samples.py. Subset of bootcamp/data/manifest.json for the tables of this sample (the CSV files stay in bootcamp/data/). Original notice: GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_data.py. Synthetic data whose tables, column names and value formats follow the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder, copies of tools/model/), modified for the Fjallmark Genie bootcamp. The CSV files are documented in data/README.md.",
+ "finance": {
+  "cost_center": {
+   "rows": 41,
+   "clean_rows": 40,
+   "scope": "bootcamp",
+   "primary_key": "cost_center_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/finance/cost_center.csv",
+   "bytes": 13810,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 2,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "allocation_method",
+      "category"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 1,
+     "handling": "deduplicate on cost_center_id keeping the row with the latest last_modified_timestamp",
+     "columns": [
+      "cost_center_id",
+      "last_modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    }
+   ]
+  },
+  "profit_center": {
+   "rows": 16,
+   "clean_rows": 16,
+   "scope": "bootcamp",
+   "primary_key": "profit_center_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/finance/profit_center.csv",
+   "bytes": 7849,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 4,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "profit_center_status",
+      "valuation_view"
+     ]
+    }
+   ]
+  },
+  "gl_account": {
+   "rows": 159,
+   "clean_rows": 156,
+   "scope": "bootcamp",
+   "primary_key": "gl_account_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/finance/gl_account.csv",
+   "bytes": 60354,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 34,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "account_status",
+      "account_type",
+      "balance_sheet_classification",
+      "cash_flow_category",
+      "cost_element_category",
+      "debit_credit_indicator",
+      "financial_statement_category"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 3,
+     "handling": "deduplicate on gl_account_id keeping the row with the latest last_modified_timestamp",
+     "columns": [
+      "gl_account_id",
+      "last_modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    }
+   ]
+  },
+  "ledger": {
+   "rows": 7,
+   "clean_rows": 7,
+   "scope": "bootcamp",
+   "primary_key": "ledger_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/finance/ledger.csv",
+   "bytes": 2414,
+   "dq_issues": []
+  },
+  "journal_entry": {
+   "rows": 5370,
+   "clean_rows": 5306,
+   "scope": "bootcamp",
+   "primary_key": "journal_entry_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/journal_entry.csv",
+   "bytes": 1642267,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 338,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "exchange_rate_type",
+      "posting_status"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 53,
+     "handling": "deduplicate on journal_entry_id (exact copies collapse)",
+     "columns": [
+      "journal_entry_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 11,
+     "handling": "expectation journal_entry_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "journal_entry_id"
+     ]
+    }
+   ]
+  },
+  "journal_entry_line": {
+   "rows": 17579,
+   "clean_rows": 17370,
+   "scope": "bootcamp",
+   "primary_key": "journal_entry_line_id",
+   "dedup_order_column": null,
+   "file": "bootcamp/data/finance/journal_entry_line.csv",
+   "bytes": 3468169,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 553,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "debit_credit_indicator"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 174,
+     "handling": "deduplicate on journal_entry_line_id (exact copies collapse)",
+     "columns": [
+      "journal_entry_line_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 35,
+     "handling": "expectation journal_entry_line_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "journal_entry_line_id"
+     ]
+    }
+   ]
+  },
+  "ar_invoice": {
+   "rows": 4460,
+   "clean_rows": 4407,
+   "scope": "bootcamp",
+   "primary_key": "ar_invoice_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/ar_invoice.csv",
+   "bytes": 1456419,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 146,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "dso_aging_bucket",
+      "payment_method"
+     ]
+    },
+    {
+     "issue": "date_format_ddmmyyyy",
+     "rows_or_values": 204,
+     "handling": "parse with yyyy-MM-dd first, fall back to dd/MM/yyyy",
+     "columns": [
+      "due_date"
+     ]
+    },
+    {
+     "issue": "boolean_mixed_format",
+     "rows_or_values": 840,
+     "handling": "map true/Y/1 -> TRUE and false/N/0 -> FALSE (case-insensitive)",
+     "columns": [
+      "dispute_flag"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 44,
+     "handling": "deduplicate on ar_invoice_id (exact copies collapse)",
+     "columns": [
+      "ar_invoice_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 9,
+     "handling": "expectation ar_invoice_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "ar_invoice_id"
+     ]
+    }
+   ]
+  },
+  "ar_payment": {
+   "rows": 4497,
+   "clean_rows": 4444,
+   "scope": "bootcamp",
+   "primary_key": "ar_payment_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/ar_payment.csv",
+   "bytes": 1770787,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 271,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "payment_channel",
+      "payment_method"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 44,
+     "handling": "deduplicate on ar_payment_id (exact copies collapse)",
+     "columns": [
+      "ar_payment_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 9,
+     "handling": "expectation ar_payment_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "ar_payment_id"
+     ]
+    }
+   ]
+  },
+  "ap_invoice": {
+   "rows": 1763,
+   "clean_rows": 1743,
+   "scope": "bootcamp",
+   "primary_key": "ap_invoice_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/ap_invoice.csv",
+   "bytes": 656229,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 106,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "match_status",
+      "payment_method"
+     ]
+    },
+    {
+     "issue": "date_format_ddmmyyyy",
+     "rows_or_values": 77,
+     "handling": "parse with yyyy-MM-dd first, fall back to dd/MM/yyyy",
+     "columns": [
+      "invoice_date"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 17,
+     "handling": "deduplicate on ap_invoice_id (exact copies collapse)",
+     "columns": [
+      "ap_invoice_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 3,
+     "handling": "expectation ap_invoice_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "ap_invoice_id"
+     ]
+    }
+   ]
+  },
+  "ap_payment": {
+   "rows": 1647,
+   "clean_rows": 1628,
+   "scope": "bootcamp",
+   "primary_key": "ap_payment_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/ap_payment.csv",
+   "bytes": 612051,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 91,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "payment_approval_status",
+      "payment_method"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 16,
+     "handling": "deduplicate on ap_payment_id (exact copies collapse)",
+     "columns": [
+      "ap_payment_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 3,
+     "handling": "expectation ap_payment_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "ap_payment_id"
+     ]
+    }
+   ]
+  },
+  "cogs_allocation": {
+   "rows": 2711,
+   "clean_rows": 2679,
+   "scope": "bootcamp",
+   "primary_key": "cogs_allocation_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/cogs_allocation.csv",
+   "bytes": 889708,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 416,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "allocation_method",
+      "costing_type",
+      "price_control_indicator",
+      "release_status",
+      "variance_category"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 27,
+     "handling": "deduplicate on cogs_allocation_id (exact copies collapse)",
+     "columns": [
+      "cogs_allocation_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 5,
+     "handling": "expectation cogs_allocation_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "cogs_allocation_id"
+     ]
+    }
+   ]
+  },
+  "standard_cost": {
+   "rows": 876,
+   "clean_rows": 857,
+   "scope": "bootcamp",
+   "primary_key": "standard_cost_id",
+   "dedup_order_column": "cost_estimate_modified_timestamp",
+   "file": "bootcamp/data/finance/standard_cost.csv",
+   "bytes": 340821,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 74,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "approval_status",
+      "costing_type",
+      "release_status"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 17,
+     "handling": "deduplicate on standard_cost_id keeping the row with the latest cost_estimate_modified_timestamp",
+     "columns": [
+      "standard_cost_id",
+      "cost_estimate_modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 2,
+     "handling": "expectation standard_cost_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "standard_cost_id"
+     ]
+    }
+   ]
+  },
+  "company_code": {
+   "rows": 6,
+   "clean_rows": 6,
+   "scope": "bootcamp",
+   "primary_key": "company_code_id",
+   "dedup_order_column": "record_audit_updated",
+   "file": "bootcamp/data/finance/company_code.csv",
+   "bytes": 2034,
+   "dq_issues": []
+  }
+ }
+}

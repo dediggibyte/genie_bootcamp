@@ -1,0 +1,37 @@
+# Fjällmark Finance router app - one chat entry point for the Finance Analyst Genie Agent of this sample, with the
+# Finance glossary (glossary/) as a function tool.
+# Created and deployed by notebooks/06_router_app.py, which binds these resources (and grants the app's service
+# principal SELECT on the sample's gold schemas plus a row-filter mapping):
+#   genie-finance     the participant's Finance Analyst Genie Agent (CAN_RUN)
+#   sql-warehouse   the agent's SQL warehouse (CAN_USE)
+#   llm-endpoint    the router's model (CAN_QUERY)
+#   experiment      MLflow experiment for the traces (CAN_EDIT)
+#   postgres        databricks_postgres of the participant's branch of the sample's Lakebase project
+# CATALOG (the participant's catalog, for the glossary's <catalog> placeholder) is not a resource: notebook 06
+# passes it, with the env below, as the deployment's environment variables.
+command: ["uv", "run", "start-app"]
+# databricks apps listen by default on port 8000
+
+env:
+  - name: MLFLOW_TRACKING_URI
+    value: "databricks"
+  - name: MLFLOW_REGISTRY_URI
+    value: "databricks-uc"
+  - name: API_PROXY
+    value: "http://localhost:8000/invocations"
+  - name: CHAT_APP_PORT
+    value: "3000"
+  - name: CHAT_PROXY_TIMEOUT_SECONDS
+    value: "300"
+  - name: MLFLOW_EXPERIMENT_ID
+    valueFrom: "experiment"
+  - name: LAKEBASE_AUTOSCALING_ENDPOINT
+    valueFrom: "postgres"
+  - name: LAKEBASE_AGENT_MEMORY_SCHEMA
+    value: "agent_memory"
+  - name: LLM_ENDPOINT
+    valueFrom: "llm-endpoint"
+  - name: GENIE_SPACE_FINANCE
+    valueFrom: "genie-finance"
+  - name: LOG_LEVEL
+    value: "INFO"

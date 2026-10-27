@@ -1,0 +1,449 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I bootcamp_domain/tools/build_domain_samples.py. Subset of bootcamp/data/manifest.json for the tables of this sample (the CSV files stay in bootcamp/data/). Original notice: GENERATED FILE - do not edit by hand; regenerate with python3 -I tools/generate_data.py. Synthetic data whose tables, column names and value formats follow the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder, copies of tools/model/), modified for the Fjallmark Genie bootcamp. The CSV files are documented in data/README.md.",
+ "manufacturing": {
+  "manufacturing_facility": {
+   "rows": 4,
+   "clean_rows": 4,
+   "scope": "bootcamp",
+   "primary_key": "manufacturing_facility_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/manufacturing_facility.csv",
+   "bytes": 2465,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 2,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "facility_type",
+      "sustainability_rating"
+     ]
+    }
+   ]
+  },
+  "production_line": {
+   "rows": 16,
+   "clean_rows": 16,
+   "scope": "bootcamp",
+   "primary_key": "production_line_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/production_line.csv",
+   "bytes": 7716,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 4,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "gmp_classification",
+      "operational_status",
+      "shift_pattern"
+     ]
+    }
+   ]
+  },
+  "work_center": {
+   "rows": 49,
+   "clean_rows": 48,
+   "scope": "bootcamp",
+   "primary_key": "work_center_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/manufacturing/work_center.csv",
+   "bytes": 22055,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 9,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "capacity_unit",
+      "category",
+      "gmp_qualification_status",
+      "work_center_status",
+      "work_center_type"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 1,
+     "handling": "deduplicate on work_center_id keeping the row with the latest modified_timestamp",
+     "columns": [
+      "work_center_id",
+      "modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    }
+   ]
+  },
+  "manufacturing_bom": {
+   "rows": 121,
+   "clean_rows": 119,
+   "scope": "bootcamp",
+   "primary_key": "manufacturing_bom_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/manufacturing_bom.csv",
+   "bytes": 40798,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 10,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "bom_status",
+      "bom_type",
+      "component_item_category",
+      "lot_size_requirement"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 2,
+     "handling": "deduplicate on manufacturing_bom_id keeping the row with the latest last_modified_timestamp",
+     "columns": [
+      "manufacturing_bom_id",
+      "last_modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    }
+   ]
+  },
+  "routing": {
+   "rows": 121,
+   "clean_rows": 119,
+   "scope": "bootcamp",
+   "primary_key": "routing_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/routing.csv",
+   "bytes": 48097,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 14,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "approval_status",
+      "routing_status",
+      "routing_type"
+     ]
+    },
+    {
+     "issue": "updated_duplicate_rows",
+     "rows_or_values": 2,
+     "handling": "deduplicate on routing_id keeping the row with the latest last_modified_timestamp",
+     "columns": [
+      "routing_id",
+      "last_modified_timestamp"
+     ],
+     "detail": "older version precedes the current one; one attribute differs (typically a status)"
+    }
+   ]
+  },
+  "production_order": {
+   "rows": 2021,
+   "clean_rows": 1997,
+   "scope": "bootcamp",
+   "primary_key": "production_order_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/production_order.csv",
+   "bytes": 827807,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 148,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "order_type",
+      "priority",
+      "settlement_rule"
+     ]
+    },
+    {
+     "issue": "boolean_mixed_format",
+     "rows_or_values": 1100,
+     "handling": "map true/Y/1 -> TRUE and false/N/0 -> FALSE (case-insensitive)",
+     "columns": [
+      "gmp_compliance_flag",
+      "quality_inspection_required"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 20,
+     "handling": "deduplicate on production_order_id (exact copies collapse)",
+     "columns": [
+      "production_order_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 4,
+     "handling": "expectation production_order_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "production_order_id"
+     ]
+    }
+   ]
+  },
+  "batch_record": {
+   "rows": 2021,
+   "clean_rows": 1997,
+   "scope": "bootcamp",
+   "primary_key": "batch_record_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/batch_record.csv",
+   "bytes": 711072,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 68,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "batch_status"
+     ]
+    },
+    {
+     "issue": "boolean_mixed_format",
+     "rows_or_values": 2868,
+     "handling": "map true/Y/1 -> TRUE and false/N/0 -> FALSE (case-insensitive)",
+     "columns": [
+      "gmp_deviation_flag",
+      "lot_genealogy_complete_flag",
+      "quality_release_flag",
+      "recall_flag",
+      "record_locked_flag",
+      "regulatory_hold_flag"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 20,
+     "handling": "deduplicate on batch_record_id (exact copies collapse)",
+     "columns": [
+      "batch_record_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 4,
+     "handling": "expectation batch_record_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "batch_record_id"
+     ]
+    }
+   ]
+  },
+  "yield_record": {
+   "rows": 2021,
+   "clean_rows": 1997,
+   "scope": "bootcamp",
+   "primary_key": "yield_record_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/yield_record.csv",
+   "bytes": 658735,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 66,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "shift_code"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 20,
+     "handling": "deduplicate on yield_record_id (exact copies collapse)",
+     "columns": [
+      "yield_record_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 4,
+     "handling": "expectation yield_record_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "yield_record_id"
+     ]
+    }
+   ]
+  },
+  "production_confirmation": {
+   "rows": 6063,
+   "clean_rows": 5991,
+   "scope": "bootcamp",
+   "primary_key": "production_confirmation_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/production_confirmation.csv",
+   "bytes": 2275125,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 524,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "confirmation_type",
+      "operation_status",
+      "source_system_code"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 60,
+     "handling": "deduplicate on production_confirmation_id (exact copies collapse)",
+     "columns": [
+      "production_confirmation_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 12,
+     "handling": "expectation production_confirmation_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "production_confirmation_id"
+     ]
+    }
+   ]
+  },
+  "planned_order": {
+   "rows": 2426,
+   "clean_rows": 2397,
+   "scope": "bootcamp",
+   "primary_key": "planned_order_id",
+   "dedup_order_column": "last_modified_timestamp",
+   "file": "bootcamp/data/manufacturing/planned_order.csv",
+   "bytes": 934110,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 502,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "conversion_status",
+      "demand_source_type",
+      "lot_size_key",
+      "order_status",
+      "order_type",
+      "priority_code",
+      "procurement_type"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 24,
+     "handling": "deduplicate on planned_order_id (exact copies collapse)",
+     "columns": [
+      "planned_order_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 5,
+     "handling": "expectation planned_order_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "planned_order_id"
+     ]
+    }
+   ]
+  },
+  "equipment": {
+   "rows": 160,
+   "clean_rows": 160,
+   "scope": "bootcamp",
+   "primary_key": "equipment_id",
+   "dedup_order_column": null,
+   "file": "bootcamp/data/manufacturing/equipment.csv",
+   "bytes": 77687,
+   "dq_issues": []
+  }
+ },
+ "finance": {
+  "journal_entry": {
+   "rows": 5370,
+   "clean_rows": 5306,
+   "scope": "bootcamp",
+   "primary_key": "journal_entry_id",
+   "dedup_order_column": "modified_timestamp",
+   "file": "bootcamp/data/finance/journal_entry.csv",
+   "bytes": 1642267,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 338,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "exchange_rate_type",
+      "posting_status"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 53,
+     "handling": "deduplicate on journal_entry_id (exact copies collapse)",
+     "columns": [
+      "journal_entry_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 11,
+     "handling": "expectation journal_entry_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "journal_entry_id"
+     ]
+    }
+   ]
+  },
+  "journal_entry_line": {
+   "rows": 17579,
+   "clean_rows": 17370,
+   "scope": "bootcamp",
+   "primary_key": "journal_entry_line_id",
+   "dedup_order_column": null,
+   "file": "bootcamp/data/finance/journal_entry_line.csv",
+   "bytes": 3468169,
+   "dq_issues": [
+    {
+     "issue": "enum_case_whitespace",
+     "rows_or_values": 553,
+     "handling": "trim + case-fold, then map to the canonical value of the column's value_regex list",
+     "columns": [
+      "debit_credit_indicator"
+     ]
+    },
+    {
+     "issue": "exact_duplicate_rows",
+     "rows_or_values": 174,
+     "handling": "deduplicate on journal_entry_line_id (exact copies collapse)",
+     "columns": [
+      "journal_entry_line_id"
+     ],
+     "detail": "re-delivered extract rows appended at the end of the file"
+    },
+    {
+     "issue": "empty_primary_key",
+     "rows_or_values": 35,
+     "handling": "expectation journal_entry_line_id IS NOT NULL -> DROP ROW",
+     "columns": [
+      "journal_entry_line_id"
+     ]
+    }
+   ]
+  },
+  "company_code": {
+   "rows": 6,
+   "clean_rows": 6,
+   "scope": "bootcamp",
+   "primary_key": "company_code_id",
+   "dedup_order_column": "record_audit_updated",
+   "file": "bootcamp/data/finance/company_code.csv",
+   "bytes": 2034,
+   "dq_issues": []
+  }
+ }
+}
