@@ -13,7 +13,7 @@ and a router app in front of it. The company is the fictional Fjällmark Consume
 
 > **Not yet run on a workspace.** This sample is built from the tested bootcamp code, but it has not been
 > deployed end to end yet: no run times are given, and the first run may surface problems the bootcamp never had.
-> Overview of all samples: [`../README.md`](../README.md).
+> Overview of all samples: [`../README.md`](../README.md). Running it as a workshop: [`INSTRUCTOR.md`](INSTRUCTOR.md).
 
 ---
 
@@ -41,7 +41,7 @@ and a router app in front of it. The company is the fictional Fjällmark Consume
 | **Serverless** compute for notebooks, jobs and pipelines | every notebook, the pipeline and the job run on serverless |
 | **CAN USE** on a SQL warehouse | the Genie Agent runs its SQL there |
 | your own catalog `cpg_manufacturing_<short name>`, or the right to create it | your sandbox |
-| the governed tag (domain) **Manufacturing** and `ASSIGN` on it | step 5 only; an admin creates it (see step 5) |
+| the governed tag (domain) **Manufacturing** and `ASSIGN` on it | step 5 only; the instructor's [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) creates it |
 | the right to create a Lakebase project and a Databricks App | step 6: the router app keeps its conversation memory in Lakebase |
 | a GitHub account | step 5: the GitHub MCP signs in with *your* account |
 
@@ -207,9 +207,9 @@ Markdown page per business term.
 
 1. **Tags (notebook).** [`notebooks/05_business_context.py`](notebooks/05_business_context.py) tags the
    `manufacturing` schema with the domain **Manufacturing**, every table and metric view with its subdomain, and your Genie Agent.
-   It needs the governed tag **Manufacturing**: a workspace admin creates it with
-   [`bootcamp/instructor/00_instructor_setup.py`](../../bootcamp/instructor/00_instructor_setup.py)
-   (`domain_names = Manufacturing`) or under **Discover** > **Domains**. Without it, the notebook skips the tags and carries
+   It needs the governed tag **Manufacturing**: the instructor creates it with
+   [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) ([`INSTRUCTOR.md`](INSTRUCTOR.md)), or an
+   admin creates it under **Discover** > **Domains**. Without it, the notebook skips the tags and carries
    on. `tag_reference_tables = true` also tags the finance reference tables (when the domain *Finance* exists).
 2. **Pages (UI).** There is no API that creates Pages, so the notebook prints a **Bulk import prompt** and a
    checklist of the expected pages. Open **Discover** > **Pages** > **Create page**, open the Genie Code pane,
@@ -286,6 +286,7 @@ Account-level objects (the domain, governed tags, published Pages) are never tou
 | path | what | written by |
 |---|---|---|
 | [`notebooks/`](notebooks/) | steps 1 and 3-6, cleanup, and the job tasks (`job_tasks/`) | hand |
+| [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py), [`INSTRUCTOR.md`](INSTRUCTOR.md) | admins, once per workshop: runs the bootcamp instructor notebook with this sample's values | hand |
 | [`databricks.yml`](databricks.yml), [`resources/`](resources/) | the bundle: pipeline `cpg_manufacturing_pipeline`, job `cpg_manufacturing_job` | hand |
 | [`app/`](app/README.md) | the router app; `app/glossary/` is generated | hand |
 | [`pipeline/`](pipeline/), [`metric_views/`](metric_views/), [`model_tags/`](model_tags/) | bronze, silver and gold SQL, metric views, `dbx_*` tags | [`../tools/build_domain_samples.py`](../tools/build_domain_samples.py) |

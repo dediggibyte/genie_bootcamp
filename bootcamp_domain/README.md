@@ -33,6 +33,7 @@ Every sample folder has the same layout and the same steps as the bootcamp:
 | 5 | `notebooks/05_business_context.py` | domain and subdomain tags, Bulk import prompt for the domain's Pages, GitHub MCP |
 | 6 | `notebooks/06_router_app.py`, `app/` | router app: the Genie Agent for numbers plus a glossary tool for definitions; memory in Lakebase |
 | - | `notebooks/99_cleanup.py` | removes everything the sample created (dry run first) |
+| 0 | `instructor/00_instructor_setup.py`, `INSTRUCTOR.md` | admins, once per workshop: groups, grants, catalogs, the domain, the Lakebase project |
 
 ### Why a single-domain router?
 
@@ -64,11 +65,12 @@ was omitted.
 3. The samples use their own catalogs (`cpg_finance_<short>`, `cpg_consumer_<short>`,
    `cpg_manufacturing_<short>`), so you can run any of them next to each other and next to the bootcamp.
 
-**Workspace prerequisites** are the bootcamp's, with one difference: a sample has no instructor notebook.
-Notebook 06 creates the sample's Lakebase project itself when it does not exist (you need the right to create
-a Lakebase project), and notebook 05 needs the domain's governed tag. A workspace admin creates the tag with
-[`../bootcamp/instructor/00_instructor_setup.py`](../bootcamp/instructor/00_instructor_setup.py)
-(`domain_names` = the sample's domain), or in **Discover** > **Domains**.
+**Workspace prerequisites** are the bootcamp's. For a workshop, an admin first runs the sample's
+`instructor/00_instructor_setup.py` (see the sample's `INSTRUCTOR.md`): it runs the bootcamp's tested instructor
+notebook with the sample's values (catalog prefix `cpg_<sample>_`, the one domain, the Lakebase project
+`fjallmark-<sample>-sample`) and creates the groups, grants, catalogs, the domain and the project. A single person
+trying a sample alone can skip it: notebook 06 creates the Lakebase project when it does not exist, and notebook 05
+carries on without the domain tag.
 
 ---
 
