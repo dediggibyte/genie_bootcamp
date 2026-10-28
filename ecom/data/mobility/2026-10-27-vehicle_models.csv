@@ -1,0 +1,17 @@
+model_id,brand,model_name,vehicle_type,body_type,powertrain,model_year,list_price_sek
+M01,Volvo,XC60 Plug-in Hybrid,car,suv,hybrid,2026,689000.00
+M02,Volvo,EX30,car,suv,ev,2026,449000.00
+M03,Volvo,EX90,car,suv,ev,2026,1095000.00
+M04,Tesla,Model Y,car,suv,ev,2026,499990.00
+M05,Tesla,Model 3,car,sedan,ev,2026,449990.00
+M06,Volkswagen,ID.4,car,suv,ev,2026,489900.00
+M07,Volkswagen,Golf,car,hatchback,petrol,2026,329900.00
+M08,Toyota,RAV4 Hybrid,car,suv,hybrid,2026,469900.00
+M09,Toyota,Corolla Hybrid,car,hatchback,hybrid,2026,309900.00
+M10,BMW,i4,car,sedan,ev,2026,619000.00
+M11,Kia,EV6,car,suv,ev,2026,529900.00
+M12,Volkswagen,ID. Buzz Cargo,van,van,ev,2026,549000.00
+M13,Ford,Transit Custom,van,van,diesel,2026,399000.00
+M14,Scania,R 450,truck,tractor_unit,diesel,2026,1650000.00
+M15,Volvo,FH Electric,truck,tractor_unit,ev,2026,3450000.00
+M16,Mercedes-Benz,eActros 600,truck,tractor_unit,ev,2026,3690000.00

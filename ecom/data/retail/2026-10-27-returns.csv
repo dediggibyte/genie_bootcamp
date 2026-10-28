@@ -1,0 +1,11 @@
+return_id,order_line_id,return_date,quantity,reason,refund_sek
+R001,L0003,2026-05-05,1,wrong_size,1255.50
+R002,L0007,2026-01-19,1,changed_mind,1255.50
+R003,L0012,2026-06-18,1,defect,539.10
+R004,L0016,2026-02-20,1,damaged,12490.00
+R005,L0020,2026-05-01,1,wrong_size,12490.00
+R006,L0024,2026-03-07,2,changed_mind,1798.00
+R007,L0029,2026-04-14,1,defect,16490.00
+R008,L0033,2026-02-15,1,damaged,16490.00
+R009,L0037,2026-05-13,1,wrong_size,8990.00
+R010,L0042,2026-02-01,1,changed_mind,985.50

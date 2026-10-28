@@ -1,0 +1,21 @@
+customer_id,customer_segment,customer_name,email,phone,city,signup_date
+N001,business,Bergslagen Konsult AB,it@bergslagen.example.com,+46 70 174 06 75,Stockholm,2022-02-01
+N002,business,Havsbris Design AB,it@havsbris.example.com,+46 70 174 06 76,Örebro,2022-03-14
+N003,Business ,Mälardalens Redovisning AB,it@malardalens.example.com,+46 70 174 06 77,Malmö,2022-04-24
+N004,business,Polaris Event AB,it@polaris.example.com,+46 70 174 06 78,Umeå,2022-06-04
+N005,business,Skärgårdens Bageri AB,it@skargardens.example.com,+46 70 174 06 79,Västerås,2022-07-15
+N006,business,Tallskogen IT AB,it@tallskogen.example.com,+46 70 174 06 80,Göteborg,2022-08-25
+N007,consumer,Isak Dahl,isak.dahl@example.com,+46 70 174 06 81,Linköping,2022-10-05
+N008,consumer,Alva Falk,alva.falk@example.com,+46 70 174 06 82,Uppsala,2022-11-15
+N009,consumer,Leo Nordin,leo.nordin@example.com,+46 70 174 06 83,Stockholm,2022-12-26
+N010,consumer,Freja Ljung,freja.ljung@example.com,+46 70 174 06 84,Örebro,2023-02-05
+N011,consumer,Elias Sjöberg,elias.sjoberg@example.com,+46 70 174 06 85,Malmö,2023-03-18
+N012,consumer,Tove Lund,tove.lund@example.com,+46 70 174 06 86,Umeå,2023-04-28
+N013,consumer,Adam Norén,adam.norén@example.com,+46 70 174 06 87,Västerås,2023-06-08
+N014,consumer,Saga Vik,saga.vik@example.com,+46 70 174 06 88,Göteborg,2023-07-19
+N015,consumer,Filip Sköld,filip.skold@example.com,+46 70 174 06 89,Linköping,2023-08-29
+N016,consumer,Ebba Holm,ebba.holm@example.com,+46 70 174 06 90,Uppsala,2023-10-09
+N017,consumer,Theo Engström,theo.engstrom@example.com,+46 70 174 06 91,Stockholm,2023-11-19
+N018,consumer,Nora Åberg,nora.aberg@example.com,+46 70 174 06 92,Örebro,2023-12-30
+N019,consumer,Gustav Ström,gustav.strom@example.com,+46 70 174 06 93,Malmö,2024-02-09
+N020,consumer,Agnes Rask,agnes.rask@example.com,+46 70 174 06 94,Umeå,2024-03-21

@@ -1,0 +1,30 @@
+product_id,sku,product_name,brand_id,category,subcategory,list_price_sek,unit_cost_sek,launch_date
+P001,NR-001,iPhone 16 128 GB,B01,electronics,phone,11990.00,8900.00,2024-01-15
+P002,NR-002,iPhone 16 Pro 256 GB,B01,electronics,phone,15990.00,11900.00,2024-02-06
+P003,NR-003,MacBook Air 13 M3,B01,electronics,laptop,14990.00,11200.00,2024-02-28
+P004,NR-004,iPad Air 11,B01,electronics,tablet,8990.00,6600.00,2024-03-21
+P005,NR-005,Galaxy S25 128 GB,B02,electronics,phone,11490.00,8300.00,2024-04-12
+P006,NR-006,Galaxy S25 Ultra 256 GB,B02,electronics,phone,16490.00,12100.00,2024-05-04
+P007,NR-007,Galaxy Tab S10,B02,electronics,tablet,10990.00,7900.00,2024-05-26
+P008,NR-008,Galaxy Book4,B02,electronics,laptop,12990.00,9700.00,2024-06-17
+P009,NR-009,Pixel 9 128 GB,B03,electronics,phone,9990.00,7200.00,2024-07-09
+P010,NR-010,Pixel 9 Pro 256 GB,B03,electronics,phone,12490.00,9100.00,2024-07-31
+P011,NR-011,Pixel Tablet,B03,electronics,tablet,6490.00,4600.00,2024-08-22
+P012,NR-012,Slim Jeans,B04,fashion,jeans,399.00,150.00,2024-09-13
+P013,NR-013,Loose Fit Jeans,B04,fashion,jeans,449.00,170.00,2024-10-05
+P014,NR-014,Denim Jacket,B04,fashion,jacket,599.00,230.00,2024-10-27
+P015,NR-015,Puffer Jacket,B04,fashion,jacket,899.00,360.00,2024-11-18
+P016,NR-016,Hoodie Sweatshirt,B04,fashion,sweatshirt,299.00,110.00,2024-12-10
+P017,NR-017,Crew-neck Sweatshirt,B04,fashion,sweatshirt,249.00,90.00,2025-01-01
+P018,NR-018,Wool Blend Blazer,B05,fashion,office_wear,1499.00,620.00,2025-01-23
+P019,NR-019,Tailored Trousers,B05,fashion,office_wear,899.00,360.00,2025-02-14
+P020,NR-020,Cotton Office Shirt,B05,fashion,office_wear,599.00,220.00,2025-03-08
+P021,NR-021,Knitted Cardigan,B05,fashion,office_wear,799.00,310.00,2025-03-30
+P022,NR-022,Libre Eau de Parfum 50 ml,B06,beauty,perfume,1395.00,560.00,2025-04-21
+P023,NR-023,Black Opium Eau de Parfum 50 ml,B06,beauty,perfume,1295.00,520.00,2025-05-13
+P024,NR-024,Le Male Eau de Toilette 125 ml,B07,beauty,perfume,1095.00,430.00,2025-06-04
+P025,NR-025,Scandal Eau de Parfum 50 ml,B07,beauty,perfume,1150.00,460.00,2025-06-26
+P026,NR-026,Sauvage Eau de Toilette 100 ml,B08,beauty,perfume,1450.00,580.00,2025-07-18
+P027,NR-027,J'adore Eau de Parfum 50 ml,B08,beauty,perfume,1395.00,560.00,2025-08-09
+P028,NR-028,N°5 Eau de Parfum 50 ml,B09,beauty,perfume,1750.00,720.00,2025-08-31
+P029,NR-029,Bleu de Chanel Eau de Parfum 100 ml,B09,beauty,perfume,1850.00,760.00,2025-09-22

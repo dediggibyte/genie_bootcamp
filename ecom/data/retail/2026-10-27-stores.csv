@@ -1,0 +1,7 @@
+store_id,store_name,city,region_code,channel,opened_date
+S01,Nordvik Retail Stockholm City,Stockholm,STO,store,2015-03-01
+S02,Nordvik Retail Kista,Stockholm,STO,store,2018-09-15
+S03,Nordvik Retail Göteborg Nordstan,Göteborg,GOT,store,2016-04-01
+S04,Nordvik Retail Göteborg Frölunda,Göteborg, got,store,2021-11-01
+S05,Nordvik Retail Malmö Triangeln,Malmö,MAL,store,2017-05-20
+S06,Nordvik Webshop,Stockholm,ONLINE,online,2019-01-10

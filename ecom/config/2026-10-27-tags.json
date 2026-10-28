@@ -1,0 +1,338 @@
+{
+ "_notice": "Tags of the ecom bootcamp: plain key/value tags with the ecom_ prefix (no collision with governed tags such as 'domain'). Applied by notebooks/2026-10-27-01-setup-catalog.py (catalog, schemas, volume) and notebooks/job_tasks/2026-10-27-02b-apply-tags.py (tables, columns, metric views); jobs and pipelines get theirs in resources/*.yml. Keys may not contain . , - = / : and values are lower-case snake case. Every gold table and metric view of the 3 domains must be listed here (02b checks it).",
+ "catalog": {
+  "ecom_project": "ecom_bootcamp",
+  "ecom_layer": "catalog"
+ },
+ "schemas": {
+  "landing": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "landing"
+  },
+  "bronze": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "bronze"
+  },
+  "silver": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "silver"
+  },
+  "retail": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_domain": "retail_commerce",
+   "ecom_layer": "gold"
+  },
+  "mobility": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_domain": "mobility_automotive",
+   "ecom_layer": "gold"
+  },
+  "telecom": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_domain": "telecom_media",
+   "ecom_layer": "gold"
+  },
+  "governance": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "governance"
+  },
+  "context": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "context"
+  }
+ },
+ "volumes": {
+  "landing.raw_files": {
+   "ecom_project": "ecom_bootcamp",
+   "ecom_layer": "landing"
+  }
+ },
+ "tables": {
+  "mobility.dim_customer": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "vehicle_sales",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {
+    "customer_name": {
+     "ecom_pii": "name",
+     "ecom_classification": "confidential"
+    },
+    "email": {
+     "ecom_pii": "email",
+     "ecom_classification": "confidential"
+    },
+    "phone": {
+     "ecom_pii": "phone",
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "mobility.dim_dealer": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "dealer_network",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {}
+  },
+  "mobility.dim_vehicle_model": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "vehicle_catalog",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {}
+  },
+  "mobility.fact_service_visits": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "aftersales_service",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {
+    "vin": {
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "mobility.fact_vehicle_sales": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "vehicle_sales",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {
+    "vin": {
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "retail.dim_customer": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "customers",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {
+    "first_name": {
+     "ecom_pii": "name",
+     "ecom_classification": "confidential"
+    },
+    "last_name": {
+     "ecom_pii": "name",
+     "ecom_classification": "confidential"
+    },
+    "email": {
+     "ecom_pii": "email",
+     "ecom_classification": "confidential"
+    },
+    "phone": {
+     "ecom_pii": "phone",
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "retail.dim_product": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "product_catalog",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {
+    "unit_cost_sek": {
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "retail.dim_store": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "stores_channels",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {}
+  },
+  "retail.fact_returns": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "sales_returns",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {}
+  },
+  "retail.fact_sales": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "sales_returns",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {}
+  },
+  "telecom.dim_customer": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "customers_subscriptions",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {
+    "customer_name": {
+     "ecom_pii": "name",
+     "ecom_classification": "confidential"
+    },
+    "email": {
+     "ecom_pii": "email",
+     "ecom_classification": "confidential"
+    },
+    "phone": {
+     "ecom_pii": "phone",
+     "ecom_classification": "confidential"
+    }
+   }
+  },
+  "telecom.dim_plan": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "plans_products",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {}
+  },
+  "telecom.dim_subscription": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "customers_subscriptions",
+    "ecom_layer": "gold",
+    "ecom_table_type": "dimension"
+   },
+   "columns": {}
+  },
+  "telecom.fact_billing": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "billing",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {}
+  },
+  "telecom.fact_usage": {
+   "type": "MATERIALIZED_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "usage",
+    "ecom_layer": "gold",
+    "ecom_table_type": "fact"
+   },
+   "columns": {}
+  },
+  "mobility.service_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "aftersales_service",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  },
+  "mobility.vehicle_sales_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "mobility_automotive",
+    "ecom_subdomain": "vehicle_sales",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  },
+  "retail.return_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "sales_returns",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  },
+  "retail.sales_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "retail_commerce",
+    "ecom_subdomain": "sales_returns",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  },
+  "telecom.billing_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "billing",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  },
+  "telecom.usage_metrics": {
+   "type": "METRIC_VIEW",
+   "tags": {
+    "ecom_project": "ecom_bootcamp",
+    "ecom_domain": "telecom_media",
+    "ecom_subdomain": "usage",
+    "ecom_layer": "semantic",
+    "ecom_table_type": "metric_view"
+   },
+   "columns": {}
+  }
+ }
+}

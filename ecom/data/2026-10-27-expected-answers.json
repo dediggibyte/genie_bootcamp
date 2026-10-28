@@ -1,0 +1,421 @@
+{
+ "_notice": "GENERATED FILE - computed by ecom/tools/2026-10-27-generate-data.py from the clean data (what silver and gold contain).",
+ "retail": {
+  "period": "2026-01-01 to 2026-06-30, completed orders only, SEK",
+  "total": {
+   "net_revenue_sek": 248606.2,
+   "units_sold": 49,
+   "orders": 37,
+   "average_order_value_sek": 6719.09,
+   "gross_margin_pct": 27.35,
+   "return_rate_pct": 22.45,
+   "refund_amount_sek": 72783.6,
+   "returns": 10
+  },
+  "by_category": {
+   "beauty": {
+    "net_revenue_sek": 14307.5,
+    "units_sold": 11,
+    "orders": 10,
+    "average_order_value_sek": 1430.75,
+    "gross_margin_pct": 57.16
+   },
+   "electronics": {
+    "net_revenue_sek": 224267.0,
+    "units_sold": 19,
+    "orders": 18,
+    "average_order_value_sek": 12459.28,
+    "gross_margin_pct": 23.97
+   },
+   "fashion": {
+    "net_revenue_sek": 10031.7,
+    "units_sold": 19,
+    "orders": 15,
+    "average_order_value_sek": 668.78,
+    "gross_margin_pct": 60.43
+   }
+  },
+  "by_region": {
+   "GOT": {
+    "net_revenue_sek": 67845.1,
+    "units_sold": 12,
+    "orders": 9,
+    "average_order_value_sek": 7538.34,
+    "gross_margin_pct": 30.55
+   },
+   "MAL": {
+    "net_revenue_sek": 47464.1,
+    "units_sold": 8,
+    "orders": 6,
+    "average_order_value_sek": 7910.68,
+    "gross_margin_pct": 23.82
+   },
+   "ONLINE": {
+    "net_revenue_sek": 45753.8,
+    "units_sold": 9,
+    "orders": 6,
+    "average_order_value_sek": 7625.63,
+    "gross_margin_pct": 26.76
+   },
+   "STO": {
+    "net_revenue_sek": 87543.2,
+    "units_sold": 20,
+    "orders": 16,
+    "average_order_value_sek": 5471.45,
+    "gross_margin_pct": 27.11
+   }
+  },
+  "by_month": {
+   "2026-01": {
+    "net_revenue_sek": 24721.0,
+    "units_sold": 4,
+    "orders": 3,
+    "average_order_value_sek": 8240.33,
+    "gross_margin_pct": 30.06
+   },
+   "2026-02": {
+    "net_revenue_sek": 45720.5,
+    "units_sold": 11,
+    "orders": 7,
+    "average_order_value_sek": 6531.5,
+    "gross_margin_pct": 27.84
+   },
+   "2026-03": {
+    "net_revenue_sek": 20303.0,
+    "units_sold": 8,
+    "orders": 6,
+    "average_order_value_sek": 3383.83,
+    "gross_margin_pct": 38.88
+   },
+   "2026-04": {
+    "net_revenue_sek": 60702.5,
+    "units_sold": 10,
+    "orders": 8,
+    "average_order_value_sek": 7587.81,
+    "gross_margin_pct": 28.95
+   },
+   "2026-05": {
+    "net_revenue_sek": 36166.0,
+    "units_sold": 5,
+    "orders": 5,
+    "average_order_value_sek": 7233.2,
+    "gross_margin_pct": 23.77
+   },
+   "2026-06": {
+    "net_revenue_sek": 60993.2,
+    "units_sold": 11,
+    "orders": 8,
+    "average_order_value_sek": 7624.15,
+    "gross_margin_pct": 22.6
+   }
+  },
+  "by_channel": {
+   "online": {
+    "net_revenue_sek": 45753.8,
+    "units_sold": 9,
+    "orders": 6,
+    "average_order_value_sek": 7625.63,
+    "gross_margin_pct": 26.76
+   },
+   "store": {
+    "net_revenue_sek": 202852.4,
+    "units_sold": 40,
+    "orders": 31,
+    "average_order_value_sek": 6543.63,
+    "gross_margin_pct": 27.49
+   }
+  },
+  "top_brand_by_revenue": "Samsung",
+  "fact_sales_rows": 45,
+  "fact_sales_rows_by_region": {
+   "GOT": 12,
+   "MAL": 7,
+   "ONLINE": 8,
+   "STO": 18
+  },
+  "cancelled_orders": 3
+ },
+ "mobility": {
+  "period": "2026-01-01 to 2026-06-30, SEK (sales: price after discount; service: amount billed to the customer)",
+  "sales_total": {
+   "units_sold": 38,
+   "vehicle_revenue_sek": 34199534.0,
+   "average_sale_price_sek": 899987.74,
+   "ev_share_pct": 50.0
+  },
+  "sales_by_vehicle_type": {
+   "car": {
+    "units_sold": 28,
+    "vehicle_revenue_sek": 14200514.0,
+    "average_sale_price_sek": 507161.21,
+    "ev_share_pct": 50.0
+   },
+   "truck": {
+    "units_sold": 7,
+    "vehicle_revenue_sek": 18663000.0,
+    "average_sale_price_sek": 2666142.86,
+    "ev_share_pct": 57.14
+   },
+   "van": {
+    "units_sold": 3,
+    "vehicle_revenue_sek": 1336020.0,
+    "average_sale_price_sek": 445340.0,
+    "ev_share_pct": 33.33
+   }
+  },
+  "sales_by_region": {
+   "GOT": {
+    "units_sold": 8,
+    "vehicle_revenue_sek": 3410894.0,
+    "average_sale_price_sek": 426361.75,
+    "ev_share_pct": 62.5
+   },
+   "MAL": {
+    "units_sold": 2,
+    "vehicle_revenue_sek": 713366.0,
+    "average_sale_price_sek": 356683.0,
+    "ev_share_pct": 50.0
+   },
+   "STO": {
+    "units_sold": 23,
+    "vehicle_revenue_sek": 27389174.0,
+    "average_sale_price_sek": 1190833.65,
+    "ev_share_pct": 47.83
+   },
+   "UME": {
+    "units_sold": 5,
+    "vehicle_revenue_sek": 2686100.0,
+    "average_sale_price_sek": 537220.0,
+    "ev_share_pct": 40.0
+   }
+  },
+  "sales_by_month": {
+   "2026-01": {
+    "units_sold": 4,
+    "vehicle_revenue_sek": 2003794.0,
+    "average_sale_price_sek": 500948.5,
+    "ev_share_pct": 75.0
+   },
+   "2026-02": {
+    "units_sold": 5,
+    "vehicle_revenue_sek": 9410208.0,
+    "average_sale_price_sek": 1882041.6,
+    "ev_share_pct": 40.0
+   },
+   "2026-03": {
+    "units_sold": 7,
+    "vehicle_revenue_sek": 7730000.0,
+    "average_sale_price_sek": 1104285.71,
+    "ev_share_pct": 71.43
+   },
+   "2026-04": {
+    "units_sold": 9,
+    "vehicle_revenue_sek": 6868612.0,
+    "average_sale_price_sek": 763179.11,
+    "ev_share_pct": 44.44
+   },
+   "2026-05": {
+    "units_sold": 6,
+    "vehicle_revenue_sek": 4981850.0,
+    "average_sale_price_sek": 830308.33,
+    "ev_share_pct": 33.33
+   },
+   "2026-06": {
+    "units_sold": 7,
+    "vehicle_revenue_sek": 3205070.0,
+    "average_sale_price_sek": 457867.14,
+    "ev_share_pct": 42.86
+   }
+  },
+  "top_model_by_units": "Toyota Corolla Hybrid",
+  "service_total": {
+   "service_visits": 44,
+   "service_revenue_sek": 149725.0,
+   "labour_hours": 98.5,
+   "warranty_share_pct": 13.64
+  },
+  "service_by_type": {
+   "annual_service": {
+    "service_visits": 1,
+    "service_revenue_sek": 5250.0,
+    "labour_hours": 3.0,
+    "warranty_share_pct": 0.0
+   },
+   "battery_check": {
+    "service_visits": 11,
+    "service_revenue_sek": 61200.0,
+    "labour_hours": 24.0,
+    "warranty_share_pct": 0.0
+   },
+   "brake_service": {
+    "service_visits": 7,
+    "service_revenue_sek": 49775.0,
+    "labour_hours": 22.5,
+    "warranty_share_pct": 0.0
+   },
+   "software_update": {
+    "service_visits": 13,
+    "service_revenue_sek": 17800.0,
+    "labour_hours": 7.0,
+    "warranty_share_pct": 0.0
+   },
+   "tyre_change": {
+    "service_visits": 6,
+    "service_revenue_sek": 15700.0,
+    "labour_hours": 10.0,
+    "warranty_share_pct": 0.0
+   },
+   "warranty_repair": {
+    "service_visits": 6,
+    "service_revenue_sek": 0.0,
+    "labour_hours": 32.0,
+    "warranty_share_pct": 100.0
+   }
+  },
+  "service_by_region": {
+   "GOT": {
+    "service_visits": 8,
+    "service_revenue_sek": 15550.0,
+    "labour_hours": 18.0,
+    "warranty_share_pct": 25.0
+   },
+   "MAL": {
+    "service_visits": 5,
+    "service_revenue_sek": 9925.0,
+    "labour_hours": 5.5,
+    "warranty_share_pct": 0.0
+   },
+   "STO": {
+    "service_visits": 31,
+    "service_revenue_sek": 124250.0,
+    "labour_hours": 75.0,
+    "warranty_share_pct": 12.9
+   }
+  },
+  "fact_vehicle_sales_rows_by_region": {
+   "GOT": 8,
+   "MAL": 2,
+   "STO": 23,
+   "UME": 5
+  },
+  "fact_service_visits_rows_by_region": {
+   "GOT": 8,
+   "MAL": 5,
+   "STO": 31
+  }
+ },
+ "telecom": {
+  "period": "billing and usage months 2026-05 and 2026-06, SEK excl. VAT",
+  "billing_by_month": {
+   "2026-05": {
+    "billed_revenue_sek": 10951.0,
+    "invoices": 24,
+    "billed_subscriptions": 24,
+    "arpu_sek": 456.29,
+    "overdue_amount_sek": 2293.0,
+    "paid_share_pct": 75.0
+   },
+   "2026-06": {
+    "billed_revenue_sek": 10304.0,
+    "invoices": 22,
+    "billed_subscriptions": 22,
+    "arpu_sek": 468.36,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 68.18
+   }
+  },
+  "billing_by_segment_june": {
+   "business": {
+    "billed_revenue_sek": 3492.0,
+    "invoices": 6,
+    "billed_subscriptions": 6,
+    "arpu_sek": 582.0,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 50.0
+   },
+   "consumer": {
+    "billed_revenue_sek": 6812.0,
+    "invoices": 16,
+    "billed_subscriptions": 16,
+    "arpu_sek": 425.75,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 75.0
+   }
+  },
+  "billing_by_plan_type_june": {
+   "broadband": {
+    "billed_revenue_sek": 3894.0,
+    "invoices": 6,
+    "billed_subscriptions": 6,
+    "arpu_sek": 649.0,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 83.33
+   },
+   "bundle": {
+    "billed_revenue_sek": 1998.0,
+    "invoices": 2,
+    "billed_subscriptions": 2,
+    "arpu_sek": 999.0,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 100.0
+   },
+   "mobile": {
+    "billed_revenue_sek": 2787.0,
+    "invoices": 9,
+    "billed_subscriptions": 9,
+    "arpu_sek": 309.67,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 44.44
+   },
+   "tv_streaming": {
+    "billed_revenue_sek": 1625.0,
+    "invoices": 5,
+    "billed_subscriptions": 5,
+    "arpu_sek": 325.0,
+    "overdue_amount_sek": 0.0,
+    "paid_share_pct": 80.0
+   }
+  },
+  "usage_by_month": {
+   "2026-05": {
+    "data_gb": 5510.7,
+    "avg_data_gb_per_subscription": 229.61,
+    "voice_minutes": 6026,
+    "streaming_hours": 450.4,
+    "active_subscriptions": 24
+   },
+   "2026-06": {
+    "data_gb": 5328.5,
+    "avg_data_gb_per_subscription": 242.2,
+    "voice_minutes": 4758,
+    "streaming_hours": 324.4,
+    "active_subscriptions": 22
+   }
+  },
+  "usage_by_segment_june": {
+   "business": {
+    "data_gb": 1654.7,
+    "avg_data_gb_per_subscription": 275.78,
+    "voice_minutes": 1944,
+    "streaming_hours": 23.2,
+    "active_subscriptions": 6
+   },
+   "consumer": {
+    "data_gb": 3673.8,
+    "avg_data_gb_per_subscription": 229.61,
+    "voice_minutes": 2814,
+    "streaming_hours": 301.2,
+    "active_subscriptions": 16
+   }
+  },
+  "active_subscriptions_now": 22,
+  "fact_billing_rows_by_segment": {
+   "business": 12,
+   "consumer": 34
+  },
+  "fact_usage_rows_by_segment": {
+   "business": 12,
+   "consumer": 34
+  }
+ }
+}

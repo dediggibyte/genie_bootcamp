@@ -1,0 +1,32 @@
+customer_id,customer_type,customer_name,email,phone,city
+K001,fleet,Lindqvist Bygg AB,fleet@lindqvist.example.com,+46 70 174 06 40,Stockholm
+K002,fleet,Norrsken Logistik AB,fleet@norrsken.example.com,+46 70 174 06 41,Uppsala
+K003,fleet,Kustfrakt AB,fleet@kustfrakt.example.com,+46 70 174 06 42,Linköping
+K004,fleet,Granit Transport AB,fleet@granit.example.com,+46 70 174 06 43,Göteborg
+K005,fleet,Solberga El AB,fleet@solberga.example.com,+46 70 174 06 44,Västerås
+K006,fleet,Fjällgård Leveranser AB,fleet@fjallgard.example.com,+46 70 174 06 45,Umeå
+K007,private,Viktor Hammar,viktor.hammar@example.com,+46 70 174 06 46,Malmö
+K008,private,Ida Borg,ida.borg@example.com,+46 70 174 06 47,Örebro
+K009,private,Nils Nyström,nils.nystrom@example.com,+46 70 174 06 48,Stockholm
+K010,private,Klara Hedlund,klara.hedlund@example.com,+46 70 174 06 49,Uppsala
+K011,private,Axel Lindgren,axel.lindgren@example.com,+46 70 174 06 50,Linköping
+K012,private,Linnea Öberg,linnea.oberg@example.com,+46 70 174 06 51,Göteborg
+K013,private,Hugo Kvist,hugo.kvist@example.com,+46 70 174 06 52,Västerås
+K014,private,Wilma Ek,wilma.ek@example.com,+46 70 174 06 53,Umeå
+K015,private,Isak Dahl,isak.dahl@example.com,+46 70 174 06 54,Malmö
+K016,private,Alva Falk,alva.falk@example.com,+46 70 174 06 55,Örebro
+K017,private,Leo Nordin,leo.nordin@example.com,+46 70 174 06 56,Stockholm
+K018,private,Freja Ljung,freja.ljung@example.com,+46 70 174 06 57,Uppsala
+K019,private,Elias Sjöberg,elias.sjoberg@example.com,+46 70 174 06 58,Linköping
+K020,private,Tove Lund,tove.lund@example.com,+46 70 174 06 59,Göteborg
+K021,private,Adam Norén,adam.norén@example.com,+46 70 174 06 60,Västerås
+K022,private,Saga Vik,saga.vik@example.com,+46 70 174 06 61,Umeå
+K023,private,Filip Sköld,filip.skold@example.com,+46 70 174 06 62,Malmö
+K024,private,Ebba Holm,ebba.holm@example.com,+46 70 174 06 63,Örebro
+K025,private,Theo Engström,theo.engstrom@example.com,+46 70 174 06 64,Stockholm
+K026,private,Nora Åberg,nora.aberg@example.com,+46 70 174 06 65,Uppsala
+K027,private,Gustav Ström,gustav.strom@example.com,+46 70 174 06 66,Linköping
+K028,private,Agnes Rask,agnes.rask@example.com,+46 70 174 06 67,Göteborg
+K029,private,Melvin Berg,melvin.berg@example.com,+46 70 174 06 68,Västerås
+K030,private,Selma Wallin,selma.wallin@example.com,+46 70 174 06 69,Umeå
+K009,private,Nils Nyström,nils.nystrom@example.com,+46 70 174 06 48,Stockholm

@@ -1,0 +1,56 @@
+# Lakeflow Spark Declarative Pipelines, one per domain: CSV landing volume -> bronze -> silver -> gold.
+# Separate pipelines keep each first update at <= 6 foreign keys (one pipeline with all 17 would fail its
+# first update while registering the keys - see bootcamp/pipeline/README.md) and let the domains refresh
+# in parallel. The domains share the bronze and silver schemas; table names carry the domain prefix.
+resources:
+  pipelines:
+    ecom_retail_pipeline:
+      name: ecom_retail_pipeline (${var.catalog})
+      catalog: ${var.catalog}
+      schema: bronze            # default schema; every dataset uses a fully qualified name
+      serverless: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        catalog: ${var.catalog} # referenced as ${catalog} in pipeline/**/*.sql
+      tags:
+        ecom_project: ecom_bootcamp
+        ecom_domain: retail_commerce
+      libraries:
+        - file: { path: ../pipeline/retail/2026-10-27-01-bronze.sql }
+        - file: { path: ../pipeline/retail/2026-10-27-02-silver.sql }
+        - file: { path: ../pipeline/retail/2026-10-27-03-gold.sql }
+
+    ecom_mobility_pipeline:
+      name: ecom_mobility_pipeline (${var.catalog})
+      catalog: ${var.catalog}
+      schema: bronze
+      serverless: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        catalog: ${var.catalog}
+      tags:
+        ecom_project: ecom_bootcamp
+        ecom_domain: mobility_automotive
+      libraries:
+        - file: { path: ../pipeline/mobility/2026-10-27-01-bronze.sql }
+        - file: { path: ../pipeline/mobility/2026-10-27-02-silver.sql }
+        - file: { path: ../pipeline/mobility/2026-10-27-03-gold.sql }
+
+    ecom_telecom_pipeline:
+      name: ecom_telecom_pipeline (${var.catalog})
+      catalog: ${var.catalog}
+      schema: bronze
+      serverless: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        catalog: ${var.catalog}
+      tags:
+        ecom_project: ecom_bootcamp
+        ecom_domain: telecom_media
+      libraries:
+        - file: { path: ../pipeline/telecom/2026-10-27-01-bronze.sql }
+        - file: { path: ../pipeline/telecom/2026-10-27-02-silver.sql }
+        - file: { path: ../pipeline/telecom/2026-10-27-03-gold.sql }

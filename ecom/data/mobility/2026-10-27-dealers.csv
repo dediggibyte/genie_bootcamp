@@ -1,0 +1,7 @@
+dealer_id,dealer_name,city,region_code,has_workshop
+D01,Nordvik Mobility Stockholm Bromma,Stockholm,STO,true
+D02,Nordvik Mobility Täby,Stockholm,STO,true
+D03,Nordvik Mobility Göteborg Hisingen,Göteborg,got ,true
+D04,Nordvik Mobility Malmö Bulltofta,Malmö,MAL,true
+D05,Nordvik Mobility Umeå,Umeå,UME,false
+D06,Nordvik Truck Center Södertälje,Södertälje,STO,true

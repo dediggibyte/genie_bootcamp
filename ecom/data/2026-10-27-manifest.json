@@ -1,0 +1,355 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I ecom/tools/2026-10-27-generate-data.py. Synthetic data of the fictional Nordvik Group; brand and model names only describe products. rows = rows in the CSV, clean_rows = rows silver keeps.",
+ "retail": {
+  "brands": {
+   "file": "ecom/data/retail/2026-10-27-brands.csv",
+   "rows": 9,
+   "clean_rows": 9,
+   "primary_key": "brand_id",
+   "columns": [
+    "brand_id",
+    "brand_name",
+    "category",
+    "country_of_origin"
+   ],
+   "dq_issues": []
+  },
+  "products": {
+   "file": "ecom/data/retail/2026-10-27-products.csv",
+   "rows": 29,
+   "clean_rows": 29,
+   "primary_key": "product_id",
+   "columns": [
+    "product_id",
+    "sku",
+    "product_name",
+    "brand_id",
+    "category",
+    "subcategory",
+    "list_price_sek",
+    "unit_cost_sek",
+    "launch_date"
+   ],
+   "dq_issues": []
+  },
+  "stores": {
+   "file": "ecom/data/retail/2026-10-27-stores.csv",
+   "rows": 6,
+   "clean_rows": 6,
+   "primary_key": "store_id",
+   "columns": [
+    "store_id",
+    "store_name",
+    "city",
+    "region_code",
+    "channel",
+    "opened_date"
+   ],
+   "dq_issues": [
+    {
+     "issue": "region code in lower case with a leading space",
+     "rows": 1,
+     "silver_handling": "trim + upper case"
+    }
+   ]
+  },
+  "customers": {
+   "file": "ecom/data/retail/2026-10-27-customers.csv",
+   "rows": 37,
+   "clean_rows": 36,
+   "primary_key": "customer_id",
+   "columns": [
+    "customer_id",
+    "first_name",
+    "last_name",
+    "email",
+    "phone",
+    "city",
+    "loyalty_tier",
+    "signup_date"
+   ],
+   "dq_issues": [
+    {
+     "issue": "loyalty tier with whitespace / upper case",
+     "rows": 2,
+     "silver_handling": "trim + lower case"
+    },
+    {
+     "issue": "exact duplicate row",
+     "rows": 1,
+     "silver_handling": "one row per customer_id"
+    }
+   ]
+  },
+  "orders": {
+   "file": "ecom/data/retail/2026-10-27-orders.csv",
+   "rows": 40,
+   "clean_rows": 40,
+   "primary_key": "order_id",
+   "columns": [
+    "order_id",
+    "order_date",
+    "customer_id",
+    "store_id",
+    "payment_method",
+    "order_status"
+   ],
+   "dq_issues": [
+    {
+     "issue": "order date as dd/MM/yyyy",
+     "rows": 2,
+     "silver_handling": "parse both date formats"
+    }
+   ]
+  },
+  "order_lines": {
+   "file": "ecom/data/retail/2026-10-27-order_lines.csv",
+   "rows": 49,
+   "clean_rows": 48,
+   "primary_key": "order_line_id",
+   "columns": [
+    "order_line_id",
+    "order_id",
+    "product_id",
+    "quantity",
+    "unit_price_sek",
+    "discount_sek"
+   ],
+   "dq_issues": [
+    {
+     "issue": "row without order_line_id (legacy feed)",
+     "rows": 1,
+     "silver_handling": "expectation drops the row"
+    }
+   ]
+  },
+  "returns": {
+   "file": "ecom/data/retail/2026-10-27-returns.csv",
+   "rows": 10,
+   "clean_rows": 10,
+   "primary_key": "return_id",
+   "columns": [
+    "return_id",
+    "order_line_id",
+    "return_date",
+    "quantity",
+    "reason",
+    "refund_sek"
+   ],
+   "dq_issues": []
+  }
+ },
+ "mobility": {
+  "vehicle_models": {
+   "file": "ecom/data/mobility/2026-10-27-vehicle_models.csv",
+   "rows": 16,
+   "clean_rows": 16,
+   "primary_key": "model_id",
+   "columns": [
+    "model_id",
+    "brand",
+    "model_name",
+    "vehicle_type",
+    "body_type",
+    "powertrain",
+    "model_year",
+    "list_price_sek"
+   ],
+   "dq_issues": []
+  },
+  "dealers": {
+   "file": "ecom/data/mobility/2026-10-27-dealers.csv",
+   "rows": 6,
+   "clean_rows": 6,
+   "primary_key": "dealer_id",
+   "columns": [
+    "dealer_id",
+    "dealer_name",
+    "city",
+    "region_code",
+    "has_workshop"
+   ],
+   "dq_issues": [
+    {
+     "issue": "region code in lower case with a trailing space",
+     "rows": 1,
+     "silver_handling": "trim + upper case"
+    }
+   ]
+  },
+  "customers": {
+   "file": "ecom/data/mobility/2026-10-27-customers.csv",
+   "rows": 31,
+   "clean_rows": 30,
+   "primary_key": "customer_id",
+   "columns": [
+    "customer_id",
+    "customer_type",
+    "customer_name",
+    "email",
+    "phone",
+    "city"
+   ],
+   "dq_issues": [
+    {
+     "issue": "exact duplicate row",
+     "rows": 1,
+     "silver_handling": "one row per customer_id"
+    }
+   ]
+  },
+  "vehicle_sales": {
+   "file": "ecom/data/mobility/2026-10-27-vehicle_sales.csv",
+   "rows": 39,
+   "clean_rows": 38,
+   "primary_key": "sale_id",
+   "columns": [
+    "sale_id",
+    "sale_date",
+    "dealer_id",
+    "customer_id",
+    "model_id",
+    "vin",
+    "sale_price_sek",
+    "discount_sek",
+    "financing"
+   ],
+   "dq_issues": [
+    {
+     "issue": "row without sale_id",
+     "rows": 1,
+     "silver_handling": "expectation drops the row"
+    }
+   ]
+  },
+  "service_visits": {
+   "file": "ecom/data/mobility/2026-10-27-service_visits.csv",
+   "rows": 44,
+   "clean_rows": 44,
+   "primary_key": "visit_id",
+   "columns": [
+    "visit_id",
+    "visit_date",
+    "dealer_id",
+    "customer_id",
+    "model_id",
+    "vin",
+    "service_type",
+    "labour_hours",
+    "labour_cost_sek",
+    "parts_cost_sek",
+    "billed_amount_sek",
+    "warranty",
+    "mileage_km"
+   ],
+   "dq_issues": [
+    {
+     "issue": "warranty flag as Y / N",
+     "rows": 3,
+     "silver_handling": "map Y/N, true/false to BOOLEAN"
+    }
+   ]
+  }
+ },
+ "telecom": {
+  "plans": {
+   "file": "ecom/data/telecom/2026-10-27-plans.csv",
+   "rows": 12,
+   "clean_rows": 12,
+   "primary_key": "plan_id",
+   "columns": [
+    "plan_id",
+    "plan_name",
+    "plan_type",
+    "segment",
+    "monthly_fee_sek",
+    "data_allowance_gb",
+    "included_streaming"
+   ],
+   "dq_issues": []
+  },
+  "customers": {
+   "file": "ecom/data/telecom/2026-10-27-customers.csv",
+   "rows": 20,
+   "clean_rows": 20,
+   "primary_key": "customer_id",
+   "columns": [
+    "customer_id",
+    "customer_segment",
+    "customer_name",
+    "email",
+    "phone",
+    "city",
+    "signup_date"
+   ],
+   "dq_issues": [
+    {
+     "issue": "segment with upper case and a trailing space",
+     "rows": 1,
+     "silver_handling": "trim + lower case"
+    }
+   ]
+  },
+  "subscriptions": {
+   "file": "ecom/data/telecom/2026-10-27-subscriptions.csv",
+   "rows": 24,
+   "clean_rows": 24,
+   "primary_key": "subscription_id",
+   "columns": [
+    "subscription_id",
+    "customer_id",
+    "plan_id",
+    "start_date",
+    "end_date",
+    "status",
+    "sales_channel"
+   ],
+   "dq_issues": []
+  },
+  "invoices": {
+   "file": "ecom/data/telecom/2026-10-27-invoices.csv",
+   "rows": 47,
+   "clean_rows": 46,
+   "primary_key": "invoice_id",
+   "columns": [
+    "invoice_id",
+    "subscription_id",
+    "billing_month",
+    "invoice_date",
+    "due_date",
+    "amount_excl_vat_sek",
+    "vat_sek",
+    "payment_status"
+   ],
+   "dq_issues": [
+    {
+     "issue": "exact duplicate row",
+     "rows": 1,
+     "silver_handling": "one row per invoice_id"
+    }
+   ]
+  },
+  "usage": {
+   "file": "ecom/data/telecom/2026-10-27-usage.csv",
+   "rows": 46,
+   "clean_rows": 46,
+   "primary_key": "usage_id",
+   "columns": [
+    "usage_id",
+    "subscription_id",
+    "usage_month",
+    "data_gb",
+    "voice_minutes",
+    "sms_count",
+    "streaming_hours"
+   ],
+   "dq_issues": [
+    {
+     "issue": "usage month as dd/MM/yyyy",
+     "rows": 2,
+     "silver_handling": "parse both date formats"
+    }
+   ]
+  }
+ }
+}

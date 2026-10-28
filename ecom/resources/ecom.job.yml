@@ -1,0 +1,64 @@
+# Orchestration job:  retail || mobility || telecom pipelines  ->  metric_views  ->  tags  ->  validate
+# All tasks run on serverless compute; the notebooks receive the job parameter catalog.
+# PERFORMANCE_OPTIMIZED: participants wait for this run during the session, so fast starts matter more
+# than the lower cost of STANDARD.
+resources:
+  jobs:
+    ecom_job:
+      name: ecom_job (${var.catalog})
+      description: >-
+        ecom bootcamp lakehouse (Nordvik Group): refresh the retail, mobility and telecom pipelines,
+        create the metric views, apply the ecom_* tags and validate the result (catalog ${var.catalog}).
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      tags:
+        ecom_project: ecom_bootcamp
+        aidevkit_project: ai-dev-kit
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      tasks:
+        - task_key: retail_pipeline
+          description: Retail and Commerce - bronze -> silver -> gold
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.ecom_retail_pipeline.id}
+          # Safety net only: with <= 6 foreign keys the first update registers all keys itself.
+          max_retries: 1
+          min_retry_interval_millis: 10000
+
+        - task_key: mobility_pipeline
+          description: Mobility and Automotive - bronze -> silver -> gold
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.ecom_mobility_pipeline.id}
+          max_retries: 1
+          min_retry_interval_millis: 10000
+
+        - task_key: telecom_pipeline
+          description: Telecommunications and Media - bronze -> silver -> gold
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.ecom_telecom_pipeline.id}
+          max_retries: 1
+          min_retry_interval_millis: 10000
+
+        - task_key: metric_views
+          description: The six metric views in the retail, mobility and telecom schemas
+          depends_on:
+            - task_key: retail_pipeline
+            - task_key: mobility_pipeline
+            - task_key: telecom_pipeline
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/2026-10-27-02a-create-metric-views.py
+
+        - task_key: tags
+          description: ecom_* tags on gold tables, columns and metric views (config/2026-10-27-tags.json)
+          depends_on:
+            - task_key: metric_views
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/2026-10-27-02b-apply-tags.py
+
+        - task_key: validate
+          description: Row counts vs the manifest, primary keys unique, every metric view answers
+          depends_on:
+            - task_key: tags
+          notebook_task:
+            notebook_path: ../notebooks/job_tasks/2026-10-27-02c-validate.py

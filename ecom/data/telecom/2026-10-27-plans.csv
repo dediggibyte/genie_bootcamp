@@ -1,0 +1,13 @@
+plan_id,plan_name,plan_type,segment,monthly_fee_sek,data_allowance_gb,included_streaming
+T01,Mobil 5G Unlimited,mobile,consumer,449.00,,
+T02,Mobil 20 GB,mobile,consumer,299.00,20,
+T03,Mobil 5 GB,mobile,consumer,199.00,5,
+T04,Fiber 250/250,broadband,consumer,399.00,,
+T05,Fiber 1000/1000,broadband,consumer,549.00,,
+T06,TV Bas with Netflix Standard,tv_streaming,consumer,349.00,,Netflix Standard
+T07,Streaming Duo: Netflix and Spotify Premium,tv_streaming,consumer,399.00,,Netflix Standard; Spotify Premium
+T08,Family Bundle 5G + Fiber + Disney+,bundle,consumer,999.00,,Disney+ Standard
+T09,Max and Spotify add-on,tv_streaming,consumer,229.00,,Max; Spotify Premium
+T10,Företag Mobil 5G Unlimited,mobile,business,399.00,,
+T11,Företag Mobil 50 GB,mobile,business,299.00,50,
+T12,Företag Fiber 1000/1000,broadband,business,799.00,,
