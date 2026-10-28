@@ -32,14 +32,14 @@ resources:
           depends_on:
             - task_key: pipeline
           notebook_task:
-            notebook_path: ../notebooks/job_tasks/02a_create_metric_views.py
+            notebook_path: ../01_notebooks/job_tasks/02a_create_metric_views.py
 
         - task_key: model_tags
           description: dbx_* tags of the industry model on schemas, tables and columns
           depends_on:
             - task_key: pipeline
           notebook_task:
-            notebook_path: ../notebooks/job_tasks/02b_apply_model_tags.py
+            notebook_path: ../01_notebooks/job_tasks/02b_apply_model_tags.py
 
         - task_key: validate
           description: Gold tables filled, primary keys unique, metric views queryable
@@ -47,4 +47,4 @@ resources:
             - task_key: metric_views
             - task_key: model_tags
           notebook_task:
-            notebook_path: ../notebooks/job_tasks/02c_validate_lakehouse.py
+            notebook_path: ../01_notebooks/job_tasks/02c_validate_lakehouse.py

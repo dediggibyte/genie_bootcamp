@@ -2,17 +2,16 @@
 """Generate the single-domain samples in bootcamp_domain/ from the Lakehouse Industry Data Model.
 
 Each sample is a self-contained bundle folder for ONE business domain - the same lab as bootcamp/, cut
-down to one domain, one Genie Agent and one router app:
+down to one domain and one Genie Agent. The folders are numbered in the order of the lab's steps:
 
   bootcamp_domain/<sample>/
-    pipeline/<domain>/01_bronze.sql, 02_silver.sql, 03_gold.sql   bronze -> silver -> gold
-    metric_views/industry/<domain>.sql                             the model's metric views (main domain)
-    metric_views/curated/<name>.sql                                copies of bootcamp/metric_views/curated/
-    model_tags/<domain>.json                                       the model's dbx_* tags
-    data/manifest.json                                             subset of bootcamp/data/manifest.json
-    genie/<template>.json                                          copy of the bootcamp Genie Agent template
-    app/glossary/glossary.csv, pages/*.md                          the domain's glossary (router glossary tool)
-    LICENSE.md, NOTICE.md                                          copies of tools/model/
+    02_pipeline/<domain>/01_bronze.sql, 02_silver.sql, 03_gold.sql   bronze -> silver -> gold
+    02_metric_views/industry/<domain>.sql                             the model's metric views (main domain)
+    02_metric_views/curated/<name>.sql                                copies of bootcamp/metric_views/curated/
+    02_model_tags/<domain>.json                                       the model's dbx_* tags
+    01_data/manifest.json                                             subset of bootcamp/data/manifest.json
+    04_genie/<template>.json                                          copy of the bootcamp Genie Agent template
+    LICENSE.md, NOTICE.md                                             copies of tools/model/
 
 A sample builds its main domain completely plus a few REFERENCE tables of other domains that its curated
 metric views, Genie Agent or governance need (for example finance.company_code for the consumer sample).
@@ -28,8 +27,6 @@ Usage (from the repo root, standard library only):
   python3 -I bootcamp_domain/tools/build_domain_samples.py --check   # exit 1 if a file is missing or stale
 """
 import copy
-import csv
-import io
 import json
 import os
 import re
@@ -73,8 +70,6 @@ GENIE_TEMPLATES = {
 BOOTCAMP_MANIFEST = "bootcamp/data/manifest.json"
 BOOTCAMP_CURATED = "bootcamp/metric_views/curated"
 BOOTCAMP_GENIE = "bootcamp/genie"
-BOOTCAMP_CONTEXT = "bootcamp/context"
-BOOTCAMP_GLOSSARY = "bootcamp/context/glossary.csv"
 
 # Foreign keys into a table of a domain the sample builds only partly are re-pointed at this marker
 # domain before the SQL is written: tools/generate_lakehouse.py then treats them as "not in scope" (it
@@ -118,7 +113,7 @@ def sample_text(text, sample, scope):
                              "-- this sample does not build are omitted (it builds %s); this bundle does not build\n"
                              % (m.group(1), tables)), text)
     text = text.replace("column mask (bootcamp lab step 3: consumer.shopper, consumer.dtc_order, finance.ar_invoice) cannot be",
-                        "column mask (step 3 of this sample, notebooks/03_governance.py) cannot be")
+                        "column mask (step 3 of this sample, 01_notebooks/03_governance.py) cannot be")
     text = re.sub(r"the policies are attached, every update recomputes those gold tables from silver \(11 of the 36\n"
                   r"-- bootcamp gold tables\)",
                   "the policies are attached, every update recomputes those gold tables from silver\n"
@@ -137,24 +132,24 @@ def build(model):
     manifest = json.loads(read(BOOTCAMP_MANIFEST))
     for sample, scope in SAMPLES.items():
         base = "%s/%s" % (SAMPLES_DIR, sample)
-        paths = {"mv_notebook": "notebooks/job_tasks/02a_create_metric_views.py",
-                 "tag_notebook": "notebooks/job_tasks/02b_apply_model_tags.py"}
+        paths = {"mv_notebook": "01_notebooks/job_tasks/02a_create_metric_views.py",
+                 "tag_notebook": "01_notebooks/job_tasks/02b_apply_model_tags.py"}
         smodel, built = sample_model(model, scope)
         order = gl.gold_build_order(smodel, tuple(scope))
         main = next(iter(scope))
         st = {"tables": 0, "fks": 0, "metric_views": 0, "tags": 0}
         for dm in smodel["domains"]:
             d = dm["name"]
-            pdir = "%s/pipeline/%s/" % (base, d)
+            pdir = "%s/02_pipeline/%s/" % (base, d)
             files[pdir + "01_bronze.sql"] = sample_text(gl.gen_bronze(dm), sample, scope)
             files[pdir + "02_silver.sql"] = sample_text(gl.gen_silver(dm), sample, scope)
             files[pdir + "03_gold.sql"] = sample_text(gl.gen_gold(dm, tuple(scope), order), sample, scope)
             nfk = files[pdir + "03_gold.sql"].count("` FOREIGN KEY (`")   # constraint lines only
             text, ntags = gl.gen_tags(dm, paths["tag_notebook"], nfk)
-            files["%s/model_tags/%s.json" % (base, d)] = text
+            files["%s/02_model_tags/%s.json" % (base, d)] = text
             if d == main:
                 text, nmv = gl.gen_metric_views(model, dm, paths["mv_notebook"])
-                files["%s/metric_views/industry/%s.sql" % (base, d)] = sample_text(text, sample, scope)
+                files["%s/02_metric_views/industry/%s.sql" % (base, d)] = sample_text(text, sample, scope)
                 st["metric_views"] += nmv
             st["tables"] += len(dm["products"])
             st["fks"] += nfk
@@ -166,7 +161,7 @@ def build(model):
                 for ref in set(re.findall(r"\$\{catalog\}\.(\w+)\.(\w+)", text)):
                     if ref not in built and not ref[1].endswith("_metrics"):
                         raise ValueError("%s reads %s.%s, which sample %s does not build" % (name, *ref, sample))
-                files["%s/metric_views/curated/%s" % (base, name)] = text
+                files["%s/02_metric_views/curated/%s" % (base, name)] = text
                 st["metric_views"] += 1
         # data manifest: the sample's tables; "file" stays relative to the repository root (bootcamp/data)
         sub = {"_notice": ("GENERATED FILE - do not edit by hand; regenerate with python3 -I %s. Subset of "
@@ -176,27 +171,14 @@ def build(model):
             sub[d] = {t: meta for t, meta in manifest[d].items() if (d, t) in built}
             if len(sub[d]) != len([1 for x in built if x[0] == d]):
                 raise ValueError("%s: manifest misses tables of %s" % (sample, d))
-        files["%s/data/manifest.json" % base] = json.dumps(sub, indent=1, ensure_ascii=False) + "\n"
+        files["%s/01_data/manifest.json" % base] = json.dumps(sub, indent=1, ensure_ascii=False) + "\n"
         # Genie Agent template of the main domain, verbatim (its sources must all be built here)
         tpl = GENIE_TEMPLATES[sample]
         text = read("%s/%s" % (BOOTCAMP_GENIE, tpl))
         for ref in set(re.findall(r"__CATALOG__\.(\w+)\.(\w+)", text)):
             if ref not in built and not ref[1].endswith("_metrics"):
                 raise ValueError("%s reads %s.%s, which sample %s does not build" % (tpl, *ref, sample))
-        files["%s/genie/%s" % (base, tpl)] = text
-        # the router app's glossary tool: the main domain's index rows and pages (the app is deployed from
-        # app/ alone, so it cannot read bootcamp/context/ at runtime)
-        rows = list(csv.reader(io.StringIO(read(BOOTCAMP_GLOSSARY))))
-        mine = [r for r in rows[1:] if r[rows[0].index("domain")].lower() == main]
-        out = io.StringIO()
-        csv.writer(out, lineterminator="\n").writerows([rows[0]] + mine)
-        files["%s/app/glossary/glossary.csv" % base] = out.getvalue()
-        pages = "%s/domains/%s/pages" % (BOOTCAMP_CONTEXT, main)
-        for name in sorted(os.listdir(os.path.join(ROOT, pages))):
-            if name.endswith(".md"):
-                files["%s/app/glossary/pages/%s" % (base, name)] = read("%s/%s" % (pages, name))
-        if len(mine) != len([f for f in files if f.startswith("%s/app/glossary/pages/" % base)]):
-            raise ValueError("%s: glossary rows and pages differ" % sample)
+        files["%s/04_genie/%s" % (base, tpl)] = text
         for name in gl.LICENSE_FILES:
             files["%s/%s" % (base, name)] = read("tools/model/%s" % name)
         stats[sample] = st
@@ -207,7 +189,7 @@ def unexpected_files(files):
     """Files below the generated folders of the samples that this script does not write."""
     out = []
     for sample in SAMPLES:
-        for key in ("pipeline", "metric_views", "model_tags", "genie", "app/glossary"):
+        for key in ("02_pipeline", "02_metric_views", "02_model_tags", "04_genie"):
             top = os.path.join(ROOT, SAMPLES_DIR, sample, key)
             for dirpath, _, names in os.walk(top):
                 for n in names:

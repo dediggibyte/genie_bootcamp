@@ -1,19 +1,17 @@
 # Genie, Governed: Consumer sample
 
 A standalone version of the [bootcamp lab](../../bootcamp/README.md) for **e-commerce, CRM and loyalty teams**: one catalog, one
-governed lakehouse, **one Genie Agent** (the *Fjällmark Consumer Analyst*), the business context of the Consumer domain
-and a router app in front of it. The company is the fictional Fjällmark Consumer Goods AB; all data is synthetic.
+governed lakehouse, **one Genie Agent** (the *Fjällmark Consumer Analyst*), the business context of the Consumer domain. The company is the fictional Fjällmark Consumer Goods AB; all data is synthetic.
 
 * **The data:** the `consumer` domain of the Databricks *Lakehouse Industry Data Model, Consumer Goods v2 (MVM)*:
   the webshop (direct-to-consumer orders in EUR, SEK, NOK and DKK), shoppers and households, the *Fjällmark Friends* loyalty programme, subscriptions and GDPR consent plus four **finance reference tables** (`company_code`, `profit_center`, `journal_entry`, `journal_entry_line`) that the curated `dtc_sales_metrics` and the company-code row filter need.
   16 gold tables (12 consumer, 4 finance), 42 foreign keys, 8 industry metric views plus the curated `dtc_sales_metrics`. Data runs from January 2024 to September 2026.
 * **What you build:** your catalog `cpg_consumer_<short name>`, the bronze/silver/gold pipeline, row filters and
-  column masks for the Consumer domain, the Consumer Analyst with 8 benchmarks, domain tags and Pages, and a
-  router app that combines the business glossary with the analyst's numbers.
+  column masks for the Consumer domain, the Consumer Analyst with 8 benchmarks, domain tags and Pages.
 
 > **Not yet run on a workspace.** This sample is built from the tested bootcamp code, but it has not been
 > deployed end to end yet: no run times are given, and the first run may surface problems the bootcamp never had.
-> Overview of all samples: [`../README.md`](../README.md). Running it as a workshop: [`INSTRUCTOR.md`](INSTRUCTOR.md).
+> Overview of all samples: [`../README.md`](../README.md). Running it as a workshop: [`00_INSTRUCTOR.md`](00_INSTRUCTOR.md).
 
 ---
 
@@ -26,7 +24,6 @@ and a router app in front of it. The company is the fictional Fjällmark Consume
 * [Step 3: Governance](#step-3-governance)
 * [Step 4: The Genie Agent](#step-4-the-genie-agent)
 * [Step 5: Business context](#step-5-business-context)
-* [Step 6: The router app](#step-6-the-router-app)
 * [Troubleshooting](#troubleshooting)
 * [Cleanup](#cleanup)
 * [What is in this folder](#what-is-in-this-folder)
@@ -41,8 +38,7 @@ and a router app in front of it. The company is the fictional Fjällmark Consume
 | **Serverless** compute for notebooks, jobs and pipelines | every notebook, the pipeline and the job run on serverless |
 | **CAN USE** on a SQL warehouse | the Genie Agent runs its SQL there |
 | your own catalog `cpg_consumer_<short name>`, or the right to create it | your sandbox |
-| the governed tag (domain) **Consumer** and `ASSIGN` on it | step 5 only; the instructor's [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) creates it |
-| the right to create a Lakebase project and a Databricks App | step 6: the router app keeps its conversation memory in Lakebase |
+| the governed tag (domain) **Consumer** and `ASSIGN` on it | step 5 only; the instructor's [`00_instructor_setup.py`](00_instructor_setup.py) creates it |
 | a GitHub account | step 5: the GitHub MCP signs in with *your* account |
 
 Your **short user name** is the part of your login before `@`, in lower case, with every character that is not a
@@ -63,25 +59,22 @@ flowchart LR
     MV --> AG
     CTX["bootcamp/context/<br/>consumer glossary"] --> PAG["domain tags, Pages, GitHub MCP<br/>notebook 05"]
     PAG --> AG
-    AG -->|"Genie MCP"| APP["router app<br/>notebook 06"]
-    CTX -->|"app/glossary/"| APP
 ```
 
 | layer | built by | where it lives |
 |---|---|---|
-| landing | [`notebooks/01_setup_catalog.py`](notebooks/01_setup_catalog.py) | `/Volumes/<catalog>/landing/raw_files/<domain>/<table>/<table>.csv` |
-| bronze, silver, gold | pipeline `cpg_consumer_pipeline` ([`pipeline/`](pipeline/)) | schemas `bronze`, `silver`, `consumer` and `finance` (reference) |
-| metric views, model tags | job tasks [`02a`](notebooks/job_tasks/02a_create_metric_views.py), [`02b`](notebooks/job_tasks/02b_apply_model_tags.py) | in the gold schema; `dbx_*` tags |
-| governance | [`notebooks/03_governance.py`](notebooks/03_governance.py) | functions and mapping tables in schema `governance`, policies on gold |
-| Genie Agent | [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) | your workspace home folder |
-| context | [`notebooks/05_business_context.py`](notebooks/05_business_context.py) + UI | domain tags, Pages, GitHub MCP source |
-| router app | [`notebooks/06_router_app.py`](notebooks/06_router_app.py) ([`app/`](app/README.md)) | Databricks App `con-router-<short name>`, a branch of the Lakebase project `fjallmark-consumer-sample`, an MLflow experiment |
+| landing | [`01_notebooks/01_setup_catalog.py`](01_notebooks/01_setup_catalog.py) | `/Volumes/<catalog>/landing/raw_files/<domain>/<table>/<table>.csv` |
+| bronze, silver, gold | pipeline `cpg_consumer_pipeline` ([`02_pipeline/`](02_pipeline/)) | schemas `bronze`, `silver`, `consumer` and `finance` (reference) |
+| metric views, model tags | job tasks [`02a`](01_notebooks/job_tasks/02a_create_metric_views.py), [`02b`](01_notebooks/job_tasks/02b_apply_model_tags.py) | in the gold schema; `dbx_*` tags |
+| governance | [`01_notebooks/03_governance.py`](01_notebooks/03_governance.py) | functions and mapping tables in schema `governance`, policies on gold |
+| Genie Agent | [`01_notebooks/04_genie_agent.py`](01_notebooks/04_genie_agent.py) | your workspace home folder |
+| context | [`01_notebooks/05_business_context.py`](01_notebooks/05_business_context.py) + UI | domain tags, Pages, GitHub MCP source |
 
 ---
 
 ## Step 1: Set up your catalog
 
-Open [`notebooks/01_setup_catalog.py`](notebooks/01_setup_catalog.py) **in your Git folder**, attach **Serverless** and
+Open [`01_notebooks/01_setup_catalog.py`](01_notebooks/01_setup_catalog.py) **in your Git folder**, attach **Serverless** and
 click **Run all**.
 
 | widget | default | meaning |
@@ -117,16 +110,16 @@ The job runs `pipeline` (bronze, silver, gold), then `metric_views` and `model_t
 **The first run of a fresh catalog** loads all data, and the pipeline update may then end *"FAILED
 unexpectedly"* while it registers the 42 foreign keys: Lakeflow registers the keys of brand-new tables only for
 small sets. The automatic retry reads no files and registers the keys; the job stays green. **Never click
-*Full refresh*.** See the bootcamp's [`pipeline/README.md`](../../bootcamp/pipeline/README.md) for the evidence.
+*Full refresh*.** See the bootcamp's [`02_pipeline/README.md`](../../bootcamp/pipeline/README.md) for the evidence.
 
 ---
 
 ## Step 3: Governance
 
-Everyone who can read your gold tables sees the orders of **every** market and every shopper's name, e-mail, phone number and birth date. You change that once, in Unity Catalog, and every consumer inherits it: SQL, metric views, the
-Genie Agent and the router app.
+Everyone who can read your gold tables sees the orders of **every** market and every shopper's name, e-mail, phone number and birth date. You change that once, in Unity Catalog, and every consumer inherits it: SQL, metric views and the
+Genie Agent.
 
-Open [`notebooks/03_governance.py`](notebooks/03_governance.py), keep the defaults and click **Run all**.
+Open [`01_notebooks/03_governance.py`](01_notebooks/03_governance.py), keep the defaults and click **Run all**.
 
 | widget | default | meaning |
 |---|---|---|
@@ -169,9 +162,9 @@ hidden value, and let a policy read a governed table. Each attempt shows a lesso
 
 ## Step 4: The Genie Agent
 
-Open [`notebooks/04_genie_agent.py`](notebooks/04_genie_agent.py) and click **Run all**. It creates the
+Open [`01_notebooks/04_genie_agent.py`](01_notebooks/04_genie_agent.py) and click **Run all**. It creates the
 **Fjällmark Consumer Analyst (\<catalog\>)** in your home folder from the template
-[`genie/fjallmark_consumer_analyst.json`](genie/fjallmark_consumer_analyst.json) (the bootcamp's agent, unchanged), asks a
+[`04_genie/fjallmark_consumer_analyst.json`](04_genie/fjallmark_consumer_analyst.json) (the bootcamp's agent, unchanged), asks a
 test question through the Conversation API and runs the 8 benchmarks.
 
 | widget | default | meaning |
@@ -198,10 +191,10 @@ Then test, benchmark and improve the agent in the UI exactly as in the bootcamp 
 The glossary of the Consumer domain lives in [`bootcamp/context/domains/consumer/`](../../bootcamp/context/domains/consumer/): one
 Markdown page per business term.
 
-1. **Tags (notebook).** [`notebooks/05_business_context.py`](notebooks/05_business_context.py) tags the
+1. **Tags (notebook).** [`01_notebooks/05_business_context.py`](01_notebooks/05_business_context.py) tags the
    `consumer` schema with the domain **Consumer**, every table and metric view with its subdomain, and your Genie Agent.
    It needs the governed tag **Consumer**: the instructor creates it with
-   [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py) ([`INSTRUCTOR.md`](INSTRUCTOR.md)), or an
+   [`00_instructor_setup.py`](00_instructor_setup.py) ([`00_INSTRUCTOR.md`](00_INSTRUCTOR.md)), or an
    admin creates it under **Discover** > **Domains**. Without it, the notebook skips the tags and carries
    on. `tag_reference_tables = true` also tags the finance reference tables (when the domain *Finance* exists).
 2. **Pages (UI).** There is no API that creates Pages, so the notebook prints a **Bulk import prompt** and a
@@ -209,38 +202,6 @@ Markdown page per business term.
    choose **Bulk import pages**, attach the two workspace paths the notebook prints and paste the prompt.
 3. **GitHub MCP (UI).** On the agent's **Sources** tab, add `system.ai.github`, point it at
    `bootcamp/context/domains/consumer/pages/`, turn on **Agent mode** and ask about *Active Shopper*.
-
----
-
-## Step 6: The router app
-
-Open [`notebooks/06_router_app.py`](notebooks/06_router_app.py) and click **Run all**. It deploys a custom agent as
-a Databricks App (from the template *Custom Agent (Advanced)*, code in [`app/`](app/README.md)):
-
-```text
-  you ──► router app ──┬──► glossary tool          (app/glossary/: what a term means)
-          (chat UI,    └──► Consumer Analyst       (Genie MCP: what the number is)
-           memory)
-```
-
-| widget | default | meaning |
-|---|---|---|
-| `catalog` | blank | your catalog |
-| `app_name` | blank = `con-router-<short name>` | the app |
-| `llm_endpoint` | blank = the default | the router's model |
-| `lakebase_project` | `fjallmark-consumer-sample` | created by this notebook if it does not exist (you own it); you get your own branch |
-
-The notebook creates the MLflow experiment, the Lakebase project (if needed) and your branch, the app with its
-resources, and gives the app's service principal `SELECT` on the gold schemas plus **your** mapping rows from
-step 3, without PII or cost access. The app is governed like you.
-
-Ask the app:
-
-1. *"According to our glossary, what is an active shopper, and how many active shoppers did we have at 2026-09-30?"*
-2. *"How is AOV defined, and what was the webshop AOV in Sweden in 2025?"*
-3. *"What was the OEE of our Poznań plant?"* - not consumer data: the router declines
-
-Every answer ends with a **Sources** line. Follow a conversation in the MLflow experiment (*Traces*).
 
 ---
 
@@ -255,18 +216,14 @@ Every answer ends with a **Sources** line. Follow a conversation in the MLflow e
 | Notebook 03 or 04: tables missing | The job has not finished. Wait until `cpg_consumer_job` is green. |
 | You still see everything after notebook 03 | You are in `cpg_bootcamp_admins`, you mapped yourself to `ALL`, or `rollback = true`. |
 | Notebook 05: governed tags missing | The domain **Consumer** does not exist yet (step 5). Pages and MCP still work. |
-| Notebook 06 fails on the Lakebase project | You may not create Lakebase projects: ask an admin to create `fjallmark-consumer-sample` and give you **CAN USE**, then re-run. |
-| The app shows "App crashed" or 502 right after deployment | Open the app's **Logs**; re-run notebook 06 (grants may still have been arriving). |
 
 ---
 
 ## Cleanup
 
-1. Run [`notebooks/99_cleanup.py`](notebooks/99_cleanup.py) once **without** confirmation: it lists what it would
-   delete (your Genie Agent, the router app with your Lakebase branch and MLflow experiment, the policies and your
-   catalog).
-2. Type your catalog name into `confirm` and **Run all** again. `drop_lakebase_project = true` deletes the whole
-   project instead of only your branch (every user's branch in it).
+1. Run [`01_notebooks/99_cleanup.py`](01_notebooks/99_cleanup.py) once **without** confirmation: it lists what it would
+   delete (your Genie Agent, the policies and your catalog).
+2. Type your catalog name into `confirm` and **Run all** again.
 3. Delete the job and the pipeline in **Jobs & Pipelines**, or run `databricks bundle destroy -t dev` from
    `bootcamp_domain/consumer/`.
 
@@ -278,14 +235,17 @@ Account-level objects (the domain, governed tags, published Pages) are never tou
 
 | path | what | written by |
 |---|---|---|
-| [`notebooks/`](notebooks/) | steps 1 and 3-6, cleanup, and the job tasks (`job_tasks/`) | hand |
-| [`instructor/00_instructor_setup.py`](instructor/00_instructor_setup.py), [`INSTRUCTOR.md`](INSTRUCTOR.md) | admins, once per workshop: the domain's governed tags, domain, subdomains and ASSIGN, and a list of all its tags | hand |
+| [`00_instructor_setup.py`](00_instructor_setup.py), [`00_INSTRUCTOR.md`](00_INSTRUCTOR.md) | admins, once per workshop: the domain's governed tags, domain, subdomains and ASSIGN, and a list of all its tags | hand |
+| [`01_notebooks/`](01_notebooks/) | steps 1 and 3-5, cleanup, and the job tasks (`job_tasks/`) | hand |
+| [`01_data/manifest.json`](01_data/manifest.json) | row counts of this sample's tables; the CSV files stay in `bootcamp/data/` | generated |
 | [`databricks.yml`](databricks.yml), [`resources/`](resources/) | the bundle: pipeline `cpg_consumer_pipeline`, job `cpg_consumer_job` | hand |
-| [`app/`](app/README.md) | the router app; `app/glossary/` is generated | hand |
-| [`pipeline/`](pipeline/), [`metric_views/`](metric_views/), [`model_tags/`](model_tags/) | bronze, silver and gold SQL, metric views, `dbx_*` tags | [`../tools/build_domain_samples.py`](../tools/build_domain_samples.py) |
-| [`genie/`](genie/) | the Genie Agent template (copy of the bootcamp's) | generated |
-| [`data/manifest.json`](data/manifest.json) | row counts of this sample's tables; the CSV files stay in `bootcamp/data/` | generated |
+| [`02_pipeline/`](02_pipeline/), [`02_metric_views/`](02_metric_views/), [`02_model_tags/`](02_model_tags/) | bronze, silver and gold SQL, metric views, `dbx_*` tags | [`../tools/build_domain_samples.py`](../tools/build_domain_samples.py) |
+| [`04_genie/`](04_genie/) | the Genie Agent template (copy of the bootcamp's) | generated |
 | [`LICENSE.md`](LICENSE.md), [`NOTICE.md`](NOTICE.md) | the industry model's license | generated |
+
+The numbers in the folder names follow the lab: `00` instructor setup, `01` notebooks and source data, `02` the pipeline content
+the bundle deploys, `04` the Genie Agent template. `databricks.yml` and `resources/` keep their names: the Databricks CLI and the
+**Deployments** button look for a file called `databricks.yml`, which includes `resources/*.yml`.
 
 **License.** The tables, columns, keys, tags and industry metric views come from the Databricks *Lakehouse Industry
 Data Model, Consumer Goods v2 (MVM)* (© Databricks, Inc.), licensed under the Databricks license; see

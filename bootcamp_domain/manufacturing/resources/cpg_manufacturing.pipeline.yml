@@ -10,11 +10,11 @@ resources:
       channel: CURRENT
       continuous: false
       configuration:
-        catalog: ${var.catalog} # referenced as ${catalog} in pipeline/**/*.sql
+        catalog: ${var.catalog} # referenced as ${catalog} in 02_pipeline/**/*.sql
       libraries:
-        - file: { path: ../pipeline/manufacturing/01_bronze.sql }
-        - file: { path: ../pipeline/manufacturing/02_silver.sql }
-        - file: { path: ../pipeline/manufacturing/03_gold.sql }
-        - file: { path: ../pipeline/finance/01_bronze.sql }
-        - file: { path: ../pipeline/finance/02_silver.sql }
-        - file: { path: ../pipeline/finance/03_gold.sql }
+        - file: { path: ../02_pipeline/manufacturing/01_bronze.sql }
+        - file: { path: ../02_pipeline/manufacturing/02_silver.sql }
+        - file: { path: ../02_pipeline/manufacturing/03_gold.sql }
+        - file: { path: ../02_pipeline/finance/01_bronze.sql }
+        - file: { path: ../02_pipeline/finance/02_silver.sql }
+        - file: { path: ../02_pipeline/finance/03_gold.sql }
