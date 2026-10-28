@@ -4,24 +4,24 @@
 # environment_version = "6"
 # ///
 # MAGIC %md
-# MAGIC # 00 · Instructor setup - Manufacturing domain (admins only - run once before the event)
+# MAGIC # 00 · Instructor setup - Finance domain (admins only - run once before the event)
 # MAGIC
-# MAGIC Prepares the **Manufacturing domain** for the Manufacturing sample (`bootcamp_domain/manufacturing/`): the governed tags, the UC Semantics
-# MAGIC domain **Manufacturing** with its subdomains, and the permission to *assign* those tags. Participants do **not** run
+# MAGIC Prepares the **Finance domain** for the Finance sample (`bootcamp_domain/finance/`): the governed tags, the UC Semantics
+# MAGIC domain **Finance** with its subdomains, and the permission to *assign* those tags. Participants do **not** run
 # MAGIC this notebook; their notebook 05 applies the tags.
 # MAGIC
 # MAGIC | step | what | needs |
 # MAGIC |---|---|---|
 # MAGIC | 2 | **who am I** - admin check, account id | workspace admin |
 # MAGIC | 3 | **prerequisites** for domains: Domains API, Discover, tags on Genie Agents; **3.3** the SQL warehouse id (no permission check) | workspace admin |
-# MAGIC | 4 | **governed tags + domain** `Manufacturing` with its subdomains, published | CREATE on governed tags |
+# MAGIC | 4 | **governed tags + domain** `Finance` with its subdomains, published | CREATE on governed tags |
 # MAGIC | 5 | the participants group may **ASSIGN** the domain tags | MANAGE on the governed tags |
 # MAGIC | 6 | **all tags** of the domain: definitions (API) and where they are applied (SQL on the warehouse) | the SQL warehouse |
 # MAGIC | 7 | summary | |
 # MAGIC | T | **teardown** *(after the event)*: `mode = teardown_domain` removes what this notebook created and stops | same as above |
 # MAGIC
-# MAGIC Not in this notebook (the bootcamp's [`00_instructor_setup`](../../bootcamp/instructor/00_instructor_setup.py) does
-# MAGIC them): account groups, catalogs, warehouse permissions, GitHub MCP, Pages. See [`00_INSTRUCTOR.md`](00_INSTRUCTOR.md).
+# MAGIC Not in this notebook (the bootcamp's [`00_instructor_setup`](../../../bootcamp/instructor/00_instructor_setup.py) does
+# MAGIC them): account groups, catalogs, warehouse permissions, GitHub MCP, Pages. See [`00_INSTRUCTOR.md`](../00_INSTRUCTOR.md).
 # MAGIC
 # MAGIC ▶ **How to run:** attach to **Serverless** and **Run all**. `dry_run = false` is the default: the notebook makes
 # MAGIC the changes. Set `dry_run = true` for a check-only run.
@@ -29,7 +29,7 @@
 # MAGIC 🔁 **Re-running is a no-op / diff:** existing tags and domains are reported as **OK** and reused as they are.
 # MAGIC
 # MAGIC **What does teardown remove?** Only what this notebook **created**: its governed tags and domains carry the
-# MAGIC marker `[created by genie_bootcamp/bootcamp_domain/manufacturing/00_instructor_setup]` in their description. A `Manufacturing`
+# MAGIC marker `[created by genie_bootcamp/bootcamp_domain/finance/00_instructor_setup]` in their description. A `Finance`
 # MAGIC domain that already existed - for example created by the bootcamp's instructor notebook - is reused and kept.
 # MAGIC
 # MAGIC > Domains and governed tags are **account-level** objects visible to every workspace of the account. Testing?
@@ -61,8 +61,8 @@ import urllib.parse
 
 from databricks.sdk import WorkspaceClient
 
-SAMPLE = "manufacturing"
-DOMAIN = "Manufacturing"       # the one domain of this sample
+SAMPLE = "finance"
+DOMAIN = "Finance"       # the one domain of this sample
 
 dbutils.widgets.dropdown("mode", "setup", ["setup", "teardown_domain"], "00 Mode")
 dbutils.widgets.dropdown("dry_run", "false", ["true", "false"], "01 Dry run")
@@ -163,7 +163,7 @@ def find_group(name: str):
 
 
 def bundle_root() -> str:
-    """The sample folder = the folder that holds databricks.yml (this notebook is in bootcamp_domain/<sample>/)."""
+    """The sample folder = the folder that holds databricks.yml (this notebook is in bootcamp_domain/<sample>/01_notebooks/)."""
     try:
         nb_path = dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()
         d = os.path.dirname(nb_path if nb_path.startswith("/Workspace") else "/Workspace" + nb_path)
@@ -228,7 +228,7 @@ record("identity", "account id resolved via the workspace identity proxy", "OK" 
 # MAGIC %md
 # MAGIC ## Teardown mode *(after the event - only when `mode = teardown_domain`)*
 # MAGIC
-# MAGIC Removes the subdomains, the domain and the governed tags of **Manufacturing** that carry this notebook's marker, then
+# MAGIC Removes the subdomains, the domain and the governed tags of **Finance** that carry this notebook's marker, then
 # MAGIC **stops the notebook** (steps 3-7 do not run). Objects without the marker are reported as **KEEP**. A domain is
 # MAGIC deleted only if all its subdomains are deleted too, and a governed tag only if no remaining domain uses it. The
 # MAGIC run deletes only when `confirm_teardown = teardown_domain`; otherwise it prints the plan.
@@ -335,7 +335,7 @@ WAREHOUSE_ID = wh.id if wh else None
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 4 · UC Semantics: governed tags and the Manufacturing domain
+# MAGIC ## 4 · UC Semantics: governed tags and the Finance domain
 # MAGIC
 # MAGIC A **domain** (Discover → Domains) *is* a governed tag: an asset belongs to the domain when it carries
 # MAGIC the tag (schema tags are inherited by tables). Rules verified against the Domains API (Beta):
@@ -345,9 +345,9 @@ WAREHOUSE_ID = wh.id if wh else None
 # MAGIC 3. a **subdomain** needs its own governed tag named `<domain tag>/<Subdomain>` and `parent_domain_id`,
 # MAGIC 4. **publish** with `PATCH /api/2.0/domains/<id>?update_mask=draft` (`draft = false`).
 # MAGIC
-# MAGIC Names, subtitles and descriptions come from `bootcamp/context/domains/manufacturing/**/_domain.md` and `_subdomain.md`
-# MAGIC front matter; the subdomains and their order from this sample's `02_model_tags/manufacturing.json`. Participants later
-# MAGIC apply the value-less tags in notebook 05: `ALTER SCHEMA <catalog>.manufacturing SET TAGS ('Manufacturing')`.
+# MAGIC Names, subtitles and descriptions come from `bootcamp/context/domains/finance/**/_domain.md` and `_subdomain.md`
+# MAGIC front matter; the subdomains and their order from this sample's `02_model_tags/finance.json`. Participants later
+# MAGIC apply the value-less tags in notebook 05: `ALTER SCHEMA <catalog>.finance SET TAGS ('Finance')`.
 
 # COMMAND ----------
 
@@ -479,7 +479,7 @@ for key, *_ in PLAN:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 6 · All tags of the Manufacturing domain
+# MAGIC ## 6 · All tags of the Finance domain
 # MAGIC
 # MAGIC **6a - definitions** (APIs): every governed tag of the domain, its domain or subdomain, and whether the
 # MAGIC participants may assign it. **6b - usage** (SQL on the warehouse of step 3.3): where the tags are applied,

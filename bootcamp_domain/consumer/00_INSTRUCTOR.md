@@ -10,7 +10,7 @@ comes from. Background: the bootcamp's [`INSTRUCTOR.md`](../../bootcamp/INSTRUCT
 
 | item | where | done by |
 |---|---|---|
-| governed tags, the domain **Consumer** with its subdomains (published), `ASSIGN` for the participants group | [`00_instructor_setup.py`](00_instructor_setup.py) (section 2) | you |
+| governed tags, the domain **Consumer** with its subdomains (published), `ASSIGN` for the participants group | [`00_instructor_setup.py`](01_notebooks/00_instructor_setup.py) (section 2) | you |
 | the account group `cpg_bootcamp_participants` (and `cpg_bootcamp_admins`) with the participants in it | the bootcamp instructor notebook, step 4, or your IdP | workspace admin |
 | **CAN USE** on a SQL warehouse for every participant (Genie runs its SQL there) | the bootcamp instructor notebook, step 3.3, or the warehouse's *Permissions* | workspace admin |
 | catalogs `cpg_consumer_<short name>`, or `CREATE CATALOG` | participants create them in notebook 01, or the bootcamp instructor notebook with `catalog_prefix = cpg_consumer_` | metastore admin |

@@ -38,7 +38,7 @@ governed lakehouse, **one Genie Agent** (the *Fjällmark Consumer Analyst*), the
 | **Serverless** compute for notebooks, jobs and pipelines | every notebook, the pipeline and the job run on serverless |
 | **CAN USE** on a SQL warehouse | the Genie Agent runs its SQL there |
 | your own catalog `cpg_consumer_<short name>`, or the right to create it | your sandbox |
-| the governed tag (domain) **Consumer** and `ASSIGN` on it | step 5 only; the instructor's [`00_instructor_setup.py`](00_instructor_setup.py) creates it |
+| the governed tag (domain) **Consumer** and `ASSIGN` on it | step 5 only; the instructor's [`00_instructor_setup.py`](01_notebooks/00_instructor_setup.py) creates it |
 | a GitHub account | step 5: the GitHub MCP signs in with *your* account |
 
 Your **short user name** is the part of your login before `@`, in lower case, with every character that is not a
@@ -194,7 +194,7 @@ Markdown page per business term.
 1. **Tags (notebook).** [`01_notebooks/05_business_context.py`](01_notebooks/05_business_context.py) tags the
    `consumer` schema with the domain **Consumer**, every table and metric view with its subdomain, and your Genie Agent.
    It needs the governed tag **Consumer**: the instructor creates it with
-   [`00_instructor_setup.py`](00_instructor_setup.py) ([`00_INSTRUCTOR.md`](00_INSTRUCTOR.md)), or an
+   [`00_instructor_setup.py`](01_notebooks/00_instructor_setup.py) ([`00_INSTRUCTOR.md`](00_INSTRUCTOR.md)), or an
    admin creates it under **Discover** > **Domains**. Without it, the notebook skips the tags and carries
    on. `tag_reference_tables = true` also tags the finance reference tables (when the domain *Finance* exists).
 2. **Pages (UI).** There is no API that creates Pages, so the notebook prints a **Bulk import prompt** and a
@@ -235,8 +235,8 @@ Account-level objects (the domain, governed tags, published Pages) are never tou
 
 | path | what | written by |
 |---|---|---|
-| [`00_instructor_setup.py`](00_instructor_setup.py), [`00_INSTRUCTOR.md`](00_INSTRUCTOR.md) | admins, once per workshop: the domain's governed tags, domain, subdomains and ASSIGN, and a list of all its tags | hand |
-| [`01_notebooks/`](01_notebooks/) | steps 1 and 3-5, cleanup, and the job tasks (`job_tasks/`) | hand |
+| [`00_instructor_setup.py`](01_notebooks/00_instructor_setup.py), [`00_INSTRUCTOR.md`](00_INSTRUCTOR.md) | admins, once per workshop: the domain's governed tags, domain, subdomains and ASSIGN, and a list of all its tags | hand |
+| [`01_notebooks/`](01_notebooks/) | step 0 (instructor setup), steps 1 and 3-5, cleanup, and the job tasks (`job_tasks/`) | hand |
 | [`01_data/manifest.json`](01_data/manifest.json) | row counts of this sample's tables; the CSV files stay in `bootcamp/data/` | generated |
 | [`databricks.yml`](databricks.yml), [`resources/`](resources/) | the bundle: pipeline `cpg_consumer_pipeline`, job `cpg_consumer_job` | hand |
 | [`02_pipeline/`](02_pipeline/), [`02_metric_views/`](02_metric_views/), [`02_model_tags/`](02_model_tags/) | bronze, silver and gold SQL, metric views, `dbx_*` tags | [`../tools/build_domain_samples.py`](../tools/build_domain_samples.py) |

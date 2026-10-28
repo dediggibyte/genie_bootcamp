@@ -25,7 +25,7 @@ Every sample folder has the same layout and, apart from the router app, the same
 
 | step | file | what it does |
 |---|---|---|
-| 0 | `00_instructor_setup.py`, `00_INSTRUCTOR.md` | admins, once per workshop: the domain's governed tags, domain and subdomains, ASSIGN, and a list of all its tags |
+| 0 | `01_notebooks/00_instructor_setup.py`, `00_INSTRUCTOR.md` | admins, once per workshop: the domain's governed tags, domain and subdomains, ASSIGN, and a list of all its tags |
 | 1 | `01_notebooks/01_setup_catalog.py` | catalog `cpg_<sample>_<short name>`, schemas, volume; copies the sample's CSV files from `../../bootcamp/data` |
 | 2 | `databricks.yml`, `resources/` | bundle `genie_domain_<sample>`: pipeline `cpg_<sample>_pipeline` and job `cpg_<sample>_job` (performance optimized) |
 | 2 | `01_notebooks/job_tasks/02a-02c` | metric views, model tags, validation (tasks of the job) |
@@ -41,8 +41,7 @@ Databricks CLI and the **Deployments** button look for a file called `databricks
 <sample>/
   README.md                       the step-by-step guide of the sample
   00_INSTRUCTOR.md                step 0   instructor guide
-  00_instructor_setup.py          step 0   admins, once per workshop
-  01_notebooks/                   steps 1, 3-5 and 99: the notebooks, and job_tasks/ for the job
+  01_notebooks/                   the notebooks: 00_instructor_setup (step 0), 01, 03-05, 99, and job_tasks/
   01_data/manifest.json           step 1   which CSV files and how many rows
   databricks.yml, resources/      step 2   the bundle: pipeline and job
   02_pipeline/, 02_metric_views/, 02_model_tags/    step 2   what the bundle deploys
@@ -74,7 +73,7 @@ was omitted.
    `cpg_manufacturing_<short>`), so you can run any of them next to each other and next to the bootcamp.
 
 **Workspace prerequisites** are the bootcamp's. For a workshop, an admin first runs the sample's
-`00_instructor_setup.py` (see the sample's `00_INSTRUCTOR.md`). It prepares **the sample's domain only**:
+`01_notebooks/00_instructor_setup.py` (see the sample's `00_INSTRUCTOR.md`). It prepares **the sample's domain only**:
 the governed tags, the domain and its subdomains, ASSIGN for the participants group, and a list of all the domain's
 tags (with a SQL query on a warehouse that shows where they are applied). Groups, warehouse permissions and
 catalogs come from the bootcamp's instructor notebook or your admins; the sample's `00_INSTRUCTOR.md` lists them. A
