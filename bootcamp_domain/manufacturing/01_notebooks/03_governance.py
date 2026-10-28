@@ -1084,7 +1084,7 @@ else:
 # MAGIC | A | copy the table (`CREATE TABLE ... AS SELECT`) | the copy only contains what **you** can see (masked values stay masked) - but the copy has **no** policy | copies leave governance: only give consumers `SELECT`, never `CREATE` on gold schemas; lineage shows every copy |
 # MAGIC | B | query **silver** instead of gold | you see **everything**, costs included | silver is not governed: consumers get `SELECT` on **gold only** |
 # MAGIC | C | filter on a masked cost / ask for another plant directly | **0 rows**, no error | the mask is applied *before* your `WHERE`; hidden rows don't exist for you |
-# MAGIC | D | (engineer) let a policy read another governed table | query **fails** with `UNSUPPORTED_NESTED_ROW_OR_COLUMN_ACCESS_POLICY` | keep lookup tables ungoverned - that is why the plant filters read silver |
+# MAGIC | D | (engineer) let a policy read another governed table | the function or the query **fails** with `UNSUPPORTED_NESTED_ROW_OR_COLUMN_ACCESS_POLICY` (when it is created or when the table is queried, depending on the runtime) | keep lookup tables ungoverned - that is why the plant filters read silver |
 
 # COMMAND ----------
 
@@ -1186,26 +1186,40 @@ if not IS_ADMIN and USER_EMAIL.lower() == current_user.lower():
 
 # COMMAND ----------
 
+rejected_at, nested_error = None, None   # where Unity Catalog stopped the nested policy
 try:
-    run(f"""
-        CREATE OR REPLACE FUNCTION {G}.plant_row_filter(row_manufacturing_facility_id BIGINT)
-        RETURNS BOOLEAN
-        RETURN EXISTS (SELECT 1 FROM {C}.manufacturing.production_order AS o
-                       WHERE o.manufacturing_facility_id = row_manufacturing_facility_id)
-    """)
     try:
-        run(f"SELECT count(*) FROM {C}.manufacturing.batch_record").collect()
-        check("D: nested policy is rejected", False, "query unexpectedly succeeded")
-    except Exception as e:
-        msg = str(e).split("\n")[0]
-        print(f"Expected error:\n  {msg[:400]}")
-        check("D: nested policy is rejected", "UNSUPPORTED_NESTED_ROW_OR_COLUMN_ACCESS_POLICY" in str(e), msg[:120])
+        run(f"""
+            CREATE OR REPLACE FUNCTION {G}.plant_row_filter(row_manufacturing_facility_id BIGINT)
+            RETURNS BOOLEAN
+            RETURN EXISTS (SELECT 1 FROM {C}.manufacturing.production_order AS o
+                           WHERE o.manufacturing_facility_id = row_manufacturing_facility_id)
+        """)
+    except Exception as e:   # recent runtimes already reject the circular definition when it is created
+        rejected_at, nested_error = "CREATE FUNCTION", e
+    if rejected_at is None:
+        try:
+            run(f"SELECT count(*) FROM {C}.manufacturing.batch_record").collect()
+        except Exception as e:   # older runtimes only fail when the table is queried
+            rejected_at, nested_error = "query", e
 finally:
     IN_EXERCISE = True
     ensure_function(**PLANT_FILTER, force=True)   # put the silver-based filter from step 6 back
     IN_EXERCISE = False
     batches = run(f"SELECT count(*) FROM {C}.manufacturing.batch_record", echo=False).first()[0]
     print(f"Restored. Batch records visible again: {batches}")
+
+if rejected_at is None:
+    check("D: nested policy is rejected", False, "neither the function definition nor the query failed")
+else:
+    text = str(nested_error)
+    msg = text.split("\n")[0]
+    print(f"Expected error (raised when Unity Catalog checked the {rejected_at}):\n  {msg[:400]}")
+    if re.search(r"PERMISSION_DENIED|INSUFFICIENT_PRIVILEGES", text):
+        raise nested_error   # not the lesson: a missing privilege - the filter is already restored
+    check("D: nested policy is rejected",
+          "UNSUPPORTED_NESTED_ROW_OR_COLUMN_ACCESS_POLICY" in text or bool(re.search(r"nested|circular|recursive", text, re.I)),
+          f"at {rejected_at}: {msg[:100]}")
 
 # COMMAND ----------
 
