@@ -1,0 +1,426 @@
+{
+ "_notice": "GENERATED FILE - do not edit by hand; regenerate with python3 -I bootcamp_domain/tools/build_domain_samples.py. Tags from the Lakehouse Industry Data Model 'Consumer Goods v2 MVM' (Copyright Databricks, Inc.; Databricks license - see LICENSE.md and NOTICE.md in this bundle folder), modified for the Fjallmark Genie bootcamp. Applied by 01_notebooks/job_tasks/02b_apply_model_tags.py.",
+ "domain": "finance",
+ "schema_comment": "Owns financial planning, accounting, and reporting including general ledger, accounts payable/receivable, cost accounting, COGS allocation, EBITDA reporting, DSO/DIO tracking, budgeting, revenue recognition, and SOX-compliant financial controls and audit trails. Integrates with SAP S/4HANA FI/CO and Oracle Cloud Financials.",
+ "tag_count": 175,
+ "foreign_key_count": 3,
+ "schema_tags": {
+  "dbx_domain": "finance",
+  "dbx_division": "corporate"
+ },
+ "tables": {
+  "journal_entry": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "general_ledger"
+   },
+   "column_tags": {
+    "journal_entry_id": {
+     "dbx_business_glossary_term": "Journal Entry ID"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center ID"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "ledger_id": {
+     "dbx_business_glossary_term": "Ledger Id (Foreign Key)"
+    },
+    "product_category_id": {
+     "dbx_business_glossary_term": "Rd Project Id (Foreign Key)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center ID"
+    },
+    "approval_timestamp": {
+     "dbx_business_glossary_term": "Approval Timestamp"
+    },
+    "baseline_payment_date": {
+     "dbx_business_glossary_term": "Baseline Payment Date"
+    },
+    "batch_input_session": {
+     "dbx_business_glossary_term": "Batch Input Session"
+    },
+    "business_area_code": {
+     "dbx_business_glossary_term": "Business Area Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "clearing_date": {
+     "dbx_business_glossary_term": "Clearing Date"
+    },
+    "clearing_document_number": {
+     "dbx_business_glossary_term": "Clearing Document Number"
+    },
+    "controlling_area": {
+     "dbx_business_glossary_term": "Controlling Area",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "created_timestamp": {
+     "dbx_business_glossary_term": "Created Timestamp"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "document_date": {
+     "dbx_business_glossary_term": "Document Date"
+    },
+    "document_number": {
+     "dbx_business_glossary_term": "Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "document_type": {
+     "dbx_business_glossary_term": "Document Type"
+    },
+    "entry_date": {
+     "dbx_business_glossary_term": "Entry Date"
+    },
+    "exchange_rate": {
+     "dbx_business_glossary_term": "Exchange Rate"
+    },
+    "exchange_rate_type": {
+     "dbx_business_glossary_term": "Exchange Rate Type",
+     "dbx_value_regex": "M|B|G|P"
+    },
+    "fiscal_period": {
+     "dbx_business_glossary_term": "Fiscal Period"
+    },
+    "fiscal_year": {
+     "dbx_business_glossary_term": "Fiscal Year"
+    },
+    "functional_area_code": {
+     "dbx_business_glossary_term": "Functional Area Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "header_text": {
+     "dbx_business_glossary_term": "Header Text"
+    },
+    "intercompany_indicator": {
+     "dbx_business_glossary_term": "Intercompany Indicator"
+    },
+    "ledger_group": {
+     "dbx_business_glossary_term": "Ledger Group",
+     "dbx_value_regex": "^[A-Z0-9]{2}$"
+    },
+    "local_currency_code": {
+     "dbx_business_glossary_term": "Local Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "modified_timestamp": {
+     "dbx_business_glossary_term": "Modified Timestamp"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "posting_date": {
+     "dbx_business_glossary_term": "Posting Date"
+    },
+    "posting_status": {
+     "dbx_business_glossary_term": "Posting Status",
+     "dbx_value_regex": "draft|posted|parked|cancelled|reversed"
+    },
+    "reference_document_number": {
+     "dbx_business_glossary_term": "Reference Document Number"
+    },
+    "reversal_indicator": {
+     "dbx_business_glossary_term": "Reversal Indicator"
+    },
+    "reversal_reason_code": {
+     "dbx_business_glossary_term": "Reversal Reason Code",
+     "dbx_value_regex": "01|02|03|04|05|06"
+    },
+    "reversed_document_number": {
+     "dbx_business_glossary_term": "Reversed Document Number"
+    },
+    "source_system_code": {
+     "dbx_business_glossary_term": "Source System Code"
+    },
+    "sox_control_flag": {
+     "dbx_business_glossary_term": "SOX (Sarbanes-Oxley Act) Control Flag"
+    },
+    "tax_reporting_date": {
+     "dbx_business_glossary_term": "Tax Reporting Date"
+    },
+    "trading_partner_company_code": {
+     "dbx_business_glossary_term": "Trading Partner Company Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "transaction_code": {
+     "dbx_business_glossary_term": "Transaction Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    }
+   }
+  },
+  "journal_entry_line": {
+   "table_tags": {
+    "dbx_data_type": "transactional_data",
+    "dbx_subdomain": "general_ledger"
+   },
+   "column_tags": {
+    "journal_entry_line_id": {
+     "dbx_business_glossary_term": "Journal Entry Line Identifier (ID)"
+    },
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Id (Foreign Key)"
+    },
+    "cost_center_id": {
+     "dbx_business_glossary_term": "Cost Center Id (Foreign Key)"
+    },
+    "gl_account_id": {
+     "dbx_business_glossary_term": "Gl Account Id (Foreign Key)"
+    },
+    "journal_entry_id": {
+     "dbx_business_glossary_term": "Journal Entry Header Identifier (ID)"
+    },
+    "profit_center_id": {
+     "dbx_business_glossary_term": "Profit Center Id (Foreign Key)"
+    },
+    "amount_company_code_currency": {
+     "dbx_business_glossary_term": "Amount in Company Code Currency"
+    },
+    "amount_group_currency": {
+     "dbx_business_glossary_term": "Amount in Group Currency"
+    },
+    "amount_transaction_currency": {
+     "dbx_business_glossary_term": "Amount in Transaction Currency"
+    },
+    "assignment_field": {
+     "dbx_business_glossary_term": "Assignment Field"
+    },
+    "baseline_payment_date": {
+     "dbx_business_glossary_term": "Baseline Payment Date"
+    },
+    "business_area_code": {
+     "dbx_business_glossary_term": "Business Area Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "clearing_date": {
+     "dbx_business_glossary_term": "Clearing Date"
+    },
+    "clearing_document_number": {
+     "dbx_business_glossary_term": "Clearing Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "company_code_currency_code": {
+     "dbx_business_glossary_term": "Company Code Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "customer_account_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Customer Account Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,10}$"
+    },
+    "debit_credit_indicator": {
+     "dbx_business_glossary_term": "Debit/Credit Indicator",
+     "dbx_value_regex": "D|C"
+    },
+    "due_date": {
+     "dbx_business_glossary_term": "Payment Due Date"
+    },
+    "exchange_rate": {
+     "dbx_business_glossary_term": "Exchange Rate"
+    },
+    "functional_area_code": {
+     "dbx_business_glossary_term": "Functional Area Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,8}$"
+    },
+    "group_currency_code": {
+     "dbx_business_glossary_term": "Group Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "internal_order_number": {
+     "dbx_business_glossary_term": "Internal Order Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,12}$"
+    },
+    "line_item_number": {
+     "dbx_business_glossary_term": "Line Item Number"
+    },
+    "material_number": {
+     "dbx_business_glossary_term": "Material Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,18}$"
+    },
+    "payment_terms_code": {
+     "dbx_business_glossary_term": "Payment Terms Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "plant_code": {
+     "dbx_business_glossary_term": "Plant Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "posting_key": {
+     "dbx_business_glossary_term": "Posting Key",
+     "dbx_value_regex": "^[0-9]{2}$"
+    },
+    "quantity": {
+     "dbx_business_glossary_term": "Quantity"
+    },
+    "reference_document_number": {
+     "dbx_business_glossary_term": "Reference Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,16}$"
+    },
+    "reversal_indicator": {
+     "dbx_business_glossary_term": "Reversal Indicator"
+    },
+    "reversed_document_number": {
+     "dbx_business_glossary_term": "Reversed Document Number",
+     "dbx_value_regex": "^[A-Z0-9]{10}$"
+    },
+    "special_gl_indicator": {
+     "dbx_business_glossary_term": "Special General Ledger (GL) Indicator",
+     "dbx_value_regex": "^[A-Z]$"
+    },
+    "storage_location_code": {
+     "dbx_business_glossary_term": "Storage Location Code",
+     "dbx_value_regex": "^[A-Z0-9]{4}$"
+    },
+    "tax_amount": {
+     "dbx_business_glossary_term": "Tax Amount"
+    },
+    "tax_code": {
+     "dbx_business_glossary_term": "Tax Code",
+     "dbx_value_regex": "^[A-Z0-9]{2,4}$"
+    },
+    "text_description": {
+     "dbx_business_glossary_term": "Line Item Text Description"
+    },
+    "trading_partner_code": {
+     "dbx_business_glossary_term": "Trading Partner Code",
+     "dbx_value_regex": "^[A-Z0-9]{4,10}$"
+    },
+    "transaction_currency_code": {
+     "dbx_business_glossary_term": "Transaction Currency Code",
+     "dbx_value_regex": "^[A-Z]{3}$"
+    },
+    "unit_of_measure": {
+     "dbx_business_glossary_term": "Unit of Measure (UOM)",
+     "dbx_value_regex": "^[A-Z]{2,3}$"
+    },
+    "value_date": {
+     "dbx_business_glossary_term": "Value Date"
+    },
+    "vendor_account_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_financial": "true",
+     "dbx_business_glossary_term": "Vendor Account Number",
+     "dbx_value_regex": "^[A-Z0-9]{8,10}$"
+    },
+    "wbs_element_code": {
+     "dbx_business_glossary_term": "Work Breakdown Structure (WBS) Element Code",
+     "dbx_value_regex": "^[A-Z0-9\\-]{8,24}$"
+    }
+   }
+  },
+  "company_code": {
+   "table_tags": {
+    "dbx_data_type": "master_data",
+    "dbx_subdomain": "organizational_accounting"
+   },
+   "column_tags": {
+    "company_code_id": {
+     "dbx_business_glossary_term": "Company Code Identifier"
+    },
+    "parent_company_code_id": {
+     "dbx_self_ref_fk": "true",
+     "dbx_business_glossary_term": "Parent Company Code Id"
+    },
+    "address_line1": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line1"
+    },
+    "address_line2": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Address Line2"
+    },
+    "city": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "City"
+    },
+    "classification_type": {
+     "dbx_business_glossary_term": "Classification Type"
+    },
+    "code": {
+     "dbx_business_glossary_term": "Code"
+    },
+    "cost_center_code": {
+     "dbx_business_glossary_term": "Cost Center Code"
+    },
+    "country_code": {
+     "dbx_business_glossary_term": "Country Code"
+    },
+    "currency_code": {
+     "dbx_business_glossary_term": "Currency Code"
+    },
+    "effective_from": {
+     "dbx_business_glossary_term": "Effective From"
+    },
+    "effective_to": {
+     "dbx_business_glossary_term": "Effective To"
+    },
+    "email_address": {
+     "dbx_restricted": "true",
+     "dbx_pii_email": "true",
+     "dbx_business_glossary_term": "Email Address"
+    },
+    "industry_code": {
+     "dbx_business_glossary_term": "Industry Code"
+    },
+    "is_consolidated_entity": {
+     "dbx_business_glossary_term": "Is Consolidated Entity"
+    },
+    "is_public_company": {
+     "dbx_business_glossary_term": "Is Public Company"
+    },
+    "legal_name": {
+     "dbx_business_glossary_term": "Legal Name"
+    },
+    "lifecycle_status": {
+     "dbx_business_glossary_term": "Lifecycle Status"
+    },
+    "name": {
+     "dbx_business_glossary_term": "Name"
+    },
+    "parent_company_code": {
+     "dbx_business_glossary_term": "Parent Company Code"
+    },
+    "phone_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_phone": "true",
+     "dbx_business_glossary_term": "Phone Number"
+    },
+    "postal_code": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "Postal Code"
+    },
+    "primary_contact_method": {
+     "dbx_business_glossary_term": "Primary Contact Method"
+    },
+    "record_audit_created": {
+     "dbx_business_glossary_term": "Record Audit Created"
+    },
+    "record_audit_updated": {
+     "dbx_business_glossary_term": "Record Audit Updated"
+    },
+    "state_province": {
+     "dbx_confidential": "true",
+     "dbx_pii_address": "true",
+     "dbx_business_glossary_term": "State Province"
+    },
+    "tax_number": {
+     "dbx_restricted": "true",
+     "dbx_pii_identifier": "true",
+     "dbx_business_glossary_term": "Tax Number"
+    }
+   }
+  }
+ }
+}
